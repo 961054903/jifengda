@@ -10,7 +10,5 @@ public class AdminController {
 	@RequestMapping("test")
 	public String test() {
 		return "success";
-		
-		
 	}
 }
