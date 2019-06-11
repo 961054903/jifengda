@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.caogen.jfd.dao.ConfigDao">
+<mapper namespace="com.caogen.jfd.dao.ModelDao">
     <sql id="model">brand,model,length,width,height,volume,load,empty_cost,night_cost,starting_cost,starting_scope</sql>
     <select id="get" parameterType="Model"
             resultType="Model">
