@@ -3,6 +3,12 @@ package com.caogen.jfd.entity;
 import java.io.Serializable;
 import java.time.LocalTime;
 
+/**
+ * sys_config 实体类
+ * 
+ * @author Spuiln
+ *
+ */
 public class SysConfig implements Serializable {
 
 	private static final long serialVersionUID = -3975707114992384047L;

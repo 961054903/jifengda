@@ -12,6 +12,11 @@ import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.ConfigService;
 
+/**
+ * 
+ * @author Spuiln
+ *
+ */
 @Controller
 @RequestMapping("config")
 public class ConfigController {

@@ -10,6 +10,11 @@ import com.caogen.jfd.dao.ConfigDao;
 import com.caogen.jfd.entity.SysConfig;
 import com.caogen.jfd.service.ConfigService;
 
+/**
+ * 
+ * @author Spuiln
+ *
+ */
 @Service
 public class ConfigServiceImpl implements ConfigService {
 	@Autowired
