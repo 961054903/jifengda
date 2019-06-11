@@ -1,7 +1,9 @@
 package com.caogen.jfd.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.caogen.jfd.dao.AppUserDao;
 import com.caogen.jfd.entity.AppUser;
 import com.caogen.jfd.service.AppUserService;
 
@@ -13,28 +15,29 @@ import com.caogen.jfd.service.AppUserService;
 @Service
 public class AppUserServiceImpl implements AppUserService {
 
+	@Autowired
+	private AppUserDao appUserDao;
+
 	@Override
 	public void create(AppUser entity) {
-		// TODO Auto-generated method stub
-
+		appUserDao.insert(entity);
 	}
 
 	@Override
 	public void remove(AppUser entity) {
-		// TODO Auto-generated method stub
-
+		appUserDao.delete(entity);
 	}
 
 	@Override
 	public void modify(AppUser entity) {
-		// TODO Auto-generated method stub
-
+		appUserDao.update(entity);
 	}
 
 	@Override
 	public AppUser getById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		AppUser entity = new AppUser();
+		entity.setId(id);
+		return appUserDao.get(entity);
 	}
 
 }

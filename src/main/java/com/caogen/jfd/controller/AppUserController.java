@@ -1,6 +1,10 @@
 package com.caogen.jfd.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.caogen.jfd.service.AppUserService;
 
 /**
  * 
@@ -8,6 +12,8 @@ import org.springframework.stereotype.Controller;
  *
  */
 @Controller
+@RequestMapping("appUser")
 public class AppUserController {
-
+	@Autowired
+	private AppUserService appUserService;
 }
