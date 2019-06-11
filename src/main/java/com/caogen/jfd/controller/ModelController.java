@@ -14,10 +14,15 @@ import java.util.List;
 
 @Controller
 @RequestMapping("vehicle")
-public class VehicleController {
+public class ModelController {
     @Autowired
     private ModelService modelService;
 
+
+    /**
+     * 车辆信息
+     * @return
+     */
     @ResponseBody
     @RequestMapping("vehicle")
     public Message vehicle() {
