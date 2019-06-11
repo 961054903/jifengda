@@ -7,10 +7,4 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class AdminController {
 
-	@ResponseBody
-	@RequestMapping("test")
-	public String test() {
-		return "success";
-	}
-
 }
