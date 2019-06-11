@@ -12,6 +12,12 @@ import org.dom4j.io.SAXReader;
 
 import com.caogen.jfd.model.Industry;
 
+/**
+ * 行业列表工具类
+ * 
+ * @author Spuiln
+ *
+ */
 public class IndustryHelper {
 
 	private static List<Industry> list = new ArrayList<Industry>();
