@@ -6,7 +6,7 @@
                         http://www.springframework.org/schema/beans/spring-beans.xsd
                         http://www.springframework.org/schema/tx
 						http://www.springframework.org/schema/tx/spring-tx.xsd">
-	引入数据库连接配置文件
+	<!-- 引入数据库连接配置文件 -->
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:jdbc.properties" />
