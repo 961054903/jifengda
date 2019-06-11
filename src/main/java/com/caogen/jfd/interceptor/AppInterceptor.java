@@ -6,6 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * 
+ * @author Spuiln
+ *
+ */
 public class AppInterceptor implements HandlerInterceptor {
 
 	@Override

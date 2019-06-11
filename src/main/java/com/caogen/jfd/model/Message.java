@@ -2,6 +2,12 @@ package com.caogen.jfd.model;
 
 import java.io.Serializable;
 
+/**
+ * 返回给客户端的实体类
+ * 
+ * @author Spuiln
+ *
+ */
 public class Message implements Serializable {
 
 	private static final long serialVersionUID = 5101995756325459110L;
