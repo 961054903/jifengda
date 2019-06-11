@@ -7,6 +7,7 @@ package com.caogen.jfd.common;
 public enum ErrorCode {
 	SUCCEED("0000", "操作成功"), FAIL("0001", "操作失败");
 
+	
 	private String code;
 	private String desc;
 
