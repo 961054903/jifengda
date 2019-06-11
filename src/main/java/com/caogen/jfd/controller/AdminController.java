@@ -11,7 +11,7 @@ public class AdminController {
 	public String test() {
 		return "success";
 
-
+sssssssssssss
 
 		
 	}
