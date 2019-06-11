@@ -4,10 +4,12 @@ import com.caogen.jfd.dao.ModelDao;
 import com.caogen.jfd.entity.Model;
 import com.caogen.jfd.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 
+@Service
 public class ModelServicelmpl implements ModelService {
 
     @Autowired
