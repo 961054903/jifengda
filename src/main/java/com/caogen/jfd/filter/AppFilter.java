@@ -40,10 +40,10 @@ public class AppFilter implements Filter {
 		if (StringUtils.isEmpty(token)) {
 			throw new RuntimeException("token null");
 		}
-		AppUser user = appUserService.getByToken(token);
-		if (user == null) {// 用户不存在或token已过期
-			throw new RuntimeException("user null");
-		}
+//		AppUser user = appUserService.getByToken(token);
+//		if (user == null) {// 用户不存在或token已过期
+//			throw new RuntimeException("user null");
+//		}
 		String message = getRequestBody((HttpServletRequest) request);
 		int len = Integer.parseInt(message.substring(0, 6));
 		String type = message.substring(6, 8);
@@ -58,7 +58,7 @@ public class AppFilter implements Filter {
 
 		}
 		WrappedRequest wr = new WrappedRequest((HttpServletRequest) request);
-		wr.setParameter("id", user.getId());
+//		wr.setParameter("id", user.getId());
 		wr.setParameter("type", type);
 		wr.setParameter("data", data);
 		chain.doFilter(wr, response);
