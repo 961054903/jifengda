@@ -11,7 +11,7 @@ public class Model implements Serializable {
     private Double width; //宽
     private Double height;//高
     private Double volume; //货物体积
-    private Double load; //载重
+    private Double capacity; //载重
     private Double empty_cost;//空时费
     private Double night_cost;//夜间服务费
     private Double starting_cost;//起步价
@@ -27,7 +27,7 @@ public class Model implements Serializable {
                 ", width=" + width +
                 ", height=" + height +
                 ", volume=" + volume +
-                ", load=" + load +
+                ", capacity=" + capacity +
                 ", empty_cost=" + empty_cost +
                 ", night_cost=" + night_cost +
                 ", starting_cost=" + starting_cost +
@@ -95,12 +95,12 @@ public class Model implements Serializable {
         this.volume = volume;
     }
 
-    public Double getLoad() {
-        return load;
+    public Double getcapacity() {
+        return capacity;
     }
 
-    public void setLoad(Double load) {
-        this.load = load;
+    public void setcapacity(Double capacity) {
+        this.capacity = capacity;
     }
 
     public Double getEmpty_cost() {

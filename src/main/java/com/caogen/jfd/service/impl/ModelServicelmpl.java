@@ -1,6 +1,7 @@
 package com.caogen.jfd.service.impl;
 
 import com.caogen.jfd.dao.ModelDao;
+import com.caogen.jfd.entity.IssueFaq;
 import com.caogen.jfd.entity.Model;
 import com.caogen.jfd.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +37,22 @@ public class ModelServicelmpl implements ModelService {
     public Model getById(Integer id) {
         return null;
     }
+
+
     @Override
-    public List<String> getmodel() {
+    public Model getModel(Integer id) {
         Model model = new Model();
-        model.setModel("id");
-        model = modelDao.get(model);
-        List<String> list = Arrays.asList(model.getBrand().split("|"));
-        return list;
+        model.setId(id);
+        return  modelDao.get(model);
+
+    }
+
+
+
+
+    @Override
+    public List<Model> getWhole() {
+        List<Model> issueFaq = modelDao.find( new Model());
+        return issueFaq;
     }
 }
