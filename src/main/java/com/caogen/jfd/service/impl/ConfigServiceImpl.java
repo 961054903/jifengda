@@ -47,7 +47,7 @@ public class ConfigServiceImpl implements ConfigService {
 		SysConfig config = new SysConfig();
 		config.setItem_key("city");
 		config = configDao.get(config);
-		List<String> list = Arrays.asList(config.getItem_value().split("|"));
+		List<String> list = Arrays.asList(config.getItem_value().split(","));
 		return list;
 	}
 
