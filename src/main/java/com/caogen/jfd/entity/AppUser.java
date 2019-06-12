@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * @author Spuiln
  *
  */
-public class AppUser extends BaseEntity implements Serializable {
+public class AppUser implements Serializable {
 
 	private static final long serialVersionUID = -5753387388562949447L;
 	private Integer id;

@@ -9,4 +9,6 @@ import com.caogen.jfd.entity.AppUser;
  */
 public interface AppUserService extends BaseService<AppUser> {
 
+	AppUser getByToken(String token);
+
 }

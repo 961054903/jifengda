@@ -27,10 +27,4 @@
 	</bean>
 	<!-- 开启 Shiro Spring AOP 权限注解 -->
 	<!-- <aop:config proxy-target-class="true"></aop:config> -->
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/app" />
-			<bean class="com.caogen.jfd.interceptor.AppInterceptor" />
-		</mvc:interceptor>
-	</mvc:interceptors>
 </beans>  

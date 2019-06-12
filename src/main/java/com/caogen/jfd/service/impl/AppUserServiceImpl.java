@@ -40,4 +40,11 @@ public class AppUserServiceImpl implements AppUserService {
 		return appUserDao.get(entity);
 	}
 
+	@Override
+	public AppUser getByToken(String token) {
+		AppUser entity = new AppUser();
+		entity.setToken(token);
+		return appUserDao.get(entity);
+	}
+
 }
