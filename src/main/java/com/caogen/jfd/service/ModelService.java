@@ -6,6 +6,6 @@ import com.caogen.jfd.entity.Model;
 import java.util.List;
 
 public interface ModelService extends BaseService<Model> {
-    Model getmodel(Integer id);
+    Model getModel(Integer id);
     List<Model>getWhole();
 }

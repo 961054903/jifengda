@@ -37,13 +37,19 @@ public class ModelServicelmpl implements ModelService {
     public Model getById(Integer id) {
         return null;
     }
+
+
     @Override
-    public Model getmodel(Integer id) {
+    public Model getModel(Integer id) {
         Model model = new Model();
         model.setId(id);
         return  modelDao.get(model);
 
     }
+
+
+
+
     @Override
     public List<Model> getWhole() {
         List<Model> issueFaq = modelDao.find( new Model());
