@@ -22,26 +22,24 @@ public class ConfigServiceImpl implements ConfigService {
 
 	@Override
 	public void create(SysConfig entity) {
-		// TODO Auto-generated method stub
-
+		configDao.insert(entity);
 	}
 
 	@Override
 	public void remove(SysConfig entity) {
-		// TODO Auto-generated method stub
-
+		configDao.delete(entity);
 	}
 
 	@Override
 	public void modify(SysConfig entity) {
-		// TODO Auto-generated method stub
-
+		configDao.update(entity);
 	}
 
 	@Override
 	public SysConfig getById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		SysConfig entity = new SysConfig();
+		entity.setId(id);
+		return configDao.get(entity);
 	}
 
 	@Override
@@ -49,7 +47,7 @@ public class ConfigServiceImpl implements ConfigService {
 		SysConfig config = new SysConfig();
 		config.setItem_key("city");
 		config = configDao.get(config);
-		List<String> list = Arrays.asList(config.getItem_value().split(","));
+		List<String> list = Arrays.asList(config.getItem_value().split("|"));
 		return list;
 	}
 
