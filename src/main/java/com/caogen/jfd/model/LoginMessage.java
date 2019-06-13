@@ -4,20 +4,27 @@ import java.io.Serializable;
 
 import com.caogen.jfd.entity.AppUser;
 
-public class LoginMessage extends Message implements Serializable {
+/**
+ * 
+ * @author Spuiln
+ *
+ */
+public class LoginMessage implements Serializable {
 
 	private static final long serialVersionUID = -3781059565730363030L;
 	private AppUser.Identity identity;
 	private Mode mode;
 	private String username;
 	private String password;
+	private String sms;
 	private Thirdparty thirdparty;
 	private String identifier;
 	private String portrait_url;
+	private String phone;
 	private String token;
 
 	public enum Mode {
-		password, code, third
+		password, sms, third
 	}
 
 	public enum Thirdparty {
@@ -27,8 +34,8 @@ public class LoginMessage extends Message implements Serializable {
 	@Override
 	public String toString() {
 		return "LoginMessage [identity=" + identity + ", mode=" + mode + ", username=" + username + ", password="
-				+ password + ", thirdparty=" + thirdparty + ", identifier=" + identifier + ", portrait_url="
-				+ portrait_url + ", token=" + token + "]";
+				+ password + ", sms=" + sms + ", thirdparty=" + thirdparty + ", identifier=" + identifier
+				+ ", portrait_url=" + portrait_url + ", phone=" + phone + ", token=" + token + "]";
 	}
 
 	public AppUser.Identity getIdentity() {
@@ -93,6 +100,22 @@ public class LoginMessage extends Message implements Serializable {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getSms() {
+		return sms;
+	}
+
+	public void setSms(String sms) {
+		this.sms = sms;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 }
