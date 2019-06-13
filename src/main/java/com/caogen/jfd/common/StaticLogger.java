@@ -16,4 +16,16 @@ public class StaticLogger {
 		return logger;
 	}
 
+	public static void info(String msg) {
+		logger.info(msg);
+	}
+
+	public static void debug(String msg) {
+		logger.debug(msg);
+	}
+
+	public static void error(String msg, Throwable t) {
+		logger.error(msg, t);
+	}
+
 }
