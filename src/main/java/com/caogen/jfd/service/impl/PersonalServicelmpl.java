@@ -1,17 +1,23 @@
 package com.caogen.jfd.service.impl;
 
+import com.caogen.jfd.dao.ModelDao;
 import com.caogen.jfd.dao.PersonalDao;
 import com.caogen.jfd.entity.Personal;
 import com.caogen.jfd.service.PersonalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class PersonalServicelmpl implements PersonalService {
     @Autowired
     private PersonalDao personalDao;
+
+    @Autowired
+    private ModelDao modelDao;
     @Override
     public void create(Personal entity) {
 
@@ -58,4 +64,15 @@ public class PersonalServicelmpl implements PersonalService {
         personal.setPhone(phone);
         return personalDao.get1(personal);
     }
+
+    @Override
+    public Personal getwhole(String phone) {
+
+        Personal personal = new Personal();
+        personal.setPhone(phone);
+
+        return  personalDao.get2(personal);
+    }
+    
+
 }

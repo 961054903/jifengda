@@ -11,6 +11,9 @@
         FROM issue_faq
         <where>
             <if test="id != null">id = #{id}</if>
+            <if test="context != null">AND context = #{context}</if>
+            <if test="photo_url != null">AND photo_url = #{photo_url}</if>
+            <if test="create_date != null">AND create_date = #{create_date}</if>
             <if test="title != null">AND title = #{title}</if>
         </where>
     </select>
@@ -22,6 +25,9 @@
         FROM issue_faq
         <where>
             <if test="id != null">id = #{id}</if>
+            <if test="context != null">AND context = #{context}</if>
+            <if test="photo_url != null">AND photo_url = #{photo_url}</if>
+            <if test="create_date != null">AND create_date = #{create_date}</if>
             <if test="title != null">AND title = #{title}</if>
         </where>
     </select>

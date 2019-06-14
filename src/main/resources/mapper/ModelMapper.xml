@@ -26,6 +26,21 @@
             <if test="model != null">AND model = #{model}</if>
         </where>
     </select>
+
+
+
+    <sql id="vehicle">model</sql>
+    <select id="get3" parameterType="Model"
+            resultType="Model">
+        SELECT id,
+        <include refid="vehicle" />
+        FROM vehicle_model
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="model != null">AND model = #{model}</if>
+        </where>
+    </select>
+
 </mapper>
 
 

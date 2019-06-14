@@ -3,6 +3,7 @@ package com.caogen.jfd.service.impl;
 import com.caogen.jfd.dao.ModelDao;
 import com.caogen.jfd.entity.IssueFaq;
 import com.caogen.jfd.entity.Model;
+import com.caogen.jfd.entity.Personal;
 import com.caogen.jfd.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,4 +56,12 @@ public class ModelServicelmpl implements ModelService {
         List<Model> issueFaq = modelDao.find( new Model());
         return issueFaq;
     }
+
+    @Override
+    public Model getvehicle(Integer id) {
+        Model model = new Model();
+        model.setId(id);
+        return modelDao.get3(model);
+    }
+
 }

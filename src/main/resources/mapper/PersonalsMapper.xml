@@ -42,7 +42,34 @@
         FROM app_driver_info
         <where>
             <if test="id != null">id = #{id}</if>
+            <if test="phone != null">AND phone = #{phone}</if>
+            <if test="photo_url != null">AND photo_url = #{photo_url}</if>
             <if test="name != null">AND name = #{name}</if>
+            <if test="grade != null">AND grade = #{grade}</if>
+        </where>
+    </select>
+
+    <sql id="whole">photo_url,name,phone,gender,birthday,licence_url,identity_front_url,identity_back_url,identity_take_url,contacts_name,contacts_phone,contacts_gender,contacts_relation</sql>
+    <select id="get2" parameterType="Personal"
+            resultType="Personal">
+        SELECT id,
+        <include refid="whole" />
+        FROM app_driver_info
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="phone != null">AND phone = #{phone}</if>
+            <if test="photo_url != null">AND photo_url = #{photo_url}</if>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="gender != null">AND gender = #{gender}</if>
+            <if test="birthday != null">AND birthday = #{birthday}</if>
+            <if test="licence_url != null">AND licence_url = #{licence_url}</if>
+            <if test="identity_front_url != null">AND identity_front_url = #{identity_front_url}</if>
+            <if test="identity_back_url != null">AND identity_back_url = #{identity_back_url}</if>
+            <if test="identity_take_url != null">AND identity_take_url = #{identity_take_url}</if>
+            <if test="contacts_name != null">AND contacts_name = #{contacts_name}</if>
+            <if test="contacts_phone != null">AND contacts_phone = #{contacts_phone}</if>
+            <if test="contacts_gender != null">AND contacts_gender = #{contacts_gender}</if>
+            <if test="contacts_relation != null">AND contacts_relation = #{contacts_relation}</if>
         </where>
     </select>
 
