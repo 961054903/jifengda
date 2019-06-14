@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author Spuiln
  *
  */
-public class AppThird implements Serializable {
+public class AppUserThird implements Serializable {
 
 	private static final long serialVersionUID = 840412543253621587L;
 	private Integer id;

@@ -2,23 +2,23 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.caogen.jfd.dao.user.AppSmsDao">
-	<sql id="appSms">phone,code,create_date</sql>
-	<insert id="insert" parameterType="AppSms">
+<mapper namespace="com.caogen.jfd.dao.user.AppUserSmsDao">
+	<sql id="sms">phone,code,create_date</sql>
+	<insert id="insert" parameterType="AppUserSms">
 		INSERT INTO app_user_sms (
-		<include refid="appSms" />
+		<include refid="sms" />
 		) VALUES (
 		#{phone},#{code},#{create_date}
 		)
 	</insert>
-	<delete id="delete" parameterType="AppSms">
+	<delete id="delete" parameterType="AppUserSms">
 		DELETE FROM app_user_sms
 		<where>
 			<if test="id != null">id = #{id}</if>
 			<if test="phone != null">AND phone = #{phone}</if>
 		</where>
 	</delete>
-	<update id="update" parameterType="AppSms">
+	<update id="update" parameterType="AppUserSms">
 		UPDATE app_user_sms
 		<set>
 			<if test="code != null">id = #{code},</if>
@@ -28,18 +28,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="phone != null">AND phone = #{phone}</if>
 		</where>
 	</update>
-	<select id="get" parameterType="AppSms" resultType="AppSms">
+	<select id="get" parameterType="AppUserSms"
+		resultType="AppUserSms">
 		SELECT id,
-		<include refid="appSms"></include>
+		<include refid="sms"></include>
 		FROM app_user_sms
 		<where>
 			<if test="id != null">id = #{id}</if>
 			<if test="phone != null">AND phone = #{phone}</if>
 		</where>
 	</select>
-	<select id="find" parameterType="AppSms" resultType="AppSms">
+	<select id="find" parameterType="AppUserSms"
+		resultType="AppUserSms">
 		SELECT id,
-		<include refid="appSms"></include>
+		<include refid="sms" />
 		FROM app_user_sms
 	</select>
 </mapper>

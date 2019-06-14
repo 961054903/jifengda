@@ -6,13 +6,13 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.caogen.jfd.dao.user.AppSmsDao;
-import com.caogen.jfd.dao.user.AppThirdDao;
+import com.caogen.jfd.dao.user.AppUserSmsDao;
+import com.caogen.jfd.dao.user.AppUserThirdDao;
 import com.caogen.jfd.dao.user.AppUserDao;
 import com.caogen.jfd.dao.user.ConfigDao;
-import com.caogen.jfd.entity.user.AppSms;
-import com.caogen.jfd.entity.user.AppThird;
-import com.caogen.jfd.entity.user.AppThird.Thirdparty;
+import com.caogen.jfd.entity.user.AppUserSms;
+import com.caogen.jfd.entity.user.AppUserThird;
+import com.caogen.jfd.entity.user.AppUserThird.Thirdparty;
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.entity.user.SysConfig;
 import com.caogen.jfd.util.PasswordHelper;
@@ -27,9 +27,9 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AppUserDao appUserDao;
 	@Autowired
-	private AppSmsDao appSmsDao;
+	private AppUserSmsDao appSmsDao;
 	@Autowired
-	private AppThirdDao appThirdDao;
+	private AppUserThirdDao appThirdDao;
 	@Autowired
 	private ConfigDao configDao;
 
@@ -77,7 +77,7 @@ public class AdminServiceImpl implements AdminService {
 		config.setItem_key("indate");
 		Long indate = Long.parseLong(configDao.get(config).getItem_value());
 		// 查询该条验证码记录
-		AppSms sms = new AppSms();
+		AppUserSms sms = new AppUserSms();
 		sms.setPhone(username);
 		sms = appSmsDao.get(sms);
 		if (sms == null) {
@@ -109,7 +109,7 @@ public class AdminServiceImpl implements AdminService {
 	public void createAppUser(Thirdparty thirdparty, String identifier, String portrait_url, String username,
 			String referrer) {
 		createAppUser(username, referrer);
-		AppThird third = new AppThird();
+		AppUserThird third = new AppUserThird();
 		third.setThirdparty(thirdparty);
 		third.setIdentifier(identifier);
 		third.setPortrait_url(portrait_url);

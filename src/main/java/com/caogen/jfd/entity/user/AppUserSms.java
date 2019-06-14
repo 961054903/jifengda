@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * @author Spuiln
  *
  */
-public class AppSms implements Serializable {
+public class AppUserSms implements Serializable {
 
 	private static final long serialVersionUID = -6947492986174465214L;
 	private Integer id;

@@ -1,6 +1,6 @@
 package com.caogen.jfd.service.user;
 
-import com.caogen.jfd.entity.user.AppThird.Thirdparty;
+import com.caogen.jfd.entity.user.AppUserThird.Thirdparty;
 
 /**
  * 

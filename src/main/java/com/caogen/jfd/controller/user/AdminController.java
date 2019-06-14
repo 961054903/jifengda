@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.caogen.jfd.common.ErrorCode;
@@ -26,6 +25,7 @@ import com.caogen.jfd.service.user.AppUserService;
  *
  */
 @Controller
+@RequestMapping("user")
 public class AdminController {
 	@Autowired
 	private AdminService adminService;
@@ -33,7 +33,7 @@ public class AdminController {
 	private AppUserService appUserService;
 
 	@ResponseBody
-	@RequestMapping(value = "sms", method = RequestMethod.POST)
+	@RequestMapping("sms")
 	public Message sms(String phone) {
 		Message message = new Message();
 		try {
@@ -48,7 +48,7 @@ public class AdminController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "login", method = RequestMethod.POST)
+	@RequestMapping("login")
 	public Message login(LoginMessage entity) {
 		Message message = new Message();
 		try {
