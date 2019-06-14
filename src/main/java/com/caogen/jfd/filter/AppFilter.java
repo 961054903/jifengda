@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
-import com.caogen.jfd.entity.AppUser;
-import com.caogen.jfd.service.AppUserService;
+import com.caogen.jfd.entity.user.AppUser;
+import com.caogen.jfd.service.user.AppUserService;
 
 /**
  * 

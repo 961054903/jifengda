@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.user.AppThirdDao">
+	<sql id="appThird">thirdparty,identifier,credential,portrait_url</sql>
+	<insert id="insert" parameterType="AppThird">
+		INSERT INTO app_third (
+		<include refid="appThird" />
+		) VALUES (
+		#{thirdparty},#{identifier},#{credential},#{portrait_url}
+		)
+	</insert>
+	<delete id="delete" parameterType="AppThird">
+		DELETE FROM app_third
+		<where>
+			<if test="id != null">id = #{id}</if>
+			<if test="identifier != null">AND identifier = #{identifier}</if>
+		</where>
+	</delete>
+	<update id="update" parameterType="AppThird">
+		UPDATE app_third
+		<set>
+			<if test="credential != null">credential = #{credential},</if>
+			<if test="portrait_url != null">portrait_url = #{portrait_url}</if>
+		</set>
+		<where>
+			<if test="id != null">id = #{id}</if>
+			<if test="identifier != null">AND identifier = #{identifier}</if>
+		</where>
+	</update>
+	<select id="get" parameterType="AppThird" resultType="AppThird">
+		SELECT id,
+		<include refid="appThird" />
+		FROM app_third
+		<where>
+			<if test="id != null">id = #{id}</if>
+			<if test="identifier != null">AND identifier = #{identifier}</if>
+		</where>
+	</select>
+	<select id="find" parameterType="AppThird" resultType="AppThird">
+		SELECT id,
+		<include refid="appThird" />
+		FROM app_third
+		<where>
+			<if test="thirdparty != null">thirdparty = #{thirdparty}</if>
+			<if test="identifier != null">AND identifier = #{identifier}</if>
+		</where>
+	</select>
+</mapper>

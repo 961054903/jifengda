@@ -2,8 +2,8 @@ package com.caogen.jfd.model;
 
 import java.io.Serializable;
 
-import com.caogen.jfd.entity.AppThird;
-import com.caogen.jfd.entity.AppUser;
+import com.caogen.jfd.entity.user.AppThird;
+import com.caogen.jfd.entity.user.AppUser;
 
 /**
  * 

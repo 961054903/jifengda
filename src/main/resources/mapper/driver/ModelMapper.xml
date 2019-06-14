@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.driver.ModelDao">
+    <sql id="model">brand,model,length,width,height,volume,capacity,empty_cost,night_cost,starting_cost,starting_scope</sql>
+    <select id="get" parameterType="Model"
+            resultType="Model">
+        SELECT id,
+        <include refid="model" />
+        FROM vehicle_model
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="model != null">AND model = #{model}</if>
+        </where>
+    </select>
+
+
+    <select id="find" parameterType="Model"
+            resultType="Model">
+        SELECT id,
+        <include refid="model" />
+        FROM vehicle_model
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="model != null">AND model = #{model}</if>
+        </where>
+    </select>
+
+
+
+    <sql id="vehicle">model</sql>
+    <select id="get3" parameterType="Model"
+            resultType="Model">
+        SELECT id,
+        <include refid="vehicle" />
+        FROM vehicle_model
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="model != null">AND model = #{model}</if>
+        </where>
+    </select>
+
+</mapper>
+
+
+
