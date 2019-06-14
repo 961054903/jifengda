@@ -34,8 +34,4 @@ public class AppUserInfoServiceImpl implements AppUserInfoService {
 		return null;
 	}
 
-	private int getAge(LocalDateTime birthday) {
-		return LocalDateTime.now().getYear() - birthday.getYear();
-	}
-
 }
