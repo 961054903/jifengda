@@ -85,7 +85,9 @@ public class AdminController {
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
 			// TODO: handle exception
-			StaticLogger.error("", e);
+			message.setCode(ErrorCode.LOGIN_ERROR.getCode());
+			message.setDesc(e.getMessage());
+			StaticLogger.error("login error", e);
 		}
 		return message;
 	}
