@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.caogen.jfd.dao.user.AppUserSmsDao;
 import com.caogen.jfd.dao.user.AppUserThirdDao;
@@ -25,11 +26,11 @@ import com.caogen.jfd.util.PasswordHelper;
 @Service
 public class AdminServiceImpl implements AdminService {
 	@Autowired
-	private AppUserDao appUserDao;
+	private AppUserDao userDao;
 	@Autowired
-	private AppUserSmsDao appSmsDao;
+	private AppUserSmsDao smsDao;
 	@Autowired
-	private AppUserThirdDao appThirdDao;
+	private AppUserThirdDao thirdDao;
 	@Autowired
 	private ConfigDao configDao;
 
@@ -45,52 +46,26 @@ public class AdminServiceImpl implements AdminService {
 		AppUser user = new AppUser();
 		user.setUsername(username);
 		user.setToken(token);
-		appUserDao.update(user);
+		userDao.update(user);
 		return token;
 	}
 
 	@Override
-	public void verifyPassword(String username, String password) throws Exception {
-		AppUser user = new AppUser();
-		user.setUsername(username);
-		user = appUserDao.get(user);
-		// 用户密码判断
-		String ciphertext = PasswordHelper.encryptPassword(password, user.getSalt());
-		if (!ciphertext.equals(user.getPassword())) {
-			throw new RuntimeException("密码输入错误");
-		}
-		// 用户状态判断
-		switch (user.getState()) {
-		case normal:
-			break;
-		case locked:
-			throw new RuntimeException("用户被锁定");
-		default:
-			break;
-		}
-	}
-
-	@Override
-	public void verifySms(String username, String code) throws Exception {
-		// 查询验证码有效时间
-		SysConfig config = new SysConfig();
-		config.setItem_key("indate");
-		Long indate = Long.parseLong(configDao.get(config).getItem_value());
+	public void verifySms(String phone, String sms) {
 		// 查询该条验证码记录
-		AppUserSms sms = new AppUserSms();
-		sms.setPhone(username);
-		sms = appSmsDao.get(sms);
-		if (sms == null) {
+		AppUserSms userSms = smsDao.get(new AppUserSms(phone));
+		if (userSms == null) {
 			throw new RuntimeException("验证码不存在");
 		}
 		// 验证码是否在有效期内
-		Duration duration = Duration.between(sms.getCreate_date(), LocalDateTime.now());
-		long millis = duration.toMillis();
-		if (millis > indate) {
+		SysConfig config = configDao.get(new SysConfig("indate"));
+		Long indate = Long.parseLong(config.getItem_value());
+		Duration duration = Duration.between(userSms.getCreate_date(), LocalDateTime.now());
+		if (duration.toMillis() > indate) {
 			throw new RuntimeException("验证码已过期");
 		}
 		// 验证码是否正确
-		if (!sms.getCode().equals(code)) {
+		if (!userSms.getCode().equals(sms)) {
 			throw new RuntimeException("验证码错误");
 		}
 	}
@@ -101,8 +76,8 @@ public class AdminServiceImpl implements AdminService {
 		user.setUsername(username);
 		user.setState(AppUser.State.normal);
 		user.setCreate_date(LocalDateTime.now());
-		appUserDao.insert(user);
-		System.out.println(user);
+		user.setReferrer(referrer);
+		userDao.insert(user);
 	}
 
 	@Override
@@ -113,8 +88,79 @@ public class AdminServiceImpl implements AdminService {
 		third.setThirdparty(thirdparty);
 		third.setIdentifier(identifier);
 		third.setPortrait_url(portrait_url);
-		appThirdDao.insert(third);
-		System.out.println(third);
+		thirdDao.insert(third);
+	}
+
+	@Override
+	public void passwordLogin(String username, String password) throws Exception {
+		// 检查参数
+		if (username == null || password == null) {
+			throw new RuntimeException("登录参数缺失");
+		}
+		// 用户是否存在
+		AppUser user = userDao.get(new AppUser(username));
+		if (user == null) {
+			throw new RuntimeException("用户不存在");
+		}
+		// 密码是否设置
+		if (StringUtils.isEmpty(user.getPassword())) {
+			throw new RuntimeException("该用户未设置密码");
+		}
+		// 密码是否正确
+		String ciphertext = PasswordHelper.encryptPassword(password, user.getSalt());
+		if (!ciphertext.equals(user.getPassword())) {
+			throw new RuntimeException("密码错误");
+		}
+		ckeckUserState(user);
+	}
+
+	@Override
+	public void smsLogin(String username, String sms, String referrer) throws Exception {
+		// 检查参数
+		if (username == null || sms == null) {
+			throw new RuntimeException("登录参数缺失");
+		}
+		// 比较验证码
+		verifySms(username, sms);
+		// 用户是否存在
+		AppUser user = userDao.get(new AppUser(username));
+		if (user == null) {
+			createAppUser(username, referrer);
+		} else {
+			ckeckUserState(user);
+		}
+	}
+
+	@Override
+	public void thirdpartyLogin(Thirdparty thirdparty, String identifier, String portrait_url, String username,
+			String sms, String referrer) throws Exception {
+		// 检查参数
+		if (thirdparty == null || identifier == null) {
+			throw new RuntimeException("登录参数缺失");
+		}
+		AppUserThird third = thirdDao.get(new AppUserThird(thirdparty, identifier));
+		if (third == null) {// 第一次登录
+			// 检查参数
+			if (username == null || sms == null) {
+				throw new RuntimeException("登录参数缺失");
+			}
+			// 比较验证码
+			verifySms(username, sms);
+			createAppUser(thirdparty, identifier, portrait_url, username, referrer);
+		} else {
+			String phone = third.getPhone();
+			
+		}
+	}
+
+	private void ckeckUserState(AppUser user) {
+		// 状态是否正常
+		switch (user.getState()) {
+		case normal:
+			break;
+		default:
+			throw new RuntimeException("用户状态异常");
+		}
 	}
 
 }

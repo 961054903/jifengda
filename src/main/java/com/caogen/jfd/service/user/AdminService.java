@@ -16,32 +16,20 @@ public interface AdminService {
 	void generateSms(String phone);
 
 	/**
+	 * 对比验证码
+	 * 
+	 * @param phone
+	 * @param sms
+	 */
+	void verifySms(String phone, String sms);
+
+	/**
 	 * 生成token
 	 * 
 	 * @param username
-	 * @param identity
 	 * @return
 	 */
 	String generateToken(String username);
-
-	/**
-	 * 对比密码
-	 * 
-	 * @param username
-	 * @param password
-	 * @param identity
-	 * @throws Exception
-	 */
-	void verifyPassword(String username, String password) throws Exception;
-
-	/**
-	 * 对比验证码
-	 * 
-	 * @param username
-	 * @param code
-	 * @throws Exception
-	 */
-	void verifySms(String username, String code) throws Exception;
 
 	/**
 	 * 创建用户
@@ -61,5 +49,38 @@ public interface AdminService {
 	 * @param referrer
 	 */
 	void createAppUser(Thirdparty thirdparty, String identifier, String portrait_url, String username, String referrer);
+
+	/**
+	 * 用户名+密码登录
+	 * 
+	 * @param username
+	 * @param password
+	 * @throws Exception
+	 */
+	void passwordLogin(String username, String password) throws Exception;
+
+	/**
+	 * 短信验证码登录
+	 * 
+	 * @param username
+	 * @param sms
+	 * @param referrer
+	 * @throws Exception
+	 */
+	void smsLogin(String username, String sms, String referrer) throws Exception;
+
+	/**
+	 * 第三方应用授权登录
+	 * 
+	 * @param thirdparty
+	 * @param identifier
+	 * @param portrait_url
+	 * @param username
+	 * @param sms
+	 * @param referrer
+	 * @throws Exception
+	 */
+	void thirdpartyLogin(Thirdparty thirdparty, String identifier, String portrait_url, String username, String sms,
+			String referrer) throws Exception;
 
 }

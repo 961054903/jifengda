@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
-import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.model.LoginMessage;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.user.AdminService;
@@ -52,29 +51,16 @@ public class AdminController {
 	public Message login(LoginMessage entity) {
 		Message message = new Message();
 		try {
-			AppUser user = appUserService.getByUsername(entity.getUsername());
 			switch (entity.getMode()) {
 			case password:
-				// 密码登录：用户不存在则抛出异常，存在则对比密码是否正确
-				if (user == null) {
-					throw new RuntimeException("用户不存在");
-				}
-				adminService.verifyPassword(entity.getUsername(), entity.getPassword());
+				adminService.passwordLogin(entity.getUsername(), entity.getPassword());
 				break;
 			case sms:
-				// 短信验证码登录：对比验证码是否正确，正确则登录成功，错误则抛出异常；若用户不存在，创建用户
-//				adminService.verifySms(entity.getUsername(), entity.getSms());
-				if (user == null) {
-					adminService.createAppUser(entity.getUsername(), entity.getReferrer());
-				}
+				adminService.smsLogin(entity.getUsername(), entity.getSms(), entity.getReferrer());
 				break;
 			case third:
-				// 第三方应用授权登录：同短信验证码登录
-//				adminService.verifySms(entity.getUsername(), entity.getSms());
-				if (user == null) {
-					adminService.createAppUser(entity.getThirdparty(), entity.getIdentifier(), entity.getPortrait_url(),
-							entity.getUsername(), entity.getReferrer());
-				}
+				adminService.thirdpartyLogin(entity.getThirdparty(), entity.getIdentifier(), entity.getPortrait_url(),
+						entity.getUsername(), entity.getSms(), entity.getReferrer());
 				break;
 			default:
 				throw new RuntimeException("登录方式有误");

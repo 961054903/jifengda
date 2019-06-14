@@ -27,6 +27,21 @@ public class AppUser implements Serializable {
 		normal, locked
 	}
 
+	public AppUser() {
+		super();
+	}
+
+	public AppUser(String username) {
+		super();
+		this.username = username;
+	}
+
+	public AppUser(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
 	@Override
 	public String toString() {
 		return "AppUser [id=" + id + ", username=" + username + ", password=" + password + ", salt=" + salt + ", state="

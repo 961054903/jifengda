@@ -21,6 +21,15 @@ public class SysConfig implements Serializable {
 	private LocalTime end_time;
 	private Boolean falg;
 
+	public SysConfig() {
+		super();
+	}
+
+	public SysConfig(String item_key) {
+		super();
+		this.item_key = item_key;
+	}
+
 	@Override
 	public String toString() {
 		return "SysConfig [id=" + id + ", item=" + item + ", item_key=" + item_key + ", item_value=" + item_value
