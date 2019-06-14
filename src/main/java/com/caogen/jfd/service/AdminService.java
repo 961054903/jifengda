@@ -39,10 +39,10 @@ public interface AdminService {
 	 * 对比验证码
 	 * 
 	 * @param username
-	 * @param identity
+	 * @param code
 	 * @throws Exception
 	 */
-	void verifySms(String username, Identity identity) throws Exception;
+	void verifySms(String username, String code) throws Exception;
 
 	/**
 	 * 创建用户

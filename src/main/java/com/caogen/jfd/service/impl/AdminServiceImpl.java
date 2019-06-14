@@ -3,7 +3,9 @@ package com.caogen.jfd.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.caogen.jfd.dao.AppSmsDao;
 import com.caogen.jfd.dao.AppUserDao;
+import com.caogen.jfd.entity.AppSms;
 import com.caogen.jfd.entity.AppUser;
 import com.caogen.jfd.entity.AppUser.Identity;
 import com.caogen.jfd.model.LoginMessage.Thirdparty;
@@ -19,10 +21,12 @@ import com.caogen.jfd.util.PasswordHelper;
 public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private AppUserDao appUserDao;
+	@Autowired
+	private AppSmsDao appSmsDao;
 
 	@Override
 	public void generateSms(String phone) {
-		// TODO Auto-generated method stub
+		// TODO 短信接口，获取验证码，存到数据库
 
 	}
 
@@ -50,15 +54,21 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void verifySms(String username, Identity identity) throws Exception {
-		// TODO Auto-generated method stub
-
+	public void verifySms(String username, String code) throws Exception {
+		AppSms sms = new AppSms();
+		sms.setPhone(username);
+		sms = appSmsDao.get(sms);
+		if (!sms.getCode().equals(code)) {
+			throw new RuntimeException("验证码错误");
+		}
 	}
 
 	@Override
 	public void createAppUser(String username, Identity identity, String referrer) {
-		// TODO Auto-generated method stub
-
+		AppUser user = new AppUser();
+		user.setUsername(username);
+		user.setIdentity(identity);
+		appUserDao.insert(user);
 	}
 
 	@Override
