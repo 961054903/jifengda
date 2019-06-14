@@ -2,7 +2,7 @@ package com.caogen.jfd.service.user;
 
 import java.util.List;
 
-import com.caogen.jfd.entity.SysConfig;
+import com.caogen.jfd.entity.user.SysConfig;
 import com.caogen.jfd.service.BaseService;
 
 /**

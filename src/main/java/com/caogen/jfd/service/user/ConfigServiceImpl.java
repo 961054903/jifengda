@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.caogen.jfd.dao.user.ConfigDao;
-import com.caogen.jfd.entity.SysConfig;
+import com.caogen.jfd.entity.user.SysConfig;
 
 /**
  * 

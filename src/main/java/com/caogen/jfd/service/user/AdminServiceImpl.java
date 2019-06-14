@@ -10,12 +10,11 @@ import com.caogen.jfd.dao.user.AppSmsDao;
 import com.caogen.jfd.dao.user.AppThirdDao;
 import com.caogen.jfd.dao.user.AppUserDao;
 import com.caogen.jfd.dao.user.ConfigDao;
-import com.caogen.jfd.entity.SysConfig;
 import com.caogen.jfd.entity.user.AppSms;
 import com.caogen.jfd.entity.user.AppThird;
-import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.entity.user.AppThird.Thirdparty;
-import com.caogen.jfd.entity.user.AppUser.Identity;
+import com.caogen.jfd.entity.user.AppUser;
+import com.caogen.jfd.entity.user.SysConfig;
 import com.caogen.jfd.util.PasswordHelper;
 
 /**
@@ -41,21 +40,19 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public String generateToken(String username, Identity identity) {
+	public String generateToken(String username) {
 		String token = PasswordHelper.generateNumber();
 		AppUser user = new AppUser();
 		user.setUsername(username);
-		user.setIdentity(identity);
 		user.setToken(token);
 		appUserDao.update(user);
 		return token;
 	}
 
 	@Override
-	public void verifyPassword(String username, String password, Identity identity) throws Exception {
+	public void verifyPassword(String username, String password) throws Exception {
 		AppUser user = new AppUser();
 		user.setUsername(username);
-		user.setIdentity(identity);
 		user = appUserDao.get(user);
 		// 用户密码判断
 		String ciphertext = PasswordHelper.encryptPassword(password, user.getSalt());
@@ -99,10 +96,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void createAppUser(String username, Identity identity, String referrer) {
+	public void createAppUser(String username, String referrer) {
 		AppUser user = new AppUser();
 		user.setUsername(username);
-		user.setIdentity(identity);
 		user.setState(AppUser.State.normal);
 		user.setCreate_date(LocalDateTime.now());
 		appUserDao.insert(user);
@@ -111,8 +107,8 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void createAppUser(Thirdparty thirdparty, String identifier, String portrait_url, String username,
-			Identity identity, String referrer) {
-		createAppUser(username, identity, referrer);
+			String referrer) {
+		createAppUser(username, referrer);
 		AppThird third = new AppThird();
 		third.setThirdparty(thirdparty);
 		third.setIdentifier(identifier);

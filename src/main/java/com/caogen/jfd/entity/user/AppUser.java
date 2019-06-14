@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
+ * APP用户entity
  * 
  * @author Spuiln
  *
@@ -12,7 +13,6 @@ public class AppUser implements Serializable {
 
 	private static final long serialVersionUID = -5753387388562949447L;
 	private Integer id;
-	private Identity identity;
 	private String username;
 	private String password;
 	private String salt;
@@ -23,19 +23,15 @@ public class AppUser implements Serializable {
 	private String token;
 	private String referrer;
 
-	public enum Identity {
-		user, driver
-	}
-
 	public enum State {
 		normal, locked
 	}
 
 	@Override
 	public String toString() {
-		return "AppUser [id=" + id + ", identity=" + identity + ", username=" + username + ", password=" + password
-				+ ", salt=" + salt + ", state=" + state + ", create_date=" + create_date + ", des_key=" + des_key
-				+ ", des_iv=" + des_iv + ", token=" + token + ", referrer=" + referrer + "]";
+		return "AppUser [id=" + id + ", username=" + username + ", password=" + password + ", salt=" + salt + ", state="
+				+ state + ", create_date=" + create_date + ", des_key=" + des_key + ", des_iv=" + des_iv + ", token="
+				+ token + ", referrer=" + referrer + "]";
 	}
 
 	public Integer getId() {
@@ -44,14 +40,6 @@ public class AppUser implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Identity getIdentity() {
-		return identity;
-	}
-
-	public void setIdentity(Identity identity) {
-		this.identity = identity;
 	}
 
 	public String getUsername() {

@@ -2,6 +2,9 @@ package com.caogen.jfd.controller.user;
 
 import java.io.IOException;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +19,6 @@ import com.caogen.jfd.model.LoginMessage;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.user.AdminService;
 import com.caogen.jfd.service.user.AppUserService;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * 
@@ -53,20 +52,20 @@ public class AdminController {
 	public Message login(LoginMessage entity) {
 		Message message = new Message();
 		try {
-			AppUser user = appUserService.getByUsername(entity.getUsername(), entity.getIdentity());
+			AppUser user = appUserService.getByUsername(entity.getUsername());
 			switch (entity.getMode()) {
 			case password:
 				// 密码登录：用户不存在则抛出异常，存在则对比密码是否正确
 				if (user == null) {
 					throw new RuntimeException("用户不存在");
 				}
-				adminService.verifyPassword(entity.getUsername(), entity.getPassword(), entity.getIdentity());
+				adminService.verifyPassword(entity.getUsername(), entity.getPassword());
 				break;
 			case sms:
 				// 短信验证码登录：对比验证码是否正确，正确则登录成功，错误则抛出异常；若用户不存在，创建用户
 //				adminService.verifySms(entity.getUsername(), entity.getSms());
 				if (user == null) {
-					adminService.createAppUser(entity.getUsername(), entity.getIdentity(), entity.getReferrer());
+					adminService.createAppUser(entity.getUsername(), entity.getReferrer());
 				}
 				break;
 			case third:
@@ -74,13 +73,13 @@ public class AdminController {
 //				adminService.verifySms(entity.getUsername(), entity.getSms());
 				if (user == null) {
 					adminService.createAppUser(entity.getThirdparty(), entity.getIdentifier(), entity.getPortrait_url(),
-							entity.getUsername(), entity.getIdentity(), entity.getReferrer());
+							entity.getUsername(), entity.getReferrer());
 				}
 				break;
 			default:
 				throw new RuntimeException("登录方式有误");
 			}
-			String token = adminService.generateToken(entity.getUsername(), entity.getIdentity());
+			String token = adminService.generateToken(entity.getUsername());
 			message.setData(token);
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());

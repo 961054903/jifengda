@@ -5,21 +5,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.caogen.jfd.dao.user.AppSmsDao">
 	<sql id="appSms">phone,code,create_date</sql>
 	<insert id="insert" parameterType="AppSms">
-		INSERT INTO app_sms (
+		INSERT INTO app_user_sms (
 		<include refid="appSms" />
 		) VALUES (
 		#{phone},#{code},#{create_date}
 		)
 	</insert>
 	<delete id="delete" parameterType="AppSms">
-		DELETE FROM app_sms
+		DELETE FROM app_user_sms
 		<where>
 			<if test="id != null">id = #{id}</if>
 			<if test="phone != null">AND phone = #{phone}</if>
 		</where>
 	</delete>
 	<update id="update" parameterType="AppSms">
-		UPDATE app_sms
+		UPDATE app_user_sms
 		<set>
 			<if test="code != null">id = #{code},</if>
 		</set>
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="get" parameterType="AppSms" resultType="AppSms">
 		SELECT id,
 		<include refid="appSms"></include>
-		FROM app_sms
+		FROM app_user_sms
 		<where>
 			<if test="id != null">id = #{id}</if>
 			<if test="phone != null">AND phone = #{phone}</if>
@@ -40,6 +40,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="find" parameterType="AppSms" resultType="AppSms">
 		SELECT id,
 		<include refid="appSms"></include>
-		FROM app_sms
+		FROM app_user_sms
 	</select>
 </mapper>

@@ -25,6 +25,6 @@ public interface AppUserService extends BaseService<AppUser> {
 	 * @param identity
 	 * @return
 	 */
-	AppUser getByUsername(String username, AppUser.Identity identity);
+	AppUser getByUsername(String username);
 
 }

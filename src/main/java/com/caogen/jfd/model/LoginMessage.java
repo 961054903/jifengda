@@ -3,7 +3,6 @@ package com.caogen.jfd.model;
 import java.io.Serializable;
 
 import com.caogen.jfd.entity.user.AppThird;
-import com.caogen.jfd.entity.user.AppUser;
 
 /**
  * 
@@ -13,7 +12,6 @@ import com.caogen.jfd.entity.user.AppUser;
 public class LoginMessage implements Serializable {
 
 	private static final long serialVersionUID = -3781059565730363030L;
-	private AppUser.Identity identity;
 	private Mode mode;
 	private String username;
 	private String password;
@@ -30,17 +28,9 @@ public class LoginMessage implements Serializable {
 
 	@Override
 	public String toString() {
-		return "LoginMessage [identity=" + identity + ", mode=" + mode + ", username=" + username + ", password="
-				+ password + ", sms=" + sms + ", thirdparty=" + thirdparty + ", identifier=" + identifier
-				+ ", portrait_url=" + portrait_url + ", referrer=" + referrer + ", token=" + token + "]";
-	}
-
-	public AppUser.Identity getIdentity() {
-		return identity;
-	}
-
-	public void setIdentity(AppUser.Identity identity) {
-		this.identity = identity;
+		return "LoginMessage [mode=" + mode + ", username=" + username + ", password=" + password + ", sms=" + sms
+				+ ", thirdparty=" + thirdparty + ", identifier=" + identifier + ", portrait_url=" + portrait_url
+				+ ", referrer=" + referrer + ", token=" + token + "]";
 	}
 
 	public Mode getMode() {

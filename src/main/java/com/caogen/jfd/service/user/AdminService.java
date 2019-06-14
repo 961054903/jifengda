@@ -1,7 +1,6 @@
 package com.caogen.jfd.service.user;
 
 import com.caogen.jfd.entity.user.AppThird.Thirdparty;
-import com.caogen.jfd.entity.user.AppUser.Identity;
 
 /**
  * 
@@ -23,7 +22,7 @@ public interface AdminService {
 	 * @param identity
 	 * @return
 	 */
-	String generateToken(String username, Identity identity);
+	String generateToken(String username);
 
 	/**
 	 * 对比密码
@@ -33,7 +32,7 @@ public interface AdminService {
 	 * @param identity
 	 * @throws Exception
 	 */
-	void verifyPassword(String username, String password, Identity identity) throws Exception;
+	void verifyPassword(String username, String password) throws Exception;
 
 	/**
 	 * 对比验证码
@@ -48,10 +47,9 @@ public interface AdminService {
 	 * 创建用户
 	 * 
 	 * @param username
-	 * @param identity
 	 * @param referrer
 	 */
-	void createAppUser(String username, Identity identity, String referrer);
+	void createAppUser(String username, String referrer);
 
 	/**
 	 * 创建用户
@@ -60,10 +58,8 @@ public interface AdminService {
 	 * @param identifier
 	 * @param portrait_url
 	 * @param username
-	 * @param identity
 	 * @param referrer
 	 */
-	void createAppUser(Thirdparty thirdparty, String identifier, String portrait_url, String username,
-			Identity identity, String referrer);
+	void createAppUser(Thirdparty thirdparty, String identifier, String portrait_url, String username, String referrer);
 
 }

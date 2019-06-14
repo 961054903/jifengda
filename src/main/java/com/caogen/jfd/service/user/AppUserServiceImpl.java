@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.caogen.jfd.dao.user.AppUserDao;
 import com.caogen.jfd.entity.user.AppUser;
-import com.caogen.jfd.entity.user.AppUser.Identity;
 
 /**
  * 
@@ -48,10 +47,9 @@ public class AppUserServiceImpl implements AppUserService {
 	}
 
 	@Override
-	public AppUser getByUsername(String username, Identity identity) {
+	public AppUser getByUsername(String username) {
 		AppUser entity = new AppUser();
 		entity.setUsername(username);
-		entity.setIdentity(identity);
 		return appUserDao.get(entity);
 	}
 
