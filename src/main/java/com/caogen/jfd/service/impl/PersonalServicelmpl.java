@@ -37,4 +37,17 @@ public class PersonalServicelmpl implements PersonalService {
         List<Personal> personals = personalDao.find( new Personal());
         return personals;
     }
+
+    @Override
+    public void getstate(Boolean is_online ,String phone) {
+        Personal personal = new Personal();
+        personal.setPhone(phone);
+        if (is_online) {
+            personal.setIs_online(true);
+        } else {
+            personal.setIs_online(false);
+        }
+        personalDao.update(personal);
+
+    }
 }

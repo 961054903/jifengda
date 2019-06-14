@@ -14,4 +14,13 @@
             <if test="name != null">AND name = #{name}</if>
         </where>
     </select>
+
+    <update id="update" parameterType="Personal">
+        UPDATE
+        app_driver_info
+        SET
+        is_online =#{is_online}
+        WHERE
+        phone =#{phone}
+    </update>
 </mapper>

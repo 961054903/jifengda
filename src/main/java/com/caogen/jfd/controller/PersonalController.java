@@ -19,6 +19,10 @@ public class PersonalController {
     @Autowired
     private PersonalService personalService;
 
+    /**
+     * 查询上下线状态全部
+     * @return
+     */
     @ResponseBody
     @RequestMapping("upAndDown")
     public Message upAndDown() {
@@ -26,6 +30,26 @@ public class PersonalController {
         try {
             List<Personal> cities = personalService.getss();
             message.setData(cities);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
+
+    /**
+     * 查询是否在线
+     *
+     */
+    @ResponseBody
+    @RequestMapping("state")
+    public Message state(Boolean is_online, String phone)  {
+        Message message = new Message();
+        try {
+             personalService.getstate(is_online,phone);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
