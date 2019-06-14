@@ -2,6 +2,7 @@ package com.caogen.jfd.model;
 
 import java.io.Serializable;
 
+import com.caogen.jfd.entity.AppThird;
 import com.caogen.jfd.entity.AppUser;
 
 /**
@@ -17,7 +18,7 @@ public class LoginMessage implements Serializable {
 	private String username;
 	private String password;
 	private String sms;
-	private Thirdparty thirdparty;
+	private AppThird.Thirdparty thirdparty;
 	private String identifier;
 	private String portrait_url;
 	private String referrer;
@@ -25,10 +26,6 @@ public class LoginMessage implements Serializable {
 
 	public enum Mode {
 		password, sms, third
-	}
-
-	public enum Thirdparty {
-		qq, weixin, weibo
 	}
 
 	@Override
@@ -78,11 +75,11 @@ public class LoginMessage implements Serializable {
 		this.sms = sms;
 	}
 
-	public Thirdparty getThirdparty() {
+	public AppThird.Thirdparty getThirdparty() {
 		return thirdparty;
 	}
 
-	public void setThirdparty(Thirdparty thirdparty) {
+	public void setThirdparty(AppThird.Thirdparty thirdparty) {
 		this.thirdparty = thirdparty;
 	}
 

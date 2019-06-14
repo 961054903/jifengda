@@ -1,7 +1,7 @@
 package com.caogen.jfd.service;
 
+import com.caogen.jfd.entity.AppThird;
 import com.caogen.jfd.entity.AppUser.Identity;
-import com.caogen.jfd.model.LoginMessage.Thirdparty;
 
 /**
  * 
@@ -63,7 +63,7 @@ public interface AdminService {
 	 * @param identity
 	 * @param referrer
 	 */
-	void createAppUser(Thirdparty thirdparty, String identifier, String portrait_url, String username,
+	void createAppUser(AppThird.Thirdparty thirdparty, String identifier, String portrait_url, String username,
 			Identity identity, String referrer);
 
 }
