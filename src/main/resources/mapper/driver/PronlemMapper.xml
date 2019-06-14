@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.caogen.jfd.dao.user.PronlemDao">
+<mapper namespace="com.caogen.jfd.dao.driver.PronlemDao">
     <sql id="issueFaq">title,context,photo_url,create_date</sql>
     <select id="find" parameterType="IssueFaq"
             resultType="IssueFaq">
