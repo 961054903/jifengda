@@ -149,7 +149,8 @@ public class AdminServiceImpl implements AdminService {
 			createAppUser(thirdparty, identifier, portrait_url, username, referrer);
 		} else {
 			String phone = third.getPhone();
-			
+			AppUser user = userDao.get(new AppUser(phone));
+			ckeckUserState(user);
 		}
 	}
 

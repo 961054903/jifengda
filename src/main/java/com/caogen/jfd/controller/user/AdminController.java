@@ -16,7 +16,6 @@ import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.model.LoginMessage;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.user.AdminService;
-import com.caogen.jfd.service.user.AppUserService;
 
 /**
  * 
@@ -28,8 +27,6 @@ import com.caogen.jfd.service.user.AppUserService;
 public class AdminController {
 	@Autowired
 	private AdminService adminService;
-	@Autowired
-	private AppUserService appUserService;
 
 	@ResponseBody
 	@RequestMapping("sms")

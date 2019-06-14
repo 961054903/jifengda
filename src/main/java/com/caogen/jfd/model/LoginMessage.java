@@ -2,6 +2,7 @@ package com.caogen.jfd.model;
 
 import java.io.Serializable;
 
+import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.entity.user.AppUserThird;
 
 /**
