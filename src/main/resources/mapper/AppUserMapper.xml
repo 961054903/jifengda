@@ -3,14 +3,14 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.AppUserDao">
-	<sql id="appUser">identity,username,password,salt,status,create_date,key,iv,token,referrer
+	<sql id="appUser">identity,username,password,salt,state,create_date,des_key,des_iv,token,referrer
 	</sql>
 	<insert id="insert" parameterType="AppUser">
-		INSERT INTO sys_user (
+		INSERT INTO app_user (
 		<include refid="appUser" />
 		)
-		VLAUES (
-		#{identity},#{username},#{password},#{salt},#{status},#{create_date},#{key},#{iv},#{token},#{referrer}
+		VALUES (
+		#{identity},#{username},#{password},#{salt},#{state},#{create_date},#{des_key},#{des_iv},#{token},#{referrer}
 		)
 	</insert>
 	<delete id="delete" parameterType="AppUser">
@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="id != null">id = #{id}</if>
 			<if test="username != null">AND username = #{username}</if>
 			<if test="identity != null">AND identity = #{identity}</if>
-			<if test="token != nul">AND token = #{token}</if>
+			<if test="token != null">AND token = #{token}</if>
 		</where>
 	</delete>
 	<update id="update" parameterType="AppUser">
@@ -27,16 +27,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<set>
 			<if test="password != null">password = #{password},</if>
 			<if test="salt != null">salt = #{salt},</if>
-			<if test="status != null">status = #{status},</if>
-			<if test="key != null">key = #{key},</if>
-			<if test="iv != null">iv = #{iv},</if>
-			<if test="key != null">token = #{token}</if>
+			<if test="state != null">state = #{state},</if>
+			<if test="des_key != null">des_key = #{des_key},</if>
+			<if test="des_iv != null">des_iv = #{des_iv},</if>
+			<if test="token != null">token = #{token}</if>
 		</set>
 		<where>
 			<if test="id != null">id = #{id}</if>
 			<if test="username != null">AND username = #{username}</if>
 			<if test="identity != null">AND identity = #{identity}</if>
-			<if test="token != nul">AND token = #{token}</if>
 		</where>
 	</update>
 	<select id="get" parameterType="AppUser" resultType="AppUser">
@@ -47,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="id != null">id = #{id}</if>
 			<if test="username != null">AND username = #{username}</if>
 			<if test="identity != null">AND identity = #{identity}</if>
-			<if test="token != nul">AND token = #{token}</if>
+			<if test="token != null">AND token = #{token}</if>
 		</where>
 	</select>
 	<select id="find" parameterType="AppUser" resultType="AppUser">
@@ -55,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="appUser" />
 		FROM app_user
 		<where>
-			<if test="status != null">status = #{status}</if>
+			<if test="state != null">state = #{state}</if>
 			<if test="referrer != null">AND referrer = #{referrer}</if>
 		</where>
 	</select>

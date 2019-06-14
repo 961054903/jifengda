@@ -1,7 +1,7 @@
 package com.caogen.jfd.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * 
@@ -16,25 +16,26 @@ public class AppUser implements Serializable {
 	private String username;
 	private String password;
 	private String salt;
-	private Status status;
-	private LocalDate create_date;
-	private String key;
-	private String iv;
+	private State state;
+	private LocalDateTime create_date;
+	private String des_key;
+	private String des_iv;
 	private String token;
+	private String referrer;
 
 	public enum Identity {
 		user, driver
 	}
 
-	public enum Status {
+	public enum State {
 		normal, locked
 	}
 
 	@Override
 	public String toString() {
 		return "AppUser [id=" + id + ", identity=" + identity + ", username=" + username + ", password=" + password
-				+ ", salt=" + salt + ", status=" + status + ", create_date=" + create_date + ", key=" + key + ", iv="
-				+ iv + ", token=" + token + "]";
+				+ ", salt=" + salt + ", state=" + state + ", create_date=" + create_date + ", des_key=" + des_key
+				+ ", des_iv=" + des_iv + ", token=" + token + ", referrer=" + referrer + "]";
 	}
 
 	public Integer getId() {
@@ -77,36 +78,36 @@ public class AppUser implements Serializable {
 		this.salt = salt;
 	}
 
-	public Status getStatus() {
-		return status;
+	public State getState() {
+		return state;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setState(State state) {
+		this.state = state;
 	}
 
-	public LocalDate getCreate_date() {
+	public LocalDateTime getCreate_date() {
 		return create_date;
 	}
 
-	public void setCreate_date(LocalDate create_date) {
+	public void setCreate_date(LocalDateTime create_date) {
 		this.create_date = create_date;
 	}
 
-	public String getKey() {
-		return key;
+	public String getDes_key() {
+		return des_key;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setDes_key(String des_key) {
+		this.des_key = des_key;
 	}
 
-	public String getIv() {
-		return iv;
+	public String getDes_iv() {
+		return des_iv;
 	}
 
-	public void setIv(String iv) {
-		this.iv = iv;
+	public void setDes_iv(String des_iv) {
+		this.des_iv = des_iv;
 	}
 
 	public String getToken() {
@@ -115,6 +116,14 @@ public class AppUser implements Serializable {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getReferrer() {
+		return referrer;
+	}
+
+	public void setReferrer(String referrer) {
+		this.referrer = referrer;
 	}
 
 }

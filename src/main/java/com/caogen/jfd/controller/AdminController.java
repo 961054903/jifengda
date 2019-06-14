@@ -43,7 +43,7 @@ public class AdminController {
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
 			// TODO: handle exception
-			StaticLogger.error("", e);
+			StaticLogger.error("get sms code error", e);
 		}
 		return message;
 	}
@@ -64,14 +64,14 @@ public class AdminController {
 				break;
 			case sms:
 				// 短信验证码登录：对比验证码是否正确，正确则登录成功，错误则抛出异常；若用户不存在，创建用户
-				adminService.verifySms(entity.getUsername(), entity.getSms());
+//				adminService.verifySms(entity.getUsername(), entity.getSms());
 				if (user == null) {
 					adminService.createAppUser(entity.getUsername(), entity.getIdentity(), entity.getReferrer());
 				}
 				break;
 			case third:
 				// 第三方应用授权登录：同短信验证码登录
-				adminService.verifySms(entity.getUsername(), entity.getSms());
+//				adminService.verifySms(entity.getUsername(), entity.getSms());
 				if (user == null) {
 					adminService.createAppUser(entity.getThirdparty(), entity.getIdentifier(), entity.getPortrait_url(),
 							entity.getUsername(), entity.getIdentity(), entity.getReferrer());
@@ -111,4 +111,5 @@ public class AdminController {
 		String data = request.getParameter("data");
 		return data;
 	}
+
 }

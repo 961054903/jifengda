@@ -12,6 +12,7 @@ import com.caogen.jfd.dao.AppUserDao;
 import com.caogen.jfd.dao.ConfigDao;
 import com.caogen.jfd.entity.AppSms;
 import com.caogen.jfd.entity.AppThird;
+import com.caogen.jfd.entity.AppThird.Thirdparty;
 import com.caogen.jfd.entity.AppUser;
 import com.caogen.jfd.entity.AppUser.Identity;
 import com.caogen.jfd.entity.SysConfig;
@@ -57,9 +58,19 @@ public class AdminServiceImpl implements AdminService {
 		user.setUsername(username);
 		user.setIdentity(identity);
 		user = appUserDao.get(user);
-		password = PasswordHelper.encryptPassword(password, user.getPassword());
-		if (!password.equals(user.getPassword())) {
+		// 用户密码判断
+		String ciphertext = PasswordHelper.encryptPassword(password, user.getSalt());
+		if (!ciphertext.equals(user.getPassword())) {
 			throw new RuntimeException("密码输入错误");
+		}
+		// 用户状态判断
+		switch (user.getState()) {
+		case normal:
+			break;
+		case locked:
+			throw new RuntimeException("用户被锁定");
+		default:
+			break;
 		}
 	}
 
@@ -73,6 +84,9 @@ public class AdminServiceImpl implements AdminService {
 		AppSms sms = new AppSms();
 		sms.setPhone(username);
 		sms = appSmsDao.get(sms);
+		if (sms == null) {
+			throw new RuntimeException("验证码不存在");
+		}
 		// 验证码是否在有效期内
 		Duration duration = Duration.between(sms.getCreate_date(), LocalDateTime.now());
 		long millis = duration.toMillis();
@@ -90,11 +104,14 @@ public class AdminServiceImpl implements AdminService {
 		AppUser user = new AppUser();
 		user.setUsername(username);
 		user.setIdentity(identity);
+		user.setState(AppUser.State.normal);
+		user.setCreate_date(LocalDateTime.now());
 		appUserDao.insert(user);
+		System.out.println(user);
 	}
 
 	@Override
-	public void createAppUser(AppThird.Thirdparty thirdparty, String identifier, String portrait_url, String username,
+	public void createAppUser(Thirdparty thirdparty, String identifier, String portrait_url, String username,
 			Identity identity, String referrer) {
 		createAppUser(username, identity, referrer);
 		AppThird third = new AppThird();
@@ -102,6 +119,7 @@ public class AdminServiceImpl implements AdminService {
 		third.setIdentifier(identifier);
 		third.setPortrait_url(portrait_url);
 		appThirdDao.insert(third);
+		System.out.println(third);
 	}
 
 }

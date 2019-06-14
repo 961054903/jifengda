@@ -15,12 +15,10 @@ public class AppSms implements Serializable {
 	private String phone;
 	private String code;
 	private LocalDateTime create_date;
-	private Boolean available;
 
 	@Override
 	public String toString() {
-		return "AppSms [id=" + id + ", phone=" + phone + ", code=" + code + ", create_date=" + create_date
-				+ ", available=" + available + "]";
+		return "AppSms [id=" + id + ", phone=" + phone + ", code=" + code + ", create_date=" + create_date + "]";
 	}
 
 	public Integer getId() {
@@ -53,14 +51,6 @@ public class AppSms implements Serializable {
 
 	public void setCreate_date(LocalDateTime create_date) {
 		this.create_date = create_date;
-	}
-
-	public Boolean getAvailable() {
-		return available;
-	}
-
-	public void setAvailable(Boolean available) {
-		this.available = available;
 	}
 
 }
