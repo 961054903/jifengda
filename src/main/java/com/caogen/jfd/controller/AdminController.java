@@ -49,30 +49,43 @@ public class AdminController {
 
 	@ResponseBody
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public Message login(LoginMessage login) {
+	public Message login(LoginMessage entity) {
 		Message message = new Message();
 		try {
-			AppUser user = appUserService.getByUsername(login.getUsername(), login.getIdentity());
-			switch (login.getMode()) {
+			AppUser user = appUserService.getByUsername(entity.getUsername(), entity.getIdentity());
+			switch (entity.getMode()) {
 			case password:
+				// 密码登录：用户不存在则抛出异常，存在则对比密码是否正确
 				if (user == null) {
 					throw new RuntimeException("用户不存在");
 				}
-				adminService.password(login.getUsername(), login.getPassword());
+				adminService.verifyPassword(entity.getUsername(), entity.getPassword(), entity.getIdentity());
 				break;
 			case sms:
+				// 短信验证码登录：对比验证码是否正确，正确则登录成功，错误则抛出异常；若用户不存在，创建用户
+				adminService.verifySms(entity.getUsername(), entity.getIdentity());
+				if (user == null) {
+					adminService.createAppUser(entity.getUsername(), entity.getIdentity(), entity.getReferrer());
+				}
 				break;
 			case third:
+				// 第三方应用授权登录：同短信验证码登录
+				adminService.verifySms(entity.getUsername(), entity.getIdentity());
+				if (user == null) {
+					adminService.createAppUser(entity.getThirdparty(), entity.getIdentifier(), entity.getPortrait_url(),
+							entity.getUsername(), entity.getIdentity(), entity.getReferrer());
+				}
 				break;
 			default:
-				break;
+				throw new RuntimeException("登录方式有误");
 			}
-			String token = adminService.generateToken(login.getUsername(), login.getIdentity());
+			String token = adminService.generateToken(entity.getUsername(), entity.getIdentity());
 			message.setData(token);
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
 			// TODO: handle exception
+			StaticLogger.error("", e);
 		}
 		return message;
 	}
@@ -80,7 +93,7 @@ public class AdminController {
 	@RequestMapping("api")
 	public void api(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			String type = request.getParameter("type");
+			// String type = request.getParameter("type");
 			request.getRequestDispatcher("test").forward(request, response);
 		} catch (ServletException e) {
 			e.printStackTrace();

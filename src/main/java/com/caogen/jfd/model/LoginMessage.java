@@ -20,7 +20,7 @@ public class LoginMessage implements Serializable {
 	private Thirdparty thirdparty;
 	private String identifier;
 	private String portrait_url;
-	private String phone;
+	private String referrer;
 	private String token;
 
 	public enum Mode {
@@ -35,7 +35,7 @@ public class LoginMessage implements Serializable {
 	public String toString() {
 		return "LoginMessage [identity=" + identity + ", mode=" + mode + ", username=" + username + ", password="
 				+ password + ", sms=" + sms + ", thirdparty=" + thirdparty + ", identifier=" + identifier
-				+ ", portrait_url=" + portrait_url + ", phone=" + phone + ", token=" + token + "]";
+				+ ", portrait_url=" + portrait_url + ", referrer=" + referrer + ", token=" + token + "]";
 	}
 
 	public AppUser.Identity getIdentity() {
@@ -70,6 +70,14 @@ public class LoginMessage implements Serializable {
 		this.password = password;
 	}
 
+	public String getSms() {
+		return sms;
+	}
+
+	public void setSms(String sms) {
+		this.sms = sms;
+	}
+
 	public Thirdparty getThirdparty() {
 		return thirdparty;
 	}
@@ -94,28 +102,20 @@ public class LoginMessage implements Serializable {
 		this.portrait_url = portrait_url;
 	}
 
+	public String getReferrer() {
+		return referrer;
+	}
+
+	public void setReferrer(String referrer) {
+		this.referrer = referrer;
+	}
+
 	public String getToken() {
 		return token;
 	}
 
 	public void setToken(String token) {
 		this.token = token;
-	}
-
-	public String getSms() {
-		return sms;
-	}
-
-	public void setSms(String sms) {
-		this.sms = sms;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 
 }
