@@ -2,9 +2,6 @@ package com.caogen.jfd.controller;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +16,10 @@ import com.caogen.jfd.model.LoginMessage;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.AdminService;
 import com.caogen.jfd.service.AppUserService;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 

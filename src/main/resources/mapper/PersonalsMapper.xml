@@ -3,7 +3,24 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.PersonalDao">
-    <sql id="personal">is_online</sql>
+    <sql id="personal">user_id,is_online,phone,photo_url,name,identity_number,grade,gender,birthday,licence_url,identity_front_url,identity_back_url,identity_take_url,contacts_name,contacts_phone,contacts_gender,contacts_relation,is_online,longitude,latitude</sql>
+    <select id="get" parameterType="Personal"
+            resultType="Personal">
+        SELECT id,
+        <include refid="personal" />
+        FROM app_driver_info
+        where
+        phone =#{phone}
+    </select>
+
+    <update id="update" parameterType="Personal">
+        UPDATE
+        app_driver_info
+        SET
+        is_online =#{is_online}
+        WHERE
+        phone =#{phone}
+    </update>
     <select id="find" parameterType="Personal"
             resultType="Personal">
         SELECT id,
@@ -15,12 +32,18 @@
         </where>
     </select>
 
-    <update id="update" parameterType="Personal">
-        UPDATE
-        app_driver_info
-        SET
-        is_online =#{is_online}
-        WHERE
-        phone =#{phone}
-    </update>
+
+
+    <sql id="sql">phone,photo_url,name,grade</sql>
+    <select id="get1" parameterType="Personal"
+            resultType="Personal">
+        SELECT id,
+        <include refid="sql" />
+        FROM app_driver_info
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="name != null">AND name = #{name}</if>
+        </where>
+    </select>
+
 </mapper>

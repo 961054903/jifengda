@@ -33,9 +33,10 @@ public class PersonalServicelmpl implements PersonalService {
     }
 
     @Override
-    public List<Personal> getss() {
-        List<Personal> personals = personalDao.find( new Personal());
-        return personals;
+    public Personal getss(String phone) {
+        Personal personal = new Personal();
+        personal.setPhone(phone);
+        return  personalDao.get(personal);
     }
 
     @Override
@@ -49,5 +50,12 @@ public class PersonalServicelmpl implements PersonalService {
         }
         personalDao.update(personal);
 
+    }
+
+    @Override
+    public Personal getmany(String phone) {
+        Personal personal = new Personal();
+        personal.setPhone(phone);
+        return personalDao.get1(personal);
     }
 }
