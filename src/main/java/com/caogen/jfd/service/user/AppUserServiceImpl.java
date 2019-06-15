@@ -1,13 +1,21 @@
 package com.caogen.jfd.service.user;
 
-import org.junit.jupiter.api.Test;
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.dao.user.AppUserDao;
+import com.caogen.jfd.dao.user.AppUserSmsDao;
+import com.caogen.jfd.dao.user.ConfigDao;
 import com.caogen.jfd.entity.user.AppUser;
+import com.caogen.jfd.entity.user.AppUser.State;
+import com.caogen.jfd.entity.user.AppUserSms;
+import com.caogen.jfd.entity.user.AppUserThird;
+import com.caogen.jfd.entity.user.SysConfig;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.util.PasswordHelper;
 
@@ -21,6 +29,10 @@ public class AppUserServiceImpl implements AppUserService {
 
 	@Autowired
 	private AppUserDao userDao;
+	@Autowired
+	private AppUserSmsDao smsDao;
+	@Autowired
+	private ConfigDao configDao;
 
 	@Override
 	public void create(AppUser entity) {
@@ -59,6 +71,25 @@ public class AppUserServiceImpl implements AppUserService {
 	}
 
 	@Override
+	public void verifySms(String phone, String sms) throws Exception {
+		// 查询该条验证码记录
+		AppUserSms userSms = smsDao.get(new AppUserSms(phone));
+		if (userSms == null) {
+			throw new DefinedException(ErrorCode.SMS_INEXISTENCE);
+		}
+		// 验证码是否在有效期内
+		SysConfig config = configDao.get(new SysConfig("indate"));
+		Long indate = Long.parseLong(config.getItem_value());
+		Duration duration = Duration.between(userSms.getCreate_date(), LocalDateTime.now());
+		if (duration.toMillis() > indate) {
+			throw new DefinedException(ErrorCode.SMS_PAST);
+		}
+		if (!userSms.getCode().equals(sms)) {
+			throw new DefinedException(ErrorCode.SMS_MISMATCHING);
+		}
+	}
+
+	@Override
 	public String loginByPassword(AppUser user) throws Exception {
 		// 检查参数
 		if (user.getUsername() == null || user.getPassword() == null) {
@@ -66,7 +97,7 @@ public class AppUserServiceImpl implements AppUserService {
 		}
 		// 用户是否存在
 		AppUser entity = userDao.get(user);
-		if (entity == null || !entity.getState().equals(AppUser.State.normal)) {
+		if (entity == null || !entity.getState().equals(State.normal)) {
 			throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);
 		}
 		// 密码是否设置
@@ -81,11 +112,33 @@ public class AppUserServiceImpl implements AppUserService {
 		return generateToken(user.getUsername());
 	}
 
-	@Test
-	public void test() {
-		String salt = PasswordHelper.generateSalt();
-		System.out.println(salt);
-		System.out.println(PasswordHelper.encryptPassword("123456", salt));
+	@Override
+	public String loginBySms(AppUser user, AppUserSms sms) throws Exception {
+		// 检查参数
+		if (user.getUsername() == null || sms.getCode() == null) {
+			throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
+		}
+		// TODO对比验证码
+		verifySms(user.getUsername(), sms.getCode());
+		//
+		AppUser entity = userDao.get(user);
+		if (entity == null) {// 创建用户
+			entity = new AppUser();
+			entity.setUsername(user.getUsername());
+			entity.setReferrer(user.getReferrer());
+			entity.setState(State.normal);
+			entity.setCreate_date(LocalDateTime.now());
+			create(entity);
+		} else if (!entity.getState().equals(State.normal)) {
+			throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);
+		}
+		return generateToken(user.getUsername());
+	}
+
+	@Override
+	public String loginByThird(AppUser user, AppUserSms sms, AppUserThird third) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**
@@ -102,4 +155,5 @@ public class AppUserServiceImpl implements AppUserService {
 		userDao.update(entity);
 		return token;
 	}
+
 }

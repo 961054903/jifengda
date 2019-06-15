@@ -9,6 +9,7 @@ import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.LoginType;
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.user.AppUser;
+import com.caogen.jfd.entity.user.AppUserSms;
 import com.caogen.jfd.entity.user.AppUserThird;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.model.Message;
@@ -27,7 +28,7 @@ public class AppUserController {
 
 	@ResponseBody
 	@RequestMapping("login")
-	public Message login(LoginType type, AppUser user, AppUserThird third) {
+	public Message login(LoginType type, AppUser user, AppUserSms sms, AppUserThird third) {
 		Message message = new Message();
 		String token = null;
 		try {
@@ -36,10 +37,10 @@ public class AppUserController {
 				token = userService.loginByPassword(user);
 				break;
 			case sms:
-//				token = userService.loginBySms(user);
+				token = userService.loginBySms(user, sms);
 				break;
 			case thirdparty:
-//				token = userService.loginByThird(user, third);
+				token = userService.loginByThird(user, sms, third);
 				break;
 			default:
 				throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);

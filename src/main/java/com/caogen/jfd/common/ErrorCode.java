@@ -7,10 +7,13 @@ package com.caogen.jfd.common;
 public enum ErrorCode {
 	SUCCEED("0000", "操作成功"), 
 	FAIL("1000", "操作失败"),
-	LOGIN_ERROR("1010", "登录失败"),
-	LOGIN_PARAM_ERROR("1011", "登录参数错误"),
-	LOGIN_USER_ERROR("1012","用户不存在或状态异常"),
-	LOGIN_PASSWORD_ERROR("1013","账号或密码错误");
+	LOGIN_ERROR("1001", "登录失败"),
+	LOGIN_PARAM_ERROR("1002", "登录参数错误"),
+	LOGIN_USER_ERROR("1003", "用户不存在或状态异常"),
+	LOGIN_PASSWORD_ERROR("1004", "账号或密码错误"),
+	SMS_MISMATCHING("1005", "验证码错误"),
+	SMS_PAST("1006", "验证码已过期"),
+	SMS_INEXISTENCE("1007", "验证码不存在");
 
 	private String code;
 	private String desc;
