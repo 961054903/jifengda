@@ -7,6 +7,8 @@ package com.caogen.jfd.common;
 public enum ErrorCode {
 	SUCCEED("0000", "操作成功"), 
 	FAIL("1000", "操作失败"),
+	PARAM_MISSING("1100", "参数缺失"),
+	PARAM_ILLEGALITY("1101", "参数格式有误"),
 	LOGIN_ERROR("1001", "登录失败"),
 	LOGIN_PARAM_ERROR("1002", "登录参数错误"),
 	LOGIN_USER_ERROR("1003", "用户不存在或状态异常"),
