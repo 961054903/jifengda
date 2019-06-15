@@ -1,4 +1,8 @@
 package com.caogen.jfd.dao.driver;
 
-public interface AppDriverDao {
+import com.caogen.jfd.dao.BaseDao;
+import com.caogen.jfd.entity.driver.AppDriver;
+
+public interface AppDriverDao extends BaseDao<AppDriver> {
+
 }

@@ -6,15 +6,30 @@ import java.time.LocalDateTime;
 public class AppDriver implements Serializable {
     private static final long serialVersionUID = -5753387388562949447L;
     private Integer id;   //id
-    private String drivename;  //司机姓名
+    private String driverphone;  //司机姓名
     private String password;   //密码
-    private Status status;  // 状态
+    private Status  status;  // 状态
+    private String salt;//盐
     private LocalDateTime create_date;   //创建时间
-    private String key;//3DES算法所需密钥
-    private String iv; // 3DES算法所需向量
+    private String des_key;//3DES算法所需密钥
+    private String des_iv; // 3DES算法所需向量
     private String token;
 
+    public AppDriver() {
+        super();
+    }
 
+
+    public AppDriver(String driverphone) {
+        super();
+        this.driverphone = driverphone;
+    }
+
+    public AppDriver(String driverphone, String password) {
+        super();
+        this.driverphone = driverphone;
+        this.password = password;
+    }
 
     public enum Status {
         normal, locked
@@ -24,12 +39,13 @@ public class AppDriver implements Serializable {
     public String toString() {
         return "AppDriver{" +
                 "id=" + id +
-                ", drivename='" + drivename + '\'' +
+                ", driverphone='" + driverphone + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
+                ", salt='" + salt + '\'' +
                 ", create_date=" + create_date +
-                ", key='" + key + '\'' +
-                ", iv='" + iv + '\'' +
+                ", des_key='" + des_key + '\'' +
+                ", des_iv='" + des_iv + '\'' +
                 ", token='" + token + '\'' +
                 '}';
     }
@@ -46,12 +62,12 @@ public class AppDriver implements Serializable {
         this.id = id;
     }
 
-    public String getDrivename() {
-        return drivename;
+    public String getDriverphone() {
+        return driverphone;
     }
 
-    public void setDrivename(String drivename) {
-        this.drivename = drivename;
+    public void setDriverphone(String driverphone) {
+        this.driverphone = driverphone;
     }
 
     public String getPassword() {
@@ -62,12 +78,20 @@ public class AppDriver implements Serializable {
         this.password = password;
     }
 
-    public Status getStatus() {
+    public Enum getStatus() {
         return status;
     }
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public LocalDateTime getCreate_date() {
@@ -78,20 +102,20 @@ public class AppDriver implements Serializable {
         this.create_date = create_date;
     }
 
-    public String getKey() {
-        return key;
+    public String getDes_key() {
+        return des_key;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setDes_key(String des_key) {
+        this.des_key = des_key;
     }
 
-    public String getIv() {
-        return iv;
+    public String getDes_iv() {
+        return des_iv;
     }
 
-    public void setIv(String iv) {
-        this.iv = iv;
+    public void setDes_iv(String des_iv) {
+        this.des_iv = des_iv;
     }
 
     public String getToken() {
