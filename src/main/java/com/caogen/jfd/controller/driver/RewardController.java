@@ -22,6 +22,11 @@ public class RewardController {
     private RewardService rewardService;
 
 
+    /**
+     * 奖励活动
+     * @return
+     */
+
     @ResponseBody
     @RequestMapping("content")
     public Message  content(){

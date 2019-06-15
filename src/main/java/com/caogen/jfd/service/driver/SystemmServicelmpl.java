@@ -2,9 +2,12 @@ package com.caogen.jfd.service.driver;
 
 import com.caogen.jfd.dao.driver.SystemmDao;
 
+import com.caogen.jfd.entity.driver.Reward;
 import com.caogen.jfd.entity.driver.Systemm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class SystemmServicelmpl implements SystemmService {
@@ -34,9 +37,11 @@ public class SystemmServicelmpl implements SystemmService {
         return null;
     }
     @Override
-    public Systemm getrules() {
-        Systemm systemm = new Systemm();
-        return systemmDao.get(systemm);
+    public List<Systemm> getrules() {
+
+        List<Systemm> systemms = systemmDao.find( new Systemm());
+        return systemms;
+
     }
 
 }

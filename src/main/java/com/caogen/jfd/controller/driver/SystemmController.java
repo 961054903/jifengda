@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("system")
 public class SystemmController {
@@ -27,7 +29,7 @@ public class SystemmController {
     public Message rules() {
         Message message = new Message();
         try {
-            Systemm system = systemmService.getrules();
+           List <Systemm> system = systemmService.getrules();
             message.setData(system);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());

@@ -5,7 +5,7 @@
 <mapper namespace="com.caogen.jfd.dao.driver.SystemmDao">
     <sql id="systemm">title,content,create_date</sql>
 
-    <select id="get" parameterType="Systemm"
+    <select id="find" parameterType="Systemm"
             resultType="Systemm">
         SELECT id,
         <include refid="systemm" />
