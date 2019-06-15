@@ -44,8 +44,6 @@ public class ModelController {
         return message;
     }
 
-
-
     /**
      * 车辆信息
      * @return
