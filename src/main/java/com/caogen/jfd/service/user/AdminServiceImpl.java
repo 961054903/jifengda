@@ -148,9 +148,9 @@ public class AdminServiceImpl implements AdminService {
 			verifySms(username, sms);
 			createAppUser(thirdparty, identifier, portrait_url, username, referrer);
 		} else {
-			String phone = third.getPhone();
-			AppUser user = userDao.get(new AppUser(phone));
-			ckeckUserState(user);
+//			String phone = third.getPhone();
+//			AppUser user = userDao.get(new AppUser(phone));
+//			ckeckUserState(user);
 		}
 	}
 

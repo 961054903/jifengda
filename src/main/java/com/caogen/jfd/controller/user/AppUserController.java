@@ -10,6 +10,7 @@ import com.caogen.jfd.common.LoginType;
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.entity.user.AppUserThird;
+import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.user.AppUserService;
 
@@ -28,24 +29,28 @@ public class AppUserController {
 	@RequestMapping("login")
 	public Message login(LoginType type, AppUser user, AppUserThird third) {
 		Message message = new Message();
+		String token = null;
 		try {
 			switch (type) {
 			case password:
-
+				token = userService.loginByPassword(user);
 				break;
 			case sms:
-
+//				token = userService.loginBySms(user);
 				break;
 			case thirdparty:
-
+//				token = userService.loginByThird(user, third);
 				break;
 			default:
-				message.setCode(ErrorCode.LOGIN_PARAM_ERROR.getCode());
-				message.setDesc(ErrorCode.LOGIN_PARAM_ERROR.getDesc());
-				return message;
+				throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
 			}
+			message.setData(token);
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
+		} catch (DefinedException e) {
+			message.setCode(e.getError().getCode());
+			message.setDesc(e.getError().getDesc());
+			StaticLogger.error(message.getCode(), e);
 		} catch (Exception e) {
 			message.setCode(ErrorCode.LOGIN_ERROR.getCode());
 			message.setDesc(ErrorCode.LOGIN_ERROR.getDesc());

@@ -27,4 +27,13 @@ public interface AppUserService extends BaseService<AppUser> {
 	 */
 	AppUser getByUsername(String username);
 
+	/**
+	 * 用户名+密码登录
+	 * 
+	 * @param user
+	 * @return token
+	 * @throws Exception
+	 */
+	String loginByPassword(AppUser user) throws Exception;
+
 }

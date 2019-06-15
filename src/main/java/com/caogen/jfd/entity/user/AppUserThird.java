@@ -12,7 +12,7 @@ public class AppUserThird implements Serializable {
 
 	private static final long serialVersionUID = 840412543253621587L;
 	private Integer id;
-	private String phone;
+	private Integer user_id;
 	private Thirdparty thirdparty;
 	private String identifier;
 	private String credential;
@@ -34,7 +34,7 @@ public class AppUserThird implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AppUserThird [id=" + id + ", phone=" + phone + ", thirdparty=" + thirdparty + ", identifier="
+		return "AppUserThird [id=" + id + ", user_id=" + user_id + ", thirdparty=" + thirdparty + ", identifier="
 				+ identifier + ", credential=" + credential + ", portrait_url=" + portrait_url + "]";
 	}
 
@@ -46,12 +46,12 @@ public class AppUserThird implements Serializable {
 		this.id = id;
 	}
 
-	public String getPhone() {
-		return phone;
+	public Integer getUser_id() {
+		return user_id;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
 	}
 
 	public Thirdparty getThirdparty() {
