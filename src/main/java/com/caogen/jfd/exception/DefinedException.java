@@ -21,6 +21,11 @@ public class DefinedException extends Exception {
 		this.error = error;
 	}
 
+	@Override
+	public String getMessage() {
+		return error.getDesc();
+	}
+
 	public ErrorCode getError() {
 		return error;
 	}

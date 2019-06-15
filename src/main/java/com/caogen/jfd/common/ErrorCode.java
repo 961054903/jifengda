@@ -8,7 +8,9 @@ public enum ErrorCode {
 	SUCCEED("0000", "操作成功"), 
 	FAIL("1000", "操作失败"),
 	LOGIN_ERROR("1010", "登录失败"),
-	LOGIN_PARAM_ERROR("1011", "登录参数错误");
+	LOGIN_PARAM_ERROR("1011", "登录参数错误"),
+	LOGIN_USER_ERROR("1012","用户不存在或状态异常"),
+	LOGIN_PASSWORD_ERROR("1013","账号或密码错误");
 
 	private String code;
 	private String desc;
