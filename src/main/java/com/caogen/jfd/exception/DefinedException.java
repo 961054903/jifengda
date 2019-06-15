@@ -12,10 +12,6 @@ public class DefinedException extends Exception {
 	private static final long serialVersionUID = -5103774988551641390L;
 	private ErrorCode error;
 
-	public DefinedException() {
-		super();
-	}
-
 	public DefinedException(ErrorCode error) {
 		super();
 		this.error = error;

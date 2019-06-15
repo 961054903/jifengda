@@ -6,6 +6,11 @@ import org.springframework.stereotype.Service;
 import com.caogen.jfd.dao.user.AppUserInfoDao;
 import com.caogen.jfd.entity.user.AppUserInfo;
 
+/**
+ * 
+ * @author Spuiln
+ *
+ */
 @Service
 public class AppUserInfoServiceImpl implements AppUserInfoService {
 	@Autowired
