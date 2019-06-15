@@ -151,7 +151,7 @@ public class AppUserServiceImpl implements AppUserService {
 				throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
 			}
 			// 对比验证码
-			//verifySms(user.getUsername(), sms.getCode());
+			verifySms(user.getUsername(), sms.getCode());
 			// 添加第三方应用记录
 			third.setPhone(user.getUsername());
 			thirdDao.insert(third);

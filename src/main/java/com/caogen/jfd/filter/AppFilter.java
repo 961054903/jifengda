@@ -12,7 +12,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.service.user.AppUserService;
@@ -25,7 +24,7 @@ import com.caogen.jfd.service.user.AppUserService;
 public class AppFilter implements Filter {
 
 	@Autowired
-	private AppUserService appUserService;
+	private AppUserService userService;
 
 	@Override
 	public void destroy() {
@@ -36,32 +35,44 @@ public class AppFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		String token = ((HttpServletRequest) request).getHeader("token");
-		if (StringUtils.isEmpty(token)) {
-			throw new RuntimeException("token null");
+		String head = request.getParameter("code");
+		String token = request.getParameter("desc");
+		String message = request.getParameter("data");
+		if (Integer.parseInt(head.substring(0, 6)) != message.length()) {
+			
 		}
+		AppUser user = userService.getByToken(token);
+		if (user == null) {
+			response.getWriter();
+		}
+
+		chain.doFilter(request, response);
+//		String token = ((HttpServletRequest) request).getHeader("token");
+//		if (StringUtils.isEmpty(token)) {
+//			throw new RuntimeException("token null");
+//		}
 //		AppUser user = appUserService.getByToken(token);
 //		if (user == null) {// 用户不存在或token已过期
 //			throw new RuntimeException("user null");
 //		}
-		String message = getRequestBody((HttpServletRequest) request);
-		int len = Integer.parseInt(message.substring(0, 6));
-		String type = message.substring(6, 8);
-		String code = message.substring(8, 10);
-		String data = message.substring(10);
-		if (data.length() != len) {
-			throw new RuntimeException("format error");
-		}
-		if (code.equals("00")) {// 默认密钥和向量解密
-
-		} else {// 数据库查询密钥和向量解密
-
-		}
-		WrappedRequest wr = new WrappedRequest((HttpServletRequest) request);
+//		String message = getRequestBody((HttpServletRequest) request);
+//		int len = Integer.parseInt(message.substring(0, 6));
+//		String type = message.substring(6, 8);
+//		String code = message.substring(8, 10);
+//		String data = message.substring(10);
+//		if (data.length() != len) {
+//			throw new RuntimeException("format error");
+//		}
+//		if (code.equals("00")) {// 默认密钥和向量解密
+//
+//		} else {// 数据库查询密钥和向量解密
+//
+//		}
+//		WrappedRequest wr = new WrappedRequest((HttpServletRequest) request);
 //		wr.setParameter("id", user.getId());
-		wr.setParameter("type", type);
-		wr.setParameter("data", data);
-		chain.doFilter(wr, response);
+//		wr.setParameter("type", type);
+//		wr.setParameter("data", data);
+//		chain.doFilter(wr, response);
 	}
 
 	@Override
