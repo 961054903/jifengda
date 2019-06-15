@@ -15,42 +15,42 @@ import com.caogen.jfd.entity.user.AppUser;
 public class AppUserServiceImpl implements AppUserService {
 
 	@Autowired
-	private AppUserDao appUserDao;
+	private AppUserDao userDao;
 
 	@Override
 	public void create(AppUser entity) {
-		appUserDao.insert(entity);
+		userDao.insert(entity);
 	}
 
 	@Override
 	public void remove(AppUser entity) {
-		appUserDao.delete(entity);
+		userDao.delete(entity);
 	}
 
 	@Override
 	public void modify(AppUser entity) {
-		appUserDao.update(entity);
+		userDao.update(entity);
 	}
 
 	@Override
 	public AppUser getById(Integer id) {
 		AppUser entity = new AppUser();
 		entity.setId(id);
-		return appUserDao.get(entity);
+		return userDao.get(entity);
 	}
 
 	@Override
 	public AppUser getByToken(String token) {
 		AppUser entity = new AppUser();
 		entity.setToken(token);
-		return appUserDao.get(entity);
+		return userDao.get(entity);
 	}
 
 	@Override
 	public AppUser getByUsername(String username) {
 		AppUser entity = new AppUser();
 		entity.setUsername(username);
-		return appUserDao.get(entity);
+		return userDao.get(entity);
 	}
 
 }

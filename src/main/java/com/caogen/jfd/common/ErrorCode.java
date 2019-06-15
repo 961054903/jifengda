@@ -5,7 +5,10 @@ package com.caogen.jfd.common;
  * 
  */
 public enum ErrorCode {
-	SUCCEED("0000", "操作成功"), FAIL("0001", "操作失败"), LOGIN_ERROR("0002", "登录失败");
+	SUCCEED("0000", "操作成功"), 
+	FAIL("1000", "操作失败"),
+	LOGIN_ERROR("1010", "登录失败"),
+	LOGIN_PARAM_ERROR("1011", "登录参数错误");
 
 	private String code;
 	private String desc;

@@ -23,7 +23,6 @@ import com.caogen.jfd.service.user.AdminService;
  *
  */
 @Controller
-@RequestMapping("user")
 public class AdminController {
 	@Autowired
 	private AdminService adminService;
@@ -60,7 +59,9 @@ public class AdminController {
 						entity.getUsername(), entity.getSms(), entity.getReferrer());
 				break;
 			default:
-				throw new RuntimeException("登录方式有误");
+				message.setCode(ErrorCode.LOGIN_PARAM_ERROR.getCode());
+				message.setDesc(ErrorCode.LOGIN_PARAM_ERROR.getDesc());
+				break;
 			}
 			String token = adminService.generateToken(entity.getUsername());
 			message.setData(token);
