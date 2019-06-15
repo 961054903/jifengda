@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.dao.user.AppUserDao;
 import com.caogen.jfd.dao.user.AppUserSmsDao;
+import com.caogen.jfd.dao.user.AppUserThirdDao;
 import com.caogen.jfd.dao.user.ConfigDao;
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.entity.user.AppUser.State;
@@ -31,6 +32,8 @@ public class AppUserServiceImpl implements AppUserService {
 	private AppUserDao userDao;
 	@Autowired
 	private AppUserSmsDao smsDao;
+	@Autowired
+	private AppUserThirdDao thirdDao;
 	@Autowired
 	private ConfigDao configDao;
 
@@ -118,17 +121,17 @@ public class AppUserServiceImpl implements AppUserService {
 		if (user.getUsername() == null || sms.getCode() == null) {
 			throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
 		}
-		// TODO对比验证码
+		// 对比验证码
 		verifySms(user.getUsername(), sms.getCode());
-		//
+		// 用户是否存在，不存在则创建用户
 		AppUser entity = userDao.get(user);
-		if (entity == null) {// 创建用户
+		if (entity == null) {
 			entity = new AppUser();
 			entity.setUsername(user.getUsername());
 			entity.setReferrer(user.getReferrer());
 			entity.setState(State.normal);
 			entity.setCreate_date(LocalDateTime.now());
-			create(entity);
+			userDao.insert(entity);
 		} else if (!entity.getState().equals(State.normal)) {
 			throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);
 		}
@@ -136,9 +139,27 @@ public class AppUserServiceImpl implements AppUserService {
 	}
 
 	@Override
-	public String loginByThird(AppUser user, AppUserSms sms, AppUserThird third) {
-		// TODO Auto-generated method stub
-		return null;
+	public String loginByThird(AppUser user, AppUserSms sms, AppUserThird third) throws Exception {
+		// 检查参数
+		if (third.getThirdparty() == null || third.getIdentifier() == null) {
+			throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
+		}
+		AppUserThird entity = thirdDao.get(third);
+		if (entity == null) {
+			// 检查参数
+			if (user.getUsername() == null || sms.getCode() == null) {
+				throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
+			}
+			// 对比验证码
+			//verifySms(user.getUsername(), sms.getCode());
+			// 添加第三方应用记录
+			third.setPhone(user.getUsername());
+			thirdDao.insert(third);
+			return generateToken(user.getUsername());
+		} else {
+			String username = entity.getPhone();
+			return generateToken(username);
+		}
 	}
 
 	/**

@@ -13,26 +13,24 @@ public class AppUserInfoServiceImpl implements AppUserInfoService {
 
 	@Override
 	public void create(AppUserInfo entity) {
-		// TODO Auto-generated method stub
-
+		infoDao.insert(entity);
 	}
 
 	@Override
 	public void remove(AppUserInfo entity) {
-		// TODO Auto-generated method stub
-
+		infoDao.delete(entity);
 	}
 
 	@Override
 	public void modify(AppUserInfo entity) {
-		// TODO Auto-generated method stub
-
+		infoDao.update(entity);
 	}
 
 	@Override
 	public AppUserInfo getById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		AppUserInfo entity = new AppUserInfo();
+		entity.setId(id);
+		return infoDao.get(entity);
 	}
 
 }
