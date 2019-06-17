@@ -29,4 +29,5 @@ public class TodayServicelmpl implements TodayService {
     public Today gettoday(String phone) {
         return null;
     }
+
 }
