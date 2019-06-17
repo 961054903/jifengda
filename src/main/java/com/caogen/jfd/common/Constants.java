@@ -1,5 +1,7 @@
 package com.caogen.jfd.common;
 
+import com.google.gson.Gson;
+
 /**
  * 静态常量
  * 
@@ -7,6 +9,8 @@ package com.caogen.jfd.common;
  *
  */
 public class Constants {
+
+	public static final Gson gson = new Gson();
 	// 请求报文参数
 	public static final String REQUEST_TOKEN = "desc";
 	public static final String REQUEST_HEAD = "code";

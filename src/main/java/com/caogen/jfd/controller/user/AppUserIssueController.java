@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.user.AppUser;
@@ -14,7 +15,6 @@ import com.caogen.jfd.entity.user.AppUserIssue;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.user.AppUserIssueService;
 import com.caogen.jfd.service.user.AppUserService;
-import com.google.gson.Gson;
 
 /**
  * 
@@ -67,7 +67,7 @@ public class AppUserIssueController {
 	public Message history(String data) {
 		Message message = new Message();
 		try {
-			AppUserIssue issue = new Gson().fromJson(data, AppUserIssue.class);
+			AppUserIssue issue = Constants.gson.fromJson(data, AppUserIssue.class);
 			AppUser user = userService.getByUsername(issue.getPhone());
 			List<AppUserIssue> list = issueService.getHistory(issue);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
