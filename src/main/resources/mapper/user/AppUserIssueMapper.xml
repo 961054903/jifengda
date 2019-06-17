@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 	<insert id="insert" parameterType="AppUserIssue">
 		INSERT INTO app_user_issue (
-		<include refid="insert" />
+		<include refid="issue" />
 		)
 		VALUES (
 		#{type},#{title},#{content},#{photo_url},#{is_check},#{create_date},#{name},#{phone}

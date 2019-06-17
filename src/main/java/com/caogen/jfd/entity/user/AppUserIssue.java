@@ -13,7 +13,7 @@ public class AppUserIssue implements Serializable {
 	private static final long serialVersionUID = 7131692433602001263L;
 	private Integer id;
 	private String title;
-	private String context;
+	private String content;
 	private String photo_url;
 	private LocalDateTime create_date;
 	private String name;
@@ -27,7 +27,7 @@ public class AppUserIssue implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AppUserIssue [id=" + id + ", title=" + title + ", context=" + context + ", photo_url=" + photo_url
+		return "AppUserIssue [id=" + id + ", title=" + title + ", content=" + content + ", photo_url=" + photo_url
 				+ ", create_date=" + create_date + ", name=" + name + ", phone=" + phone + ", is_check=" + is_check
 				+ ", type=" + type + "]";
 	}
@@ -48,12 +48,12 @@ public class AppUserIssue implements Serializable {
 		this.title = title;
 	}
 
-	public String getContext() {
-		return context;
+	public String getContent() {
+		return content;
 	}
 
-	public void setContext(String context) {
-		this.context = context;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public String getPhoto_url() {
