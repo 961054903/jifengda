@@ -53,8 +53,6 @@ public class ModelServicelmpl implements ModelService {
     }
 
 
-
-
     @Override
     public List<Model> getWhole() {
         List<Model> issueFaq = modelDao.find( new Model());

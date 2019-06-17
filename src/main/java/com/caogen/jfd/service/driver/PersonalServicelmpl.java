@@ -2,6 +2,7 @@ package com.caogen.jfd.service.driver;
 
 import com.caogen.jfd.dao.driver.ModelDao;
 import com.caogen.jfd.dao.driver.PersonalDao;
+import com.caogen.jfd.entity.driver.Model;
 import com.caogen.jfd.entity.driver.Personal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,10 @@ public class PersonalServicelmpl implements PersonalService {
     public Personal getset(String phone) {
         return null;
     }
+
+
+
+
 
 
 }

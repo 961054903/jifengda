@@ -3,7 +3,7 @@ package com.caogen.jfd.entity.driver;
 import java.io.Serializable;
 
 public class Model implements Serializable {
-    private static final long serialVersionUID = -3975707114992384047L;
+    private static final long serialVersionUID = -3975707114992364047L;
     private Integer id; //id
     private String brand; // 所属品牌
     private String model;//车型

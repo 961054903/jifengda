@@ -20,7 +20,7 @@
 
     <select id="get" parameterType="IssueFaq"
             resultType="IssueFaq">
-        SELECT id,
+        SELECT
         <include refid="issueFaq" />
         FROM issue_faq
         <where>

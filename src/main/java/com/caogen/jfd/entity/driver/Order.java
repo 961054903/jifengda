@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class Order implements Serializable {
 
-    private static final long serialVersionUID = -3975707114992384047L;
+    private static final long serialVersionUID = -3975707114992384046L;
     private Integer id; //id
     private LocalDateTime create_date;//创建时间
     private Integer driver_id;//司机id

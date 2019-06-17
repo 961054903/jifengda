@@ -37,7 +37,7 @@
     <sql id="sql">phone,photo_url,name,grade</sql>
     <select id="get1" parameterType="Personal"
             resultType="Personal">
-        SELECT id,
+        SELECT
         <include refid="sql" />
         FROM app_driver_info
         <where>
@@ -52,7 +52,7 @@
     <sql id="whole">photo_url,name,phone,gender,birthday,licence_url,identity_front_url,identity_back_url,identity_take_url,contacts_name,contacts_phone,contacts_gender,contacts_relation</sql>
     <select id="get2" parameterType="Personal"
             resultType="Personal">
-        SELECT id,
+        SELECT
         <include refid="whole" />
         FROM app_driver_info
         <where>

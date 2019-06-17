@@ -5,7 +5,6 @@ import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.driver.*;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -111,6 +110,52 @@ public class PersonalController {
         }
         return message;
     }
+
+
+    /**
+     * 预约订单
+     * @param phone
+     * @return
+     */
+
+
+    @Autowired
+    private PeservationService reservationService;
+
+    @ResponseBody
+    @RequestMapping("make")
+    public Message make(String phone,Peservation.Mode mode) {
+
+        Message message = new Message();
+        try {
+           List <Peservation> personals = reservationService.getmake(phone,mode);
+            message.setData(personals);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 累计今天

@@ -7,7 +7,7 @@
 
     <select id="find" parameterType="Reward"
             resultType="Reward">
-        SELECT id,
+        SELECT
         <include refid="reward" />
         FROM driver_reward
         <where>

@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 public class Systemm implements Serializable {
 
-    private static final long serialVersionUID = -3975707114992384047L;
+    private static final long serialVersionUID = -3975707114992384337L;
     private Integer id; //id
     private String title;//标题
     private String content;//内容

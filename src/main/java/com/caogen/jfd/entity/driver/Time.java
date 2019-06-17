@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class Time implements Serializable {
 
-    private static final long serialVersionUID = -3975707114992384047L;
+    private static final long serialVersionUID = -3933707114992384047L;
     private Integer id; //id
     private String phone;//手机号
     private LocalDateTime time;//累计在线时间

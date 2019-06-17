@@ -6,7 +6,7 @@
     <sql id="model">brand,model,length,width,height,volume,capacity,empty_cost,night_cost,starting_cost,starting_scope</sql>
     <select id="get" parameterType="Model"
             resultType="Model">
-        SELECT id,
+        SELECT
         <include refid="model" />
         FROM vehicle_model
         <where>
@@ -18,7 +18,7 @@
 
     <select id="find" parameterType="Model"
             resultType="Model">
-        SELECT id,
+        SELECT
         <include refid="model" />
         FROM vehicle_model
         <where>
@@ -32,7 +32,7 @@
     <sql id="vehicle">model</sql>
     <select id="get3" parameterType="Model"
             resultType="Model">
-        SELECT id,
+        SELECT
         <include refid="vehicle" />
         FROM vehicle_model
         <where>

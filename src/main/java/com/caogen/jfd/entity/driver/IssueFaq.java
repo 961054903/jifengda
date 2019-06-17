@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalTime;
 
 public class IssueFaq implements Serializable {
-    private static final long serialVersionUID = -3975707114992384047L;
+    private static final long serialVersionUID = -975707114992384347L;
     private Integer id; //id
     private  String title;//标题
     private  String context;//内容

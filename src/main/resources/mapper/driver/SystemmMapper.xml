@@ -7,7 +7,7 @@
 
     <select id="find" parameterType="Systemm"
             resultType="Systemm">
-        SELECT id,
+        SELECT
         <include refid="systemm" />
         FROM
         rules_and_regulations

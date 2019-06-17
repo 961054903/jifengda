@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 
 public class AppDriver implements Serializable {
-    private static final long serialVersionUID = -5753387388562949447L;
+    private static final long serialVersionUID = -4753387388562949447L;
     private Integer id;   //id
     private String driverphone;  //司机姓名
     private String password;   //密码
