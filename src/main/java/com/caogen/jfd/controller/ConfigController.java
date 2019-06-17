@@ -1,4 +1,4 @@
-package com.caogen.jfd.controller.user;
+package com.caogen.jfd.controller;
 
 import java.util.List;
 
