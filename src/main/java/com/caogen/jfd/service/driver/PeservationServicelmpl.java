@@ -53,5 +53,12 @@ public class PeservationServicelmpl implements PeservationService {
         return peservations;
     }
 
+    @Override
+    public Peservation getma(String code) {
+        Peservation peservation = new Peservation();
+        peservation.setCode(code);
+        return peservationDao.get(peservation);
+    }
+
 
 }

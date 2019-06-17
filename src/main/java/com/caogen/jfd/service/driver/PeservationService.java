@@ -8,4 +8,11 @@ import java.util.List;
 
 public interface PeservationService extends BaseService<Peservation> {
    List<Peservation> getmake(String phone, Peservation.Mode mode);
+
+   /**
+    * 获取订单详情
+    * @param
+    * @return7
+    */
+   Peservation getma(String code);
 }

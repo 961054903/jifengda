@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.driver.UserDao">
+    <sql id="sql">phone,photo_url,name</sql>
+    <select id="get" parameterType="User"
+            resultType="User">
+        SELECT
+        <include refid="sql" />
+        FROM app_User_info
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="phone != null">AND phone = #{phone}</if>
+            <if test="photo_url != null">AND photo_url = #{photo_url}</if>
+            <if test="name != null">AND name = #{name}</if>
+
+        </where>
+    </select>
+
+
+
+</mapper>

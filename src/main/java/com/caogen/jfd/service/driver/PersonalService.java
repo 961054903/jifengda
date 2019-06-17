@@ -13,7 +13,6 @@ public interface PersonalService extends BaseService<Personal> {
      */
     Personal getss(String phone);
 
-
     /**
      * 接收上下线状态
      * @param is_online
