@@ -16,7 +16,8 @@ public enum ErrorCode {
 	SMS_MISMATCHING("1005", "验证码错误"),
 	SMS_PAST("1006", "验证码已过期"),
 	SMS_INEXISTENCE("1007", "验证码不存在"),
-	SIGNIN_ERROR("1008", "密钥交换失败");
+	SIGNIN_ERROR("1008", "密钥交换失败"),
+	ISSUE_ERROR("1009", "问题反馈异常");
 
 	private String code;
 	private String desc;

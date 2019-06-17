@@ -51,4 +51,9 @@ public class AppUserIssueServiceImpl implements AppUserIssueService {
 		return issueDao.find(entity);
 	}
 
+	@Override
+	public List<AppUserIssue> getHistory(AppUserIssue entity) {
+		return issueDao.find(entity);
+	}
+
 }
