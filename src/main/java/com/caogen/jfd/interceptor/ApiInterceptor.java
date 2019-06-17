@@ -41,10 +41,9 @@ public class ApiInterceptor implements HandlerInterceptor {
 		if (user == null) {
 			throw new DefinedException(ErrorCode.FAIL);
 		}
-		String type = head.substring(TYPE_START, TYPE_END);
-		WrappedRequest wr = new WrappedRequest(request);
 		// 解密
 		String key, iv;
+		String type = head.substring(TYPE_START, TYPE_END);
 		if (type.equals(DECODE_DEFAULT)) {
 			key = DEFAULT_KEY;
 			iv = DEFAULT_IV;
@@ -55,8 +54,9 @@ public class ApiInterceptor implements HandlerInterceptor {
 			throw new DefinedException(ErrorCode.PARAM_ILLEGALITY);
 		}
 		String plaintext = SecretUtils.desedeDecode(ciphertext, key, iv);
-		wr.setParameter("data", plaintext);
 		// 转发
+		WrappedRequest wr = new WrappedRequest(request);
+		wr.setParameter("data", plaintext);
 		String path = request.getServletPath().replace(PATH_TARGET, PATH_REPLACEMENT);
 		request.getRequestDispatcher(path).forward(wr, response);
 		return false;
