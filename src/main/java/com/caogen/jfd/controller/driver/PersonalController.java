@@ -41,7 +41,6 @@ public class PersonalController {
         }
         return message;
     }
-
     /**
      * 查询是否在线
      *
@@ -118,8 +117,6 @@ public class PersonalController {
      * @param phone
      * @return
      */
-
-
     @Autowired
     private PeservationService reservationService;
 
@@ -177,20 +174,6 @@ public class PersonalController {
         return message;
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
