@@ -6,5 +6,4 @@ import com.caogen.jfd.entity.driver.Peservation;
 
 public interface PeservationDao extends BaseDao<Peservation> {
 
-    Peservation get1(Peservation id);
 }
