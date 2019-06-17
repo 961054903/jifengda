@@ -1,4 +1,4 @@
-package com.caogen.jfd.entity.user;
+package com.caogen.jfd.entity;
 
 import java.io.Serializable;
 import java.time.LocalTime;

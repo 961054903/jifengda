@@ -16,6 +16,11 @@ import com.caogen.jfd.service.user.AppUserIssueService;
 import com.caogen.jfd.service.user.AppUserService;
 import com.google.gson.Gson;
 
+/**
+ * 
+ * @author Spuiln
+ *
+ */
 @Controller
 @RequestMapping("issue")
 public class AppUserIssueController {

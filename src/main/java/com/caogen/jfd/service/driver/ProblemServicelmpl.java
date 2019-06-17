@@ -1,8 +1,8 @@
 package com.caogen.jfd.service.driver;
 
 import com.caogen.jfd.dao.driver.PronlemDao;
+import com.caogen.jfd.entity.SysConfig;
 import com.caogen.jfd.entity.driver.IssueFaq;
-import com.caogen.jfd.entity.user.SysConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -9,15 +9,15 @@ import org.springframework.util.StringUtils;
 
 import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
+import com.caogen.jfd.dao.ConfigDao;
 import com.caogen.jfd.dao.user.AppUserDao;
 import com.caogen.jfd.dao.user.AppUserSmsDao;
 import com.caogen.jfd.dao.user.AppUserThirdDao;
-import com.caogen.jfd.dao.user.ConfigDao;
+import com.caogen.jfd.entity.SysConfig;
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.entity.user.AppUser.State;
 import com.caogen.jfd.entity.user.AppUserSms;
 import com.caogen.jfd.entity.user.AppUserThird;
-import com.caogen.jfd.entity.user.SysConfig;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.util.PasswordHelper;
 import com.caogen.jfd.util.SecretUtils;
