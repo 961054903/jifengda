@@ -1,5 +1,6 @@
 package com.caogen.jfd.service.user;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class AppUserIssueServiceImpl implements AppUserIssueService {
 
 	@Override
 	public void create(AppUserIssue entity) {
+		entity.setIs_check(false);
+		entity.setCreate_date(LocalDateTime.now());
 		issueDao.insert(entity);
 	}
 
