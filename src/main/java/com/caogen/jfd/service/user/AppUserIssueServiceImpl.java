@@ -1,10 +1,13 @@
 package com.caogen.jfd.service.user;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.caogen.jfd.dao.user.AppUserIssueDao;
 import com.caogen.jfd.entity.user.AppUserIssue;
+import com.caogen.jfd.entity.user.AppUserIssue.Type;
 
 /**
  * 
@@ -36,6 +39,13 @@ public class AppUserIssueServiceImpl implements AppUserIssueService {
 		AppUserIssue entity = new AppUserIssue();
 		entity.setId(id);
 		return issueDao.get(entity);
+	}
+
+	@Override
+	public List<AppUserIssue> getFAQ() {
+		AppUserIssue entity = new AppUserIssue();
+		entity.setType(Type.faq);
+		return issueDao.find(entity);
 	}
 
 }
