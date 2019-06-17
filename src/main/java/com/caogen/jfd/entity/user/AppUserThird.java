@@ -22,16 +22,6 @@ public class AppUserThird implements Serializable {
 		qq, weixin, weibo
 	}
 
-	public AppUserThird() {
-		super();
-	}
-
-	public AppUserThird(Thirdparty thirdparty, String identifier) {
-		super();
-		this.thirdparty = thirdparty;
-		this.identifier = identifier;
-	}
-
 	@Override
 	public String toString() {
 		return "AppUserThird [id=" + id + ", phone=" + phone + ", thirdparty=" + thirdparty + ", identifier="

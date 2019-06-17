@@ -76,7 +76,9 @@ public class AppUserServiceImpl implements AppUserService {
 	@Override
 	public void verifySms(String phone, String sms) throws Exception {
 		// 查询该条验证码记录
-		AppUserSms userSms = smsDao.get(new AppUserSms(phone));
+		AppUserSms entity = new AppUserSms();
+		entity.setPhone(phone);
+		AppUserSms userSms = smsDao.get(entity);
 		if (userSms == null) {
 			throw new DefinedException(ErrorCode.SMS_INEXISTENCE);
 		}
