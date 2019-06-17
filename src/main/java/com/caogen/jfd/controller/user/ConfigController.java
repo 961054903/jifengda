@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import com.caogen.jfd.model.Message;
-import com.caogen.jfd.service.user.ConfigService;
+import com.caogen.jfd.service.ConfigService;
 
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.caogen.jfd.service.user;
+package com.caogen.jfd.service;
 
 import java.util.Arrays;
 import java.util.List;
