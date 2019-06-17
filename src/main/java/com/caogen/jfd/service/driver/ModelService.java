@@ -13,8 +13,8 @@ public interface ModelService extends BaseService<Model> {
 
     /**
      * 获取车辆信息
-     * @param id
+     * @param
      * @return
      */
-    Model getvehicle(Integer id);
+    Model getvehicle(String phone);
 }

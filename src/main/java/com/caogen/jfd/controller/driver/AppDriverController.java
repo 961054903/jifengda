@@ -20,7 +20,11 @@ public class AppDriverController {
     @Autowired
     private AppDriverService appDriverService;
 
-
+    /**
+     * 登录
+     * @param driver
+     * @return
+     */
     @ResponseBody
     @RequestMapping("login")
     public Message login(AppDriver driver) {
@@ -43,4 +47,6 @@ public class AppDriverController {
     }
 		return message;
 }
+
+
 }

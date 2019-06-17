@@ -1,6 +1,7 @@
 package com.caogen.jfd.service.driver;
 
 import com.caogen.jfd.dao.driver.ModelDao;
+import com.caogen.jfd.dao.driver.PersonalDao;
 import com.caogen.jfd.entity.driver.IssueFaq;
 import com.caogen.jfd.entity.driver.Model;
 import com.caogen.jfd.entity.driver.Personal;
@@ -17,6 +18,9 @@ public class ModelServicelmpl implements ModelService {
 
     @Autowired
     private ModelDao modelDao;
+
+    @Autowired
+    private PersonalDao personalDao;
 
 
     @Override
@@ -57,11 +61,15 @@ public class ModelServicelmpl implements ModelService {
         return issueFaq;
     }
 
+
     @Override
-    public Model getvehicle(Integer id) {
+    public Model getvehicle(String phone) {
         Model model = new Model();
-        model.setId(id);
+        Personal personal = new Personal();
+        personal.setPhone(phone);
+        model.setId(personalDao.get2(personal).getId());
         return modelDao.get3(model);
+
     }
 
 }

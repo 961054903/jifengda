@@ -16,8 +16,7 @@ public class PersonalServicelmpl implements PersonalService {
     @Autowired
     private PersonalDao personalDao;
 
-    @Autowired
-    private ModelDao modelDao;
+
     @Override
     public void create(Personal entity) {
 
@@ -67,8 +66,8 @@ public class PersonalServicelmpl implements PersonalService {
 
     @Override
     public Personal getwhole(String phone) {
-
         Personal personal = new Personal();
+
         personal.setPhone(phone);
 
         return  personalDao.get2(personal);
