@@ -81,11 +81,11 @@ public class SecretUtils {
 	 * @param p_str
 	 * @return
 	 */
-	public static String[] dh(String A_str, String g_str, String p_str, int b_number) {
+	public static String[] dh(String A_str, String g_str, String p_str) {
 		BigInteger A = new BigInteger(A_str, 16);
 		BigInteger g = new BigInteger(g_str, 16);
 		BigInteger p = new BigInteger(p_str, 16);
-		String b_str = RandomStringUtils.random(b_number, "0123456789ABCDEF");
+		String b_str = RandomStringUtils.random(64, "0123456789ABCDEF");
 		BigInteger b = new BigInteger(b_str, 16);
 		String B = g.modPow(b, p).toString(16).toUpperCase();
 		String result = A.modPow(b, p).toString(16).toUpperCase();

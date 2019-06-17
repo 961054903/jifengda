@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.LoginType;
 import com.caogen.jfd.common.StaticLogger;
@@ -13,7 +14,9 @@ import com.caogen.jfd.entity.user.AppUserSms;
 import com.caogen.jfd.entity.user.AppUserThird;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.model.Message;
+import com.caogen.jfd.model.Signin;
 import com.caogen.jfd.service.user.AppUserService;
+import com.google.gson.Gson;
 
 /**
  * 
@@ -55,6 +58,26 @@ public class AppUserController {
 		} catch (Exception e) {
 			message.setCode(ErrorCode.LOGIN_ERROR.getCode());
 			message.setDesc(ErrorCode.LOGIN_ERROR.getDesc());
+			StaticLogger.error(message.getCode(), e);
+		}
+		return message;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = { "signin", "api/signin" })
+	public Message signin(String data) {
+		Message message = new Message();
+		try {
+			Signin signin = new Gson().fromJson(data, Signin.class);
+			String[] array = userService.sign(signin.getResult(), signin.getPhone());
+			signin.setResult(array[0]);
+			signin.setVerify(array[1]);
+			message.setData(signin, Constants.DEFAULT_KEY, Constants.DEFAULT_IV);
+			message.setCode(ErrorCode.SUCCEED.getCode());
+			message.setDesc(ErrorCode.SUCCEED.getDesc());
+		} catch (Exception e) {
+			message.setCode(ErrorCode.SIGNIN_ERROR.getCode());
+			message.setDesc(ErrorCode.SIGNIN_ERROR.getDesc());
 			StaticLogger.error(message.getCode(), e);
 		}
 		return message;

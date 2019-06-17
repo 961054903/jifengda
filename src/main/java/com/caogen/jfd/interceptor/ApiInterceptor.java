@@ -16,6 +16,11 @@ import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.service.user.AppUserService;
 import com.caogen.jfd.util.SecretUtils;
 
+/**
+ * 
+ * @author Spuiln
+ *
+ */
 public class ApiInterceptor implements HandlerInterceptor {
 
 	@Autowired

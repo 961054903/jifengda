@@ -68,4 +68,14 @@ public interface AppUserService extends BaseService<AppUser> {
 	 */
 	String loginByThird(AppUser user, AppUserSms sms, AppUserThird third) throws Exception;
 
+	/**
+	 * 密钥交换
+	 * 
+	 * @param A
+	 * @param phone
+	 * @return
+	 * @throws Exception
+	 */
+	String[] sign(String A, String phone) throws Exception;
+
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.dao.user.AppUserDao;
 import com.caogen.jfd.dao.user.AppUserSmsDao;
@@ -19,6 +20,7 @@ import com.caogen.jfd.entity.user.AppUserThird;
 import com.caogen.jfd.entity.user.SysConfig;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.util.PasswordHelper;
+import com.caogen.jfd.util.SecretUtils;
 
 /**
  * 
@@ -177,6 +179,20 @@ public class AppUserServiceImpl implements AppUserService {
 		entity.setToken(token);
 		userDao.update(entity);
 		return token;
+	}
+
+	@Override
+	public String[] sign(String A, String phone) throws Exception {
+		AppUser user = getByUsername(phone);
+		String[] result = SecretUtils.dh(A, Constants.DH_G, Constants.DH_P);
+		String B = result[0];
+		String iv = result[1].substring(Constants.IV_START, Constants.IV_END);
+		String key = result[1].substring(Constants.KEY_START, Constants.KEY_END);
+		user.setDes_iv(iv);
+		user.setDes_key(key);
+		String verify = SecretUtils.desedeEncode(Constants.DEFAULT_IV, key, iv);
+		modify(user);
+		return new String[] { B, verify };
 	}
 
 }

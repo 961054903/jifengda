@@ -2,6 +2,9 @@ package com.caogen.jfd.model;
 
 import java.io.Serializable;
 
+import com.caogen.jfd.util.SecretUtils;
+import com.google.gson.Gson;
+
 /**
  * 返回给客户端的实体类
  * 
@@ -26,6 +29,11 @@ public class Message implements Serializable {
 
 	public void setData(Object data) {
 		this.data = data;
+	}
+
+	public void setData(Object data, String key, String iv) throws Exception {
+		String plaintext = new Gson().toJson(data);
+		this.data = SecretUtils.desedeEncode(plaintext, key, iv);
 	}
 
 	public String getCode() {
