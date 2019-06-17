@@ -2,12 +2,9 @@ package com.caogen.jfd.controller.driver;
 
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
-import com.caogen.jfd.entity.driver.Model;
-import com.caogen.jfd.entity.driver.Personal;
+import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.model.Message;
-import com.caogen.jfd.service.driver.ModelService;
-import com.caogen.jfd.service.driver.PersonalService;
-import com.caogen.jfd.service.driver.TodayService;
+import com.caogen.jfd.service.driver.*;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +23,6 @@ public class PersonalController {
 
     /**
      * 查询上下线状态全部
-     *
      * @return
      */
     @ResponseBody
@@ -48,13 +44,14 @@ public class PersonalController {
 
     /**
      * 查询是否在线
+     *
      */
     @ResponseBody
     @RequestMapping("state")
-    public Message state(Boolean is_online, String phone) {
+    public Message state(Boolean is_online, String phone)  {
         Message message = new Message();
         try {
-            personalService.getstate(is_online, phone);
+             personalService.getstate(is_online,phone);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -72,7 +69,7 @@ public class PersonalController {
 
     @ResponseBody
     @RequestMapping("information")
-    public Message information(String phone) {
+    public Message information(String phone)  {
         Message message = new Message();
         try {
             Personal cities = personalService.getmany(phone);
@@ -89,18 +86,19 @@ public class PersonalController {
 
     /**
      * 个人信息全部
+     *
      */
     @Autowired
     private ModelService modelService;
 
     @ResponseBody
     @RequestMapping("whole")
-    public Message whole(String phone) {
+    public Message whole(String phone)  {
         Message message = new Message();
         try {
             Personal cities = personalService.getwhole(phone);
             Model vehicle = modelService.getvehicle(phone);
-            List<Object> ASD = new ArrayList<Object>();
+            List<Object>ASD = new ArrayList<Object>( );
             ASD.add(cities);
             ASD.add(vehicle);
             message.setData(ASD);
@@ -118,4 +116,31 @@ public class PersonalController {
      * 累计今天
      * @return
      */
+    @Autowired
+    private TodayService todayService;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private TimeService timeService;
+
+    @ResponseBody
+    @RequestMapping("cumulative")
+    public Message cumulative(String phone) {
+        Message message = new Message();
+        try {
+            Personal cities = personalService.getset(phone);
+            Today today = todayService.gettoday(phone);
+             Order order = orderService.getorder(phone);
+            Time time = timeService.gettime(phone);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
 }
