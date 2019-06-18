@@ -198,7 +198,7 @@ public class AppUserServiceImpl implements AppUserService {
 	}
 
 	@Override
-	public String[] sign(String A, String phone) throws Exception {
+	public String[] exchangeKey(String A, String phone) throws Exception {
 		AppUser user = getByUsername(phone);
 		String[] result = SecretUtils.dh(A, Constants.DH_G, Constants.DH_P);
 		String B = result[0];
@@ -209,6 +209,14 @@ public class AppUserServiceImpl implements AppUserService {
 		String verify = SecretUtils.desedeEncode(Constants.DEFAULT_IV, key, iv);
 		modify(user);
 		return new String[] { B, verify };
+	}
+
+	@Override
+	public void changePassword(String username, String password) {
+		AppUser user = getByUsername(username);
+		user.setSalt(PasswordHelper.generateSalt());
+		user.setPassword(PasswordHelper.encryptPassword(password, user.getSalt()));
+		modify(user);
 	}
 
 }

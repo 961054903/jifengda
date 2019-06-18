@@ -33,7 +33,7 @@ public class AppUserInfoController {
 		Message message = new Message();
 		try {
 			AppUserInfo info = Constants.gson.fromJson(data, AppUserInfo.class);
-			infoService.remove(info);
+			infoService.modify(info);
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {

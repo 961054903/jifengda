@@ -69,7 +69,7 @@ public class AppUserController {
 		Message message = new Message();
 		try {
 			Signin signin = new Gson().fromJson(data, Signin.class);
-			String[] array = userService.sign(signin.getResult(), signin.getPhone());
+			String[] array = userService.exchangeKey(signin.getResult(), signin.getPhone());
 			signin.setResult(array[0]);
 			signin.setVerify(array[1]);
 			message.setData(signin, Constants.DEFAULT_KEY, Constants.DEFAULT_IV);
@@ -79,6 +79,22 @@ public class AppUserController {
 			message.setCode(ErrorCode.SIGNIN_ERROR.getCode());
 			message.setDesc(ErrorCode.SIGNIN_ERROR.getDesc());
 			StaticLogger.error(message.getCode(), e);
+		}
+		return message;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = { "cipher", "api/cipher" })
+	public Message cipher(String data) {
+		Message message = new Message();
+		try {
+			AppUser user = Constants.gson.fromJson(data, AppUser.class);
+			userService.changePassword(user.getUsername(), user.getPassword());
+			message.setCode(ErrorCode.SUCCEED.getCode());
+			message.setDesc(ErrorCode.SUCCEED.getDesc());
+		} catch (Exception e) {
+			// TODO: handle exception
+			
 		}
 		return message;
 	}

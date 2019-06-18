@@ -76,6 +76,14 @@ public interface AppUserService extends BaseService<AppUser> {
 	 * @return
 	 * @throws Exception
 	 */
-	String[] sign(String A, String phone) throws Exception;
+	String[] exchangeKey(String A, String phone) throws Exception;
+
+	/**
+	 * 更改密码
+	 * 
+	 * @param username
+	 * @param password
+	 */
+	void changePassword(String username, String password);
 
 }
