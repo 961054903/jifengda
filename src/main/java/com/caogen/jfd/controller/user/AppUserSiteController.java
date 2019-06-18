@@ -42,7 +42,7 @@ public class AppUserSiteController {
 			// TODO: handle exception
 			message.setCode(ErrorCode.SITE_ERROR.getCode());
 			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
-			StaticLogger.error("", e);
+			StaticLogger.error("user site add error", e);
 		}
 		return message;
 	}
@@ -91,7 +91,7 @@ public class AppUserSiteController {
 			AppUserSite site = Constants.gson.fromJson(data, AppUserSite.class);
 			AppUser user = userService.getByUsername(site.getPhone());
 			AppUserSite entity = siteService.getOne(site);
-			message.setData(entity, user.getDes_iv(), user.getDes_iv());
+			message.setData(entity, user.getDes_key(), user.getDes_iv());
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {

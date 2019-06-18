@@ -2,6 +2,7 @@ package com.caogen.jfd.model;
 
 import java.io.Serializable;
 
+import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.util.SecretUtils;
 import com.google.gson.Gson;
 
@@ -32,7 +33,7 @@ public class Message implements Serializable {
 	}
 
 	public void setData(Object data, String key, String iv) throws Exception {
-		String plaintext = new Gson().toJson(data);
+		String plaintext = Constants.gson.toJson(data);
 		this.data = SecretUtils.desedeEncode(plaintext, key, iv);
 	}
 
