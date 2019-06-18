@@ -178,11 +178,6 @@ public class PersonalController {
      * 累计今天时间（没编写完）
      * @return
      */
-    @Autowired
-    private TodayService todayService;
-
-    @Autowired
-    private OrderService orderService;
 
     @Autowired
     private TimeService timeService;
@@ -193,8 +188,7 @@ public class PersonalController {
         Message message = new Message();
         try {
             Personal cities = personalService.getset(phone);
-            Today today = todayService.gettoday(phone);
-             Order order = orderService.getorder(phone);
+
             Time time = timeService.gettime(phone);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
