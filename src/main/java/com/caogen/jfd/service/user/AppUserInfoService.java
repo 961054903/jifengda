@@ -9,5 +9,12 @@ import com.caogen.jfd.service.BaseService;
  *
  */
 public interface AppUserInfoService extends BaseService<AppUserInfo> {
+	/**
+	 * 查询
+	 * 
+	 * @param entity
+	 * @return
+	 */
+	AppUserInfo getOne(AppUserInfo entity);
 
 }

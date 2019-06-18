@@ -19,7 +19,8 @@ public enum ErrorCode {
 	SIGNIN_ERROR("1008", "密钥交换失败"),
 	ISSUE_ERROR("1009", "问题反馈操作异常"),
 	SITE_ERROR("1010", "常用地址操作异常"), 
-	PATH_ERROR("1011", "常用路线操作异常");
+	PATH_ERROR("1011", "常用路线操作异常"),
+	INFO_ERROR("1012", "用户信息操作异常");
 
 	private String code;
 	private String desc;

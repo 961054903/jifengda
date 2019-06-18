@@ -41,6 +41,8 @@ public class AppUserServiceImpl implements AppUserService {
 
 	@Override
 	public void create(AppUser entity) {
+		entity.setState(State.normal);
+		entity.setCreate_date(LocalDateTime.now());
 		userDao.insert(entity);
 	}
 
@@ -133,9 +135,7 @@ public class AppUserServiceImpl implements AppUserService {
 			entity = new AppUser();
 			entity.setUsername(user.getUsername());
 			entity.setReferrer(user.getReferrer());
-			entity.setState(State.normal);
-			entity.setCreate_date(LocalDateTime.now());
-			userDao.insert(entity);
+			create(entity);
 		} else if (!entity.getState().equals(State.normal)) {
 			throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);
 		}
@@ -159,6 +159,8 @@ public class AppUserServiceImpl implements AppUserService {
 			// 添加第三方应用记录
 			third.setPhone(user.getUsername());
 			thirdDao.insert(third);
+			// TODO 创建用户
+			
 			return generateToken(user.getUsername());
 		} else {
 			String username = entity.getPhone();

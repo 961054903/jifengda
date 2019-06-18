@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.caogen.jfd.dao.user.AppUserInfoDao;
 import com.caogen.jfd.entity.user.AppUserInfo;
+import com.caogen.jfd.entity.user.AppUserInfo.Gender;
 
 /**
  * 
@@ -18,6 +19,10 @@ public class AppUserInfoServiceImpl implements AppUserInfoService {
 
 	@Override
 	public void create(AppUserInfo entity) {
+		entity.setLevel(0);
+		entity.setGender(Gender.unknown);
+		entity.setIs_real(false);
+		entity.setBalance(0.0);
 		infoDao.insert(entity);
 	}
 
@@ -35,6 +40,11 @@ public class AppUserInfoServiceImpl implements AppUserInfoService {
 	public AppUserInfo getById(Integer id) {
 		AppUserInfo entity = new AppUserInfo();
 		entity.setId(id);
+		return infoDao.get(entity);
+	}
+
+	@Override
+	public AppUserInfo getOne(AppUserInfo entity) {
 		return infoDao.get(entity);
 	}
 
