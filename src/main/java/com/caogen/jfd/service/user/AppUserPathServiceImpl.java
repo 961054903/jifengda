@@ -35,18 +35,22 @@ public class AppUserPathServiceImpl implements AppUserPathService {
 
 	@Override
 	public AppUserPath getById(Integer id) {
-		AppUserPath entity = new AppUserPath();
-		entity.setId(id);
-		return pathDao.get(entity);
+		return pathDao.get(new AppUserPath(id));
 	}
 
 	@Override
 	public AppUserPath getOne(AppUserPath entity) {
+		if (entity.getId() == null) {
+			return null;
+		}
 		return pathDao.get(entity);
 	}
 
 	@Override
 	public List<AppUserPath> getAll(AppUserPath entity) {
+		if (entity.getPhone() == null) {
+			return null;
+		}
 		return pathDao.find(entity);
 	}
 

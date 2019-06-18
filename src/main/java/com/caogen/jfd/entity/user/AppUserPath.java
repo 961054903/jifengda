@@ -17,6 +17,15 @@ public class AppUserPath implements Serializable {
 	private String origin;
 	private String destination;
 
+	public AppUserPath() {
+		super();
+	}
+
+	public AppUserPath(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "AppUserPath [id=" + id + ", phone=" + phone + ", name=" + name + ", description=" + description

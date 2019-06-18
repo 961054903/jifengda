@@ -13,24 +13,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{type},#{title},#{content},#{photo_url},#{is_check},#{create_date},#{name},#{phone}
 		)
 	</insert>
-	<delete id="delete" parameterType="AppUserIssue">
-		DELETE FROM app_user_issue
-		<where>
-			<if test="id != null">id = #{id}</if>
-			<if test="phone != null">AND phone = #{phone}</if>
-		</where>
-	</delete>
-	<update id="update" parameterType="AppUserIssue">
-		UPDATE app_user_issue
-		<set>
-			<if test="type != null">type = #{type},</if>
-			<if test="title != null">title = #{title},</if>
-			<if test="content != null">content = #{content},</if>
-			<if test="photo_url != null">photo_url = #{photo_url},</if>
-			<if test="is_check != null">is_check = #{is_check}</if>
-		</set>
-		WHERE id = #{id}
-	</update>
 	<select id="get" parameterType="AppUserIssue"
 		resultType="AppUserIssue">
 		SELECT id,
@@ -46,7 +28,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<where>
 			<if test="type != null">type = #{type}</if>
 			<if test="phone != null">AND phone = #{phone}</if>
-			<if test="is_check != null">AND is_check = #{is_check}</if>
 		</where>
 	</select>
 </mapper>

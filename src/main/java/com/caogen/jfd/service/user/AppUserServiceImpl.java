@@ -193,7 +193,7 @@ public class AppUserServiceImpl implements AppUserService {
 		AppUser entity = new AppUser();
 		entity.setUsername(username);
 		entity.setToken(token);
-		userDao.update(entity);
+		modify(entity);
 		return token;
 	}
 

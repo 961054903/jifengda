@@ -76,8 +76,7 @@ public class AppUserController {
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.SIGNIN_ERROR.getCode());
-			message.setDesc(ErrorCode.SIGNIN_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.SIGNIN_ERROR);
 			StaticLogger.error(message.getCode(), e);
 		}
 		return message;
@@ -90,11 +89,9 @@ public class AppUserController {
 		try {
 			AppUser user = Constants.gson.fromJson(data, AppUser.class);
 			userService.changePassword(user.getUsername(), user.getPassword());
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			// TODO: handle exception
-			
+			message.setErrorCode(ErrorCode.CIPHER_ERROR);
+			StaticLogger.error(message.getCode(), e);
 		}
 		return message;
 	}

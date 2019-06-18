@@ -38,13 +38,14 @@ public class AppUserInfoServiceImpl implements AppUserInfoService {
 
 	@Override
 	public AppUserInfo getById(Integer id) {
-		AppUserInfo entity = new AppUserInfo();
-		entity.setId(id);
-		return infoDao.get(entity);
+		return infoDao.get(new AppUserInfo(id));
 	}
 
 	@Override
 	public AppUserInfo getOne(AppUserInfo entity) {
+		if (entity.getId() == null || entity.getPhone() == null) {
+			return null;
+		}
 		return infoDao.get(entity);
 	}
 

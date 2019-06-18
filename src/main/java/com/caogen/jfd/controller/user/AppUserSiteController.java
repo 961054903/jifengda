@@ -36,11 +36,8 @@ public class AppUserSiteController {
 		try {
 			AppUserSite site = Constants.gson.fromJson(data, AppUserSite.class);
 			siteService.create(site);
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.SITE_ERROR.getCode());
-			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.SITE_ERROR);
 			StaticLogger.error("user site add error", e);
 		}
 		return message;
@@ -53,11 +50,8 @@ public class AppUserSiteController {
 		try {
 			AppUserSite site = Constants.gson.fromJson(data, AppUserSite.class);
 			siteService.remove(site);
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.SITE_ERROR.getCode());
-			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.SITE_ERROR);
 			StaticLogger.error("user site del error", e);
 		}
 		return message;
@@ -70,11 +64,8 @@ public class AppUserSiteController {
 		try {
 			AppUserSite site = Constants.gson.fromJson(data, AppUserSite.class);
 			siteService.modify(site);
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.SITE_ERROR.getCode());
-			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.SITE_ERROR);
 			StaticLogger.error("user site edit error", e);
 		}
 		return message;
@@ -89,11 +80,8 @@ public class AppUserSiteController {
 			AppUser user = userService.getByUsername(site.getPhone());
 			AppUserSite entity = siteService.getOne(site);
 			message.setData(entity, user.getDes_key(), user.getDes_iv());
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.SITE_ERROR.getCode());
-			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.SITE_ERROR);
 			StaticLogger.error("user site get one error", e);
 		}
 		return message;
@@ -108,11 +96,8 @@ public class AppUserSiteController {
 			AppUser user = userService.getByUsername(site.getPhone());
 			List<AppUserSite> list = siteService.getAll(site);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.SITE_ERROR.getCode());
-			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.SITE_ERROR);
 			StaticLogger.error("user site get all error", e);
 		}
 		return message;

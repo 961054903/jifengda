@@ -36,11 +36,8 @@ public class AppUserPathController {
 		try {
 			AppUserPath path = Constants.gson.fromJson(data, AppUserPath.class);
 			pathService.create(path);
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.PATH_ERROR.getCode());
-			message.setDesc(ErrorCode.PATH_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.PATH_ERROR);
 			StaticLogger.error("user path add error", e);
 		}
 		return message;
@@ -53,11 +50,8 @@ public class AppUserPathController {
 		try {
 			AppUserPath path = Constants.gson.fromJson(data, AppUserPath.class);
 			pathService.remove(path);
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.PATH_ERROR.getCode());
-			message.setDesc(ErrorCode.PATH_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.PATH_ERROR);
 			StaticLogger.error("user path del error", e);
 		}
 		return message;
@@ -70,11 +64,8 @@ public class AppUserPathController {
 		try {
 			AppUserPath path = Constants.gson.fromJson(data, AppUserPath.class);
 			pathService.modify(path);
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.PATH_ERROR.getCode());
-			message.setDesc(ErrorCode.PATH_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.PATH_ERROR);
 			StaticLogger.error("user path edit error", e);
 		}
 		return message;
@@ -89,11 +80,8 @@ public class AppUserPathController {
 			AppUser user = userService.getByUsername(path.getPhone());
 			AppUserPath entity = pathService.getOne(path);
 			message.setData(entity, user.getDes_key(), user.getDes_iv());
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.PATH_ERROR.getCode());
-			message.setDesc(ErrorCode.PATH_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.PATH_ERROR);
 			StaticLogger.error("user path get one error", e);
 		}
 		return message;
@@ -108,11 +96,8 @@ public class AppUserPathController {
 			AppUser user = userService.getByUsername(path.getPhone());
 			List<AppUserPath> list = pathService.getAll(path);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.PATH_ERROR.getCode());
-			message.setDesc(ErrorCode.PATH_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.PATH_ERROR);
 			StaticLogger.error("user path get all error", e);
 		}
 		return message;

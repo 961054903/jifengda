@@ -13,14 +13,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{username},#{password},#{salt},#{state},#{create_date},#{des_key},#{des_iv},#{token},#{referrer}
 		)
 	</insert>
-	<delete id="delete" parameterType="AppUser">
-		DELETE FROM app_user
-		<where>
-			<if test="id != null">id = #{id}</if>
-			<if test="username != null">AND username = #{username}</if>
-			<if test="token != null">AND token = #{token}</if>
-		</where>
-	</delete>
 	<update id="update" parameterType="AppUser">
 		UPDATE app_user
 		<set>

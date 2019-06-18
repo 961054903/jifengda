@@ -30,6 +30,15 @@ public class AppUserInfo implements Serializable {
 		unknown, female, male
 	}
 
+	public AppUserInfo() {
+		super();
+	}
+
+	public AppUserInfo(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "AppUserInfo [id=" + id + ", phone=" + phone + ", photo_url=" + photo_url + ", nickname=" + nickname

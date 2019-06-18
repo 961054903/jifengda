@@ -36,11 +36,8 @@ public class AppUserIssueController {
 		try {
 			List<AppUserIssue> list = issueService.getFAQ();
 			message.setData(list);
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.ISSUE_ERROR.getCode());
-			message.setDesc(ErrorCode.ISSUE_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.ISSUE_ERROR);
 			StaticLogger.error("get FAQ list error", e);
 		}
 		return message;
@@ -52,11 +49,8 @@ public class AppUserIssueController {
 		Message message = new Message();
 		try {
 			issueService.create(issue);
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.ISSUE_ERROR.getCode());
-			message.setDesc(ErrorCode.ISSUE_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.ISSUE_ERROR);
 			StaticLogger.error("feedback error", e);
 		}
 		return message;
@@ -71,11 +65,8 @@ public class AppUserIssueController {
 			AppUser user = userService.getByUsername(issue.getPhone());
 			List<AppUserIssue> list = issueService.getHistory(issue);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.ISSUE_ERROR.getCode());
-			message.setDesc(ErrorCode.ISSUE_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.ISSUE_ERROR);
 			StaticLogger.error("feedback error", e);
 		}
 		return message;

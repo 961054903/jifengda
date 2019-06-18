@@ -19,6 +19,15 @@ public class AppUserSite implements Serializable {
 	private String contacts_name;
 	private String contacts_phone;
 
+	public AppUserSite() {
+		super();
+	}
+
+	public AppUserSite(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "AppUserSite [id=" + id + ", phone=" + phone + ", name=" + name + ", description=" + description

@@ -22,17 +22,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update" parameterType="AppUserSite">
 		UPDATE app_user_site
 		<set>
+			description = #{description},
 			<if test="name != null">name = #{name},</if>
-			<if test="description != null">description = #{description},</if>
 			<if test="longitude != null">longitude = #{longitude},</if>
 			<if test="latitude != null">latitude = #{latitude},</if>
 			<if test="contacts_name != null">contacts_name = #{contacts_name},</if>
 			<if test="contacts_phone != null">contacts_phone = #{contacts_phone}</if>
 		</set>
-		<where>
-			<if test="id != null">id = #{id}</if>
-			<if test="phone != null">AND phone = #{phone}</if>
-		</where>
+		WHERE id = #{id}
 	</update>
 	<select id="get" parameterType="AppUserSite"
 		resultType="AppUserSite">

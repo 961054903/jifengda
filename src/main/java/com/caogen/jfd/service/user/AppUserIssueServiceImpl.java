@@ -39,9 +39,7 @@ public class AppUserIssueServiceImpl implements AppUserIssueService {
 
 	@Override
 	public AppUserIssue getById(Integer id) {
-		AppUserIssue entity = new AppUserIssue();
-		entity.setId(id);
-		return issueDao.get(entity);
+		return issueDao.get(new AppUserIssue(id));
 	}
 
 	@Override
@@ -53,6 +51,9 @@ public class AppUserIssueServiceImpl implements AppUserIssueService {
 
 	@Override
 	public List<AppUserIssue> getHistory(AppUserIssue entity) {
+		if (entity.getPhone() == null || entity.getTitle() == null) {
+			return null;
+		}
 		return issueDao.find(entity);
 	}
 

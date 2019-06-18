@@ -3,6 +3,7 @@ package com.caogen.jfd.model;
 import java.io.Serializable;
 
 import com.caogen.jfd.common.Constants;
+import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.util.SecretUtils;
 
 /**
@@ -17,6 +18,19 @@ public class Message implements Serializable {
 	private Object data;
 	private String code;
 	private String desc;
+
+	public Message() {
+		this(ErrorCode.SUCCEED);
+	}
+
+	public Message(ErrorCode error) {
+		setErrorCode(error);
+	}
+
+	public void setErrorCode(ErrorCode error) {
+		this.code = error.getCode();
+		this.desc = error.getDesc();
+	}
 
 	@Override
 	public String toString() {

@@ -34,11 +34,8 @@ public class AppUserInfoController {
 		try {
 			AppUserInfo info = Constants.gson.fromJson(data, AppUserInfo.class);
 			infoService.modify(info);
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.INFO_ERROR.getCode());
-			message.setDesc(ErrorCode.INFO_ERROR.getDesc());
+			message.setErrorCode(ErrorCode.INFO_ERROR);
 			StaticLogger.error("user info del error", e);
 		}
 		return message;
@@ -53,12 +50,9 @@ public class AppUserInfoController {
 			AppUser user = userService.getByUsername(info.getPhone());
 			AppUserInfo entity = infoService.getOne(info);
 			message.setData(entity, user.getDes_key(), user.getDes_iv());
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.INFO_ERROR.getCode());
-			message.setDesc(ErrorCode.INFO_ERROR.getDesc());
-			StaticLogger.error("user info del error", e);
+			message.setErrorCode(ErrorCode.INFO_ERROR);
+			StaticLogger.error("user info get one error", e);
 		}
 		return message;
 	}

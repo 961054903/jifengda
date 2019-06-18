@@ -25,6 +25,15 @@ public class AppUserIssue implements Serializable {
 		problem, suggest, faq
 	}
 
+	public AppUserIssue() {
+		super();
+	}
+
+	public AppUserIssue(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "AppUserIssue [id=" + id + ", title=" + title + ", content=" + content + ", photo_url=" + photo_url
