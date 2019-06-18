@@ -20,7 +20,7 @@ public class AppUserPathServiceImpl implements AppUserPathService {
 
 	@Override
 	public void create(AppUserPath entity) {
-		pathDao.find(entity);
+		pathDao.insert(entity);
 	}
 
 	@Override

@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.util.SecretUtils;
-import com.google.gson.Gson;
 
 /**
  * 返回给客户端的实体类

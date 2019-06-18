@@ -39,10 +39,9 @@ public class AppUserPathController {
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			// TODO: handle exception
-			message.setCode(ErrorCode.SITE_ERROR.getCode());
-			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
-			StaticLogger.error("", e);
+			message.setCode(ErrorCode.PATH_ERROR.getCode());
+			message.setDesc(ErrorCode.PATH_ERROR.getDesc());
+			StaticLogger.error("user path add error", e);
 		}
 		return message;
 	}
@@ -57,10 +56,9 @@ public class AppUserPathController {
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			// TODO: handle exception
-			message.setCode(ErrorCode.SITE_ERROR.getCode());
-			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
-			StaticLogger.error("", e);
+			message.setCode(ErrorCode.PATH_ERROR.getCode());
+			message.setDesc(ErrorCode.PATH_ERROR.getDesc());
+			StaticLogger.error("user path del error", e);
 		}
 		return message;
 	}
@@ -75,10 +73,9 @@ public class AppUserPathController {
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			// TODO: handle exception
-			message.setCode(ErrorCode.SITE_ERROR.getCode());
-			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
-			StaticLogger.error("", e);
+			message.setCode(ErrorCode.PATH_ERROR.getCode());
+			message.setDesc(ErrorCode.PATH_ERROR.getDesc());
+			StaticLogger.error("user path edit error", e);
 		}
 		return message;
 	}
@@ -91,14 +88,13 @@ public class AppUserPathController {
 			AppUserPath path = Constants.gson.fromJson(data, AppUserPath.class);
 			AppUser user = userService.getByUsername(path.getPhone());
 			AppUserPath entity = pathService.getOne(path);
-			message.setData(entity, user.getDes_iv(), user.getDes_iv());
+			message.setData(entity, user.getDes_key(), user.getDes_iv());
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			// TODO: handle exception
-			message.setCode(ErrorCode.SITE_ERROR.getCode());
-			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
-			StaticLogger.error("", e);
+			message.setCode(ErrorCode.PATH_ERROR.getCode());
+			message.setDesc(ErrorCode.PATH_ERROR.getDesc());
+			StaticLogger.error("user path get one error", e);
 		}
 		return message;
 	}
@@ -115,10 +111,9 @@ public class AppUserPathController {
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			// TODO: handle exception
-			message.setCode(ErrorCode.SITE_ERROR.getCode());
-			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
-			StaticLogger.error("", e);
+			message.setCode(ErrorCode.PATH_ERROR.getCode());
+			message.setDesc(ErrorCode.PATH_ERROR.getDesc());
+			StaticLogger.error("user path get all error", e);
 		}
 		return message;
 	}

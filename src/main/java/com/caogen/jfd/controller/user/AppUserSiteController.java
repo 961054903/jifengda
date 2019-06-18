@@ -39,7 +39,6 @@ public class AppUserSiteController {
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			// TODO: handle exception
 			message.setCode(ErrorCode.SITE_ERROR.getCode());
 			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
 			StaticLogger.error("user site add error", e);
@@ -57,10 +56,9 @@ public class AppUserSiteController {
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			// TODO: handle exception
 			message.setCode(ErrorCode.SITE_ERROR.getCode());
 			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
-			StaticLogger.error("", e);
+			StaticLogger.error("user site del error", e);
 		}
 		return message;
 	}
@@ -75,10 +73,9 @@ public class AppUserSiteController {
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			// TODO: handle exception
 			message.setCode(ErrorCode.SITE_ERROR.getCode());
 			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
-			StaticLogger.error("", e);
+			StaticLogger.error("user site edit error", e);
 		}
 		return message;
 	}
@@ -95,17 +92,16 @@ public class AppUserSiteController {
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			// TODO: handle exception
 			message.setCode(ErrorCode.SITE_ERROR.getCode());
 			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
-			StaticLogger.error("", e);
+			StaticLogger.error("user site get one error", e);
 		}
 		return message;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = { "all", "api/all" })
-	public Message list(String data) {
+	public Message all(String data) {
 		Message message = new Message();
 		try {
 			AppUserSite site = Constants.gson.fromJson(data, AppUserSite.class);
@@ -115,10 +111,9 @@ public class AppUserSiteController {
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			// TODO: handle exception
 			message.setCode(ErrorCode.SITE_ERROR.getCode());
 			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
-			StaticLogger.error("", e);
+			StaticLogger.error("user site get all error", e);
 		}
 		return message;
 	}

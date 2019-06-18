@@ -18,7 +18,8 @@ public enum ErrorCode {
 	SMS_INEXISTENCE("1007", "验证码不存在"),
 	SIGNIN_ERROR("1008", "密钥交换失败"),
 	ISSUE_ERROR("1009", "问题反馈操作异常"),
-	SITE_ERROR("1010", "常用地址操作异常");
+	SITE_ERROR("1010", "常用地址操作异常"), 
+	PATH_ERROR("1011", "常用路线操作异常");
 
 	private String code;
 	private String desc;
