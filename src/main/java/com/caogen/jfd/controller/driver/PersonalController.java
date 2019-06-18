@@ -241,5 +241,33 @@ public class PersonalController {
 
 }
 
+    /**
+     * 今日接单
+     * @param phone
+     * @param cc
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("receipt")
+    public Message receipt(String phone,Boolean cc) {
+        Message message = new Message();
+        try {
+            List <Peservation> peservation = reservationService.getto(phone);
+            int size = peservation.size();
+            List<Object>ASD = new ArrayList<Object>( );
+            ASD.add(size);
+            if (cc){
+                ASD.add(peservation);
+            }
+            message.setData(ASD);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
 
+    }
 }
