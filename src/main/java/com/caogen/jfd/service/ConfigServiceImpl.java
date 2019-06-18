@@ -1,8 +1,5 @@
 package com.caogen.jfd.service;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,12 +39,10 @@ public class ConfigServiceImpl implements ConfigService {
 	}
 
 	@Override
-	public List<String> getCities() {
-		SysConfig config = new SysConfig();
-		config.setItem_key("city");
-		config = configDao.get(config);
-		List<String> list = Arrays.asList(config.getItem_value().split(","));
-		return list;
+	public SysConfig getByItem(String key) {
+		SysConfig entity = new SysConfig();
+		entity.setItem_key(key);
+		return configDao.get(entity);
 	}
 
 }

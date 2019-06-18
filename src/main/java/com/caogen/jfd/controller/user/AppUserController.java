@@ -13,7 +13,6 @@ import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.LoginType;
 import com.caogen.jfd.common.StaticLogger;
-import com.caogen.jfd.entity.SysConfig;
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.entity.user.AppUser.State;
 import com.caogen.jfd.entity.user.AppUserSms;
@@ -107,14 +106,59 @@ public class AppUserController {
 		return generateToken(user.getUsername());
 	}
 
-	private String loginBySms(AppUser user, AppUserSms sms) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * 短信验证码登录
+	 * 
+	 * @param user
+	 * @param sms
+	 * @return
+	 * @throws Exception
+	 */
+	private String loginBySms(AppUser user, AppUserSms sms) throws Exception {
+		// 检查参数
+		if (user.getUsername() == null || sms.getCode() == null) {
+			throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
+		}
+		// 对比验证码
+		verifySms(user.getUsername(), sms.getCode());
+		// 用户是否存在，不存在则创建用户
+		AppUser entity = userService.getByUsername(user.getUsername());
+		if (entity == null) {
+			entity = new AppUser();
+			entity.setUsername(user.getUsername());
+			entity.setReferrer(user.getReferrer());
+			userService.create(entity);
+		} else if (!entity.getState().equals(State.normal)) {
+			throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);
+		}
+		return generateToken(user.getUsername());
 	}
 
-	private String loginByThird(AppUser user, AppUserSms sms, AppUserThird third) {
-		// TODO Auto-generated method stub
-		return null;
+	private String loginByThird(AppUser user, AppUserSms sms, AppUserThird third) throws Exception {
+		// 检查参数
+		if (third.getThirdparty() == null || third.getIdentifier() == null) {
+			throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
+		}
+		AppUserThird entity = thirdService.getByProperty(third);
+		if (entity == null) {
+			// 检查参数
+			if (user.getUsername() == null || sms.getCode() == null) {
+				throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
+			}
+			// 对比验证码
+			verifySms(user.getUsername(), sms.getCode());
+			// 创建用户
+//			if (userDao.get(user) == null) {
+//				create(user);
+//			}
+			// 添加第三方应用记录
+			third.setPhone(user.getUsername());
+//			thirdDao.insert(third);
+			return generateToken(user.getUsername());
+		} else {
+			String username = entity.getPhone();
+			return generateToken(username);
+		}
 	}
 
 	@ResponseBody
@@ -174,13 +218,12 @@ public class AppUserController {
 		// 查询该条验证码记录
 		AppUserSms entity = new AppUserSms();
 		entity.setPhone(phone);
-		AppUserSms userSms = smsDao.get(entity);
+		AppUserSms userSms = smsService.getByPhone(phone);
 		if (userSms == null) {
 			throw new DefinedException(ErrorCode.SMS_INEXISTENCE);
 		}
 		// 验证码是否在有效期内
-		SysConfig config = configDao.get(new SysConfig("indate"));
-		Long indate = Long.parseLong(config.getItem_value());
+		Long indate = Long.parseLong(configService.getByItem("indate").getItem_value());
 		Duration duration = Duration.between(userSms.getCreate_date(), LocalDateTime.now());
 		if (duration.toMillis() > indate) {
 			throw new DefinedException(ErrorCode.SMS_PAST);

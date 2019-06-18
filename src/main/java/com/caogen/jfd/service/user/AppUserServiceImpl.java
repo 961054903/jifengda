@@ -86,53 +86,6 @@ public class AppUserServiceImpl implements AppUserService {
 		return userDao.get(entity);
 	}
 
-	public String loginBySms(AppUser user, AppUserSms sms) throws Exception {
-		// 检查参数
-		if (user.getUsername() == null || sms.getCode() == null) {
-			throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
-		}
-		// 对比验证码
-		verifySms(user.getUsername(), sms.getCode());
-		// 用户是否存在，不存在则创建用户
-		AppUser entity = userDao.get(user);
-		if (entity == null) {
-			entity = new AppUser();
-			entity.setUsername(user.getUsername());
-			entity.setReferrer(user.getReferrer());
-			create(entity);
-		} else if (!entity.getState().equals(State.normal)) {
-			throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);
-		}
-		return generateToken(user.getUsername());
-	}
-
-	public String loginByThird(AppUser user, AppUserSms sms, AppUserThird third) throws Exception {
-		// 检查参数
-		if (third.getThirdparty() == null || third.getIdentifier() == null) {
-			throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
-		}
-		AppUserThird entity = thirdDao.get(third);
-		if (entity == null) {
-			// 检查参数
-			if (user.getUsername() == null || sms.getCode() == null) {
-				throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
-			}
-			// 对比验证码
-			verifySms(user.getUsername(), sms.getCode());
-			// 创建用户
-			if (userDao.get(user) == null) {
-				create(user);
-			}
-			// 添加第三方应用记录
-			third.setPhone(user.getUsername());
-			thirdDao.insert(third);
-			return generateToken(user.getUsername());
-		} else {
-			String username = entity.getPhone();
-			return generateToken(username);
-		}
-	}
-
 	@Override
 	public String[] exchangeKey(String A, String phone) throws Exception {
 		AppUser user = getByUsername(phone);

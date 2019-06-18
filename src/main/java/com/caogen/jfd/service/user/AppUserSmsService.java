@@ -9,5 +9,12 @@ import com.caogen.jfd.service.BaseService;
  *
  */
 public interface AppUserSmsService extends BaseService<AppUserSms> {
+	/**
+	 * 根据手机号查询
+	 * 
+	 * @param phone
+	 * @return
+	 */
+	AppUserSms getByPhone(String phone);
 
 }

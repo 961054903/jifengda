@@ -11,37 +11,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{phone},#{code},#{create_date}
 		)
 	</insert>
-	<delete id="delete" parameterType="AppUserSms">
-		DELETE FROM app_user_sms
-		<where>
-			<if test="id != null">id = #{id}</if>
-			<if test="phone != null">AND phone = #{phone}</if>
-		</where>
-	</delete>
 	<update id="update" parameterType="AppUserSms">
 		UPDATE app_user_sms
 		<set>
-			<if test="code != null">id = #{code},</if>
+			<if test="code != null">code = #{code}</if>
+			<if test="create_date != null">create_date = #{create_date}</if>
 		</set>
-		<where>
-			<if test="id != null">id = #{id}</if>
-			<if test="phone != null">AND phone = #{phone}</if>
-		</where>
+		WHERE phone = #{phone}
 	</update>
 	<select id="get" parameterType="AppUserSms"
 		resultType="AppUserSms">
 		SELECT id,
-		<include refid="sms"></include>
-		FROM app_user_sms
-		<where>
-			<if test="id != null">id = #{id}</if>
-			<if test="phone != null">AND phone = #{phone}</if>
-		</where>
-	</select>
-	<select id="find" parameterType="AppUserSms"
-		resultType="AppUserSms">
-		SELECT id,
 		<include refid="sms" />
 		FROM app_user_sms
+		WHERE phone = #{phone}
 	</select>
 </mapper>

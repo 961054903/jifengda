@@ -36,4 +36,9 @@ public class AppUserThirdServiceImpl implements AppUserThirdService {
 		return thirdDao.get(new AppUserThird(id));
 	}
 
+	@Override
+	public AppUserThird getByProperty(AppUserThird entity) {
+		return thirdDao.get(entity);
+	}
+
 }

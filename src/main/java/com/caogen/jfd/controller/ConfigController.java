@@ -1,11 +1,9 @@
 package com.caogen.jfd.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-
-import com.caogen.jfd.model.Message;
-import com.caogen.jfd.service.ConfigService;
 
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
+import com.caogen.jfd.model.Message;
+import com.caogen.jfd.service.ConfigService;
 import com.caogen.jfd.util.IndustryHelper;
 
 /**
@@ -38,7 +38,8 @@ public class ConfigController {
 	public Message city() {
 		Message message = new Message();
 		try {
-			List<String> cities = configService.getCities();
+			String city = configService.getByItem("city").getItem_value();
+			List<String> cities = Arrays.asList(city.split(","));
 			message.setData(cities);
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());

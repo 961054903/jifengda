@@ -9,5 +9,12 @@ import com.caogen.jfd.service.BaseService;
  *
  */
 public interface AppUserThirdService extends BaseService<AppUserThird> {
+	/**
+	 * 通过属性查询
+	 * 
+	 * @param entity
+	 * @return
+	 */
+	AppUserThird getByProperty(AppUserThird entity);
 
 }
