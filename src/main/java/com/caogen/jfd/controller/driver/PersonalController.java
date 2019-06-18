@@ -171,11 +171,31 @@ public class PersonalController {
         return message;
 
     }
+    /**
+     * 计算在线时间
+     */
+    @Autowired
+    private  DetaiService detaiService;
 
-
+    @ResponseBody
+    @RequestMapping("cout")
+    public Message cout(String phone) {
+        Message message = new Message();
+        try {
+            String cc = detaiService.getime(phone);
+            message.setData(cc);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
 
     /**
-     * 累计今天时间（没编写完）
+     * 取出时间
      * @return
      */
 
@@ -184,11 +204,11 @@ public class PersonalController {
 
     @ResponseBody
     @RequestMapping("cumulative")
-    public Message cumulative(String phone) {
+    public Message cumulative(String phone,String time) {
         Message message = new Message();
         try {
-            Personal cities = personalService.getset(phone);
-            Time time = timeService.gettime(phone);
+            Time cc = timeService.gettime(phone,time);
+            message.setData(cc);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {

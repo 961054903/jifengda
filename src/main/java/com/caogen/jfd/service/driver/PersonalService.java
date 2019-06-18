@@ -34,14 +34,6 @@ public interface PersonalService extends BaseService<Personal> {
      */
     Personal getwhole(String phone);
 
-    /**
-     *
-     * 获取时间
-     * @param phone
-     * @return
-     */
-    Personal getset(String phone);
-
 
 
 }

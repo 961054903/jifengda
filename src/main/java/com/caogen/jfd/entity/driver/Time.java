@@ -3,18 +3,22 @@ package com.caogen.jfd.entity.driver;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+
 public class Time implements Serializable {
 
     private static final long serialVersionUID = -3933707114992384047L;
     private Integer id; //id
     private String phone;//手机号
-    private LocalDateTime time;//累计在线时间
+    private LocalDateTime time;//时间
+    private  Double one_day;//一天时间
+
     @Override
     public String toString() {
         return "Time{" +
                 "id=" + id +
                 ", phone='" + phone + '\'' +
                 ", time=" + time +
+                ", one_day=" + one_day +
                 '}';
     }
 
@@ -44,5 +48,13 @@ public class Time implements Serializable {
 
     public void setTime(LocalDateTime time) {
         this.time = time;
+    }
+
+    public Double getOne_day() {
+        return one_day;
+    }
+
+    public void setOne_day(Double one_day) {
+        this.one_day = one_day;
     }
 }

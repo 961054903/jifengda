@@ -71,13 +71,6 @@ public class PersonalServicelmpl implements PersonalService {
         return  personalDao.get2(personal);
     }
 
-    @Override
-    public Personal getset(String phone) {
-        return null;
-    }
-
-
-
 
 
 
