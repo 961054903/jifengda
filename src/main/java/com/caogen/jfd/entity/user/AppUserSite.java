@@ -15,14 +15,14 @@ public class AppUserSite implements Serializable {
 	private String name;
 	private String description;
 	private Double longitude;
-	private Double latiude;
+	private Double latitude;
 	private String contacts_name;
 	private String contacts_phone;
 
 	@Override
 	public String toString() {
 		return "AppUserSite [id=" + id + ", phone=" + phone + ", name=" + name + ", description=" + description
-				+ ", longitude=" + longitude + ", latiude=" + latiude + ", contacts_name=" + contacts_name
+				+ ", longitude=" + longitude + ", latitude=" + latitude + ", contacts_name=" + contacts_name
 				+ ", contacts_phone=" + contacts_phone + "]";
 	}
 
@@ -66,12 +66,12 @@ public class AppUserSite implements Serializable {
 		this.longitude = longitude;
 	}
 
-	public Double getLatiude() {
-		return latiude;
+	public Double getLatitude() {
+		return latitude;
 	}
 
-	public void setLatiude(Double latiude) {
-		this.latiude = latiude;
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
 	}
 
 	public String getContacts_name() {

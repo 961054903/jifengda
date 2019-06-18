@@ -1,13 +1,12 @@
 package com.caogen.jfd.entity.user;
+
+import java.io.Serializable;
+
 /**
  * 
  * @author Spuiln
  *
  */
-
-import java.io.Serializable;
-import java.util.List;
-
 public class AppUserPath implements Serializable {
 
 	private static final long serialVersionUID = 1829157775148787101L;
@@ -15,8 +14,8 @@ public class AppUserPath implements Serializable {
 	private String phone;
 	private String name;
 	private String description;
-	private AppUserSite origin;
-	private List<AppUserSite> destination;
+	private String origin;
+	private String destination;
 
 	@Override
 	public String toString() {
@@ -56,19 +55,19 @@ public class AppUserPath implements Serializable {
 		this.description = description;
 	}
 
-	public AppUserSite getOrigin() {
+	public String getOrigin() {
 		return origin;
 	}
 
-	public void setOrigin(AppUserSite origin) {
+	public void setOrigin(String origin) {
 		this.origin = origin;
 	}
 
-	public List<AppUserSite> getDestination() {
+	public String getDestination() {
 		return destination;
 	}
 
-	public void setDestination(List<AppUserSite> destination) {
+	public void setDestination(String destination) {
 		this.destination = destination;
 	}
 
