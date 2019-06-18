@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.driver.CompleteDao">
+    <sql id="roya">code,origin,destination,kilometre,bonus</sql>
+    <select id="find1" parameterType="Complete"
+            resultType="Complete">
+        SELECT
+        <include refid="roya" />
+        FROM order_history
+        where
+        TO_DAYS(create_date) = TO_DAYS(NOW())
+    </select>
+
+    <sql id="month">code,origin,destination,kilometre,bonus</sql>
+    <select id="find2" parameterType="Complete"
+            resultType="Complete">
+        SELECT
+        <include refid="month" />
+        FROM order_history
+        where
+        DATE_FORMAT( create_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+    </select>
+</mapper>

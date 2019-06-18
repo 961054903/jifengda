@@ -16,17 +16,5 @@ public interface PeservationService extends BaseService<Peservation> {
     */
    Peservation getma(String code);
 
-    /**
-     * 今日订单
-     * @param
-     * @return
-     */
-  List <Peservation> getto(String phone);
 
-    /**
-     * 本月提成
-     * @param phone
-     * @return
-     */
-    List<Peservation> getmon(String phone);
 }

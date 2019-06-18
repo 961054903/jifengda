@@ -188,7 +188,6 @@ public class PersonalController {
         Message message = new Message();
         try {
             Personal cities = personalService.getset(phone);
-
             Time time = timeService.gettime(phone);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -201,6 +200,9 @@ public class PersonalController {
     }
 
 
+
+       @Autowired
+       private  CompleteService completeService;
     /**
      * 今日提成
      * @param
@@ -211,8 +213,7 @@ public class PersonalController {
     public Message royalty(String phone,Boolean cc) {
         Message message = new Message();
         try {
-//        Double royalty = royaltyService.getday(phone);
-        List <Peservation> peservation = reservationService.getto(phone);
+        List <Complete> peservation = completeService.getto(phone);
         Double aa =0.0;
     for(int i = 0;i<peservation.size();i++){
         Double ss = peservation.get(i).getBonus();
@@ -246,7 +247,7 @@ public class PersonalController {
     public Message receipt(String phone,Boolean cc) {
         Message message = new Message();
         try {
-            List <Peservation> peservation = reservationService.getto(phone);
+            List <Complete> peservation = completeService.getto(phone);
             int size = peservation.size();
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(size);
@@ -276,7 +277,7 @@ public class PersonalController {
     public Message month(String phone,Boolean cc) {
         Message message = new Message();
         try {
-            List <Peservation> peservation = reservationService.getmon(phone);
+            List <Complete> peservation = completeService.getmon(phone);
             int size = peservation.size();
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(size);
@@ -306,16 +307,16 @@ public class PersonalController {
     public Message mont(String phone,Boolean cc) {
         Message message = new Message();
         try {
-            List <Peservation> peservation = reservationService.getmon(phone);
+            List <Complete> completes = completeService.getmon(phone);
             Double aa =0.0;
-            for(int i = 0;i<peservation.size();i++){
-                Double ss = peservation.get(i).getBonus();
+            for(int i = 0;i<completes.size();i++){
+                Double ss = completes.get(i).getBonus();
                 aa += ss;
             }
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(aa);
             if (cc){
-                ASD.add(peservation);
+                ASD.add(completes);
             }
             message.setData(ASD);
             message.setCode(ErrorCode.SUCCEED.getCode());
