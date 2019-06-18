@@ -12,6 +12,7 @@ import com.caogen.jfd.service.BaseService;
  */
 public interface AppUserSiteService extends BaseService<AppUserSite> {
 	/**
+	 * 查询
 	 * 
 	 * @param entity
 	 * @return
@@ -19,10 +20,11 @@ public interface AppUserSiteService extends BaseService<AppUserSite> {
 	AppUserSite getOne(AppUserSite entity);
 
 	/**
+	 * 查询全部
 	 * 
 	 * @param entity
 	 * @return
 	 */
-	List<AppUserSite> getList(AppUserSite entity);
+	List<AppUserSite> getAll(AppUserSite entity);
 
 }

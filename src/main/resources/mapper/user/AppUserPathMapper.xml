@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.user.AppUserPathDao">
+	<sql id="path">phone,name,description,origin,destination</sql>
+	<insert id="insert" parameterType="AppUserPath">
+		insert into app_user_path (
+		<include refid="path" />
+		) values (
+		#{phone},#{name},#{description},#{origin},#{destination}
+		)
+	</insert>
+	<delete id="delete" parameterType="AppUserPath">
+		DELETE FROM app_user_path
+		<where>
+			<if test="id != null">id = #{id}</if>
+			<if test="phone != null">AND phone = #{phone}</if>
+		</where>
+	</delete>
+	<update id="update" parameterType="AppUserPath">
+		update app_user_path
+		<set>
+			<if test="name != null">name = #{name},</if>
+			<if test="description != null">description = #{description},</if>
+			<if test="origin != null">origin = #{origin},</if>
+			<if test="destination != null">destination = #{destination}</if>
+		</set>
+		<where>
+			<if test="id != null">id = #{id}</if>
+			<if test="phone != null">AND phone = #{phone}</if>
+		</where>
+	</update>
+	<select id="get" parameterType="AppUserPath"
+		resultType="AppUserPath">
+		SELECT id,
+		<include refid="path" />
+		FROM app_user_path
+		WHERE id = #{id}
+	</select>
+	<select id="find" parameterType="AppUserPath"
+		resultType="AppUserPath">
+		SELECT id,
+		<include refid="path" />
+		FROM app_user_path
+		WHERE phone = #{phone}
+	</select>
+</mapper>

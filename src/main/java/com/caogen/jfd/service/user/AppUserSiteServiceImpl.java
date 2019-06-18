@@ -46,7 +46,7 @@ public class AppUserSiteServiceImpl implements AppUserSiteService {
 	}
 
 	@Override
-	public List<AppUserSite> getList(AppUserSite entity) {
+	public List<AppUserSite> getAll(AppUserSite entity) {
 		return siteDao.find(entity);
 	}
 

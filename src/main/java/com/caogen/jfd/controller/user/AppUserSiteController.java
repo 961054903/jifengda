@@ -2,11 +2,10 @@ package com.caogen.jfd.controller.user;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
@@ -30,7 +29,7 @@ public class AppUserSiteController {
 	@Autowired
 	private AppUserSiteService siteService;
 
-	@Resource
+	@ResponseBody
 	@RequestMapping(value = { "add", "api/add" })
 	public Message add(String data) {
 		Message message = new Message();
@@ -41,14 +40,14 @@ public class AppUserSiteController {
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
 			// TODO: handle exception
-			message.setCode(ErrorCode.FAIL.getCode());
-			message.setDesc(ErrorCode.FAIL.getDesc());
+			message.setCode(ErrorCode.SITE_ERROR.getCode());
+			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
 			StaticLogger.error("", e);
 		}
 		return message;
 	}
 
-	@Resource
+	@ResponseBody
 	@RequestMapping(value = { "del", "api/del" })
 	public Message del(String data) {
 		Message message = new Message();
@@ -59,14 +58,14 @@ public class AppUserSiteController {
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
 			// TODO: handle exception
-			message.setCode(ErrorCode.FAIL.getCode());
-			message.setDesc(ErrorCode.FAIL.getDesc());
+			message.setCode(ErrorCode.SITE_ERROR.getCode());
+			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
 			StaticLogger.error("", e);
 		}
 		return message;
 	}
 
-	@Resource
+	@ResponseBody
 	@RequestMapping(value = { "edit", "api/edit" })
 	public Message edit(String data) {
 		Message message = new Message();
@@ -77,14 +76,14 @@ public class AppUserSiteController {
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
 			// TODO: handle exception
-			message.setCode(ErrorCode.FAIL.getCode());
-			message.setDesc(ErrorCode.FAIL.getDesc());
+			message.setCode(ErrorCode.SITE_ERROR.getCode());
+			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
 			StaticLogger.error("", e);
 		}
 		return message;
 	}
 
-	@Resource
+	@ResponseBody
 	@RequestMapping(value = { "one", "api/one" })
 	public Message one(String data) {
 		Message message = new Message();
@@ -97,28 +96,28 @@ public class AppUserSiteController {
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
 			// TODO: handle exception
-			message.setCode(ErrorCode.FAIL.getCode());
-			message.setDesc(ErrorCode.FAIL.getDesc());
+			message.setCode(ErrorCode.SITE_ERROR.getCode());
+			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
 			StaticLogger.error("", e);
 		}
 		return message;
 	}
 
-	@Resource
+	@ResponseBody
 	@RequestMapping(value = { "all", "api/all" })
 	public Message list(String data) {
 		Message message = new Message();
 		try {
 			AppUserSite site = Constants.gson.fromJson(data, AppUserSite.class);
 			AppUser user = userService.getByUsername(site.getPhone());
-			List<AppUserSite> list = siteService.getList(site);
+			List<AppUserSite> list = siteService.getAll(site);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
 			message.setCode(ErrorCode.SUCCEED.getCode());
 			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
 			// TODO: handle exception
-			message.setCode(ErrorCode.FAIL.getCode());
-			message.setDesc(ErrorCode.FAIL.getDesc());
+			message.setCode(ErrorCode.SITE_ERROR.getCode());
+			message.setDesc(ErrorCode.SITE_ERROR.getDesc());
 			StaticLogger.error("", e);
 		}
 		return message;

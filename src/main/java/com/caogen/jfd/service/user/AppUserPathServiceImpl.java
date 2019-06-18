@@ -1,5 +1,7 @@
 package com.caogen.jfd.service.user;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +38,16 @@ public class AppUserPathServiceImpl implements AppUserPathService {
 		AppUserPath entity = new AppUserPath();
 		entity.setId(id);
 		return pathDao.get(entity);
+	}
+
+	@Override
+	public AppUserPath getOne(AppUserPath entity) {
+		return pathDao.get(entity);
+	}
+
+	@Override
+	public List<AppUserPath> getAll(AppUserPath entity) {
+		return pathDao.find(entity);
 	}
 
 }
