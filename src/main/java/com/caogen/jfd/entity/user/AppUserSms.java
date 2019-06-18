@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * APP用户短信验证码entity
  * 
  * @author Spuiln
  *

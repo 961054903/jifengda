@@ -11,11 +11,14 @@ import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.dao.ConfigDao;
 import com.caogen.jfd.dao.user.AppUserDao;
+import com.caogen.jfd.dao.user.AppUserInfoDao;
 import com.caogen.jfd.dao.user.AppUserSmsDao;
 import com.caogen.jfd.dao.user.AppUserThirdDao;
 import com.caogen.jfd.entity.SysConfig;
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.entity.user.AppUser.State;
+import com.caogen.jfd.entity.user.AppUserInfo.Gender;
+import com.caogen.jfd.entity.user.AppUserInfo;
 import com.caogen.jfd.entity.user.AppUserSms;
 import com.caogen.jfd.entity.user.AppUserThird;
 import com.caogen.jfd.exception.DefinedException;
@@ -33,6 +36,8 @@ public class AppUserServiceImpl implements AppUserService {
 	@Autowired
 	private AppUserDao userDao;
 	@Autowired
+	private AppUserInfoDao infoDao;
+	@Autowired
 	private AppUserSmsDao smsDao;
 	@Autowired
 	private AppUserThirdDao thirdDao;
@@ -44,6 +49,13 @@ public class AppUserServiceImpl implements AppUserService {
 		entity.setState(State.normal);
 		entity.setCreate_date(LocalDateTime.now());
 		userDao.insert(entity);
+		AppUserInfo info = new AppUserInfo();
+		info.setPhone(entity.getUsername());
+		info.setLevel(0);
+		info.setGender(Gender.unknown);
+		info.setIs_real(false);
+		info.setBalance(0.0);
+		infoDao.insert(info);
 	}
 
 	@Override
@@ -156,11 +168,13 @@ public class AppUserServiceImpl implements AppUserService {
 			}
 			// 对比验证码
 			verifySms(user.getUsername(), sms.getCode());
+			// 创建用户
+			if (userDao.get(user) == null) {
+				create(user);
+			}
 			// 添加第三方应用记录
 			third.setPhone(user.getUsername());
 			thirdDao.insert(third);
-			// TODO 创建用户
-			
 			return generateToken(user.getUsername());
 		} else {
 			String username = entity.getPhone();

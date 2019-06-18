@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * APP用户信息entity
  * 
  * @author Spuiln
  *
@@ -13,7 +12,6 @@ public class AppUserInfo implements Serializable {
 
 	private static final long serialVersionUID = 8293865348126760421L;
 	private Integer id;
-	private Integer app_user_id;
 	private String phone;
 	private String photo_url;
 	private String nickname;
@@ -34,11 +32,11 @@ public class AppUserInfo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AppUserInfo [id=" + id + ", app_user_id=" + app_user_id + ", phone=" + phone + ", photo_url="
-				+ photo_url + ", nickname=" + nickname + ", level=" + level + ", gender=" + gender + ", birthday="
-				+ birthday + ", occupation=" + occupation + ", is_real=" + is_real + ", name=" + name
-				+ ", identity_number=" + identity_number + ", identity_front_url=" + identity_front_url
-				+ ", identity_back_url=" + identity_back_url + ", balance=" + balance + "]";
+		return "AppUserInfo [id=" + id + ", phone=" + phone + ", photo_url=" + photo_url + ", nickname=" + nickname
+				+ ", level=" + level + ", gender=" + gender + ", birthday=" + birthday + ", occupation=" + occupation
+				+ ", is_real=" + is_real + ", name=" + name + ", identity_number=" + identity_number
+				+ ", identity_front_url=" + identity_front_url + ", identity_back_url=" + identity_back_url
+				+ ", balance=" + balance + "]";
 	}
 
 	public Integer getId() {
@@ -47,14 +45,6 @@ public class AppUserInfo implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Integer getApp_user_id() {
-		return app_user_id;
-	}
-
-	public void setApp_user_id(Integer app_user_id) {
-		this.app_user_id = app_user_id;
 	}
 
 	public String getPhone() {

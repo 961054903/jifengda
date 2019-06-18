@@ -3,7 +3,6 @@ package com.caogen.jfd.entity.user;
 import java.io.Serializable;
 
 /**
- * APP用户第三方应用授权entity
  * 
  * @author Spuiln
  *
