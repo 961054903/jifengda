@@ -22,4 +22,11 @@ public interface PeservationService extends BaseService<Peservation> {
      * @return
      */
   List <Peservation> getto(String phone);
+
+    /**
+     * 本月提成
+     * @param phone
+     * @return
+     */
+    List<Peservation> getmon(String phone);
 }

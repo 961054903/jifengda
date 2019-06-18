@@ -175,7 +175,7 @@ public class PersonalController {
 
 
     /**
-     * 累计今天（没编写完）
+     * 累计今天时间（没编写完）
      * @return
      */
     @Autowired
@@ -270,4 +270,69 @@ public class PersonalController {
         return message;
 
     }
+
+    /**
+     * 本月接单
+     * @param phone
+     * @param cc
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("month")
+    public Message month(String phone,Boolean cc) {
+        Message message = new Message();
+        try {
+            List <Peservation> peservation = reservationService.getmon(phone);
+            int size = peservation.size();
+            List<Object>ASD = new ArrayList<Object>( );
+            ASD.add(size);
+            if (cc){
+                ASD.add(peservation);
+            }
+            message.setData(ASD);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+
+    }
+
+    /**
+     * 本月提成
+     * @param phone
+     * @param cc
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("mont")
+    public Message mont(String phone,Boolean cc) {
+        Message message = new Message();
+        try {
+            List <Peservation> peservation = reservationService.getmon(phone);
+            Double aa =0.0;
+            for(int i = 0;i<peservation.size();i++){
+                Double ss = peservation.get(i).getBonus();
+                aa += ss;
+            }
+            List<Object>ASD = new ArrayList<Object>( );
+            ASD.add(aa);
+            if (cc){
+                ASD.add(peservation);
+            }
+            message.setData(ASD);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+
+    }
+
 }
