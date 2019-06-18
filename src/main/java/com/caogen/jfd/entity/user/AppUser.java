@@ -26,6 +26,15 @@ public class AppUser implements Serializable {
 		normal, locked
 	}
 
+	public AppUser() {
+		super();
+	}
+
+	public AppUser(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "AppUser [id=" + id + ", username=" + username + ", password=" + password + ", salt=" + salt + ", state="

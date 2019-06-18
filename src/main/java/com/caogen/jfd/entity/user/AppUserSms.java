@@ -16,6 +16,15 @@ public class AppUserSms implements Serializable {
 	private String code;
 	private LocalDateTime create_date;
 
+	public AppUserSms() {
+		super();
+	}
+
+	public AppUserSms(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "AppSms [id=" + id + ", phone=" + phone + ", code=" + code + ", create_date=" + create_date + "]";

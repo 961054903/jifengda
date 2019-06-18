@@ -21,6 +21,15 @@ public class AppUserThird implements Serializable {
 		qq, weixin, weibo
 	}
 
+	public AppUserThird() {
+		super();
+	}
+
+	public AppUserThird(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "AppUserThird [id=" + id + ", phone=" + phone + ", thirdparty=" + thirdparty + ", identifier="
