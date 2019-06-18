@@ -15,6 +15,7 @@ import com.caogen.jfd.common.LoginType;
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.entity.user.AppUser.State;
+import com.caogen.jfd.entity.user.AppUserInfo;
 import com.caogen.jfd.entity.user.AppUserSms;
 import com.caogen.jfd.entity.user.AppUserThird;
 import com.caogen.jfd.exception.DefinedException;
@@ -120,20 +121,29 @@ public class AppUserController {
 			throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
 		}
 		// 对比验证码
-		verifySms(user.getUsername(), sms.getCode());
+		contrastSms(user.getUsername(), sms.getCode());
 		// 用户是否存在，不存在则创建用户
 		AppUser entity = userService.getByUsername(user.getUsername());
 		if (entity == null) {
-			entity = new AppUser();
-			entity.setUsername(user.getUsername());
+			entity = new AppUser(user.getUsername());
 			entity.setReferrer(user.getReferrer());
 			userService.create(entity);
+			infoService.create(new AppUserInfo(user.getUsername()));
 		} else if (!entity.getState().equals(State.normal)) {
 			throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);
 		}
 		return generateToken(user.getUsername());
 	}
 
+	/**
+	 * 第三方应用授权登录
+	 * 
+	 * @param user
+	 * @param sms
+	 * @param third
+	 * @return
+	 * @throws Exception
+	 */
 	private String loginByThird(AppUser user, AppUserSms sms, AppUserThird third) throws Exception {
 		// 检查参数
 		if (third.getThirdparty() == null || third.getIdentifier() == null) {
@@ -146,19 +156,19 @@ public class AppUserController {
 				throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
 			}
 			// 对比验证码
-			verifySms(user.getUsername(), sms.getCode());
+			contrastSms(user.getUsername(), sms.getCode());
 			// 创建用户
-//			if (userDao.get(user) == null) {
-//				create(user);
-//			}
+			if (userService.getByUsername(user.getUsername()) == null) {
+				userService.create(user);
+				infoService.create(new AppUserInfo(user.getUsername()));
+			}
 			// 添加第三方应用记录
 			third.setPhone(user.getUsername());
-//			thirdDao.insert(third);
-			return generateToken(user.getUsername());
+			thirdService.create(third);
 		} else {
-			String username = entity.getPhone();
-			return generateToken(username);
+			user.setUsername(entity.getPhone());
 		}
+		return generateToken(user.getUsername());
 	}
 
 	@ResponseBody
@@ -214,7 +224,7 @@ public class AppUserController {
 	 * @param sms
 	 * @throws Exception
 	 */
-	private void verifySms(String phone, String sms) throws Exception {
+	private void contrastSms(String phone, String sms) throws Exception {
 		// 查询该条验证码记录
 		AppUserSms entity = new AppUserSms();
 		entity.setPhone(phone);

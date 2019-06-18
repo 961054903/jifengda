@@ -39,6 +39,11 @@ public class AppUserInfo implements Serializable {
 		this.id = id;
 	}
 
+	public AppUserInfo(String phone) {
+		super();
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString() {
 		return "AppUserInfo [id=" + id + ", phone=" + phone + ", photo_url=" + photo_url + ", nickname=" + nickname

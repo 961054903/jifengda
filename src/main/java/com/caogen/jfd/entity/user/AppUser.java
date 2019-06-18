@@ -35,6 +35,11 @@ public class AppUser implements Serializable {
 		this.id = id;
 	}
 
+	public AppUser(String username) {
+		super();
+		this.username = username;
+	}
+
 	@Override
 	public String toString() {
 		return "AppUser [id=" + id + ", username=" + username + ", password=" + password + ", salt=" + salt + ", state="
