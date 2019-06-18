@@ -29,6 +29,7 @@ public class Peservation implements Serializable {
     private Double actually_paid;//实付金额
     private Integer driver_id;//司机id
     private Double kilometre;//公里
+    private Double bonus;//提成
 
 
     public enum Type {
@@ -69,6 +70,7 @@ public class Peservation implements Serializable {
                 ", actually_paid=" + actually_paid +
                 ", driver_id=" + driver_id +
                 ", kilometre=" + kilometre +
+                ", bonus=" + bonus +
                 '}';
     }
 
@@ -258,5 +260,13 @@ public class Peservation implements Serializable {
 
     public void setKilometre(Double kilometre) {
         this.kilometre = kilometre;
+    }
+
+    public Double getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(Double bonus) {
+        this.bonus = bonus;
     }
 }

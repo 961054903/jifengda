@@ -2,6 +2,7 @@ package com.caogen.jfd.entity.driver;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Royalty implements Serializable {
 

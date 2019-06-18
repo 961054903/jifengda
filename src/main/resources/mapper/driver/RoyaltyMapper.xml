@@ -3,16 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.driver.RoyaltyDao">
-    <sql id="royalty">bonus</sql>
-    <select id="get" parameterType="Royalty"
+    <sql id="roya">bonus</sql>
+    <select id="find" parameterType="Royalty"
             resultType="Royalty">
-        SELECT
-        <include refid="royalty" />
+        SELECT id,
+        <include refid="roya" />
         FROM log_driver_detail
-        <where>
-            <if test="id != null">id = #{id}</if>
-            <if test="bonus != null">AND bonus = #{bonus}</if>
-        </where>
-    </select>
+          <where>
 
+              <if test="id != null">id = #{id}</if>
+          </where>
+
+    </select>
 </mapper>

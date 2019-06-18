@@ -15,4 +15,11 @@ public interface PeservationService extends BaseService<Peservation> {
     * @return7
     */
    Peservation getma(String code);
+
+    /**
+     * 今日订单
+     * @param
+     * @return
+     */
+  List <Peservation> getto(String phone);
 }

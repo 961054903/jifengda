@@ -5,8 +5,11 @@ import com.caogen.jfd.service.BaseService;
 
 public interface RoyaltyService extends BaseService<Royalty> {
 
-    /*
-      订单提成
-     */
-    Royalty getroy(String code);
+//
+//    /**
+//     * 今日提成累计
+//     * @param
+//     * @return
+//     */
+//    Double getday(String phone);
 }

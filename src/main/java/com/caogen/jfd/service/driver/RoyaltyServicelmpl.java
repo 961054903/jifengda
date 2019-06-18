@@ -1,7 +1,6 @@
 package com.caogen.jfd.service.driver;
 
 import com.caogen.jfd.dao.driver.RoyaltyDao;
-import com.caogen.jfd.entity.driver.Reward;
 import com.caogen.jfd.entity.driver.Royalty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,10 +34,21 @@ public class RoyaltyServicelmpl implements  RoyaltyService {
         return null;
     }
 
-    @Override
-    public Royalty getroy(String code) {
-        Royalty royalty = new Royalty();
-        royalty.setPhone(code);
-        return royaltyDao.get(royalty);
-    }
+
+//    @Override
+//    public Double getday(String phone) {
+//        Royalty royalty = new Royalty();
+//        royalty.setPhone(phone);
+//        List<Royalty> zz = royaltyDao.find(royalty);
+//        Double aa = 0.0;
+//        for (int i = 0; i < zz.size(); i++) {
+//            Double ss = zz.get(i).getBonus();
+//            aa += ss;
+//        }
+//        return  aa;
+//
+//    }
+
+
+
 }

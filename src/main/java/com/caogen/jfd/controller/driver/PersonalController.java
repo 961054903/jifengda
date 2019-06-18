@@ -150,18 +150,15 @@ public class PersonalController {
     @Autowired
     private RoyaltyService royaltyService;
 
-
     @ResponseBody
     @RequestMapping("details")
     public Message details(String code) {
         Message message = new Message();
         try {
             User user = userService.getuser(code);
-            Royalty royalty =royaltyService.getroy(code);
             Peservation peservation = reservationService.getma(code);
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(user);
-            ASD.add(royalty);
             ASD.add(peservation);
             message.setData(ASD);
             message.setCode(ErrorCode.SUCCEED.getCode());
@@ -178,7 +175,7 @@ public class PersonalController {
 
 
     /**
-     * 累计今天
+     * 累计今天（没编写完）
      * @return
      */
     @Autowired
@@ -208,4 +205,41 @@ public class PersonalController {
         }
         return message;
     }
+
+
+    /**
+     * 今日提成
+     * @param
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("royalty")
+    public Message royalty(String phone,Boolean cc) {
+        Message message = new Message();
+        try {
+//        Double royalty = royaltyService.getday(phone);
+        List <Peservation> peservation = reservationService.getto(phone);
+        Double aa =0.0;
+    for(int i = 0;i<peservation.size();i++){
+        Double ss = peservation.get(i).getBonus();
+        aa += ss;
+    }
+        List<Object>ASD = new ArrayList<Object>( );
+        ASD.add(aa);
+        if (cc){
+            ASD.add(peservation);
+        }
+        message.setData(ASD);
+        message.setCode(ErrorCode.SUCCEED.getCode());
+        message.setDesc(ErrorCode.SUCCEED.getDesc());
+    } catch (Exception e) {
+        message.setCode(ErrorCode.FAIL.getCode());
+        message.setDesc(ErrorCode.FAIL.getDesc());
+        StaticLogger.logger().error(message.getDesc(), e);
+    }
+        return message;
+
+}
+
+
 }
