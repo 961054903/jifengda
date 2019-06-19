@@ -34,6 +34,10 @@ public interface PersonalService extends BaseService<Personal> {
      */
     Personal getwhole(String phone);
 
-
-
+    /**
+     * 修改信息
+     * @param cities
+     * @return
+     */
+    void getmodify(Personal cities);
 }

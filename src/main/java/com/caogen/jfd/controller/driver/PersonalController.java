@@ -110,6 +110,28 @@ public class PersonalController {
         }
         return message;
     }
+    /**
+     * 修改个人信息
+     * @param cities
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("edit")
+    public Message edit(Personal cities) {
+        Message message = new Message();
+        try {
+            personalService.getmodify(cities);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
+
+
 
 
     /**

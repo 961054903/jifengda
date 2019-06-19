@@ -33,6 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="phone != null">AND phone = #{phone}</if>
 		</where>
 	</update>
+
 	<select id="get" parameterType="AppUserInfo"
 		resultType="AppUserInfo">
 		SELECT id,

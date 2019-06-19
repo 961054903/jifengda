@@ -19,5 +19,5 @@ public interface PersonalDao extends BaseDao<Personal> {
      */
     Personal get2(Personal phone);
 
-
+    void update1(Personal cities);
 }
