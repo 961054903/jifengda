@@ -2,8 +2,10 @@ package com.caogen.jfd.service.driver;
 
 import com.caogen.jfd.dao.driver.AppDriverDao;
 import com.caogen.jfd.dao.driver.CompleteDao;
+import com.caogen.jfd.dao.driver.PersonalDao;
 import com.caogen.jfd.entity.driver.AppDriver;
 import com.caogen.jfd.entity.driver.Complete;
+import com.caogen.jfd.entity.driver.Personal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,9 @@ public class CompleteServicelmpl implements CompleteService {
     private AppDriverDao appDriverDao;
     @Autowired
     private CompleteDao completeDao;
+    @Autowired
+    private PersonalDao personalDao;
+
     @Override
     public void create(Complete entity) {
 
@@ -72,8 +77,7 @@ public class CompleteServicelmpl implements CompleteService {
         Integer id = appDriverDao.get(appDriver).getId();
         complete.setDriver_id(id);
         List<Complete> completes = completeDao.find3(complete);
-        System.out.println(completes);
-        for(int i = 0;i<completes.size();i++){
+        for (int i = 0; i < completes.size(); i++) {
             LocalDateTime SS = completes.get(i).getFinish_date();
             Long newss = SS.toInstant(ZoneOffset.of("+8")).toEpochMilli();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -81,12 +85,29 @@ public class CompleteServicelmpl implements CompleteService {
             Date date = sdf.parse(start);
             //结束
             Date date1 = sdf.parse(end);
-            if (date.getTime() >= newss && newss <= date1.getTime()){
+            if (date.getTime() >= newss && newss <= date1.getTime()) {
 
-            }else {
+            } else {
                 completes.remove(i);
             }
         }
         return completes;
+    }
+
+    @Override
+    public List<Complete> getchampion(String phone) {
+        AppDriver appDriver = new AppDriver();
+        Complete complete = new Complete();
+        Personal personal = new Personal();
+        appDriver.setDriverphone(phone);
+        Integer id = appDriverDao.get(appDriver).getId();
+        complete.setDriver_id(id);
+        List<Complete> completes = completeDao.find4(complete);
+        Complete complete1 = completes.get(0);
+        Integer driver_id = complete1.getDriver_id();
+        String str = Integer.toString(driver_id);
+        personal.setPhone(str);
+        List<Complete> personals = personalDao.get6( new Personal());
+        return personals;
     }
 }

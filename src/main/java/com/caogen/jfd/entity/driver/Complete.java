@@ -34,20 +34,7 @@ public class Complete implements Serializable {
     private Boolean is_evaluate;//是否评价
     private Integer evaluate_grade;//评价分数
     private String evaluate_content;//评价内容
-
-
-
-    public enum Type {
-        single, multiple
-    }
-
-    public enum Mode {
-        common, appoint
-    }
-
-    public enum Label {
-        none, change, complain,rob,distribution
-    }
+    private Integer Total;//所有订单
 
     @Override
     public String toString() {
@@ -80,7 +67,28 @@ public class Complete implements Serializable {
                 ", is_evaluate=" + is_evaluate +
                 ", evaluate_grade=" + evaluate_grade +
                 ", evaluate_content='" + evaluate_content + '\'' +
+                ", Total=" + Total +
                 '}';
+    }
+
+    public Integer getTotal() {
+        return Total;
+    }
+
+    public void setTotal(Integer total) {
+        Total = total;
+    }
+
+    public enum Type {
+        single, multiple
+    }
+
+    public enum Mode {
+        common, appoint
+    }
+
+    public enum Label {
+        none, change, complain,rob,distribution
     }
 
     public static long getSerialVersionUID() {

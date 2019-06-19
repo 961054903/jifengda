@@ -402,6 +402,27 @@ public class PersonalController {
         StaticLogger.logger().error(message.getDesc(), e);
     }
         return message;
-
 }
+
+    /**
+     * 订单冠军
+     * @return
+     */
+    @ResponseBody
+        @RequestMapping("champion")
+    public Message champion(String phone) {
+        Message message = new Message();
+        try {
+           List <Complete> completes = completeService.getchampion(phone);
+            message.setData(completes);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+        }
+
 }

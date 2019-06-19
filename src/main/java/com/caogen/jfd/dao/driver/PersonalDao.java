@@ -1,7 +1,10 @@
 package com.caogen.jfd.dao.driver;
 
 import com.caogen.jfd.dao.BaseDao;
+import com.caogen.jfd.entity.driver.Complete;
 import com.caogen.jfd.entity.driver.Personal;
+
+import java.util.List;
 
 public interface PersonalDao extends BaseDao<Personal> {
 
@@ -20,4 +23,6 @@ public interface PersonalDao extends BaseDao<Personal> {
     Personal get2(Personal phone);
 
     void update1(Personal cities);
+
+    List<Complete> get6(Personal personal);
 }

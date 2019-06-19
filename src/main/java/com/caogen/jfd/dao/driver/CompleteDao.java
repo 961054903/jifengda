@@ -21,4 +21,6 @@ public interface CompleteDao {
     List<Complete> find2(Complete complete);
 
     List<Complete> find3(Complete complete);
+
+    List<Complete> find4(Complete complete);
 }

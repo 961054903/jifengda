@@ -23,5 +23,21 @@ public interface CompleteService extends BaseService<Complete> {
      */
     List<Complete> getmon(String phone);
 
+    /**
+     * 历史收入
+     * @param phone
+     * @param start
+     * @param end
+     * @return
+     * @throws ParseException
+     */
+
     List<Complete> gethistory(String phone, String start, String end) throws ParseException;
+
+    /**
+     * 月冠军
+     * @param phone
+     * @return
+     */
+   List <Complete> getchampion(String phone);
 }
