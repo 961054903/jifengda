@@ -43,9 +43,6 @@ public class AppUserInfoServiceImpl implements AppUserInfoService {
 
 	@Override
 	public AppUserInfo getOne(AppUserInfo entity) {
-		if (entity.getId() == null || entity.getPhone() == null) {
-			return null;
-		}
 		return infoDao.get(entity);
 	}
 

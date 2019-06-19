@@ -40,17 +40,11 @@ public class AppUserSiteServiceImpl implements AppUserSiteService {
 
 	@Override
 	public AppUserSite getOne(AppUserSite entity) {
-		if (entity.getId() == null) {
-			return null;
-		}
 		return siteDao.get(entity);
 	}
 
 	@Override
 	public List<AppUserSite> getAll(AppUserSite entity) {
-		if (entity.getPhone() == null) {
-			return null;
-		}
 		return siteDao.find(entity);
 	}
 

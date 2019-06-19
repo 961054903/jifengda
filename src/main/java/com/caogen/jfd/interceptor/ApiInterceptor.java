@@ -36,11 +36,6 @@ public class ApiInterceptor implements HandlerInterceptor {
 		if (StringUtils.isEmpty(head) || StringUtils.isEmpty(token) || StringUtils.isEmpty(ciphertext)) {
 			throw new DefinedException(ErrorCode.PARAM_MISSING);
 		}
-		// 校验报文长度
-		int len = Integer.parseInt(head.substring(LEN_START, LEN_END));
-		if (ciphertext.length() != len) {
-			throw new DefinedException(ErrorCode.PARAM_ILLEGALITY);
-		}
 		// 验证用户
 		AppUser user = userService.getByToken(token);
 		if (user == null) {
@@ -48,11 +43,10 @@ public class ApiInterceptor implements HandlerInterceptor {
 		}
 		// 解密
 		String key, iv;
-		String type = head.substring(TYPE_START, TYPE_END);
-		if (type.equals(DECODE_DEFAULT)) {
+		if (head.equals(DECODE_DEFAULT)) {
 			key = DEFAULT_KEY;
 			iv = DEFAULT_IV;
-		} else if (type.equals(DECODE_KEY)) {
+		} else if (head.equals(DECODE_KEY)) {
 			key = user.getDes_key();
 			iv = user.getDes_iv();
 		} else {

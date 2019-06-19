@@ -51,9 +51,6 @@ public class AppUserIssueServiceImpl implements AppUserIssueService {
 
 	@Override
 	public List<AppUserIssue> getHistory(AppUserIssue entity) {
-		if (entity.getPhone() == null || entity.getTitle() == null) {
-			return null;
-		}
 		return issueDao.find(entity);
 	}
 

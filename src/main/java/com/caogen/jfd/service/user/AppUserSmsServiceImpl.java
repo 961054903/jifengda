@@ -38,9 +38,7 @@ public class AppUserSmsServiceImpl implements AppUserSmsService {
 
 	@Override
 	public AppUserSms getByPhone(String phone) {
-		AppUserSms entity = new AppUserSms();
-		entity.setPhone(phone);
-		return smsDao.get(entity);
+		return smsDao.get(new AppUserSms(phone));
 	}
 
 }
