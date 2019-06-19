@@ -57,9 +57,7 @@ public class DetaiServicelmpl implements DetaiService {
                 LocalDateTime SS = zz.get(i).getCreate_date();
                 LocalDateTime AA = zz.get(i+1).getCreate_date();
                 Long newSecond1 = SS.toInstant(ZoneOffset.of("+8")).toEpochMilli();
-                System.out.println(newSecond1);
                 Long newSecond2 = AA.toInstant(ZoneOffset.of("+8")).toEpochMilli();
-                System.out.println(newSecond1);
                 Long a = newSecond2 - newSecond1;
                 aa += a;
         }

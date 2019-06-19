@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -372,4 +373,35 @@ public class PersonalController {
 
     }
 
+    /**
+     * 历史收入
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("history")
+    public Message history(String start,String end,String phone) {
+        Message message = new Message();
+        try {
+        List <Complete> completes = completeService.gethistory(phone,start,end);
+            Double aa =0.0;
+            for(int i = 0;i<completes.size();i++){
+                Double ss = completes.get(i).getBonus();
+                aa += ss;
+            }
+            int size = completes.size();
+            List<Object>ASD = new ArrayList<Object>( );
+                ASD.add(aa);
+                ASD.add(size);
+                ASD.add(completes);
+            message.setData(ASD);
+        message.setCode(ErrorCode.SUCCEED.getCode());
+        message.setDesc(ErrorCode.SUCCEED.getDesc());
+    } catch (Exception e) {
+        message.setCode(ErrorCode.FAIL.getCode());
+        message.setDesc(ErrorCode.FAIL.getDesc());
+        StaticLogger.logger().error(message.getDesc(), e);
+    }
+        return message;
+
+}
 }

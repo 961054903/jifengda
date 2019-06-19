@@ -36,6 +36,7 @@ public class Complete implements Serializable {
     private String evaluate_content;//评价内容
 
 
+
     public enum Type {
         single, multiple
     }
@@ -309,4 +310,8 @@ public class Complete implements Serializable {
     public void setEvaluate_content(String evaluate_content) {
         this.evaluate_content = evaluate_content;
     }
+
+
+
+
 }

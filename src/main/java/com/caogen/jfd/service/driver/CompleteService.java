@@ -4,6 +4,8 @@ import com.caogen.jfd.entity.driver.Complete;
 
 import com.caogen.jfd.service.BaseService;
 
+import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface CompleteService extends BaseService<Complete> {
@@ -20,4 +22,6 @@ public interface CompleteService extends BaseService<Complete> {
      * @return
      */
     List<Complete> getmon(String phone);
+
+    List<Complete> gethistory(String phone, String start, String end) throws ParseException;
 }

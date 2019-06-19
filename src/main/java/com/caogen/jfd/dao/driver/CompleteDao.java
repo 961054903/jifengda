@@ -19,4 +19,6 @@ public interface CompleteDao {
      * @return
      */
     List<Complete> find2(Complete complete);
+
+    List<Complete> find3(Complete complete);
 }

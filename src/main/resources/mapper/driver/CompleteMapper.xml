@@ -22,4 +22,23 @@
         where
         DATE_FORMAT( create_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
     </select>
+
+    <sql id="ccc">code,origin,destination,kilometre,bonus,finish_date</sql>
+    <select id="find3" parameterType="Complete"
+            resultType="Complete">
+        SELECT
+        <include refid="ccc" />
+        FROM order_history
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="code != null">AND code = #{code}</if>
+            <if test="origin != null">AND origin = #{origin}</if>
+            <if test="destination != null">AND destination = #{destination}</if>
+            <if test="kilometre != null">AND kilometre = #{kilometre}</if>
+            <if test="bonus != null">AND bonus = #{bonus}</if>
+            <if test="finish_date != null">AND finish_date = #{finish_date}</if>
+        </where>
+
+    </select>
+
 </mapper>
