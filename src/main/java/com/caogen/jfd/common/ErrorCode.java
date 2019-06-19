@@ -23,7 +23,8 @@ public enum ErrorCode {
 	INFO_ERROR("1012", "用户信息操作异常"), 
 	CIPHER_ERROR("1013", "修改密码操作异常"), 
 	LOGOUT_ERROR("1014", "用户退出操作异常"), 
-	TICKET_ERROR("1015", "用户红包操作异常");
+	TICKET_ERROR("1015", "用户红包操作异常"), 
+	DETAIL_ERROR("1016", "用户账户明细操作异常");
 
 	private String code;
 	private String desc;

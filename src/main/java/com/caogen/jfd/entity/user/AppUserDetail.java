@@ -32,6 +32,11 @@ public class AppUserDetail implements Serializable {
 		this.id = id;
 	}
 
+	public AppUserDetail(String phone) {
+		super();
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString() {
 		return "AppUserDetail [id=" + id + ", phone=" + phone + ", title=" + title + ", description=" + description
