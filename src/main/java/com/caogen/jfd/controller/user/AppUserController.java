@@ -70,10 +70,10 @@ public class AppUserController {
 			message.setData(token);
 		} catch (DefinedException e) {
 			message.setErrorCode(e.getError());
-			StaticLogger.error(message.getCode(), e);
+			StaticLogger.error("user login error", e);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.LOGIN_ERROR);
-			StaticLogger.error(message.getCode(), e);
+			StaticLogger.error("user login error", e);
 		}
 		return message;
 	}
@@ -169,6 +169,24 @@ public class AppUserController {
 			user.setUsername(entity.getPhone());
 		}
 		return generateToken(user.getUsername());
+	}
+
+	@ResponseBody
+	@RequestMapping(value = { "logout", "api/logout" })
+	public Message logout(String data) {
+		Message message = new Message();
+		try {
+			AppUser user = Constants.gson.fromJson(data, AppUser.class);
+			AppUser entity = userService.getByUsername(user.getUsername());
+			entity.setToken(null);
+			entity.setDes_key(null);
+			entity.setDes_iv(null);
+			userService.modify(entity);
+		} catch (Exception e) {
+			message.setErrorCode(ErrorCode.LOGOUT_ERROR);
+			StaticLogger.error("user loginout error", e);
+		}
+		return message;
 	}
 
 	@ResponseBody

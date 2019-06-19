@@ -21,7 +21,8 @@ public enum ErrorCode {
 	SITE_ERROR("1010", "常用地址操作异常"), 
 	PATH_ERROR("1011", "常用路线操作异常"),
 	INFO_ERROR("1012", "用户信息操作异常"), 
-	CIPHER_ERROR("1013", "修改密码操作异常");
+	CIPHER_ERROR("1013", "修改密码操作异常"), 
+	LOGOUT_ERROR("1014", "用户退出操作异常");
 
 	private String code;
 	private String desc;

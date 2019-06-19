@@ -16,12 +16,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update" parameterType="AppUser">
 		UPDATE app_user
 		<set>
-			<if test="password != null">password = #{password},</if>
-			<if test="salt != null">salt = #{salt},</if>
+			password = #{password},
+			salt = #{salt},
+			des_key = #{des_key},
+			des_iv = #{des_iv},
+			token = #{token}
 			<if test="state != null">state = #{state},</if>
-			<if test="des_key != null">des_key = #{des_key},</if>
-			<if test="des_iv != null">des_iv = #{des_iv},</if>
-			<if test="token != null">token = #{token}</if>
 		</set>
 		<where>
 			<if test="id != null">id = #{id}</if>

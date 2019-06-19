@@ -33,7 +33,6 @@ public class AppUserInfoServiceImpl implements AppUserInfoService {
 
 	@Override
 	public void modify(AppUserInfo entity) {
-
 		infoDao.update(entity);
 	}
 
