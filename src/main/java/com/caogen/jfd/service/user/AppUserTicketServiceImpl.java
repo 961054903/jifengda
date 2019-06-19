@@ -1,5 +1,7 @@
 package com.caogen.jfd.service.user;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,11 @@ public class AppUserTicketServiceImpl implements AppUserTicketService {
 	@Override
 	public AppUserTicket getById(Integer id) {
 		return ticketDao.get(new AppUserTicket(id));
+	}
+
+	@Override
+	public List<AppUserTicket> getAll(String phone) {
+		return ticketDao.find(new AppUserTicket(phone));
 	}
 
 }

@@ -1,16 +1,11 @@
-package com.caogen.jfd.entity.user;
+package com.caogen.jfd.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/**
- * 
- * @author Spuiln
- *
- */
 public class AppTicket implements Serializable {
 
-	private static final long serialVersionUID = -3670167029426346437L;
+	private static final long serialVersionUID = -5785794855053104914L;
 	private Integer id;
 	private String title;
 	private String description;
@@ -18,25 +13,18 @@ public class AppTicket implements Serializable {
 	private Type type;
 	private Double sill;
 	private LocalDateTime start_date;
-	private LocalDateTime end_date;
+	private LocalDateTime end_data;
+	private Double duration;
 
 	public enum Type {
 		common, condition
 	}
 
-	public AppTicket() {
-		super();
-	}
-
-	public AppTicket(Integer id) {
-		super();
-		this.id = id;
-	}
-
 	@Override
 	public String toString() {
 		return "AppTicket [id=" + id + ", title=" + title + ", description=" + description + ", money=" + money
-				+ ", type=" + type + ", sill=" + sill + ", start_date=" + start_date + ", end_date=" + end_date + "]";
+				+ ", type=" + type + ", sill=" + sill + ", start_date=" + start_date + ", end_data=" + end_data
+				+ ", duration=" + duration + "]";
 	}
 
 	public Integer getId() {
@@ -95,12 +83,20 @@ public class AppTicket implements Serializable {
 		this.start_date = start_date;
 	}
 
-	public LocalDateTime getEnd_date() {
-		return end_date;
+	public LocalDateTime getEnd_data() {
+		return end_data;
 	}
 
-	public void setEnd_date(LocalDateTime end_date) {
-		this.end_date = end_date;
+	public void setEnd_data(LocalDateTime end_data) {
+		this.end_data = end_data;
+	}
+
+	public Double getDuration() {
+		return duration;
+	}
+
+	public void setDuration(Double duration) {
+		this.duration = duration;
 	}
 
 }
