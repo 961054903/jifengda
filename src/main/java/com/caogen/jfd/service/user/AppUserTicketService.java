@@ -14,9 +14,9 @@ public interface AppUserTicketService extends BaseService<AppUserTicket> {
 	/**
 	 * 全是查询
 	 * 
-	 * @param phone
+	 * @param entity
 	 * @return
 	 */
-	List<AppUserTicket> getAll(String phone);
+	List<AppUserTicket> getAll(AppUserTicket entity);
 
 }

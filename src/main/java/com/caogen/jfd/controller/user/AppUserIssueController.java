@@ -29,6 +29,11 @@ public class AppUserIssueController {
 	@Autowired
 	private AppUserIssueService issueService;
 
+	/**
+	 * 获取FAQ列表
+	 * 
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("faq")
 	public Message faq() {
@@ -43,6 +48,12 @@ public class AppUserIssueController {
 		return message;
 	}
 
+	/**
+	 * 提交反馈
+	 * 
+	 * @param issue
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("feedback")
 	public Message feedback(AppUserIssue issue) {
@@ -56,6 +67,12 @@ public class AppUserIssueController {
 		return message;
 	}
 
+	/**
+	 * 查询历史反馈
+	 * 
+	 * @param data
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = { "history", "api/history" })
 	public Message history(String data) {
@@ -67,7 +84,7 @@ public class AppUserIssueController {
 			message.setData(list, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.ISSUE_ERROR);
-			StaticLogger.error("feedback error", e);
+			StaticLogger.error("get history feedback list error", e);
 		}
 		return message;
 	}

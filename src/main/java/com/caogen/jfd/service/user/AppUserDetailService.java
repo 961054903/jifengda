@@ -14,9 +14,9 @@ public interface AppUserDetailService extends BaseService<AppUserDetail> {
 	/**
 	 * 全部查询
 	 * 
-	 * @param phone
+	 * @param entity
 	 * @return
 	 */
-	List<AppUserDetail> getAll(String phone);
+	List<AppUserDetail> getAll(AppUserDetail entity);
 
 }

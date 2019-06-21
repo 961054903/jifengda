@@ -39,8 +39,8 @@ public class AppUserTicketServiceImpl implements AppUserTicketService {
 	}
 
 	@Override
-	public List<AppUserTicket> getAll(String phone) {
-		return ticketDao.find(new AppUserTicket(phone));
+	public List<AppUserTicket> getAll(AppUserTicket entity) {
+		return ticketDao.find(entity);
 	}
 
 }

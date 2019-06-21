@@ -45,35 +45,21 @@ public class AppUserWalletController {
 		try {
 			AppUserDetail detail = Constants.gson.fromJson(data, AppUserDetail.class);
 			AppUser user = userService.getByUsername(detail.getPhone());
-			List<AppUserDetail> list = detailService.getAll(detail.getPhone());
+			List<AppUserDetail> list = detailService.getAll(detail);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.DETAIL_ERROR);
-			StaticLogger.error("user detail get all error", e);
+			StaticLogger.error("get user detail list error", e);
 		}
 		return message;
 	}
 
 	/**
+	 * 获取红包列表
 	 * 
 	 * @param data
 	 * @return
 	 */
-	@ResponseBody
-	@RequestMapping(value = { "ticket/add", "ticket/api/add" })
-	public Message ticketAdd(String data) {
-		Message message = new Message();
-		try {
-			AppUserTicket userTicket = Constants.gson.fromJson(data, AppUserTicket.class);
-			AppUser user = userService.getByUsername(userTicket.getPhone());
-			ticketService.create(userTicket);
-		} catch (Exception e) {
-			message.setErrorCode(ErrorCode.TICKET_ERROR);
-			StaticLogger.error("user ticket add error", e);
-		}
-		return message;
-	}
-
 	@ResponseBody
 	@RequestMapping(value = { "ticket/all", "ticket/api/all" })
 	public Message ticketAll(String data) {
@@ -81,11 +67,11 @@ public class AppUserWalletController {
 		try {
 			AppUserTicket ticket = Constants.gson.fromJson(data, AppUserTicket.class);
 			AppUser user = userService.getByUsername(ticket.getPhone());
-			List<AppUserTicket> list = ticketService.getAll(ticket.getPhone());
+			List<AppUserTicket> list = ticketService.getAll(ticket);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.TICKET_ERROR);
-			StaticLogger.error("user ticket get all error", e);
+			StaticLogger.error("get user ticket list error", e);
 		}
 		return message;
 	}

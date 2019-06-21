@@ -39,8 +39,8 @@ public class AppUserDetailServiceImpl implements AppUserDetailService {
 	}
 
 	@Override
-	public List<AppUserDetail> getAll(String phone) {
-		return detailDao.find(new AppUserDetail(phone));
+	public List<AppUserDetail> getAll(AppUserDetail entity) {
+		return detailDao.find(entity);
 	}
 
 }

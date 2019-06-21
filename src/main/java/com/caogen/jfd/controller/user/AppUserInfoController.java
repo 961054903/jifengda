@@ -27,6 +27,12 @@ public class AppUserInfoController {
 	@Autowired
 	private AppUserInfoService infoService;
 
+	/**
+	 * 编辑个人信息
+	 * 
+	 * @param data
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = { "edit", "api/edit" })
 	public Message edit(String data) {
@@ -41,6 +47,12 @@ public class AppUserInfoController {
 		return message;
 	}
 
+	/**
+	 * 获取个人信息
+	 * 
+	 * @param data
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = { "one", "api/one" })
 	public Message one(String data) {
