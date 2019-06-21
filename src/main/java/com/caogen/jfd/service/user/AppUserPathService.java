@@ -27,4 +27,12 @@ public interface AppUserPathService extends BaseService<AppUserPath> {
 	 */
 	List<AppUserPath> getAll(AppUserPath entity);
 
+	/**
+	 * 统计订单数量
+	 * 
+	 * @param path
+	 * @return
+	 */
+	Integer count(AppUserPath path);
+
 }

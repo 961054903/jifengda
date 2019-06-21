@@ -42,4 +42,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM app_user_path
 		WHERE phone = #{phone}
 	</select>
+	<select id="count" parameterType="AppUserPath"
+		resultType="Integer">
+		SELECT count(id) FROM app_user_path WHERE phone = #{phone}
+	</select>
 </mapper>

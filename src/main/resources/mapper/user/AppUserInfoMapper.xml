@@ -15,10 +15,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update" parameterType="AppUserInfo">
 		UPDATE app_user_info
 		<set>
-			nickname = #{nickname},
-			photo_url = #{photo_url},
-			birthday = #{birthday},
-			occupation = #{occupation},
+			<if test="nickname != null">nickname = #{nickname},</if>
+			<if test="photo_url != null">photo_url = #{photo_url},</if>
+			<if test="birthday != null">birthday = #{birthday},</if>
+			<if test="occupation != null">occupation = #{occupation},</if>
 			<if test="level != null">level = #{level},</if>
 			<if test="gender != null">gender = #{gender},</if>
 			<if test="is_real != null">is_real = #{is_real},</if>

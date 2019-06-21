@@ -40,7 +40,7 @@ public class AppUserWalletController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "detail/all", "detail/api/all" })
-	public Message detailAll(String data) {
+	public Message detail(String data) {
 		Message message = new Message();
 		try {
 			AppUserDetail detail = Constants.gson.fromJson(data, AppUserDetail.class);
@@ -62,7 +62,7 @@ public class AppUserWalletController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "ticket/all", "ticket/api/all" })
-	public Message ticketAll(String data) {
+	public Message ticket(String data) {
 		Message message = new Message();
 		try {
 			AppUserTicket ticket = Constants.gson.fromJson(data, AppUserTicket.class);

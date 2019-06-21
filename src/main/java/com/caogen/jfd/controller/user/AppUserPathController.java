@@ -103,4 +103,20 @@ public class AppUserPathController {
 		return message;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = { "count", "api/count" })
+	public Message count(String data) {
+		Message message = new Message();
+		try {
+			AppUserPath path = Constants.gson.fromJson(data, AppUserPath.class);
+			AppUser user = userService.getByUsername(path.getPhone());
+			Integer num = pathService.count(path);
+			message.setData(num, user.getDes_key(), user.getDes_iv());
+		} catch (Exception e) {
+			message.setErrorCode(ErrorCode.PATH_ERROR);
+			StaticLogger.error("user path count error", e);
+		}
+		return message;
+	}
+
 }

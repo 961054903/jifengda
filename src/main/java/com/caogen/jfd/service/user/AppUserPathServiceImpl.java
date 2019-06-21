@@ -48,4 +48,9 @@ public class AppUserPathServiceImpl implements AppUserPathService {
 		return pathDao.find(entity);
 	}
 
+	@Override
+	public Integer count(AppUserPath path) {
+		return pathDao.count(path);
+	}
+
 }

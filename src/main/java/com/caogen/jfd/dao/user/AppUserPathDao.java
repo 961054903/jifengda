@@ -9,5 +9,11 @@ import com.caogen.jfd.entity.user.AppUserPath;
  *
  */
 public interface AppUserPathDao extends BaseDao<AppUserPath> {
+	/**
+	 * 
+	 * @param path
+	 * @return
+	 */
+	Integer count(AppUserPath path);
 
 }
