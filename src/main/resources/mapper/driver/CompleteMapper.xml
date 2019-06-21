@@ -50,5 +50,6 @@
         desc
 --         where
 --             DATE_FORMAT( create_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+	</select>
    
 </mapper>
