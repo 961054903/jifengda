@@ -3,5 +3,15 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.user.AppUserTicketDao">
-	<sql id="ticket"></sql>
+	<sql id="ticket">phone,ticket,available,reason</sql>
+	<select id="find" parameterType="AppUserTicket"
+		resultType="AppUserTicket">
+		SELECT id,
+		<include refid="ticket" />
+		FROM app_user_ticket
+		<where>
+			<if test="phone != null">phone = #{phone}</if>
+			<if test="available != null">AND available = #{available}</if>
+		</where>
+	</select>
 </mapper>
