@@ -18,6 +18,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="countHistory" parameterType="AppUserOrder"
 		resultType="Integer">
-		SELECT COUNT(id) FROM order_history WHERE user_id = #{user_id}
+		SELECT COUNT(id) FROM order_history WHERE user_id =
+		#{user_id}
+	</select>
+	<select id="findUnderway" parameterType="AppUserOrder"
+		resultType="AppUserOrder">
+		SELECT id,
+		<include refid="order" />
+		FROM order_info
+		<where>
+			<if test="user_id != null">user_id = #{user_id}</if>
+			<if test="status != null">AND status = #{status}</if>
+			<if test="type != null">AND type = #{type}</if>
+			<if test="mode != null">AND mode = #{mode}</if>
+			<if test="label != null">AND label = #{label}</if>
+		</where>
+	</select>
+	<select id="findFinish" parameterType="AppUserOrder"
+		resultType="AppUserOrder">
+		SELECT id,
+		<include refid="order" />
+		FROM order_history
+		<where>
+			<if test="user_id != null">user_id = #{user_id}</if>
+			<if test="status != null">AND status = #{status}</if>
+			<if test="type != null">AND type = #{type}</if>
+			<if test="mode != null">AND mode = #{mode}</if>
+			<if test="label != null">AND label = #{label}</if>
+			<if test="is_evaluate != null">AND is_evaluate = #{is_evaluate}</if>
+		</where>
 	</select>
 </mapper>

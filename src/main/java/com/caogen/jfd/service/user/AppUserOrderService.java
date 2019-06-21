@@ -20,11 +20,17 @@ public interface AppUserOrderService extends BaseService<AppUserOrder> {
 	Integer count(AppUserOrder entity);
 
 	/**
-	 * 查询全部
+	 * 
+	 * @param order
+	 * @return
+	 */
+	List<AppUserOrder> getUnderway(AppUserOrder entity);
+
+	/**
 	 * 
 	 * @param entity
 	 * @return
 	 */
-	List<AppUserOrder> getAll(AppUserOrder entity);
+	List<AppUserOrder> getFinish(AppUserOrder entity);
 
 }

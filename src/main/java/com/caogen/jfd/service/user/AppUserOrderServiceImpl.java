@@ -46,8 +46,13 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 	}
 
 	@Override
-	public List<AppUserOrder> getAll(AppUserOrder entity) {
-		return orderDao.find(entity);
+	public List<AppUserOrder> getUnderway(AppUserOrder entity) {
+		return orderDao.findUnderway(entity);
+	}
+
+	@Override
+	public List<AppUserOrder> getFinish(AppUserOrder entity) {
+		return orderDao.findFinish(entity);
 	}
 
 }
