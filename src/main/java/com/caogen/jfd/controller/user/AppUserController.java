@@ -171,6 +171,12 @@ public class AppUserController {
 		return generateToken(user.getUsername());
 	}
 
+	/**
+	 * 退出登录
+	 * 
+	 * @param data
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = { "logout", "api/logout" })
 	public Message logout(String data) {
@@ -189,6 +195,12 @@ public class AppUserController {
 		return message;
 	}
 
+	/**
+	 * 密钥交换
+	 * 
+	 * @param data
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = { "signin", "api/signin" })
 	public Message signin(String data) {
@@ -206,6 +218,12 @@ public class AppUserController {
 		return message;
 	}
 
+	/**
+	 * 修改密码
+	 * 
+	 * @param data
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = { "cipher", "api/cipher" })
 	public Message cipher(String data) {

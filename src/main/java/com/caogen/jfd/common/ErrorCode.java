@@ -24,7 +24,8 @@ public enum ErrorCode {
 	CIPHER_ERROR("1013", "修改密码操作异常"), 
 	LOGOUT_ERROR("1014", "用户退出操作异常"), 
 	TICKET_ERROR("1015", "用户红包操作异常"), 
-	DETAIL_ERROR("1016", "用户账户明细操作异常");
+	DETAIL_ERROR("1016", "用户账户明细操作异常"), 
+	ORDER_ERROR("10017", "用户订单操作异常");
 
 	private String code;
 	private String desc;

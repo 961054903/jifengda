@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.user.AppUserOrderDao">
+	<sql id="order">user_id,model_id,code,create_date,status,type,mode,appoint_date,label,origin,destination,name,night_service_cost,traffic_jam_cost,is_support,support_money,support_cost,order_money,ticket_money,actually_paid,kilometre,bonus,is_evaluate,evaluate_grade,evaluate_content
+	</sql>
+	<insert id="insert" parameterType="AppUserOrder">
+		INSERT INTO order_info (
+		<include refid="order" />
+		) VALUES (
+		#{user_id},#{model_id},#{code},#{create_date},#{status},#{type},#{mode},#{appoint_date},#{label},#{origin},#{destination},#{name},#{night_service_cost},#{traffic_jam_cost},#{is_support},#{support_money},#{support_cost},#{order_money},#{ticket_money},#{actually_paid},#{kilometre},#{bonus},#{is_evaluate},#{evaluate_grade},#{evaluate_content}
+		)
+	</insert>
+	<select id="countInfo" parameterType="AppUserOrder"
+		resultType="Integer">
+		SELECT COUNT(id) FROM order_info WHERE user_id = #{user_id}
+	</select>
+	<select id="countHistory" parameterType="AppUserOrder"
+		resultType="Integer">
+		SELECT COUNT(id) FROM order_history WHERE user_id = #{user_id}
+	</select>
+</mapper>

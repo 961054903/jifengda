@@ -28,7 +28,7 @@ public interface AppUserPathService extends BaseService<AppUserPath> {
 	List<AppUserPath> getAll(AppUserPath entity);
 
 	/**
-	 * 统计订单数量
+	 * 统计路线数量
 	 * 
 	 * @param path
 	 * @return
