@@ -17,4 +17,6 @@ public interface PeservationService extends BaseService<Peservation> {
    Peservation getma(String code);
 
 
+   List<Peservation> getput();
+
 }

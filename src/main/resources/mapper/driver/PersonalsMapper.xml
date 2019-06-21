@@ -104,8 +104,7 @@
         <include refid="sq" />
         FROM app_driver_info
         <where>
-            <if test="id != null">id = #{id}</if>
-            <if test="phone != null">AND phone = #{phone}</if>
+
             <if test="photo_url != null">AND photo_url = #{photo_url}</if>
             <if test="name != null">AND name = #{name}</if>
             <if test="grade != null">AND grade = #{grade}</if>

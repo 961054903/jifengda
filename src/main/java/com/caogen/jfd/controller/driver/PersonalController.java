@@ -141,7 +141,7 @@ public class PersonalController {
      * @return
      */
     @Autowired
-    private PeservationService reservationService;
+    private PeservationService peservationService;
 
     @ResponseBody
     @RequestMapping("make")
@@ -149,7 +149,7 @@ public class PersonalController {
 
         Message message = new Message();
         try {
-           List <Peservation> personals = reservationService.getmake(phone,mode);
+           List <Peservation> personals = peservationService.getmake(phone,mode);
             message.setData(personals);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -172,14 +172,16 @@ public class PersonalController {
 
     @Autowired
     private RoyaltyService royaltyService;
-
     @ResponseBody
     @RequestMapping("details")
     public Message details(String code) {
         Message message = new Message();
+        System.out.println(code);
         try {
             User user = userService.getuser(code);
-            Peservation peservation = reservationService.getma(code);
+
+            Peservation peservation = peservationService.getma(code);
+
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(user);
             ASD.add(peservation);
@@ -350,16 +352,16 @@ public class PersonalController {
     public Message mont(String phone,Boolean cc) {
         Message message = new Message();
         try {
-            List <Complete> completes = completeService.getmon(phone);
+            List <Complete> peservation = completeService.getmon(phone);
             Double aa =0.0;
-            for(int i = 0;i<completes.size();i++){
-                Double ss = completes.get(i).getBonus();
+            for(int i = 0;i<peservation.size();i++){
+                Double ss = peservation.get(i).getBonus();
                 aa += ss;
             }
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(aa);
             if (cc){
-                ASD.add(completes);
+                ASD.add(peservation);
             }
             message.setData(ASD);
             message.setCode(ErrorCode.SUCCEED.getCode());
@@ -410,10 +412,11 @@ public class PersonalController {
      */
     @ResponseBody
         @RequestMapping("champion")
-    public Message champion(String phone) {
+    public Message champion( ) {
         Message message = new Message();
         try {
-           List <Complete> completes = completeService.getchampion(phone);
+
+         Complete completes = completeService.getchampion();
             message.setData(completes);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -425,4 +428,25 @@ public class PersonalController {
         return message;
         }
 
-}
+    /**
+     * 推送 抢单
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("push")
+    public Message push() {
+        Message message = new Message();
+        try {
+            List<Peservation> peservations = peservationService.getput();
+            message.setData(peservations);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
+
+        }

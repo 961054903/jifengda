@@ -11,7 +11,7 @@ public class Peservation implements Serializable {
     private Integer model_id;//车辆型号id
     private String code;//订单号
     private LocalDateTime create_date;//创建时间
-    private Integer status;//订单状态
+    private Integer status;//订单状态 0：待付款；1：待接单；2：已接单；3：已取货；4：已完成；5：已取消；6：已退款
     private Type type; //'订单类型：单点订单、多点订单',
     private Mode mode;//订单模式：普通订单、预约订单
     private LocalDateTime appoint_date;//预约时间

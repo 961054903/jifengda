@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface PeservationDao extends BaseDao<Peservation> {
 
+    List<Peservation> findput();
 }

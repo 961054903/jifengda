@@ -25,6 +25,7 @@ public class AppDriverServicelmpl implements AppDriverService {
         }
         // 用户是否存在
         AppDriver entity = appDriverDao.get(driverphone);
+        System.out.println(entity);
 
         if (entity == null || !entity.getStatus().equals(AppDriver.Status.normal)) {
             throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);

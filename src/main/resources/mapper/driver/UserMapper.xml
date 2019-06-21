@@ -8,13 +8,12 @@
             resultType="User">
         SELECT
         <include refid="sql" />
-        FROM app_User_info
+        FROM app_user_info
         <where>
             <if test="id != null">id = #{id}</if>
             <if test="phone != null">AND phone = #{phone}</if>
             <if test="photo_url != null">AND photo_url = #{photo_url}</if>
             <if test="name != null">AND name = #{name}</if>
-
         </where>
     </select>
 

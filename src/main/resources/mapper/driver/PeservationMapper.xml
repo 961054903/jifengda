@@ -21,7 +21,7 @@
     </select>
 
 
-    <sql id="Order">code,origin,destination,kilometre,create_date,mode,bonus</sql>
+    <sql id="Order">code,origin,destination,kilometre,create_date,mode,bonus,user_id</sql>
     <select id="get" parameterType="Peservation"
             resultType="Peservation">
         SELECT
@@ -40,24 +40,11 @@
         </where>
     </select>
 
-    <sql id="roya">code,origin,destination,kilometre,bonus</sql>
-    <select id="find1" parameterType="Peservation"
-            resultType="Peservation">
-        SELECT
-        <include refid="roya" />
-        FROM order_info
-        where
-        TO_DAYS(create_date) = TO_DAYS(NOW())
-    </select>
-
-    <sql id="month">code,origin,destination,kilometre,bonus</sql>
-    <select id="find2" parameterType="Peservation"
+    <sql id="month">origin,destination,kilometre,status</sql>
+    <select id="findput"
             resultType="Peservation">
         SELECT
         <include refid="month" />
         FROM order_info
-        where
-        DATE_FORMAT( create_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
     </select>
-
 </mapper>

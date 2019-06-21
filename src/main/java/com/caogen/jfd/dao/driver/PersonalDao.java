@@ -24,5 +24,5 @@ public interface PersonalDao extends BaseDao<Personal> {
 
     void update1(Personal cities);
 
-    List<Complete> get6(Personal personal);
+    Complete get6(Personal personal);
 }

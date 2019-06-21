@@ -15,6 +15,13 @@ import cn.jpush.api.push.model.notification.Notification;
 import java.util.Map;
 public class JPush {
     // 设置好账号的app_key和masterSecret是必须的
+
+//    用户端:
+//    AppKey:8b5ddabea93b9becb8e12dd2
+//    Master Secret: 85ddffcf80676ae95c95a3f0
+//    司机端:
+//    AppKey:809af7dfa25a0d0bb74c8e61
+//    Master Secret:cbab1113022f86c1acb179aa
     private static String APP_KEY = "2f7bd160b5c947f95012ba8e";
     private static String MASTER_SECRET = "d83374c1a5ab9fba6bc1deec";
 

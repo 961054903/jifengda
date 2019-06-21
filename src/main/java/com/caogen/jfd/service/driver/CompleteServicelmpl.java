@@ -6,6 +6,7 @@ import com.caogen.jfd.dao.driver.PersonalDao;
 import com.caogen.jfd.entity.driver.AppDriver;
 import com.caogen.jfd.entity.driver.Complete;
 import com.caogen.jfd.entity.driver.Personal;
+import com.caogen.jfd.entity.driver.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -93,21 +94,17 @@ public class CompleteServicelmpl implements CompleteService {
         }
         return completes;
     }
-
     @Override
-    public List<Complete> getchampion(String phone) {
+    public Complete getchampion() {
         AppDriver appDriver = new AppDriver();
-        Complete complete = new Complete();
         Personal personal = new Personal();
-        appDriver.setDriverphone(phone);
-        Integer id = appDriverDao.get(appDriver).getId();
-        complete.setDriver_id(id);
-        List<Complete> completes = completeDao.find4(complete);
+        List<Complete> completes = completeDao.find4();
         Complete complete1 = completes.get(0);
-        Integer driver_id = complete1.getDriver_id();
-        String str = Integer.toString(driver_id);
-        personal.setPhone(str);
-        List<Complete> personals = personalDao.get6( new Personal());
-        return personals;
+        Integer driver_id = complete1.getCc();
+        appDriver.setId(driver_id);
+        AppDriver app = appDriverDao.get(appDriver);
+        String  phone =  app.getDriverphone();
+        personal.setPhone(phone);
+        return  personalDao.get6(personal);
     }
 }

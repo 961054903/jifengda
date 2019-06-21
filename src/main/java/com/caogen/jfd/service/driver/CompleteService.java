@@ -36,8 +36,8 @@ public interface CompleteService extends BaseService<Complete> {
 
     /**
      * 月冠军
-     * @param phone
+     * @param
      * @return
      */
-   List <Complete> getchampion(String phone);
+  Complete getchampion();
 }
