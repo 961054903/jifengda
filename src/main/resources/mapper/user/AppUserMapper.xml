@@ -3,14 +3,14 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.user.AppUserDao">
-	<sql id="user">username,password,salt,state,create_date,des_key,des_iv,token,referrer
+	<sql id="user">username,password,salt,state,create_date,des_key,des_iv,token,referrer,referrer_award
 	</sql>
 	<insert id="insert" parameterType="AppUser">
 		INSERT INTO app_user (
 		<include refid="user" />
 		)
 		VALUES (
-		#{username},#{password},#{salt},#{state},#{create_date},#{des_key},#{des_iv},#{token},#{referrer}
+		#{username},#{password},#{salt},#{state},#{create_date},#{des_key},#{des_iv},#{token},#{referrer},#{referrer_award}
 		)
 	</insert>
 	<update id="update" parameterType="AppUser">
@@ -19,9 +19,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			password = #{password},
 			salt = #{salt},
 			des_key = #{des_key},
-			des_iv = #{des_iv},
+			des_iv =
+			#{des_iv},
 			token = #{token}
 			<if test="state != null">state = #{state},</if>
+			<if test="referrer_award != null">referrer_award = #{referrer_award}</if>
 		</set>
 		<where>
 			<if test="id != null">id = #{id}</if>
@@ -46,5 +48,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="state != null">state = #{state}</if>
 			<if test="referrer != null">AND referrer = #{referrer}</if>
 		</where>
+	</select>
+	<sql id="underling">username,referrer_award</sql>
+	<select id="findUnderling" parameterType="AppUser"
+		resultType="AppUser">
+		SELECT
+		<include refid="underling" />
+		FROM app_user
+		WHERE referrer = #{username}
 	</select>
 </mapper>

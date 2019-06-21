@@ -1,5 +1,7 @@
 package com.caogen.jfd.service.user;
 
+import java.util.List;
+
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.service.BaseService;
 
@@ -44,5 +46,13 @@ public interface AppUserService extends BaseService<AppUser> {
 	 * @param password
 	 */
 	void changePassword(String username, String password);
+
+	/**
+	 * 查询下级
+	 * 
+	 * @param entity
+	 * @return
+	 */
+	List<AppUser> getLowerList(AppUser entity);
 
 }

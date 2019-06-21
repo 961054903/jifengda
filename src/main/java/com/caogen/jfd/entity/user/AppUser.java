@@ -21,6 +21,7 @@ public class AppUser implements Serializable {
 	private String des_iv;
 	private String token;
 	private String referrer;
+	private Double referrer_award;
 
 	public enum State {
 		normal, locked
@@ -44,7 +45,7 @@ public class AppUser implements Serializable {
 	public String toString() {
 		return "AppUser [id=" + id + ", username=" + username + ", password=" + password + ", salt=" + salt + ", state="
 				+ state + ", create_date=" + create_date + ", des_key=" + des_key + ", des_iv=" + des_iv + ", token="
-				+ token + ", referrer=" + referrer + "]";
+				+ token + ", referrer=" + referrer + ", referrer_award=" + referrer_award + "]";
 	}
 
 	public Integer getId() {
@@ -125,6 +126,14 @@ public class AppUser implements Serializable {
 
 	public void setReferrer(String referrer) {
 		this.referrer = referrer;
+	}
+
+	public Double getReferrer_award() {
+		return referrer_award;
+	}
+
+	public void setReferrer_award(Double referrer_award) {
+		this.referrer_award = referrer_award;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.caogen.jfd.service.user;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,6 +80,11 @@ public class AppUserServiceImpl implements AppUserService {
 		user.setSalt(PasswordHelper.generateSalt());
 		user.setPassword(PasswordHelper.encryptPassword(password, user.getSalt()));
 		modify(user);
+	}
+
+	@Override
+	public List<AppUser> getLowerList(AppUser entity) {
+		return userDao.findUnderling(entity);
 	}
 
 }

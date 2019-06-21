@@ -2,6 +2,7 @@ package com.caogen.jfd.controller.user;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -277,6 +278,22 @@ public class AppUserController {
 		if (!userSms.getCode().equals(sms)) {
 			throw new DefinedException(ErrorCode.SMS_MISMATCHING);
 		}
+	}
+
+	@ResponseBody
+	@RequestMapping(value = { "referrer", "api/referrer" })
+	public Message referrer(String data) {
+		Message message = new Message();
+		try {
+			AppUser user = Constants.gson.fromJson(data, AppUser.class);
+			AppUser entity = userService.getByUsername(user.getUsername());
+			List<AppUser> list = userService.getLowerList(entity);
+			message.setData(list, entity.getDes_key(), entity.getDes_iv());
+		} catch (Exception e) {
+			message.setErrorCode(ErrorCode.FAIL);
+			StaticLogger.error(message.getCode(), e);
+		}
+		return message;
 	}
 
 }
