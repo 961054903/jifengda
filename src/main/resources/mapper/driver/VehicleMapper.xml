@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.driver.VehicleDao">
+    <sql id="sql">model_id</sql>
+    <select id="get1" parameterType="Vehicele"
+            resultType="model_id">
+        SELECT
+        <include refid="sql" />
+        FROM vehicele
+
+        where
+        model_id =#{model_id}
+    </select>
+
+</mapper>

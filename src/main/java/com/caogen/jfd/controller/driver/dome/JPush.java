@@ -79,6 +79,7 @@ public class JPush {
             e.printStackTrace();
         }
     }
+
     //极光推送>>All所有平台
     public static void jpushAll(Map<String, String> parm) {
         //创建JPushClient
