@@ -29,8 +29,7 @@ public enum ErrorCode {
 	ORDER_ERROR("1110", "用户订单操作异常"),
 	
 	END("1018","已抢完"),
-	SUCCESS("1019","抢单成功"),
-	;
+	SUCCESS("1019","抢单成功");
 
 	private String code;
 	private String desc;
