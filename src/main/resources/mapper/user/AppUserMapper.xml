@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			des_key = #{des_key},
 			des_iv =
 			#{des_iv},
-			token = #{token}
+			token = #{token},
 			<if test="state != null">state = #{state},</if>
 			<if test="referrer_award != null">referrer_award = #{referrer_award}</if>
 		</set>
