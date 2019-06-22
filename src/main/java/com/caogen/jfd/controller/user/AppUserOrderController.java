@@ -41,7 +41,7 @@ public class AppUserOrderController {
 		Message message = new Message();
 		try {
 			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
-			AppUser user = userService.getByUsername(order.getPhone());
+			AppUser user = userService.getByPhone(order.getPhone());
 			order.setUser_id(user.getId());
 			Integer num = orderService.count(order);
 			message.setData(num, user.getDes_key(), user.getDes_iv());
@@ -64,7 +64,7 @@ public class AppUserOrderController {
 		Message message = new Message();
 		try {
 			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
-			AppUser user = userService.getByUsername(order.getPhone());
+			AppUser user = userService.getByPhone(order.getPhone());
 			order.setUser_id(user.getId());
 			List<AppUserOrder> list = orderService.getUnderway(order);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
@@ -87,7 +87,7 @@ public class AppUserOrderController {
 		Message message = new Message();
 		try {
 			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
-			AppUser user = userService.getByUsername(order.getPhone());
+			AppUser user = userService.getByPhone(order.getPhone());
 			order.setUser_id(user.getId());
 			List<AppUserOrder> list = orderService.getFinish(order);
 			message.setData(list, user.getDes_key(), user.getDes_iv());

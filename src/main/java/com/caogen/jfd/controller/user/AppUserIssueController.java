@@ -79,7 +79,7 @@ public class AppUserIssueController {
 		Message message = new Message();
 		try {
 			AppUserIssue issue = Constants.gson.fromJson(data, AppUserIssue.class);
-			AppUser user = userService.getByUsername(issue.getPhone());
+			AppUser user = userService.getByPhone(issue.getPhone());
 			List<AppUserIssue> list = issueService.getHistory(issue);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {

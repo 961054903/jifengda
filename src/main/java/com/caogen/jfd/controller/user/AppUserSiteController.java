@@ -77,7 +77,7 @@ public class AppUserSiteController {
 		Message message = new Message();
 		try {
 			AppUserSite site = Constants.gson.fromJson(data, AppUserSite.class);
-			AppUser user = userService.getByUsername(site.getPhone());
+			AppUser user = userService.getByPhone(site.getPhone());
 			AppUserSite entity = siteService.getOne(site);
 			message.setData(entity, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
@@ -93,7 +93,7 @@ public class AppUserSiteController {
 		Message message = new Message();
 		try {
 			AppUserSite site = Constants.gson.fromJson(data, AppUserSite.class);
-			AppUser user = userService.getByUsername(site.getPhone());
+			AppUser user = userService.getByPhone(site.getPhone());
 			List<AppUserSite> list = siteService.getAll(site);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {

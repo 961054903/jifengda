@@ -77,7 +77,7 @@ public class AppUserPathController {
 		Message message = new Message();
 		try {
 			AppUserPath path = Constants.gson.fromJson(data, AppUserPath.class);
-			AppUser user = userService.getByUsername(path.getPhone());
+			AppUser user = userService.getByPhone(path.getPhone());
 			AppUserPath entity = pathService.getOne(path);
 			message.setData(entity, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
@@ -93,7 +93,7 @@ public class AppUserPathController {
 		Message message = new Message();
 		try {
 			AppUserPath path = Constants.gson.fromJson(data, AppUserPath.class);
-			AppUser user = userService.getByUsername(path.getPhone());
+			AppUser user = userService.getByPhone(path.getPhone());
 			List<AppUserPath> list = pathService.getAll(path);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
@@ -109,7 +109,7 @@ public class AppUserPathController {
 		Message message = new Message();
 		try {
 			AppUserPath path = Constants.gson.fromJson(data, AppUserPath.class);
-			AppUser user = userService.getByUsername(path.getPhone());
+			AppUser user = userService.getByPhone(path.getPhone());
 			Integer num = pathService.count(path);
 			message.setData(num, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {

@@ -12,7 +12,7 @@ public class AppUser implements Serializable {
 
 	private static final long serialVersionUID = -5753387388562949447L;
 	private Integer id;
-	private String username;
+	private String phone;
 	private String password;
 	private String salt;
 	private State state;
@@ -36,14 +36,14 @@ public class AppUser implements Serializable {
 		this.id = id;
 	}
 
-	public AppUser(String username) {
+	public AppUser(String phone) {
 		super();
-		this.username = username;
+		this.phone = phone;
 	}
 
 	@Override
 	public String toString() {
-		return "AppUser [id=" + id + ", username=" + username + ", password=" + password + ", salt=" + salt + ", state="
+		return "AppUser [id=" + id + ", phone=" + phone + ", password=" + password + ", salt=" + salt + ", state="
 				+ state + ", create_date=" + create_date + ", des_key=" + des_key + ", des_iv=" + des_iv + ", token="
 				+ token + ", referrer=" + referrer + ", referrer_award=" + referrer_award + "]";
 	}
@@ -56,12 +56,12 @@ public class AppUser implements Serializable {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getPassword() {

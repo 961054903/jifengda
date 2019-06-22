@@ -44,7 +44,7 @@ public class AppUserWalletController {
 		Message message = new Message();
 		try {
 			AppUserDetail detail = Constants.gson.fromJson(data, AppUserDetail.class);
-			AppUser user = userService.getByUsername(detail.getPhone());
+			AppUser user = userService.getByPhone(detail.getPhone());
 			List<AppUserDetail> list = detailService.getAll(detail);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
@@ -66,7 +66,7 @@ public class AppUserWalletController {
 		Message message = new Message();
 		try {
 			AppUserTicket ticket = Constants.gson.fromJson(data, AppUserTicket.class);
-			AppUser user = userService.getByUsername(ticket.getPhone());
+			AppUser user = userService.getByPhone(ticket.getPhone());
 			List<AppUserTicket> list = ticketService.getAll(ticket);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
