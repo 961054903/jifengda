@@ -5,7 +5,7 @@
 <mapper namespace="com.caogen.jfd.dao.driver.VehicleDao">
     <sql id="sql">model_id</sql>
     <select id="get1" parameterType="Vehicle"
-            resultType="model_id">
+            resultType="Integer">
         SELECT
         <include refid="sql" />
         FROM vehicele
