@@ -21,7 +21,7 @@ public class AppDriverServicelmpl implements AppDriverService {
     public String passwordLogin(AppDriver driverphone) throws Exception {
         // 检查参数
         if (driverphone.getDriverphone() == null || driverphone.getPassword() == null) {
-            throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
+            throw new DefinedException(ErrorCode.PARAM_MISSING);
         }
         // 用户是否存在
         AppDriver entity = appDriverDao.get(driverphone);

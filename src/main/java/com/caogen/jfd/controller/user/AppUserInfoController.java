@@ -59,7 +59,7 @@ public class AppUserInfoController {
 		Message message = new Message();
 		try {
 			AppUserInfo info = Constants.gson.fromJson(data, AppUserInfo.class);
-			AppUser user = userService.getByUsername(info.getPhone());
+			AppUser user = userService.getByPhone(info.getPhone());
 			AppUserInfo entity = infoService.getOne(info);
 			message.setData(entity, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {

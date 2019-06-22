@@ -23,11 +23,10 @@ public interface AppUserService extends BaseService<AppUser> {
 	/**
 	 * 根据用户名查询
 	 * 
-	 * @param username
-	 * @param identity
+	 * @param phone
 	 * @return
 	 */
-	AppUser getByUsername(String username);
+	AppUser getByPhone(String phone);
 
 	/**
 	 * 密钥交换

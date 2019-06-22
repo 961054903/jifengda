@@ -54,15 +54,15 @@ public class AppUserServiceImpl implements AppUserService {
 	}
 
 	@Override
-	public AppUser getByUsername(String username) {
+	public AppUser getByPhone(String phone) {
 		AppUser entity = new AppUser();
-		entity.setUsername(username);
+		entity.setPhone(phone);
 		return userDao.get(entity);
 	}
 
 	@Override
 	public String[] exchangeKey(String A, String phone) throws Exception {
-		AppUser user = getByUsername(phone);
+		AppUser user = getByPhone(phone);
 		String[] result = SecretUtils.dh(A, Constants.DH_G, Constants.DH_P);
 		String B = result[0];
 		String iv = result[1].substring(Constants.IV_START, Constants.IV_END);
@@ -76,7 +76,7 @@ public class AppUserServiceImpl implements AppUserService {
 
 	@Override
 	public void changePassword(String username, String password) {
-		AppUser user = getByUsername(username);
+		AppUser user = getByPhone(username);
 		user.setSalt(PasswordHelper.generateSalt());
 		user.setPassword(PasswordHelper.encryptPassword(password, user.getSalt()));
 		modify(user);

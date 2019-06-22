@@ -66,7 +66,7 @@ public class AppUserController {
 				token = loginByThird(user, sms, third);
 				break;
 			default:
-				throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
+				throw new DefinedException(ErrorCode.PARAM_MISSING);
 			}
 			message.setData(token);
 		} catch (DefinedException e) {
@@ -88,11 +88,11 @@ public class AppUserController {
 	 */
 	private String loginByPassword(AppUser user) throws Exception {
 		// 检查参数
-		if (user.getUsername() == null || user.getPassword() == null) {
-			throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
+		if (user.getPhone() == null || user.getPassword() == null) {
+			throw new DefinedException(ErrorCode.PARAM_MISSING);
 		}
 		// 用户是否存在
-		AppUser entity = userService.getByUsername(user.getUsername());
+		AppUser entity = userService.getByPhone(user.getPhone());
 		if (entity == null || !entity.getState().equals(State.normal)) {
 			throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);
 		}
@@ -105,7 +105,7 @@ public class AppUserController {
 		if (!ciphertext.equals(entity.getPassword())) {
 			throw new DefinedException(ErrorCode.LOGIN_PASSWORD_ERROR);
 		}
-		return generateToken(user.getUsername());
+		return generateToken(user.getPhone());
 	}
 
 	/**
@@ -118,22 +118,22 @@ public class AppUserController {
 	 */
 	private String loginBySms(AppUser user, AppUserSms sms) throws Exception {
 		// 检查参数
-		if (user.getUsername() == null || sms.getCode() == null) {
-			throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
+		if (user.getPhone() == null || sms.getCode() == null) {
+			throw new DefinedException(ErrorCode.PARAM_MISSING);
 		}
 		// 对比验证码
-		contrastSms(user.getUsername(), sms.getCode());
+		contrastSms(user.getPhone(), sms.getCode());
 		// 用户是否存在，不存在则创建用户
-		AppUser entity = userService.getByUsername(user.getUsername());
+		AppUser entity = userService.getByPhone(user.getPhone());
 		if (entity == null) {
-			entity = new AppUser(user.getUsername());
+			entity = new AppUser(user.getPhone());
 			entity.setReferrer(user.getReferrer());
 			userService.create(entity);
-			infoService.create(new AppUserInfo(user.getUsername()));
+			infoService.create(new AppUserInfo(user.getPhone()));
 		} else if (!entity.getState().equals(State.normal)) {
 			throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);
 		}
-		return generateToken(user.getUsername());
+		return generateToken(user.getPhone());
 	}
 
 	/**
@@ -148,28 +148,28 @@ public class AppUserController {
 	private String loginByThird(AppUser user, AppUserSms sms, AppUserThird third) throws Exception {
 		// 检查参数
 		if (third.getThirdparty() == null || third.getIdentifier() == null) {
-			throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
+			throw new DefinedException(ErrorCode.PARAM_MISSING);
 		}
 		AppUserThird entity = thirdService.getByProperty(third);
 		if (entity == null) {
 			// 检查参数
-			if (user.getUsername() == null || sms.getCode() == null) {
-				throw new DefinedException(ErrorCode.LOGIN_PARAM_ERROR);
+			if (user.getPhone() == null || sms.getCode() == null) {
+				throw new DefinedException(ErrorCode.PARAM_MISSING);
 			}
 			// 对比验证码
-			contrastSms(user.getUsername(), sms.getCode());
+			contrastSms(user.getPhone(), sms.getCode());
 			// 创建用户
-			if (userService.getByUsername(user.getUsername()) == null) {
+			if (userService.getByPhone(user.getPhone()) == null) {
 				userService.create(user);
-				infoService.create(new AppUserInfo(user.getUsername()));
+				infoService.create(new AppUserInfo(user.getPhone()));
 			}
 			// 添加第三方应用记录
-			third.setPhone(user.getUsername());
+			third.setPhone(user.getPhone());
 			thirdService.create(third);
 		} else {
-			user.setUsername(entity.getPhone());
+			user.setPhone(entity.getPhone());
 		}
-		return generateToken(user.getUsername());
+		return generateToken(user.getPhone());
 	}
 
 	/**
@@ -184,7 +184,7 @@ public class AppUserController {
 		Message message = new Message();
 		try {
 			AppUser user = Constants.gson.fromJson(data, AppUser.class);
-			AppUser entity = userService.getByUsername(user.getUsername());
+			AppUser entity = userService.getByPhone(user.getPhone());
 			entity.setToken(null);
 			entity.setDes_key(null);
 			entity.setDes_iv(null);
@@ -231,7 +231,7 @@ public class AppUserController {
 		Message message = new Message();
 		try {
 			AppUser user = Constants.gson.fromJson(data, AppUser.class);
-			userService.changePassword(user.getUsername(), user.getPassword());
+			userService.changePassword(user.getPhone(), user.getPassword());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.CIPHER_ERROR);
 			StaticLogger.error(message.getCode(), e);
@@ -248,7 +248,7 @@ public class AppUserController {
 	private String generateToken(String username) {
 		String token = PasswordHelper.generateNumber();
 		AppUser entity = new AppUser();
-		entity.setUsername(username);
+		entity.setPhone(username);
 		entity.setToken(token);
 		userService.modify(entity);
 		return token;
@@ -286,7 +286,7 @@ public class AppUserController {
 		Message message = new Message();
 		try {
 			AppUser user = Constants.gson.fromJson(data, AppUser.class);
-			AppUser entity = userService.getByUsername(user.getUsername());
+			AppUser entity = userService.getByPhone(user.getPhone());
 			List<AppUser> list = userService.getLowerList(entity);
 			message.setData(list, entity.getDes_key(), entity.getDes_iv());
 		} catch (Exception e) {
