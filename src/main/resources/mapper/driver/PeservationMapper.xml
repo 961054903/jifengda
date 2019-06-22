@@ -20,7 +20,6 @@
         </where>
     </select>
 
-
     <sql id="Order">code,origin,destination,kilometre,create_date,mode,bonus,user_id</sql>
     <select id="get" parameterType="Peservation"
             resultType="Peservation">
@@ -39,7 +38,6 @@
 
         </where>
     </select>
-
     <sql id="month">origin,destination,kilometre,status</sql>
     <select id="findput"
             resultType="Peservation">

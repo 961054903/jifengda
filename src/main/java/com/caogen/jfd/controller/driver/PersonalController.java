@@ -429,7 +429,7 @@ public class PersonalController {
         }
 
     /**
-     * 推送 抢单
+     * 推送
      * @return
      */
     @ResponseBody
@@ -449,4 +449,26 @@ public class PersonalController {
         return message;
     }
 
+    /**
+     * 抢单
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("spike")
+    public Message spike(String phone,String code) {
+        Message message = new Message();
+        try {
+            Peservation peservations = peservationService.getspike(phone,code);
+            message.setData(peservations);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
         }
+        return message;
+    }
+
+
+}

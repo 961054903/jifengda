@@ -19,4 +19,5 @@ public interface PeservationService extends BaseService<Peservation> {
 
    List<Peservation> getput();
 
+    Peservation getspike(String phone, String code);
 }

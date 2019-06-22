@@ -1,6 +1,7 @@
 package com.caogen.jfd.service.driver;
 
 import com.caogen.jfd.common.Constants;
+import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.controller.driver.dome.JPush;
 import com.caogen.jfd.dao.driver.AppDriverDao;
 import com.caogen.jfd.dao.driver.PersonalDao;
@@ -130,6 +131,26 @@ public class PeservationServicelmpl implements PeservationService {
             }
         }
       return  null;
+    }
+
+    @Override
+    public Peservation getspike(String phone, String code) {
+        AppDriver appDriver = new AppDriver();
+        Peservation peservation = new Peservation();
+        appDriver.setDriverphone(phone);
+        Integer id = appDriverDao.get(appDriver).getId();
+        peservation.setDriver_id(id);
+        peservation.setCode(code);
+        Peservation  peservations = peservationDao.getdsp(peservation);
+        //判断库存
+        if(peservations.getCode()==null){
+            peservations.setCode(ErrorCode.END.getCode());
+        }
+        //判断是否已经秒杀到了
+        if (peservations.getDriver_id()!=null){
+            peservations.setCode(ErrorCode.SUCCESS.getCode());
+        }
+        return peservations;
     }
 
 
