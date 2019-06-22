@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.driver.VehicleDao">
     <sql id="sql">model_id</sql>
-    <select id="get1" parameterType="Vehicele"
+    <select id="get1" parameterType="Vehicle"
             resultType="model_id">
         SELECT
         <include refid="sql" />
