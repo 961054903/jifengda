@@ -458,7 +458,7 @@ public class PersonalController {
     public Message spike(String phone,String code) {
         Message message = new Message();
         try {
-            Peservation peservations = peservationService.getspike(phone,code);
+            boolean peservations = peservationService.getspike(phone,code);
             message.setData(peservations);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());

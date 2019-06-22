@@ -28,4 +28,6 @@ public interface PersonalDao extends BaseDao<Personal> {
     Complete get6(Personal personal);
 
     List<Personal> find1(Personal personal);
+
+    Personal getdsp(Peservation peservation);
 }

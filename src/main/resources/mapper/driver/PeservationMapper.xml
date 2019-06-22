@@ -45,4 +45,27 @@
         <include refid="month" />
         FROM order_info
     </select>
+
+
+<sql id="moccc">code,driver_id</sql>
+<select id="getdsp"
+        resultType="Peservation">
+SELECT
+<include refid="moccc" />
+FROM order_info
+    <where>
+
+    <if test="code != null"> code = #{code}</if>
+    </where>
+</select>
+
+
+    <update id="update" parameterType="Peservation">
+        UPDATE
+        order_info
+        SET
+       driver_id=#{driver_id}
+        WHERE
+       code =#{code}
+    </update>
 </mapper>
