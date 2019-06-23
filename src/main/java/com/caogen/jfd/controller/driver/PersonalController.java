@@ -6,6 +6,7 @@ import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.driver.*;
 import com.caogen.jfd.service.user.AppUserService;
+import com.sun.jmx.snmp.tasks.TaskServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -470,5 +471,27 @@ public class PersonalController {
         return message;
     }
 
+    /**
+     * 已到达
+     * @return
+     */
+      @Autowired
+      private TaskService taskService;
 
+    @ResponseBody
+    @RequestMapping("arrive")
+    public Message arrive(String code,String serial) {
+        Message message = new Message();
+        try {
+           List  <Task> task = taskService.getarrive(code,serial);
+            message.setData(task);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
 }

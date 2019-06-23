@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.driver.TaskDao">
+    <sql id="sys">code,serial,destination,status</sql>
+
+    <select id="find" parameterType="Task"
+            resultType="Task">
+        SELECT
+        <include refid="sys" />
+        FROM
+        order_task
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="code != null">AND code = #{code}</if>
+            <if test="serial != null">AND serial = #{serial}</if>
+            <if test="destination != null">AND destination = #{destination}</if>
+            <if test="status != null">AND status = #{status}</if>
+        </where>
+    </select>
+</mapper>
