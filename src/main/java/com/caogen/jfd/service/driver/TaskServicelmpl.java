@@ -2,10 +2,10 @@ package com.caogen.jfd.service.driver;
 
 import com.caogen.jfd.dao.driver.TaskDao;
 import com.caogen.jfd.entity.driver.Task;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class TaskServicelmpl implements TaskService {
@@ -33,12 +33,15 @@ public class TaskServicelmpl implements TaskService {
     }
 
     @Override
-    public List <Task> getarrive(String code,String serial) {
+    public void getarrive(String code,String serial) {
         Task task = new Task();
         task.setCode(code);
         task.setSerial(serial);
-        List<Task> tasks = taskDao.find(task);
-      //  tasks.set(code).setSerial(0);
-        return tasks;
+        Task tasks = taskDao.get(task);
+        if (tasks!=null){
+            tasks.setStatus(1);
+            taskDao.update(tasks);
+        }
+
     }
 }

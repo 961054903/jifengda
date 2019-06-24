@@ -73,6 +73,7 @@ public class PersonalServicelmpl implements PersonalService {
 
     @Override
     public void getmodify(Personal cities) {
+
         personalDao.update1(cities);
     }
 

@@ -483,8 +483,7 @@ public class PersonalController {
     public Message arrive(String code,String serial) {
         Message message = new Message();
         try {
-           List  <Task> task = taskService.getarrive(code,serial);
-            message.setData(task);
+            taskService.getarrive(code,serial);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {

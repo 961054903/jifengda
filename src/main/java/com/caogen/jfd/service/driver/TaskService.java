@@ -6,5 +6,5 @@ import com.caogen.jfd.service.BaseService;
 import java.util.List;
 
 public interface TaskService extends BaseService<Task> {
-   List <Task> getarrive(String code,String serial);
+  void getarrive(String code,String serial);
 }
