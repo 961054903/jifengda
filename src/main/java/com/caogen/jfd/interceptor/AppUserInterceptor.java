@@ -21,7 +21,7 @@ import com.caogen.jfd.util.SecretUtils;
  * @author Spuiln
  *
  */
-public class ApiInterceptor implements HandlerInterceptor {
+public class AppUserInterceptor implements HandlerInterceptor {
 
 	@Autowired
 	private AppUserService userService;

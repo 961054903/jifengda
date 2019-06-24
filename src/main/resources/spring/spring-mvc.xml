@@ -30,7 +30,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*/api/*" />
-			<bean class="com.caogen.jfd.interceptor.ApiInterceptor" />
+			<bean class="com.caogen.jfd.interceptor.AppUserInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>  
