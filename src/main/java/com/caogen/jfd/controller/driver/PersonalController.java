@@ -182,15 +182,13 @@ public class PersonalController {
     @Autowired
     private RoyaltyService royaltyService;
     @ResponseBody
-    @RequestMapping("details")
-    public Message details(String code) {
+    @RequestMapping(value = {"details","app/details"})
+    public Message details(String data) {
         Message message = new Message();
-        System.out.println(code);
         try {
-            User user = userService.getuser(code);
-
-            Peservation peservation = peservationService.getma(code);
-
+            Peservation appDriver = Constants.gson.fromJson(data,Peservation.class);
+            User user = userService.getuser(appDriver.getCode());
+            Peservation peservation = peservationService.getma(appDriver.getCode());
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(user);
             ASD.add(peservation);

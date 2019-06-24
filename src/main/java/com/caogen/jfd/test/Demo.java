@@ -55,7 +55,7 @@ public class Demo {
 	public void test2() throws Exception {
 		Peservation entity = new Peservation();
 		entity.setPhone("123456");
-		entity.setMode(appoint);
+		entity.setCode("1");
 		String json = gson.toJson(entity);
 		System.out.println(json);
 		String result = SecretUtils.desedeEncode(json, key, iv);
