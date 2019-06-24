@@ -40,4 +40,6 @@ public interface PersonalService extends BaseService<Personal> {
      * @return
      */
     void getmodify(Personal cities);
+
+    Personal getchampion();
 }

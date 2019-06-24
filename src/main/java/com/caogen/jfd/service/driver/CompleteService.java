@@ -39,5 +39,5 @@ public interface CompleteService extends BaseService<Complete> {
      * @param
      * @return
      */
-  Complete getchampion();
+  //Complete getchampion();
 }

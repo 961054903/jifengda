@@ -417,8 +417,8 @@ public class PersonalController {
         Message message = new Message();
         try {
 
-         Complete completes = completeService.getchampion();
-            message.setData(completes);
+         Personal personal = personalService.getchampion();
+            message.setData(personal);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
