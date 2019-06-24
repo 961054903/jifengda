@@ -33,7 +33,8 @@ public class Constants {
 	public static final int KEY_START = 8;
 	public static final int KEY_END = 32;
 	// 高德地图参数
-	public static final String GD_KEY = "";
+	public static final String GD_KEY = "d1c70a488b4a9827f31bcb20668b48a0";
 	public static final String GD_DISTANCE_URL = "https://restapi.amap.com/v3/distance";
+	public static final String GD_DISTANCE_TYPE = "1";
 
 }
