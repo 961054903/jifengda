@@ -35,6 +35,7 @@ public class AppDriverInterceptor implements HandlerInterceptor {
 		// 检查参数
 		if (StringUtils.isEmpty(head) || StringUtils.isEmpty(token) || StringUtils.isEmpty(ciphertext)) {
 			throw new DefinedException(ErrorCode.PARAM_MISSING);
+
 		}
 		// 验证用户
 		AppDriver driver = driverService.getByToken(token);

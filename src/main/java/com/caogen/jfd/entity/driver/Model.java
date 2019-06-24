@@ -14,8 +14,7 @@ public class Model implements Serializable {
     private Double capacity; //载重
     private Double empty_cost;//空时费
     private Double night_cost;//夜间服务费
-    private Double starting_cost;//起步价
-    private Double starting_scope;//起步距离
+    private Double jam_cost;
 
     @Override
     public String toString() {
@@ -30,8 +29,7 @@ public class Model implements Serializable {
                 ", capacity=" + capacity +
                 ", empty_cost=" + empty_cost +
                 ", night_cost=" + night_cost +
-                ", starting_cost=" + starting_cost +
-                ", starting_scope=" + starting_scope +
+                ", jam_cost=" + jam_cost +
                 '}';
     }
 
@@ -119,19 +117,19 @@ public class Model implements Serializable {
         this.night_cost = night_cost;
     }
 
-    public Double getStarting_cost() {
-        return starting_cost;
+    public Double getCapacity() {
+        return capacity;
     }
 
-    public void setStarting_cost(Double starting_cost) {
-        this.starting_cost = starting_cost;
+    public void setCapacity(Double capacity) {
+        this.capacity = capacity;
     }
 
-    public Double getStarting_scope() {
-        return starting_scope;
+    public Double getJam_cost() {
+        return jam_cost;
     }
 
-    public void setStarting_scope(Double starting_scope) {
-        this.starting_scope = starting_scope;
+    public void setJam_cost(Double jam_cost) {
+        this.jam_cost = jam_cost;
     }
 }

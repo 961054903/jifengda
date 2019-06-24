@@ -5,6 +5,7 @@ import com.caogen.jfd.common.ErrorCode;
 
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.driver.AppDriver;
+import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.model.Signin;
@@ -57,11 +58,12 @@ public class AppDriverController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("tuicu")
-    public Message logout(String phone) {
+    @RequestMapping(value = {"tuicu","app/tuicu"})
+    public Message logout(String data) {
         Message message = new Message();
         try {
-            AppDriver entity = appDriverService.getByPhone(phone);
+            AppDriver appDriver = Constants.gson.fromJson(data, AppDriver.class);
+            AppDriver entity = appDriverService.getByPhone(appDriver.getDriverphone());
             entity.setToken(null);
             entity.setDes_key(null);
             entity.setDes_iv(null);

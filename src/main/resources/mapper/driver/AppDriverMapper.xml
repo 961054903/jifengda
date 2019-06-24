@@ -13,7 +13,6 @@
             <if test="id != null">id = #{id}</if>
             <if test="driverphone != null">AND driverphone = #{driverphone}</if>
             <if test="token != null">AND token = #{token}</if>
-
         </where>
     </select>
 
@@ -32,11 +31,9 @@
             password = #{password},
             salt = #{salt},
             des_key = #{des_key},
-            des_iv =
-            #{des_iv},
-            token = #{token},
-            <if test="state != null">state = #{state},</if>
-            <if test="referrer_award != null">referrer_award = #{referrer_award}</if>
+            des_iv =#{des_iv},
+            token = #{token}
+
         </set>
         <where>
             <if test="id != null">id = #{id}</if>

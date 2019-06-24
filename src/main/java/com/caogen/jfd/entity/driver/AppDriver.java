@@ -8,7 +8,7 @@ public class AppDriver implements Serializable {
     private Integer id;   //id
     private String driverphone;  //司机姓名
     private String password;   //密码
-    private Status  status;  // 状态
+    private Status status;  // 状态
     private String salt;//盐
     private LocalDateTime create_date;   //创建时间
     private String des_key;//3DES算法所需密钥
@@ -32,7 +32,7 @@ public class AppDriver implements Serializable {
     }
 
     public enum Status {
-        normal, locked
+        normal,locked
     }
 
     @Override

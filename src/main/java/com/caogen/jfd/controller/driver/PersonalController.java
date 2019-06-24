@@ -1,5 +1,6 @@
 package com.caogen.jfd.controller.driver;
 
+import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.driver.*;
@@ -7,7 +8,9 @@ import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.driver.*;
 import com.caogen.jfd.service.user.AppUserService;
 import com.sun.jmx.snmp.tasks.TaskServer;
+import com.sun.org.apache.bcel.internal.generic.GETFIELD;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,11 +31,12 @@ public class PersonalController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("upAndDown")
-    public Message upAndDown(String phone) {
+    @RequestMapping(value = {"upAndDown","app/upAndDown"})
+    public Message upAndDown(String data) {
         Message message = new Message();
         try {
-            Personal cities = personalService.getss(phone);
+            Personal appDriver = Constants.gson.fromJson(data,Personal.class);
+            Personal cities = personalService.getss(appDriver.getPhone());
             message.setData(cities.getIs_online());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -48,11 +52,12 @@ public class PersonalController {
      *
      */
     @ResponseBody
-    @RequestMapping("state")
-    public Message state(Boolean is_online, String phone)  {
+    @RequestMapping(value = {"state","app/state"})
+    public Message state(String data)  {
         Message message = new Message();
         try {
-             personalService.getstate(is_online,phone);
+            Personal appDriver = Constants.gson.fromJson(data,Personal.class);
+             personalService.getstate(appDriver.getIs_online(),appDriver.getPhone());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -69,11 +74,12 @@ public class PersonalController {
      */
 
     @ResponseBody
-    @RequestMapping("information")
-    public Message information(String phone)  {
+    @RequestMapping(value = {"information","app/information"})
+    public Message information(String data)  {
         Message message = new Message();
         try {
-            Personal cities = personalService.getmany(phone);
+            Personal appDriver = Constants.gson.fromJson(data,Personal.class);
+            Personal cities = personalService.getmany(appDriver.getPhone());
             message.setData(cities);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -93,12 +99,13 @@ public class PersonalController {
     private ModelService modelService;
 
     @ResponseBody
-    @RequestMapping("whole")
-    public Message whole(String phone)  {
+    @RequestMapping(value = {"whole","app/whole"})
+    public Message whole(String data)  {
         Message message = new Message();
         try {
-            Personal cities = personalService.getwhole(phone);
-            Model vehicle = modelService.getvehicle(phone);
+            Personal appDriver = Constants.gson.fromJson(data,Personal.class);
+            Personal cities = personalService.getwhole(appDriver.getPhone());
+            Model vehicle = modelService.getvehicle(appDriver.getPhone());
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(cities);
             ASD.add(vehicle);
@@ -114,15 +121,15 @@ public class PersonalController {
     }
     /**
      * 修改个人信息
-     * @param cities
      * @return
      */
     @ResponseBody
-    @RequestMapping("edit")
-    public Message edit(Personal cities) {
+    @RequestMapping(value = {"edit","app/edit"})
+    public Message edit(String data) {
         Message message = new Message();
         try {
-            personalService.getmodify(cities);
+            Personal appDriver = Constants.gson.fromJson(data,Personal.class);
+            personalService.getmodify(appDriver);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
