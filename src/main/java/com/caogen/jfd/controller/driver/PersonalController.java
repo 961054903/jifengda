@@ -236,11 +236,12 @@ public class PersonalController {
     private TimeService timeService;
 
     @ResponseBody
-    @RequestMapping("cumulative")
-    public Message cumulative(String phone,String time) {
+    @RequestMapping(value = {"cumulative","app/cumulative"})
+    public Message cumulative(String data) {
         Message message = new Message();
         try {
-            Time cc = timeService.gettime(phone,time);
+            Time appDriver = Constants.gson.fromJson(data,Time.class);
+            Time cc = timeService.gettime(appDriver.getPhone(),appDriver.getTim());
             message.setData(cc);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());

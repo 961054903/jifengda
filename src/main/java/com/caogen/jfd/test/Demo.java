@@ -4,10 +4,7 @@ import java.math.BigInteger;
 
 
 import com.caogen.jfd.common.Constants;
-import com.caogen.jfd.entity.driver.AppDriver;
-import com.caogen.jfd.entity.driver.Detail;
-import com.caogen.jfd.entity.driver.Personal;
-import com.caogen.jfd.entity.driver.Peservation;
+import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.entity.user.AppUserPath;
 import com.caogen.jfd.model.Signin;
 import com.caogen.jfd.util.SecretUtils;
@@ -54,8 +51,9 @@ public class Demo {
 
 	@Test
 	public void test2() throws Exception {
-		Detail entity = new Detail();
+		Time entity = new Time();
 		entity.setPhone("123456");
+		entity.setTim("17:07:05");
 		String json = gson.toJson(entity);
 		System.out.println(json);
 		String result = SecretUtils.desedeEncode(json, key, iv);

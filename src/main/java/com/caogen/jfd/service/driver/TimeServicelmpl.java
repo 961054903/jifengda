@@ -40,10 +40,10 @@ public class TimeServicelmpl  implements  TimeService{
     public Time gettime(String phone, String time) {
         Time time1 = new Time();
         time1.setPhone(phone);
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         LocalDateTime time2 = LocalDateTime.now();
         String localTime = df.format(time2);
-        LocalDateTime ldt = LocalDateTime.parse("2018-01-12 17:07:05",df);
+        LocalDateTime ldt = LocalDateTime.parse(localTime,df);
         time1.setTime(ldt);
         return  timeDao.get(time1);
     }
