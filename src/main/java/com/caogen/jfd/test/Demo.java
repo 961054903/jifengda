@@ -2,13 +2,15 @@ package com.caogen.jfd.test;
 
 import java.math.BigInteger;
 
-import org.junit.Test;
 
 import com.caogen.jfd.common.Constants;
+import com.caogen.jfd.entity.driver.AppDriver;
+import com.caogen.jfd.entity.driver.Personal;
 import com.caogen.jfd.entity.user.AppUserPath;
 import com.caogen.jfd.model.Signin;
 import com.caogen.jfd.util.SecretUtils;
 import com.google.gson.Gson;
+import org.junit.jupiter.api.Test;
 
 public class Demo {
 	Gson gson = new Gson();
@@ -48,12 +50,14 @@ public class Demo {
 
 	@Test
 	public void test2() throws Exception {
-		AppUserPath entity = new AppUserPath();
-		entity.setPhone("17610611351");
+		Personal entity = new Personal();
+		entity.setPhone("123456");
+
 		String json = gson.toJson(entity);
 		System.out.println(json);
 		String result = SecretUtils.desedeEncode(json, key, iv);
 		System.out.println(result);
+
 	}
 
 	@Test

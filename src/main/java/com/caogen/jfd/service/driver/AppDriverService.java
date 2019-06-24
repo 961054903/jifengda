@@ -2,6 +2,7 @@ package com.caogen.jfd.service.driver;
 
 
 import com.caogen.jfd.entity.driver.AppDriver;
+import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.service.BaseService;
 
 public interface AppDriverService extends BaseService<AppDriver> {
@@ -23,5 +24,13 @@ public interface AppDriverService extends BaseService<AppDriver> {
      * @return
      */
     String generateToken(String driver);
+    /**
+     * 根据token查询
+     *
+     * @param token
+     * @return
+     */
+    AppDriver getByToken(String token);
+
 
 }

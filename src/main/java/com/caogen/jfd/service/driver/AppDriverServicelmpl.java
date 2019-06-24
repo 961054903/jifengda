@@ -71,4 +71,12 @@ public class AppDriverServicelmpl implements AppDriverService {
     public AppDriver getById(Integer id) {
         return null;
     }
+
+
+    @Override
+    public AppDriver getByToken(String token) {
+        AppDriver entity = new AppDriver();
+        entity.setToken(token);
+        return appDriverDao.get(entity);
+    }
 }
