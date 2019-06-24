@@ -51,9 +51,9 @@ public class Demo {
 
 	@Test
 	public void test2() throws Exception {
-		Time entity = new Time();
+		Complete entity = new Complete();
 		entity.setPhone("123456");
-		entity.setTim("17:07:05");
+		entity.setAa(true);
 		String json = gson.toJson(entity);
 		System.out.println(json);
 		String result = SecretUtils.desedeEncode(json, key, iv);

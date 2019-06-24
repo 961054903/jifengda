@@ -263,11 +263,12 @@ public class PersonalController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("royalty")
-    public Message royalty(String phone,Boolean cc) {
+    @RequestMapping(value = {"royalty","app/royalty"})
+    public Message royalty(String data) {
         Message message = new Message();
         try {
-        List <Complete> peservation = completeService.getto(phone);
+            Complete appDriver = Constants.gson.fromJson(data,Complete.class);
+        List <Complete> peservation = completeService.getto(appDriver.getPhone());
         Double aa =0.0;
     for(int i = 0;i<peservation.size();i++){
         Double ss = peservation.get(i).getBonus();
@@ -275,7 +276,7 @@ public class PersonalController {
     }
         List<Object>ASD = new ArrayList<Object>( );
         ASD.add(aa);
-        if (cc){
+        if (appDriver.getAa()){
             ASD.add(peservation);
         }
         message.setData(ASD);

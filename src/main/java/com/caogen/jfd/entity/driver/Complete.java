@@ -36,6 +36,10 @@ public class Complete implements Serializable {
     private String evaluate_content;//评价内容
     private Integer Total;//所有订单
     private Integer cc;
+    private String phone;
+    private Boolean aa;
+
+
 
     public Integer getCc() {
         return cc;
@@ -43,6 +47,14 @@ public class Complete implements Serializable {
 
     public void setCc(Integer cc) {
         this.cc = cc;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public enum Type {
@@ -55,6 +67,14 @@ public class Complete implements Serializable {
 
     public enum Label {
         none, change, complain, rob, distribution
+    }
+
+    public Boolean getAa() {
+        return aa;
+    }
+
+    public void setAa(Boolean aa) {
+        this.aa = aa;
     }
 
     @Override
@@ -90,6 +110,7 @@ public class Complete implements Serializable {
                 ", evaluate_content='" + evaluate_content + '\'' +
                 ", Total=" + Total +
                 ", cc=" + cc +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 
