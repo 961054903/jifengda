@@ -210,11 +210,12 @@ public class PersonalController {
     private  DetaiService detaiService;
 
     @ResponseBody
-    @RequestMapping("cout")
-    public Message cout(String phone) {
+    @RequestMapping(value = {"cout","app/cout"})
+    public Message cout(String data) {
         Message message = new Message();
         try {
-            String cc = detaiService.getime(phone);
+            Detail appDriver = Constants.gson.fromJson(data,Detail.class);
+            String cc = detaiService.getime(appDriver.getPhone());
             message.setData(cc);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());

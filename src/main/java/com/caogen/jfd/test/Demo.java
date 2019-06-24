@@ -5,6 +5,7 @@ import java.math.BigInteger;
 
 import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.entity.driver.AppDriver;
+import com.caogen.jfd.entity.driver.Detail;
 import com.caogen.jfd.entity.driver.Personal;
 import com.caogen.jfd.entity.driver.Peservation;
 import com.caogen.jfd.entity.user.AppUserPath;
@@ -53,9 +54,8 @@ public class Demo {
 
 	@Test
 	public void test2() throws Exception {
-		Peservation entity = new Peservation();
+		Detail entity = new Detail();
 		entity.setPhone("123456");
-		entity.setCode("1");
 		String json = gson.toJson(entity);
 		System.out.println(json);
 		String result = SecretUtils.desedeEncode(json, key, iv);
