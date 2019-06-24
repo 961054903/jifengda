@@ -44,20 +44,19 @@
             resultType="Complete">
         SELECT
           aa.driver_id as cc,
-          count(aa.driver_id) as Total
+          count(aa.driver_id) as total
         FROM
          order_history aa
-       JOIN
-        app_driver_info bb
+        LEFT JOIN
+        app_driver bb
         on
-        aa.driver_id = bb.user_id
+        aa.driver_id = bb.driverphone
        where
-        DATE_FORMAT(create_date,'%Y%m') = DATE_FORMAT( CURDATE( ) ,'%Y%m' )
+        DATE_FORMAT(finish_date,'%Y%m') = DATE_FORMAT( CURDATE( ) ,'%Y%m' )
         group by
          aa.driver_id
         order  by
-        Total
+        total
         desc
 	</select>
-
 </mapper>
