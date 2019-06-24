@@ -12,6 +12,7 @@ import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.entity.user.AppUserOrder;
+import com.caogen.jfd.entity.user.AppUserSite;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.user.AppUserOrderService;
 import com.caogen.jfd.service.user.AppUserService;
@@ -53,7 +54,7 @@ public class AppUserOrderController {
 	}
 
 	/**
-	 * 获取进行中的订单列表
+	 * 获取未完成的订单列表
 	 * 
 	 * @param data
 	 * @return
@@ -76,7 +77,7 @@ public class AppUserOrderController {
 	}
 
 	/**
-	 * 获取进行中的订单列表
+	 * 获取已完成的订单列表
 	 * 
 	 * @param data
 	 * @return
@@ -94,6 +95,28 @@ public class AppUserOrderController {
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.ORDER_ERROR);
 			StaticLogger.error("user order get all error", e);
+		}
+		return message;
+	}
+
+	/**
+	 * 计算价格
+	 * 
+	 * @param data
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = { "calculate", "api/calculate" })
+	public Message calculate(String data) {
+		Message message = new Message();
+		try {
+			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
+			AppUserSite origin = Constants.gson.fromJson(order.getOrigin(), AppUserSite.class);
+			AppUserSite[] destination = Constants.gson.fromJson(order.getDestination(), AppUserSite[].class);
+			orderService.calculate(origin, destination);
+		} catch (Exception e) {
+			message.setErrorCode(ErrorCode.ORDER_ERROR);
+			StaticLogger.error("user order calculate price error", e);
 		}
 		return message;
 	}

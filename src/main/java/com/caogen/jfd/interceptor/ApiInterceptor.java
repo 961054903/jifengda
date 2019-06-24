@@ -29,9 +29,9 @@ public class ApiInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String head = request.getParameter(REQUEST_HEAD);
 		String token = request.getParameter(REQUEST_TOKEN);
-		String ciphertext = request.getParameter(REQUEST_MESSAGE);
+		String head = request.getParameter(REQUEST_HEAD);
+		String ciphertext = request.getParameter(REQUEST_BODY);
 		// 检查参数
 		if (StringUtils.isEmpty(head) || StringUtils.isEmpty(token) || StringUtils.isEmpty(ciphertext)) {
 			throw new DefinedException(ErrorCode.PARAM_MISSING);
@@ -44,9 +44,9 @@ public class ApiInterceptor implements HandlerInterceptor {
 		// 解密
 		String key, iv;
 		if (head.equals(DECODE_DEFAULT)) {
-			key = DEFAULT_KEY;
-			iv = DEFAULT_IV;
-		} else if (head.equals(DECODE_KEY)) {
+			key = DES_KEY;
+			iv = DES_IV;
+		} else if (head.equals(DECODE_SECRETKEY)) {
 			key = user.getDes_key();
 			iv = user.getDes_iv();
 		} else {

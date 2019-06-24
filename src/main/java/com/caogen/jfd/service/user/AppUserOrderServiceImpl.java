@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.caogen.jfd.dao.user.AppUserOrderDao;
 import com.caogen.jfd.entity.user.AppUserOrder;
+import com.caogen.jfd.entity.user.AppUserSite;
 
 /**
  * 
@@ -53,6 +54,11 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 	@Override
 	public List<AppUserOrder> getFinish(AppUserOrder entity) {
 		return orderDao.findFinish(entity);
+	}
+
+	@Override
+	public void calculate(AppUserSite origin, AppUserSite[] destination) {
+		
 	}
 
 }

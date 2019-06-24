@@ -69,7 +69,7 @@ public class AppUserServiceImpl implements AppUserService {
 		String key = result[1].substring(Constants.KEY_START, Constants.KEY_END);
 		user.setDes_iv(iv);
 		user.setDes_key(key);
-		String verify = SecretUtils.desedeEncode(Constants.DEFAULT_IV, key, iv);
+		String verify = SecretUtils.desedeEncode(Constants.DES_IV, key, iv);
 		modify(user);
 		return new String[] { B, verify };
 	}
