@@ -6,11 +6,14 @@ import java.math.BigInteger;
 import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.entity.driver.AppDriver;
 import com.caogen.jfd.entity.driver.Personal;
+import com.caogen.jfd.entity.driver.Peservation;
 import com.caogen.jfd.entity.user.AppUserPath;
 import com.caogen.jfd.model.Signin;
 import com.caogen.jfd.util.SecretUtils;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
+
+import static com.caogen.jfd.entity.driver.Peservation.Mode.appoint;
 
 public class Demo {
 	Gson gson = new Gson();
@@ -50,9 +53,9 @@ public class Demo {
 
 	@Test
 	public void test2() throws Exception {
-		Personal entity = new Personal();
+		Peservation entity = new Peservation();
 		entity.setPhone("123456");
-		entity.setName("ZHANG");
+		entity.setMode(appoint);
 		String json = gson.toJson(entity);
 		System.out.println(json);
 		String result = SecretUtils.desedeEncode(json, key, iv);

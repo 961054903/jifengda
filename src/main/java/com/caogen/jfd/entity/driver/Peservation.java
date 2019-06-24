@@ -30,6 +30,7 @@ public class Peservation implements Serializable {
     private Integer driver_id;//司机id
     private Double kilometre;//公里
     private Double bonus;//提成
+    private String phone;
 
 
     public enum Type {
@@ -71,6 +72,7 @@ public class Peservation implements Serializable {
                 ", driver_id=" + driver_id +
                 ", kilometre=" + kilometre +
                 ", bonus=" + bonus +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 
@@ -268,5 +270,13 @@ public class Peservation implements Serializable {
 
     public void setBonus(Double bonus) {
         this.bonus = bonus;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

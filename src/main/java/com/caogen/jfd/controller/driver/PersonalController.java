@@ -152,12 +152,13 @@ public class PersonalController {
     private PeservationService peservationService;
 
     @ResponseBody
-    @RequestMapping("make")
-    public Message make(String phone,Peservation.Mode mode) {
+    @RequestMapping(value = {"make","app/make"})
+    public Message make(String data) {
 
         Message message = new Message();
         try {
-           List <Peservation> personals = peservationService.getmake(phone,mode);
+            Peservation appDriver = Constants.gson.fromJson(data,Peservation.class);
+           List <Peservation> personals = peservationService.getmake(appDriver.getPhone(),appDriver.getMode());
             message.setData(personals);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
