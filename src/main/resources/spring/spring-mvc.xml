@@ -32,5 +32,9 @@
 			<mvc:mapping path="/*/api/*" />
 			<bean class="com.caogen.jfd.interceptor.AppUserInterceptor" />
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/*/app/*" />
+			<bean class="com.caogen.jfd.interceptor.AppDriverInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>  

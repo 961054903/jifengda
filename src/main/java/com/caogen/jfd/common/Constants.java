@@ -16,7 +16,8 @@ public class Constants {
 	public static final String REQUEST_HEAD = "code";
 	public static final String REQUEST_BODY = "data";
 	// 替换请求路径所需参数
-	public static final String PATH_TARGET = "/api";
+	public static final String PATH_TARGET_USER = "/api";
+	public static final String PATH_TARGET_DRIVER = "/app";
 	public static final String PATH_REPLACEMENT = "";
 	// 解密方式
 	public static final String DECODE_DEFAULT = "00";
