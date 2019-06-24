@@ -1,11 +1,13 @@
 package com.caogen.jfd.service.driver;
 
+import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.dao.driver.AppDriverDao;
 import com.caogen.jfd.entity.driver.AppDriver;
 import com.caogen.jfd.exception.DefinedException;
 
 import com.caogen.jfd.util.PasswordHelper;
+import com.caogen.jfd.util.SecretUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,7 +66,7 @@ public class AppDriverServicelmpl implements AppDriverService {
 
     @Override
     public void modify(AppDriver entity) {
-
+        appDriverDao.update1(entity);
     }
 
     @Override
@@ -79,4 +81,36 @@ public class AppDriverServicelmpl implements AppDriverService {
         entity.setToken(token);
         return appDriverDao.get(entity);
     }
+
+    @Override
+    public AppDriver getByPhone(String phone) {
+            AppDriver entity = new AppDriver();
+            entity.setDriverphone(phone);
+            return appDriverDao.get(entity);
+        }
+
+    @Override
+    public String[] exchange(String result, String phone) throws Exception {
+
+            AppDriver user = getByPhone(phone);
+            String[] ss = SecretUtils.dh(result, Constants.DH_G, Constants.DH_P);
+            String B = ss[0];
+            String iv = ss[1].substring(Constants.IV_START, Constants.IV_END);
+            String key = ss[1].substring(Constants.KEY_START, Constants.KEY_END);
+            user.setDes_iv(iv);
+            user.setDes_key(key);
+            String verify = SecretUtils.desedeEncode(Constants.DES_IV, key, iv);
+            modify(user);
+            return new String[] { B, verify };
+        }
+
+    @Override
+    public void changePassword(String driverphone, String password) {
+        AppDriver user = getByPhone(driverphone);
+        user.setSalt(PasswordHelper.generateSalt());
+        user.setPassword(PasswordHelper.encryptPassword(password, user.getSalt()));
+        modify(user);
+    }
+
+
 }

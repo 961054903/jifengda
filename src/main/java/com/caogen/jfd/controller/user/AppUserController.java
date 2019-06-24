@@ -218,7 +218,6 @@ public class AppUserController {
 		}
 		return message;
 	}
-
 	/**
 	 * 修改密码
 	 * 

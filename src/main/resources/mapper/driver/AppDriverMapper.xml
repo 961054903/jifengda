@@ -25,4 +25,22 @@
         WHERE
         driverphone =#{driverphone}
     </update>
+
+    <update id="update1" parameterType="AppDriver">
+        UPDATE app_driver
+        <set>
+            password = #{password},
+            salt = #{salt},
+            des_key = #{des_key},
+            des_iv =
+            #{des_iv},
+            token = #{token},
+            <if test="state != null">state = #{state},</if>
+            <if test="referrer_award != null">referrer_award = #{referrer_award}</if>
+        </set>
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="driverphone != null">AND driverphone = #{driverphone}</if>
+        </where>
+    </update>
 </mapper>
