@@ -22,11 +22,17 @@ public class Distance implements Serializable {
 				+ "]";
 	}
 
-	public class Result {
+	public class Result implements Comparable<Object> {
 		private String origin_id;
 		private String dest_id;
 		private String distance;
 		private String duration;
+
+		@Override
+		public int compareTo(Object object) {
+			Result result = (Result) object;
+			return Integer.parseInt(this.distance) - Integer.parseInt(result.getDistance());
+		}
 
 		@Override
 		public String toString() {

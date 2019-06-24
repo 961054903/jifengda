@@ -113,7 +113,9 @@ public class AppUserOrderController {
 			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
 			AppUserSite origin = Constants.gson.fromJson(order.getOrigin(), AppUserSite.class);
 			AppUserSite[] destination = Constants.gson.fromJson(order.getDestination(), AppUserSite[].class);
-			orderService.calculate(origin, destination);
+			int distance = orderService.getDistance(origin, destination);
+			double price = orderService.getPrice(order.getModel_id(), order.getType(), distance);
+
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.ORDER_ERROR);
 			StaticLogger.error("user order calculate price error", e);

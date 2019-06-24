@@ -3,6 +3,7 @@ package com.caogen.jfd.service.user;
 import java.util.List;
 
 import com.caogen.jfd.entity.user.AppUserOrder;
+import com.caogen.jfd.entity.user.AppUserOrder.Type;
 import com.caogen.jfd.entity.user.AppUserSite;
 import com.caogen.jfd.service.BaseService;
 
@@ -35,11 +36,22 @@ public interface AppUserOrderService extends BaseService<AppUserOrder> {
 	List<AppUserOrder> getFinish(AppUserOrder entity);
 
 	/**
-	 * 根据起终点计算价格、距离
+	 * 计算距离
 	 * 
 	 * @param origin
 	 * @param destination
+	 * @return
 	 */
-	void calculate(AppUserSite origin, AppUserSite[] destination);
+	int getDistance(AppUserSite origin, AppUserSite[] destination);
+
+	/**
+	 * 计算价格
+	 * 
+	 * @param model_id
+	 * @param type
+	 * @param distance
+	 * @return
+	 */
+	double getPrice(Integer model_id, Type type, int distance);
 
 }
