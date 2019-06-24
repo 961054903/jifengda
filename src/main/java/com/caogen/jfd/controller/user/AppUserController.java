@@ -211,7 +211,7 @@ public class AppUserController {
 			String[] array = userService.exchangeKey(signin.getResult(), signin.getPhone());
 			signin.setResult(array[0]);
 			signin.setVerify(array[1]);
-			message.setData(signin, Constants.DEFAULT_KEY, Constants.DEFAULT_IV);
+			message.setData(signin, Constants.DES_KEY, Constants.DES_IV);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.SIGNIN_ERROR);
 			StaticLogger.error(message.getCode(), e);
