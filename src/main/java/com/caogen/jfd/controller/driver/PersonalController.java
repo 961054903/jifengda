@@ -293,20 +293,19 @@ public class PersonalController {
 
     /**
      * 今日接单
-     * @param phone
-     * @param cc
      * @return
      */
     @ResponseBody
-    @RequestMapping("receipt")
-    public Message receipt(String phone,Boolean cc) {
+    @RequestMapping(value = {"receipt","app/receipt"})
+    public Message receipt(String data) {
         Message message = new Message();
         try {
-            List <Complete> peservation = completeService.getto(phone);
+            Complete appDriver = Constants.gson.fromJson(data,Complete.class);
+            List <Complete> peservation = completeService.getto(appDriver.getPhone());
             int size = peservation.size();
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(size);
-            if (cc){
+            if (appDriver.getAa()){
                 ASD.add(peservation);
             }
             message.setData(ASD);
@@ -323,20 +322,19 @@ public class PersonalController {
 
     /**
      * 本月接单
-     * @param phone
-     * @param cc
      * @return
      */
     @ResponseBody
-    @RequestMapping("month")
-    public Message month(String phone,Boolean cc) {
+    @RequestMapping(value = {"month","app/month"})
+    public Message month(String data) {
         Message message = new Message();
         try {
-            List <Complete> peservation = completeService.getmon(phone);
+            Complete appDriver = Constants.gson.fromJson(data,Complete.class);
+            List <Complete> peservation = completeService.getmon(appDriver.getPhone());
             int size = peservation.size();
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(size);
-            if (cc){
+            if (appDriver.getAa()){
                 ASD.add(peservation);
             }
             message.setData(ASD);
@@ -353,16 +351,15 @@ public class PersonalController {
 
     /**
      * 本月提成
-     * @param phone
-     * @param cc
      * @return
      */
     @ResponseBody
-    @RequestMapping("mont")
-    public Message mont(String phone,Boolean cc) {
+    @RequestMapping(value = {"mont","app/mont"})
+    public Message mont(String data) {
         Message message = new Message();
         try {
-            List <Complete> peservation = completeService.getmon(phone);
+            Complete appDriver = Constants.gson.fromJson(data,Complete.class);
+            List <Complete> peservation = completeService.getmon(appDriver.getPhone());
             Double aa =0.0;
             for(int i = 0;i<peservation.size();i++){
                 Double ss = peservation.get(i).getBonus();
@@ -370,7 +367,7 @@ public class PersonalController {
             }
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(aa);
-            if (cc){
+            if (appDriver.getAa()){
                 ASD.add(peservation);
             }
             message.setData(ASD);
