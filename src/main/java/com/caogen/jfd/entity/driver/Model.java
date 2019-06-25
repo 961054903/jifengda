@@ -3,7 +3,7 @@ package com.caogen.jfd.entity.driver;
 import java.io.Serializable;
 
 public class Model implements Serializable {
-    private static final long serialVersionUID = -3975707114992364047L;
+    private static final long serialVersionUID = -3975707110092364047L;
     private Integer id; //id
     private String brand; // 所属品牌
     private String model;//车型
@@ -93,11 +93,11 @@ public class Model implements Serializable {
         this.volume = volume;
     }
 
-    public Double getcapacity() {
+    public Double getCapacity() {
         return capacity;
     }
 
-    public void setcapacity(Double capacity) {
+    public void setCapacity(Double capacity) {
         this.capacity = capacity;
     }
 
@@ -115,14 +115,6 @@ public class Model implements Serializable {
 
     public void setNight_cost(Double night_cost) {
         this.night_cost = night_cost;
-    }
-
-    public Double getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(Double capacity) {
-        this.capacity = capacity;
     }
 
     public Double getJam_cost() {

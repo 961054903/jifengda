@@ -25,6 +25,8 @@ public class PersonalController {
 
     @Autowired
     private PersonalService personalService;
+    @Autowired
+    private AppDriverService appDriverService;
 
     /**
      * 查询上下线状态全部
@@ -36,8 +38,9 @@ public class PersonalController {
         Message message = new Message();
         try {
             Personal appDriver = Constants.gson.fromJson(data,Personal.class);
+            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
             Personal cities = personalService.getss(appDriver.getPhone());
-            message.setData(cities.getIs_online());
+            message.setData(cities.getIs_online(),driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -79,8 +82,9 @@ public class PersonalController {
         Message message = new Message();
         try {
             Personal appDriver = Constants.gson.fromJson(data,Personal.class);
+            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
             Personal cities = personalService.getmany(appDriver.getPhone());
-            message.setData(cities);
+            message.setData(cities,driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -104,12 +108,13 @@ public class PersonalController {
         Message message = new Message();
         try {
             Personal appDriver = Constants.gson.fromJson(data,Personal.class);
+            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
             Personal cities = personalService.getwhole(appDriver.getPhone());
             Model vehicle = modelService.getvehicle(appDriver.getPhone());
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(cities);
             ASD.add(vehicle);
-            message.setData(ASD);
+            message.setData(ASD,driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -158,8 +163,9 @@ public class PersonalController {
         Message message = new Message();
         try {
             Peservation appDriver = Constants.gson.fromJson(data,Peservation.class);
+            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
            List <Peservation> personals = peservationService.getmake(appDriver.getPhone(),appDriver.getMode());
-            message.setData(personals);
+            message.setData(personals,driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -187,12 +193,13 @@ public class PersonalController {
         Message message = new Message();
         try {
             Peservation appDriver = Constants.gson.fromJson(data,Peservation.class);
+            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
             User user = userService.getuser(appDriver.getCode());
             Peservation peservation = peservationService.getma(appDriver.getCode());
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(user);
             ASD.add(peservation);
-            message.setData(ASD);
+            message.setData(ASD,driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -215,8 +222,9 @@ public class PersonalController {
         Message message = new Message();
         try {
             Detail appDriver = Constants.gson.fromJson(data,Detail.class);
+            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
             String cc = detaiService.getime(appDriver.getPhone());
-            message.setData(cc);
+            message.setData(cc,driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -241,8 +249,9 @@ public class PersonalController {
         Message message = new Message();
         try {
             Time appDriver = Constants.gson.fromJson(data,Time.class);
+            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
             Time cc = timeService.gettime(appDriver.getPhone(),appDriver.getTim());
-            message.setData(cc);
+            message.setData(cc,driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -268,6 +277,7 @@ public class PersonalController {
         Message message = new Message();
         try {
             Complete appDriver = Constants.gson.fromJson(data,Complete.class);
+            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
         List <Complete> peservation = completeService.getto(appDriver.getPhone());
         Double aa =0.0;
     for(int i = 0;i<peservation.size();i++){
@@ -279,7 +289,7 @@ public class PersonalController {
         if (appDriver.getAa()){
             ASD.add(peservation);
         }
-        message.setData(ASD);
+        message.setData(ASD,driver.getDes_key(),driver.getDes_iv());
         message.setCode(ErrorCode.SUCCEED.getCode());
         message.setDesc(ErrorCode.SUCCEED.getDesc());
     } catch (Exception e) {
@@ -301,6 +311,7 @@ public class PersonalController {
         Message message = new Message();
         try {
             Complete appDriver = Constants.gson.fromJson(data,Complete.class);
+            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
             List <Complete> peservation = completeService.getto(appDriver.getPhone());
             int size = peservation.size();
             List<Object>ASD = new ArrayList<Object>( );
@@ -308,7 +319,7 @@ public class PersonalController {
             if (appDriver.getAa()){
                 ASD.add(peservation);
             }
-            message.setData(ASD);
+            message.setData(ASD,driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -330,6 +341,7 @@ public class PersonalController {
         Message message = new Message();
         try {
             Complete appDriver = Constants.gson.fromJson(data,Complete.class);
+            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
             List <Complete> peservation = completeService.getmon(appDriver.getPhone());
             int size = peservation.size();
             List<Object>ASD = new ArrayList<Object>( );
@@ -337,7 +349,7 @@ public class PersonalController {
             if (appDriver.getAa()){
                 ASD.add(peservation);
             }
-            message.setData(ASD);
+            message.setData(ASD,driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -355,10 +367,11 @@ public class PersonalController {
      */
     @ResponseBody
     @RequestMapping(value = {"mont","app/mont"})
-    public Message mont(String data) {
+    public Message mont(String data){
         Message message = new Message();
         try {
             Complete appDriver = Constants.gson.fromJson(data,Complete.class);
+            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
             List <Complete> peservation = completeService.getmon(appDriver.getPhone());
             Double aa =0.0;
             for(int i = 0;i<peservation.size();i++){
@@ -370,7 +383,7 @@ public class PersonalController {
             if (appDriver.getAa()){
                 ASD.add(peservation);
             }
-            message.setData(ASD);
+            message.setData(ASD,driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -387,11 +400,13 @@ public class PersonalController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("history")
-    public Message history(String start,String end,String phone) {
+    @RequestMapping(value = {"history","app/history"})
+    public Message history(String data) {
         Message message = new Message();
         try {
-        List <Complete> completes = completeService.gethistory(phone,start,end);
+            Complete appDriver = Constants.gson.fromJson(data,Complete.class);
+            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
+          List <Complete> completes = completeService.gethistory(appDriver.getPhone(),appDriver.getStart(),appDriver.getEnd());
             Double aa =0.0;
             for(int i = 0;i<completes.size();i++){
                 Double ss = completes.get(i).getBonus();
@@ -402,7 +417,7 @@ public class PersonalController {
                 ASD.add(aa);
                 ASD.add(size);
                 ASD.add(completes);
-            message.setData(ASD);
+            message.setData(ASD,driver.getDes_key(),driver.getDes_iv());
         message.setCode(ErrorCode.SUCCEED.getCode());
         message.setDesc(ErrorCode.SUCCEED.getDesc());
     } catch (Exception e) {
@@ -422,7 +437,6 @@ public class PersonalController {
     public Message champion( ) {
         Message message = new Message();
         try {
-
          Personal personal = personalService.getchampion();
             message.setData(personal);
             message.setCode(ErrorCode.SUCCEED.getCode());
@@ -461,12 +475,14 @@ public class PersonalController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("spike")
-    public Message spike(String phone,String code) {
+    @RequestMapping(value = {"spike","app/spike"})
+    public Message spike(String data) {
         Message message = new Message();
         try {
-            boolean peservations = peservationService.getspike(phone,code);
-            message.setData(peservations);
+            Peservation appDriver = Constants.gson.fromJson(data,Peservation.class);
+            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
+            boolean peservations = peservationService.getspike(appDriver.getPhone(),appDriver.getCode());
+            message.setData(peservations,driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -485,11 +501,12 @@ public class PersonalController {
       private TaskService taskService;
 
     @ResponseBody
-    @RequestMapping("arrive")
-    public Message arrive(String code,String serial) {
+    @RequestMapping(value = {"arrive","app/arrive"})
+    public Message arrive(String data) {
         Message message = new Message();
         try {
-            taskService.getarrive(code,serial);
+            Task appDriver = Constants.gson.fromJson(data,Task.class);
+            taskService.getarrive(appDriver.getCode(),appDriver.getSerial());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
