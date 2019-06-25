@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.caogen.jfd.common.Constants;
-import com.caogen.jfd.dao.VehiclePriceDao;
 import com.caogen.jfd.dao.user.AppUserOrderDao;
-import com.caogen.jfd.entity.VehiclePrice;
+import com.caogen.jfd.dao.user.VehiclePriceDao;
 import com.caogen.jfd.entity.user.AppUserOrder;
 import com.caogen.jfd.entity.user.AppUserOrder.Type;
 import com.caogen.jfd.entity.user.AppUserSite;
+import com.caogen.jfd.entity.user.VehiclePrice;
 import com.caogen.jfd.model.Distance;
 import com.caogen.jfd.model.Distance.Result;
 import com.caogen.jfd.util.HttpClientUtils;
@@ -106,32 +106,34 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 	}
 
 	@Override
-	public double getPrice(Integer model_id, Type type, int distance) {
+	public double getPrice(AppUserOrder order, int distance) {
+		int model_id = order.getModel_id();
+		Type type = order.getType();
+		double cost = 0.0;
 		VehiclePrice entity = new VehiclePrice();
 		entity.setModel_id(model_id);
 		List<VehiclePrice> list = priceDao.find(entity);
+		double price = 0.0;
+		double gap = 0.0;
 		switch (type) {
 		case single:
 			// 单点订单，获取起步价、起步距离
 			double startSpace = list.get(0).getStart_space();
 			double startPrice = list.get(0).getPrice();
 			for (int i = 1; i < list.size(); i++) {
-
 				if (distance >= list.get(i).getEnd_space()) {
-					double gap = list.get(i).getEnd_space() - list.get(i).getStart_space();
-					double price = gap * list.get(i).getPrice();
+					gap = list.get(i).getEnd_space() - list.get(i).getStart_space();
 				} else if (distance < list.get(i).getStart_space()) {
 					break;
 				} else {
-
+					gap = distance - list.get(i).getStart_space();
 				}
-
+				price += gap * (list.get(i).getPrice() + cost);
 			}
+			price += startPrice;
 			break;
 		case multiple:
-			double price = 0.0;
 			for (VehiclePrice item : list) {
-				double gap = 0.0;
 				if (distance >= item.getEnd_space()) {
 					gap = item.getEnd_space() - item.getStart_space();
 				} else if (distance < item.getStart_space()) {
@@ -139,13 +141,13 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 				} else {
 					gap = distance - item.getStart_space();
 				}
-				price += gap * item.getPrice();
+				price += gap * (item.getPrice() + cost);
 			}
 			break;
 		default:
 			break;
 		}
-		return 0.0;
+		return price;
 	}
 
 }

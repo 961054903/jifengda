@@ -114,7 +114,7 @@ public class AppUserOrderController {
 			AppUserSite origin = Constants.gson.fromJson(order.getOrigin(), AppUserSite.class);
 			AppUserSite[] destination = Constants.gson.fromJson(order.getDestination(), AppUserSite[].class);
 			int distance = orderService.getDistance(origin, destination);
-			double price = orderService.getPrice(order.getModel_id(), order.getType(), distance);
+			double price = orderService.getPrice(order, distance);
 
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.ORDER_ERROR);

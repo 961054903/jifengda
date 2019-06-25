@@ -1,10 +1,10 @@
-package com.caogen.jfd.service;
+package com.caogen.jfd.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.caogen.jfd.dao.VehiclePriceDao;
-import com.caogen.jfd.entity.VehiclePrice;
+import com.caogen.jfd.dao.user.VehiclePriceDao;
+import com.caogen.jfd.entity.user.VehiclePrice;
 
 /**
  * 

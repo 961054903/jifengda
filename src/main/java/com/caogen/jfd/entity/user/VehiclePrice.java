@@ -1,4 +1,4 @@
-package com.caogen.jfd.entity;
+package com.caogen.jfd.entity.user;
 
 import java.io.Serializable;
 

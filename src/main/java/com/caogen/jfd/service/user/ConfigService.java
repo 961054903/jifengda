@@ -1,6 +1,7 @@
-package com.caogen.jfd.service;
+package com.caogen.jfd.service.user;
 
-import com.caogen.jfd.entity.SysConfig;
+import com.caogen.jfd.entity.user.SysConfig;
+import com.caogen.jfd.service.BaseService;
 
 /**
  * 

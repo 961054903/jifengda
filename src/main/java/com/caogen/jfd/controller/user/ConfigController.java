@@ -1,4 +1,4 @@
-package com.caogen.jfd.controller;
+package com.caogen.jfd.controller.user;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.model.Message;
-import com.caogen.jfd.service.ConfigService;
+import com.caogen.jfd.service.user.ConfigService;
 import com.caogen.jfd.util.IndustryHelper;
 
 /**
