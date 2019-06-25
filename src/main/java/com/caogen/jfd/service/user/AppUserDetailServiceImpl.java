@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.caogen.jfd.dao.user.AppUserDetailDao;
 import com.caogen.jfd.entity.user.AppUserDetail;
+import com.caogen.jfd.util.FormatUtils;
 
 /**
  * 
@@ -40,7 +41,12 @@ public class AppUserDetailServiceImpl implements AppUserDetailService {
 
 	@Override
 	public List<AppUserDetail> getAll(AppUserDetail entity) {
-		return detailDao.find(entity);
+		List<AppUserDetail> list = detailDao.find(entity);
+		for (AppUserDetail item : list) {
+			item.setCreateDate(FormatUtils.dateToStr(item.getCreate_date()));
+			item.setCreate_date(null);
+		}
+		return list;
 	}
 
 }

@@ -16,6 +16,7 @@ public class AppUserIssue implements Serializable {
 	private String content;
 	private String photo_url;
 	private LocalDateTime create_date;
+	private String createDate;
 	private String name;
 	private String phone;
 	private Boolean is_check;
@@ -37,8 +38,8 @@ public class AppUserIssue implements Serializable {
 	@Override
 	public String toString() {
 		return "AppUserIssue [id=" + id + ", title=" + title + ", content=" + content + ", photo_url=" + photo_url
-				+ ", create_date=" + create_date + ", name=" + name + ", phone=" + phone + ", is_check=" + is_check
-				+ ", type=" + type + "]";
+				+ ", create_date=" + create_date + ", createDate=" + createDate + ", name=" + name + ", phone=" + phone
+				+ ", is_check=" + is_check + ", type=" + type + "]";
 	}
 
 	public Integer getId() {
@@ -111,6 +112,14 @@ public class AppUserIssue implements Serializable {
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
 	}
 
 }

@@ -17,7 +17,9 @@ public class AppTicket implements Serializable {
 	private Type type;
 	private Double sill;
 	private LocalDateTime start_date;
-	private LocalDateTime end_data;
+	private String startDate;
+	private LocalDateTime end_date;
+	private String endDate;
 	private Double duration;
 
 	public enum Type {
@@ -27,8 +29,8 @@ public class AppTicket implements Serializable {
 	@Override
 	public String toString() {
 		return "AppTicket [title=" + title + ", description=" + description + ", money=" + money + ", type=" + type
-				+ ", sill=" + sill + ", start_date=" + start_date + ", end_data=" + end_data + ", duration=" + duration
-				+ "]";
+				+ ", sill=" + sill + ", start_date=" + start_date + ", startDate=" + startDate + ", end_date="
+				+ end_date + ", endDate=" + endDate + ", duration=" + duration + "]";
 	}
 
 	public String getTitle() {
@@ -79,12 +81,28 @@ public class AppTicket implements Serializable {
 		this.start_date = start_date;
 	}
 
-	public LocalDateTime getEnd_data() {
-		return end_data;
+	public String getStartDate() {
+		return startDate;
 	}
 
-	public void setEnd_data(LocalDateTime end_data) {
-		this.end_data = end_data;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDateTime getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(LocalDateTime end_date) {
+		this.end_date = end_date;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
 	public Double getDuration() {
