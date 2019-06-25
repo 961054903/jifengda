@@ -40,9 +40,7 @@ public class ConfigServiceImpl implements ConfigService {
 
 	@Override
 	public SysConfig getByItem(String key) {
-		SysConfig entity = new SysConfig();
-		entity.setItem_key(key);
-		return configDao.get(entity);
+		return configDao.get(new SysConfig(key));
 	}
 
 }

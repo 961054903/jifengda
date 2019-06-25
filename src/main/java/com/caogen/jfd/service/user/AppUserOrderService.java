@@ -50,6 +50,6 @@ public interface AppUserOrderService extends BaseService<AppUserOrder> {
 	 * @param distance
 	 * @return
 	 */
-	double getPrice(AppUserOrder order, int distance);
+	AppUserOrder getPrice(AppUserOrder order, int distance);
 
 }

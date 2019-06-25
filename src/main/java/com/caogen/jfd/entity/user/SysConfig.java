@@ -19,10 +19,15 @@ public class SysConfig implements Serializable {
 	private String description;
 	private LocalTime start_time;
 	private LocalTime end_time;
-	private Boolean falg;
+	private Boolean flag;
 
 	public SysConfig() {
 		super();
+	}
+
+	public SysConfig(Integer id) {
+		super();
+		this.id = id;
 	}
 
 	public SysConfig(String item_key) {
@@ -33,8 +38,8 @@ public class SysConfig implements Serializable {
 	@Override
 	public String toString() {
 		return "SysConfig [id=" + id + ", item=" + item + ", item_key=" + item_key + ", item_value=" + item_value
-				+ ", description=" + description + ", start_time=" + start_time + ", end_time=" + end_time + ", falg="
-				+ falg + "]";
+				+ ", description=" + description + ", start_time=" + start_time + ", end_time=" + end_time + ", flag="
+				+ flag + "]";
 	}
 
 	public Integer getId() {
@@ -93,12 +98,12 @@ public class SysConfig implements Serializable {
 		this.end_time = end_time;
 	}
 
-	public Boolean getFalg() {
-		return falg;
+	public Boolean getFlag() {
+		return flag;
 	}
 
-	public void setFalg(Boolean falg) {
-		this.falg = falg;
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
 	}
 
 }

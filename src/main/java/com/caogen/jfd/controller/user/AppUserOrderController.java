@@ -111,11 +111,12 @@ public class AppUserOrderController {
 		Message message = new Message();
 		try {
 			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
+			AppUser user = userService.getByPhone(order.getPhone());
 			AppUserSite origin = Constants.gson.fromJson(order.getOrigin(), AppUserSite.class);
 			AppUserSite[] destination = Constants.gson.fromJson(order.getDestination(), AppUserSite[].class);
 			int distance = orderService.getDistance(origin, destination);
-			double price = orderService.getPrice(order, distance);
-
+			AppUserOrder entity = orderService.getPrice(order, distance);
+			message.setData(entity, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.ORDER_ERROR);
 			StaticLogger.error("user order calculate price error", e);
