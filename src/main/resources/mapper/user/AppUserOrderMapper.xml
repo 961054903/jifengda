@@ -12,6 +12,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{user_id},#{model_id},#{code},#{create_date},#{status},#{type},#{mode},#{appoint_date},#{label},#{origin},#{destination},#{name},#{night_service_cost},#{traffic_jam_cost},#{is_support},#{support_money},#{support_cost},#{order_money},#{ticket_money},#{actually_paid},#{kilometre},#{bonus},#{is_evaluate},#{evaluate_grade},#{evaluate_content}
 		)
 	</insert>
+	<update id="update" parameterType="AppUserOrder">
+		UPDATE order_info
+		<set>
+			<if test="status != null">status = #{status},</if>
+			<if test="label != null">label = #{label},</if>
+			<if test="is_evaluate != null">is_evaluate = #{is_evaluate},</if>
+			<if test="evaluate_grade != null">evaluate_grade = #{evaluate_grade},</if>
+			<if test="evaluate_content != null">evaluate_content = #{evaluate_content},</if>
+		</set>
+		WHERE code = #{code}
+	</update>
 	<select id="countInfo" parameterType="AppUserOrder"
 		resultType="Integer">
 		SELECT COUNT(id) FROM order_info WHERE user_id = #{user_id}
@@ -47,5 +58,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="label != null">AND label = #{label}</if>
 			<if test="is_evaluate != null">AND is_evaluate = #{is_evaluate}</if>
 		</where>
+	</select>
+	<select id="getUnderway" parameterType="AppUserOrder"
+		resultType="AppUserOrder">
+		SELECT id,
+		<include refid="order" />
+		FROM order_info
+		WHERE code = #{code}
+	</select>
+	<select id="getFinish" parameterType="AppUserOrder"
+		resultType="AppUserOrder">
+		SELECT id,
+		<include refid="order" />
+		FROM order_history
+		WHERE code = #{code}
 	</select>
 </mapper>

@@ -52,4 +52,12 @@ public interface AppUserOrderService extends BaseService<AppUserOrder> {
 	 */
 	AppUserOrder getPrice(AppUserOrder order, int distance);
 
+	/**
+	 * 查询
+	 * 
+	 * @param entity
+	 * @return
+	 */
+	AppUserOrder getOne(AppUserOrder entity);
+
 }

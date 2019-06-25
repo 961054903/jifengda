@@ -38,4 +38,20 @@ public interface AppUserOrderDao extends BaseDao<AppUserOrder> {
 	 */
 	List<AppUserOrder> findFinish(AppUserOrder entity);
 
+	/**
+	 * 查询info表
+	 * 
+	 * @param entity
+	 * @return
+	 */
+	AppUserOrder getUnderway(AppUserOrder entity);
+
+	/**
+	 * 查询history表
+	 * 
+	 * @param entity
+	 * @return
+	 */
+	AppUserOrder getFinish(AppUserOrder entity);
+
 }

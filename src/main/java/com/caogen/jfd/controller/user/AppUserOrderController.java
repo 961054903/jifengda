@@ -123,4 +123,66 @@ public class AppUserOrderController {
 		}
 		return message;
 	}
+
+	/**
+	 * 创建订单
+	 * 
+	 * @param data
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = { "add", "api/add" })
+	public Message add(String data) {
+		Message message = new Message();
+		try {
+			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
+			orderService.create(order);
+		} catch (Exception e) {
+			message.setErrorCode(ErrorCode.ORDER_ERROR);
+			StaticLogger.error("user order add error", e);
+		}
+		return message;
+	}
+
+	/**
+	 * 评价订单
+	 * 
+	 * @param data
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = { "edit", "api/edit" })
+	public Message edit(String data) {
+		Message message = new Message();
+		try {
+			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
+			orderService.modify(order);
+		} catch (Exception e) {
+			message.setErrorCode(ErrorCode.ORDER_ERROR);
+			StaticLogger.error("user order edit error", e);
+		}
+		return message;
+	}
+
+	/**
+	 * 订单详情
+	 * 
+	 * @param data
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = { "one", "api/one" })
+	public Message one(String data) {
+		Message message = new Message();
+		try {
+			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
+			AppUser user = userService.getByPhone(order.getPhone());
+			AppUserOrder entity = orderService.getOne(order);
+			message.setData(entity, user.getDes_key(), user.getDes_iv());
+		} catch (Exception e) {
+			message.setErrorCode(ErrorCode.ORDER_ERROR);
+			StaticLogger.error("user order get one error", e);
+		}
+		return message;
+	}
 }

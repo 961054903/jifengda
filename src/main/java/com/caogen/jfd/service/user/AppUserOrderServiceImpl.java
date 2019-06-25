@@ -1,5 +1,6 @@
 package com.caogen.jfd.service.user;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +18,8 @@ import com.caogen.jfd.dao.user.ConfigDao;
 import com.caogen.jfd.dao.user.VehicleModelDao;
 import com.caogen.jfd.dao.user.VehiclePriceDao;
 import com.caogen.jfd.entity.user.AppUserOrder;
+import com.caogen.jfd.entity.user.AppUserOrder.Label;
+import com.caogen.jfd.entity.user.AppUserOrder.Mode;
 import com.caogen.jfd.entity.user.AppUserSite;
 import com.caogen.jfd.entity.user.SysConfig;
 import com.caogen.jfd.entity.user.VehicleModel;
@@ -25,6 +28,7 @@ import com.caogen.jfd.model.Distance;
 import com.caogen.jfd.model.Distance.Result;
 import com.caogen.jfd.util.FormatUtils;
 import com.caogen.jfd.util.HttpClientUtils;
+import com.caogen.jfd.util.PasswordHelper;
 
 /**
  * 
@@ -44,6 +48,13 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 
 	@Override
 	public void create(AppUserOrder entity) {
+		entity.setCreate_date(LocalDateTime.now());
+		if (entity.getMode().equals(Mode.appoint)) {
+			entity.setAppoint_date(FormatUtils.strToDate(entity.getAppointDate()));
+		}
+		entity.setCode(PasswordHelper.generateNumber());
+		entity.setStatus(0);
+		entity.setLabel(Label.none);
 		orderDao.insert(entity);
 	}
 
@@ -181,6 +192,20 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 			throw new RuntimeException("订单类型错误");
 		}
 		order.setOrder_money(price);
+		order.setKilometre(distance * 0.001);
+		return order;
+	}
+
+	@Override
+	public AppUserOrder getOne(AppUserOrder entity) {
+		AppUserOrder order = orderDao.getUnderway(entity);
+		if (order == null) {
+			order = orderDao.getFinish(entity);
+		}
+		order.setCreateDate(FormatUtils.dateToStr(order.getCreate_date()));
+		if (order.getMode().equals(Mode.appoint)) {
+			order.setAppointDate(FormatUtils.dateToStr(order.getAppoint_date()));
+		}
 		return order;
 	}
 
