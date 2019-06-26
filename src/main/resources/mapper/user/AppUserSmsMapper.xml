@@ -25,5 +25,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="sms" />
 		FROM app_user_sms
 		WHERE phone = #{phone}
+		ORDER BY create_date DESC
+		LIMIT
+		1
 	</select>
 </mapper>

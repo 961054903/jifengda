@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
-import com.caogen.jfd.common.LoginType;
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.entity.user.AppUser.State;
@@ -28,6 +27,7 @@ import com.caogen.jfd.service.user.AppUserSmsService;
 import com.caogen.jfd.service.user.AppUserThirdService;
 import com.caogen.jfd.service.user.ConfigService;
 import com.caogen.jfd.util.PasswordHelper;
+import com.caogen.jfd.util.SmsUtils;
 import com.google.gson.Gson;
 
 /**
@@ -50,34 +50,35 @@ public class AppUserController {
 	private ConfigService configService;
 
 	/**
-	 * 登录
+	 * 密码登录
 	 * 
-	 * @param type
 	 * @param user
-	 * @param sms
-	 * @param third
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("login")
-	public Message login(LoginType type, AppUser user, AppUserSms sms, AppUserThird third) {
+	@RequestMapping("login/password")
+	public Message loginByPassword(AppUser user) {
 		Message message = new Message();
-		String token = null;
 		try {
-			switch (type) {
-			case password:
-				token = loginByPassword(user);
-				break;
-			case sms:
-				token = loginBySms(user, sms);
-				break;
-			case thirdparty:
-				token = loginByThird(user, sms, third);
-				break;
-			default:
+			// 检查参数
+			if (user.getPhone() == null || user.getPassword() == null) {
 				throw new DefinedException(ErrorCode.PARAM_MISSING);
 			}
-			message.setData(token);
+			// 用户是否存在
+			AppUser entity = userService.getByPhone(user.getPhone());
+			if (entity == null || !entity.getState().equals(State.normal)) {
+				throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);
+			}
+			// 密码是否设置
+			if (StringUtils.isEmpty(entity.getPassword())) {
+				throw new DefinedException(ErrorCode.LOGIN_PASSWORD_ERROR);
+			}
+			// 密码是否正确
+			String ciphertext = PasswordHelper.encryptPassword(user.getPassword(), entity.getSalt());
+			if (!ciphertext.equals(entity.getPassword())) {
+				throw new DefinedException(ErrorCode.LOGIN_PASSWORD_ERROR);
+			}
+			message.setData(generateToken(user.getPhone()));
 		} catch (DefinedException e) {
 			message.setErrorCode(e.getError());
 			StaticLogger.error("user login error", e);
@@ -88,97 +89,75 @@ public class AppUserController {
 		return message;
 	}
 
-	/**
-	 * 密码登录
-	 * 
-	 * @param user
-	 * @return
-	 * @throws Exception
-	 */
-	private String loginByPassword(AppUser user) throws Exception {
-		// 检查参数
-		if (user.getPhone() == null || user.getPassword() == null) {
-			throw new DefinedException(ErrorCode.PARAM_MISSING);
-		}
-		// 用户是否存在
-		AppUser entity = userService.getByPhone(user.getPhone());
-		if (entity == null || !entity.getState().equals(State.normal)) {
-			throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);
-		}
-		// 密码是否设置
-		if (StringUtils.isEmpty(entity.getPassword())) {
-			throw new DefinedException(ErrorCode.LOGIN_PASSWORD_ERROR);
-		}
-		// 密码是否正确
-		String ciphertext = PasswordHelper.encryptPassword(user.getPassword(), entity.getSalt());
-		if (!ciphertext.equals(entity.getPassword())) {
-			throw new DefinedException(ErrorCode.LOGIN_PASSWORD_ERROR);
-		}
-		return generateToken(user.getPhone());
-	}
-
-	/**
-	 * 短信验证码登录
-	 * 
-	 * @param user
-	 * @param sms
-	 * @return
-	 * @throws Exception
-	 */
-	private String loginBySms(AppUser user, AppUserSms sms) throws Exception {
-		// 检查参数
-		if (user.getPhone() == null || sms.getCode() == null) {
-			throw new DefinedException(ErrorCode.PARAM_MISSING);
-		}
-		// 对比验证码
-		contrastSms(user.getPhone(), sms.getCode());
-		// 用户是否存在，不存在则创建用户
-		AppUser entity = userService.getByPhone(user.getPhone());
-		if (entity == null) {
-			entity = new AppUser(user.getPhone());
-			entity.setReferrer(user.getReferrer());
-			userService.create(entity);
-			infoService.create(new AppUserInfo(user.getPhone()));
-		} else if (!entity.getState().equals(State.normal)) {
-			throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);
-		}
-		return generateToken(user.getPhone());
-	}
-
-	/**
-	 * 第三方应用授权登录
-	 * 
-	 * @param user
-	 * @param sms
-	 * @param third
-	 * @return
-	 * @throws Exception
-	 */
-	private String loginByThird(AppUser user, AppUserSms sms, AppUserThird third) throws Exception {
-		// 检查参数
-		if (third.getThirdparty() == null || third.getIdentifier() == null) {
-			throw new DefinedException(ErrorCode.PARAM_MISSING);
-		}
-		AppUserThird entity = thirdService.getByProperty(third);
-		if (entity == null) {
+	@ResponseBody
+	@RequestMapping("login/sms")
+	public Message loginBySms(AppUser user, AppUserSms sms) {
+		Message message = new Message();
+		try {
 			// 检查参数
 			if (user.getPhone() == null || sms.getCode() == null) {
 				throw new DefinedException(ErrorCode.PARAM_MISSING);
 			}
 			// 对比验证码
 			contrastSms(user.getPhone(), sms.getCode());
-			// 创建用户
-			if (userService.getByPhone(user.getPhone()) == null) {
-				userService.create(user);
+			// 用户是否存在，不存在则创建用户
+			AppUser entity = userService.getByPhone(user.getPhone());
+			if (entity == null) {
+				entity = new AppUser(user.getPhone());
+				entity.setReferrer(user.getReferrer());
+				userService.create(entity);
 				infoService.create(new AppUserInfo(user.getPhone()));
+			} else if (!entity.getState().equals(State.normal)) {
+				throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);
 			}
-			// 添加第三方应用记录
-			third.setPhone(user.getPhone());
-			thirdService.create(third);
-		} else {
-			user.setPhone(entity.getPhone());
+			message.setData(generateToken(user.getPhone()));
+		} catch (DefinedException e) {
+			message.setErrorCode(e.getError());
+			StaticLogger.error("user login error", e);
+		} catch (Exception e) {
+			message.setErrorCode(ErrorCode.LOGIN_ERROR);
+			StaticLogger.error("user login error", e);
 		}
-		return generateToken(user.getPhone());
+		return message;
+	}
+
+	@ResponseBody
+	@RequestMapping("login/third")
+	public Message loginByThird(AppUser user, AppUserSms sms, AppUserThird third) {
+		Message message = new Message();
+		try {
+			// 检查参数
+			if (third.getThirdparty() == null || third.getIdentifier() == null) {
+				throw new DefinedException(ErrorCode.PARAM_MISSING);
+			}
+			AppUserThird entity = thirdService.getByProperty(third);
+			if (entity == null) {
+				// 检查参数
+				if (user.getPhone() == null || sms.getCode() == null) {
+					throw new DefinedException(ErrorCode.FIRST_LOGIN);
+				}
+				// 对比验证码
+				contrastSms(user.getPhone(), sms.getCode());
+				// 创建用户
+				if (userService.getByPhone(user.getPhone()) == null) {
+					userService.create(user);
+					infoService.create(new AppUserInfo(user.getPhone()));
+				}
+				// 添加第三方应用记录
+				third.setPhone(user.getPhone());
+				thirdService.create(third);
+			} else {
+				user.setPhone(entity.getPhone());
+			}
+			message.setData(generateToken(user.getPhone()));
+		} catch (DefinedException e) {
+			message.setErrorCode(e.getError());
+			StaticLogger.error("user login error", e);
+		} catch (Exception e) {
+			message.setErrorCode(ErrorCode.LOGIN_ERROR);
+			StaticLogger.error("user login error", e);
+		}
+		return message;
 	}
 
 	/**
@@ -249,47 +228,6 @@ public class AppUserController {
 	}
 
 	/**
-	 * 生成token
-	 * 
-	 * @param username
-	 * @return
-	 */
-	private String generateToken(String username) {
-		String token = PasswordHelper.generateNumber();
-		AppUser entity = new AppUser();
-		entity.setPhone(username);
-		entity.setToken(token);
-		userService.modify(entity);
-		return token;
-	}
-
-	/**
-	 * 对比验证码
-	 * 
-	 * @param phone
-	 * @param sms
-	 * @throws Exception
-	 */
-	private void contrastSms(String phone, String sms) throws Exception {
-		// 查询该条验证码记录
-		AppUserSms entity = new AppUserSms();
-		entity.setPhone(phone);
-		AppUserSms userSms = smsService.getByPhone(phone);
-		if (userSms == null) {
-			throw new DefinedException(ErrorCode.SMS_INEXISTENCE);
-		}
-		// 验证码是否在有效期内
-		Long indate = Long.parseLong(configService.getByItem("indate").getItem_value());
-		Duration duration = Duration.between(userSms.getCreate_date(), LocalDateTime.now());
-		if (duration.toMillis() > indate) {
-			throw new DefinedException(ErrorCode.SMS_PAST);
-		}
-		if (!userSms.getCode().equals(sms)) {
-			throw new DefinedException(ErrorCode.SMS_MISMATCHING);
-		}
-	}
-
-	/**
 	 * 获取邀请人列表
 	 * 
 	 * @param data
@@ -319,14 +257,64 @@ public class AppUserController {
 	 */
 	@ResponseBody
 	@RequestMapping("sms")
-	public Message sms(String phone) {
+	public Message sendSms(String phone) {
 		Message message = new Message();
 		try {
-
+			// 发送验证码，成功则存储验证码
+			String code = PasswordHelper.generateCode();
+			boolean flag = SmsUtils.sendSms(phone, code);
+			if (flag) {
+				AppUserSms entity = new AppUserSms(phone);
+				entity.setCode(code);
+				smsService.create(entity);
+			} else {
+				throw new RuntimeException("验证码发送失败");
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			message.setErrorCode(ErrorCode.SMS_SEND_ERROR);
+			StaticLogger.error("send sms error", e);
 		}
 		return message;
+	}
+
+	/**
+	 * 生成token
+	 * 
+	 * @param phone
+	 * @return
+	 */
+	private String generateToken(String phone) {
+		String token = PasswordHelper.generateNumber();
+		AppUser entity = new AppUser(phone);
+		entity.setToken(token);
+		userService.modify(entity);
+		return token;
+	}
+
+	/**
+	 * 对比验证码
+	 * 
+	 * @param phone
+	 * @param sms
+	 * @throws Exception
+	 */
+	private void contrastSms(String phone, String sms) throws Exception {
+		// 查询该条验证码记录
+		AppUserSms entity = new AppUserSms();
+		entity.setPhone(phone);
+		AppUserSms userSms = smsService.getByPhone(phone);
+		if (userSms == null) {
+			throw new DefinedException(ErrorCode.SMS_INEXISTENCE);
+		}
+		// 验证码是否在有效期内
+		Long indate = Long.parseLong(configService.getByItem("indate").getItem_value());
+		Duration duration = Duration.between(userSms.getCreate_date(), LocalDateTime.now());
+		if (duration.toMillis() > indate) {
+			throw new DefinedException(ErrorCode.SMS_PAST);
+		}
+		if (!userSms.getCode().equals(sms)) {
+			throw new DefinedException(ErrorCode.SMS_MISMATCHING);
+		}
 	}
 
 }

@@ -25,6 +25,15 @@ public class PasswordHelper {
 	}
 
 	/**
+	 * 生成验证码
+	 * 
+	 * @return
+	 */
+	public static String generateCode() {
+		return RandomStringUtils.random(4, "0123456789");
+	}
+
+	/**
 	 * 加密密码
 	 * 
 	 * @param password

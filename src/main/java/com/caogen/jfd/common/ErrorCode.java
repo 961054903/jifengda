@@ -9,6 +9,7 @@ public enum ErrorCode {
 	FAIL("1000", "操作失败"),
 	PARAM_MISSING("1001", "参数缺失"),
 	PARAM_ILLEGALITY("1002", "参数格式有误"),
+	FIRST_LOGIN("1003", "该第三方第一次登录，需携带手机号和验证码"),
 	
 	LOGIN_ERROR("1010", "登录失败"),
 	LOGIN_USER_ERROR("1011", "用户不存在或状态异常"),
@@ -16,6 +17,7 @@ public enum ErrorCode {
 	SMS_MISMATCHING("1013", "验证码不匹配"),
 	SMS_PAST("1014", "验证码已过期"),
 	SMS_INEXISTENCE("1015", "验证码不存在"),
+	SMS_SEND_ERROR("1016", "验证码发送异常"),
 	
 	SIGNIN_ERROR("1020", "密钥交换失败"),
 	ISSUE_ERROR("1030", "问题反馈操作异常"),

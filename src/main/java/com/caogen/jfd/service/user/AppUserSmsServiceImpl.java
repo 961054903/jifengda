@@ -1,5 +1,7 @@
 package com.caogen.jfd.service.user;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ public class AppUserSmsServiceImpl implements AppUserSmsService {
 
 	@Override
 	public void create(AppUserSms entity) {
+		entity.setCreate_date(LocalDateTime.now());
 		smsDao.insert(entity);
 	}
 
