@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.caogen.jfd.entity.driver.Complete.Type.multiple;
+import static com.caogen.jfd.entity.driver.Complete.Type.single;
+
 
 @Service
 public class PeservationServicelmpl implements PeservationService {
@@ -33,8 +36,6 @@ public class PeservationServicelmpl implements PeservationService {
     private PersonalDao personalDao;
     @Autowired
     private VehicleDao vehicleDao;
-
-
     @Override
     public void create(Peservation entity) {
 
@@ -74,7 +75,6 @@ public class PeservationServicelmpl implements PeservationService {
         peservation.setCode(code);
         return peservationDao.get(peservation);
     }
-
     @Override
     public List<Peservation> getput() {
         Personal personal = new Personal();
@@ -119,14 +119,12 @@ public class PeservationServicelmpl implements PeservationService {
                     //公里自定义
                     if (ss<=5){
                     //推送
-
                     }
-                    
             }
         }
       return  null;
-    }
 
+    }
     @Override
     public boolean getspike(String phone, String code) {
         AppDriver appDriver = new AppDriver();
@@ -140,14 +138,17 @@ public class PeservationServicelmpl implements PeservationService {
         if(peservations.getCode()==null){
             return false;
         }
+
         //判断是否已经秒杀到了
-        if (peservations.getDriver_id()!=null){
-         return false;
+        if (peservations.getDriver_id()!=null) {
+            return false;
         }
         peservations.setDriver_id(id);
         peservationDao.update(peservation);
         return true;
     }
+
+
 
 
 }
