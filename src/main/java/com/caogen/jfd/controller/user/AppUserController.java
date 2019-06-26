@@ -49,6 +49,15 @@ public class AppUserController {
 	@Autowired
 	private ConfigService configService;
 
+	/**
+	 * 登录
+	 * 
+	 * @param type
+	 * @param user
+	 * @param sms
+	 * @param third
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping("login")
 	public Message login(LoginType type, AppUser user, AppUserSms sms, AppUserThird third) {
@@ -218,6 +227,7 @@ public class AppUserController {
 		}
 		return message;
 	}
+
 	/**
 	 * 修改密码
 	 * 
@@ -279,6 +289,12 @@ public class AppUserController {
 		}
 	}
 
+	/**
+	 * 获取邀请人列表
+	 * 
+	 * @param data
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = { "referrer", "api/referrer" })
 	public Message referrer(String data) {
@@ -291,6 +307,24 @@ public class AppUserController {
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.FAIL);
 			StaticLogger.error(message.getCode(), e);
+		}
+		return message;
+	}
+
+	/**
+	 * 获取短信验证码
+	 * 
+	 * @param data
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("sms")
+	public Message sms(String phone) {
+		Message message = new Message();
+		try {
+
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		return message;
 	}
