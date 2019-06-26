@@ -55,7 +55,7 @@ public class AppUserWalletController {
 	}
 
 	/**
-	 * 获取红包列表
+	 * 红包列表
 	 * 
 	 * @param data
 	 * @return

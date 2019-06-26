@@ -3,12 +3,15 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.user.AppUserTicketDao">
-	<sql id="ticket">phone,ticket,available,reason</sql>
+	<sql id="ticket">phone,ticket_id,available,reason</sql>
 	<select id="find" parameterType="AppUserTicket"
 		resultType="AppUserTicket">
-		SELECT id,
-		<include refid="ticket" />
-		FROM app_user_ticket
+		SELECT
+		ut.available, ut.reason, t.*
+		FROM
+		app_user_ticket ut
+		JOIN
+		app_ticket t ON ut.ticket_id = t.id
 		<where>
 			<if test="phone != null">phone = #{phone}</if>
 			<if test="available != null">AND available = #{available}</if>
