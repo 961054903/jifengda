@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class DriverSite implements Serializable {
-    private static final long serialVersionUID = -1975707114992384047L;
+    private static final long serialVersionUID = -1975707114992664047L;
     private Integer id; //id
     private String phone;//手机号
     private LocalDateTime create_date;//创建时间
