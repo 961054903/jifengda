@@ -18,7 +18,7 @@ import com.caogen.jfd.util.FormatUtils;
 public class AppUserDetailServiceImpl implements AppUserDetailService {
 	@Autowired
 	private AppUserDetailDao detailDao;
-
+	
 	@Override
 	public void create(AppUserDetail entity) {
 		detailDao.insert(entity);
