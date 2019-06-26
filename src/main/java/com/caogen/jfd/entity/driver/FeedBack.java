@@ -6,34 +6,29 @@ import java.time.LocalDateTime;
 public class FeedBack implements Serializable {
     private static final long serialVersionUID = -1975707114992384047L;
     private Integer id; //id
-    private Integer user_id; //用户id
+    private String name; //
     private String type;//类型 问题，建议
     private String title;//标题
     private String content;//内容
     private String photo_url; //图片
     private Boolean is_check;// 是否查看
     private LocalDateTime create_date;//创建时间
-
-    public Boolean getIs_check() {
-        return is_check;
-    }
-
-    public void setIs_check(Boolean is_check) {
-        this.is_check = is_check;
-
-    }
+    private String createDate;
+    private String phone;
 
     @Override
     public String toString() {
         return "FeedBack{" +
                 "id=" + id +
-                ", user_id=" + user_id +
+                ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", photo_url='" + photo_url + '\'' +
-                ", is_check='" + is_check + '\'' +
+                ", is_check=" + is_check +
                 ", create_date=" + create_date +
+                ", createDate='" + createDate + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 
@@ -49,12 +44,12 @@ public class FeedBack implements Serializable {
         this.id = id;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public String getName() {
+        return name;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getType() {
@@ -89,6 +84,14 @@ public class FeedBack implements Serializable {
         this.photo_url = photo_url;
     }
 
+    public Boolean getIs_check() {
+        return is_check;
+    }
+
+    public void setIs_check(Boolean is_check) {
+        this.is_check = is_check;
+    }
+
     public LocalDateTime getCreate_date() {
         return create_date;
     }
@@ -96,7 +99,20 @@ public class FeedBack implements Serializable {
     public void setCreate_date(LocalDateTime create_date) {
         this.create_date = create_date;
     }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }
-
-
-

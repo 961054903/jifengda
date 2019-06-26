@@ -51,9 +51,8 @@ public class Demo {
 
 	@Test
 	public void test2() throws Exception {
-		Task entity = new Task();
-		entity.setSerial("1");
-	    entity.setCode("1");
+		FeedBack entity = new FeedBack();
+		entity.setPhone("123456");
 		String json = gson.toJson(entity);
 		System.out.println(json);
 		String result = SecretUtils.desedeEncode(json, key, iv);
@@ -63,7 +62,7 @@ public class Demo {
 
 	@Test
 	public void test3() throws Exception {
-		String str = "4F4F624167774A74754B633D" +
+		String str = "5338313479616D3243533068534946593563553139476947586D48616C6D396158667A4E2B4E3151685358775047367863306E734453562F6F70713172474E57524C4D6F6170626973456C534E386B414A6A396364303066717651396B70426A55464F4269715963453764774C3552486D546745326F3544335169713462496775446F49707A4A77635758644E424E6C4A2F6F4B79692F577A534C595A5179545471666C6B544E3934584B34766276352B3647725067766A3739796873303149327949345439585A735166357468634D3678674276513D3D" +
 				"";
 		System.out.println(SecretUtils.desedeDecode(str, key, iv));
 	}

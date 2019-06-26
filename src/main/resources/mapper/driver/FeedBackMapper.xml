@@ -3,12 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.driver.FeedBackDao">
-    <sql id="name">user_id,type,title,content,photo_url,is_check,create_date</sql>
+    <sql id="name">type,title,content,photo_url,is_check,create_date,name,phone
+	</sql>
     <insert id="insert" parameterType="FeedBack">
-        INSERT
-        INTO
-        issue_feedback(<include refid="name"/>)
-        VALUES
-        (#{user_id},#{type},#{title},#{content},#{photo_url},#{is_check},#{create_date})
+        INSERT INTO issue_feedback (
+        <include refid="name" />
+        )
+        VALUES (
+        #{type},#{title},#{content},#{photo_url},#{is_check},#{create_date},#{name},#{phone}
+        )
     </insert>
+
+    <select id="find" parameterType="FeedBack"
+            resultType="FeedBack">
+        SELECT id,
+        <include refid="name" />
+        FROM issue_feedback
+        <where>
+            <if test="type != null">type = #{type}</if>
+            <if test="phone != null">AND phone = #{phone}</if>
+        </where>
+    </select>
 </mapper>
