@@ -3,7 +3,7 @@ package com.caogen.jfd.entity.driver;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class FeedBack implements Serializable {
+public class    FeedBack implements Serializable {
     private static final long serialVersionUID = -1975707114992384047L;
     private Integer id; //id
     private String name; //
