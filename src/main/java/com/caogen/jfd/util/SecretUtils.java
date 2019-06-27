@@ -35,7 +35,7 @@ public class SecretUtils {
 	public static String desedeEncode(String plaintext, String secretKey, String iv) throws Exception {
 		byte[] text = plaintext.getBytes(charset);
 		byte[] encryptData = desede(text, secretKey, iv, Cipher.ENCRYPT_MODE);
-		return str2hex(base.encodeToString(encryptData));
+		return base.encodeToString(encryptData);
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class SecretUtils {
 	 * @throws Exception
 	 */
 	public static String desedeDecode(String ciphertext, String secretKey, String iv) throws Exception {
-		byte[] text = base.decode(hex2str(ciphertext));
+		byte[] text = base.decode(ciphertext);
 		byte[] decryptData = desede(text, secretKey, iv, Cipher.DECRYPT_MODE);
 		return new String(decryptData, charset);
 	}

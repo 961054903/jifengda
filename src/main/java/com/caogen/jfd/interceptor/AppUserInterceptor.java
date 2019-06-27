@@ -52,7 +52,7 @@ public class AppUserInterceptor implements HandlerInterceptor {
 		} else {
 			throw new DefinedException(ErrorCode.PARAM_ILLEGALITY);
 		}
-		String plaintext = SecretUtils.desedeDecode(ciphertext, key, iv);
+		String plaintext = SecretUtils.desedeDecode(ciphertext.replace(" ", "+"), key, iv);
 		// 转发
 		WrappedRequest wr = new WrappedRequest(request);
 		wr.setParameter("data", plaintext);

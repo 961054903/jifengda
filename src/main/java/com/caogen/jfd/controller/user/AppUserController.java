@@ -256,7 +256,7 @@ public class AppUserController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("sms")
+	@RequestMapping("sendSms")
 	public Message sendSms(String phone) {
 		Message message = new Message();
 		try {
@@ -273,6 +273,19 @@ public class AppUserController {
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.SMS_SEND_ERROR);
 			StaticLogger.error("send sms error", e);
+		}
+		return message;
+	}
+
+	@ResponseBody
+	@RequestMapping("contrast")
+	public Message contrast(String phone, String code) {
+		Message message = new Message();
+		try {
+			contrastSms(phone, code);
+		} catch (Exception e) {
+			message.setErrorCode(ErrorCode.SMS_MISMATCHING);
+			StaticLogger.error("sms error", e);
 		}
 		return message;
 	}

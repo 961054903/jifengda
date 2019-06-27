@@ -47,6 +47,12 @@ public class AppUserInfoController {
 		return message;
 	}
 
+	/**
+	 * 实名认证
+	 * 
+	 * @param data
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = { "real", "api/real" })
 	public Message real(String data) {
