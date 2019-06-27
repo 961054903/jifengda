@@ -60,4 +60,11 @@ public interface AppUserOrderService extends BaseService<AppUserOrder> {
 	 */
 	AppUserOrder getOne(AppUserOrder entity);
 
+	/**
+	 * 评价订单
+	 * 
+	 * @param order
+	 */
+	void evaluate(AppUserOrder order);
+
 }

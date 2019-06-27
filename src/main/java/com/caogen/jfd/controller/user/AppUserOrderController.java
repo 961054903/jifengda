@@ -151,12 +151,12 @@ public class AppUserOrderController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = { "edit", "api/edit" })
-	public Message edit(String data) {
+	@RequestMapping(value = { "evaluate", "api/evaluate" })
+	public Message evaluate(String data) {
 		Message message = new Message();
 		try {
 			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
-			orderService.modify(order);
+			orderService.evaluate(order);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.ORDER_ERROR);
 			StaticLogger.error("user order edit error", e);
@@ -171,8 +171,8 @@ public class AppUserOrderController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = { "one", "api/one" })
-	public Message one(String data) {
+	@RequestMapping(value = { "details", "api/details" })
+	public Message details(String data) {
 		Message message = new Message();
 		try {
 			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);

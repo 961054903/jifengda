@@ -203,10 +203,18 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 			order = orderDao.getFinish(entity);
 		}
 		order.setCreateDate(FormatUtils.dateToStr(order.getCreate_date()));
-		if (order.getMode().equals(Mode.appoint)) {
+		order.setCreate_date(null);
+		if (order.getAppoint_date() != null) {
 			order.setAppointDate(FormatUtils.dateToStr(order.getAppoint_date()));
+			order.setAppoint_date(null);
 		}
 		return order;
+	}
+
+	@Override
+	public void evaluate(AppUserOrder entity) {
+		entity.setIs_evaluate(true);
+		orderDao.evaluate(entity);
 	}
 
 }

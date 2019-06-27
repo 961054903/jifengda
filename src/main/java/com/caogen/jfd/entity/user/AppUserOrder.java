@@ -64,6 +64,11 @@ public class AppUserOrder implements Serializable {
 		this.id = id;
 	}
 
+	public AppUserOrder(String phone) {
+		super();
+		this.phone = phone;
+	}
+
 	@Override
 	public String toString() {
 		return "AppUserOrder [id=" + id + ", user_id=" + user_id + ", driver_id=" + driver_id + ", model_id=" + model_id

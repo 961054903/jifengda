@@ -3,20 +3,20 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.user.AppUserOrderDao">
-	<sql id="order">user_id,model_id,code,create_date,status,type,mode,appoint_date,label,origin,destination,name,night_service_cost,traffic_jam_cost,is_support,support_money,support_cost,order_money,ticket_money,actually_paid,kilometre,bonus,is_evaluate,evaluate_grade,evaluate_content
+	<sql id="orderUnderway">user_id,model_id,code,create_date,status,type,mode,appoint_date,label,origin,destination,name,night_service_cost,traffic_jam_cost,is_support,support_money,support_cost,order_money,ticket_money,actually_paid,kilometre,bonus
+	</sql>
+	<sql id="orderFinish">user_id,model_id,code,create_date,status,type,mode,appoint_date,label,origin,destination,name,night_service_cost,traffic_jam_cost,is_support,support_money,support_cost,order_money,ticket_money,actually_paid,kilometre,bonus,is_evaluate,evaluate_grade,evaluate_content
 	</sql>
 	<insert id="insert" parameterType="AppUserOrder">
 		INSERT INTO order_info (
-		<include refid="order" />
+		<include refid="orderUnderway" />
 		) VALUES (
 		#{user_id},#{model_id},#{code},#{create_date},#{status},#{type},#{mode},#{appoint_date},#{label},#{origin},#{destination},#{name},#{night_service_cost},#{traffic_jam_cost},#{is_support},#{support_money},#{support_cost},#{order_money},#{ticket_money},#{actually_paid},#{kilometre},#{bonus},#{is_evaluate},#{evaluate_grade},#{evaluate_content}
 		)
 	</insert>
-	<update id="update" parameterType="AppUserOrder">
-		UPDATE order_info
+	<update id="evaluate" parameterType="AppUserOrder">
+		UPDATE order_history
 		<set>
-			<if test="status != null">status = #{status},</if>
-			<if test="label != null">label = #{label},</if>
 			<if test="is_evaluate != null">is_evaluate = #{is_evaluate},</if>
 			<if test="evaluate_grade != null">evaluate_grade = #{evaluate_grade},</if>
 			<if test="evaluate_content != null">evaluate_content = #{evaluate_content},</if>
@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findUnderway" parameterType="AppUserOrder"
 		resultType="AppUserOrder">
 		SELECT id,
-		<include refid="order" />
+		<include refid="orderUnderway" />
 		FROM order_info
 		<where>
 			<if test="user_id != null">user_id = #{user_id}</if>
@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findFinish" parameterType="AppUserOrder"
 		resultType="AppUserOrder">
 		SELECT id,
-		<include refid="order" />
+		<include refid="orderFinish" />
 		FROM order_history
 		<where>
 			<if test="user_id != null">user_id = #{user_id}</if>
@@ -62,15 +62,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getUnderway" parameterType="AppUserOrder"
 		resultType="AppUserOrder">
 		SELECT id,
-		<include refid="order" />
+		<include refid="orderUnderway" />
 		FROM order_info
 		WHERE code = #{code}
 	</select>
 	<select id="getFinish" parameterType="AppUserOrder"
 		resultType="AppUserOrder">
 		SELECT id,
-		<include refid="order" />
+		<include refid="orderFinish" />
 		FROM order_history
 		WHERE code = #{code}
 	</select>
+	
 </mapper>

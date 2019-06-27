@@ -54,4 +54,10 @@ public interface AppUserOrderDao extends BaseDao<AppUserOrder> {
 	 */
 	AppUserOrder getFinish(AppUserOrder entity);
 
+	/**
+	 * 
+	 * @param entity
+	 */
+	void evaluate(AppUserOrder entity);
+
 }
