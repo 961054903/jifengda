@@ -50,7 +50,7 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 	public void create(AppUserOrder entity) {
 		entity.setCreate_date(LocalDateTime.now());
 		if (entity.getMode().equals(Mode.appoint)) {
-			entity.setAppoint_date(FormatUtils.strToDate(entity.getAppointDate()));
+			entity.setAppoint_date(FormatUtils.strToDateTime(entity.getAppointDate()));
 		}
 		entity.setCode(PasswordHelper.generateNumber());
 		entity.setStatus(0);
@@ -139,7 +139,7 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 			order.setNight_service_cost(night.getFlag() ? vm.getNight_cost() : 0.0);
 			break;
 		case appoint:// 预约订单
-			LocalTime time = FormatUtils.strToDate(order.getAppointDate()).toLocalTime();
+			LocalTime time = FormatUtils.strToDateTime(order.getAppointDate()).toLocalTime();
 			// 高峰期加价
 			if (time.isAfter(jam.getStart_time()) && time.isBefore(jam.getEnd_time())) {
 				order.setTraffic_jam_cost(vm.getJam_cost());

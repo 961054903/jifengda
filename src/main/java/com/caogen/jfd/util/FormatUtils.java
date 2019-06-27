@@ -21,7 +21,7 @@ public class FormatUtils {
 	 * @param str
 	 * @return
 	 */
-	public static LocalDateTime strToDate(String str) {
+	public static LocalDateTime strToDateTime(String str) {
 		return LocalDateTime.parse(str, datetime);
 	}
 
@@ -35,12 +35,32 @@ public class FormatUtils {
 	}
 
 	/**
+	 * 字符串转时间
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static LocalDate strToDate(String str) {
+		return LocalDate.parse(str, date);
+	}
+
+	/**
 	 * 时间转字符串
 	 * 
 	 * @return
 	 */
 	public static String dateToStr(LocalDate local) {
 		return date.format(local);
+	}
+
+	/**
+	 * 字符串转时间
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static LocalTime strToTime(String str) {
+		return LocalTime.parse(str, time);
 	}
 
 	/**
