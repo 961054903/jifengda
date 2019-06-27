@@ -42,7 +42,27 @@ public class AppUserInfoController {
 			infoService.modify(info);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.INFO_ERROR);
-			StaticLogger.error("user info del error", e);
+			StaticLogger.error("user info edit error", e);
+		}
+		return message;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = { "real", "api/real" })
+	public Message real(String data) {
+		Message message = new Message();
+		try {
+			AppUserInfo info = Constants.gson.fromJson(data, AppUserInfo.class);
+			AppUserInfo entity = infoService.getOne(new AppUserInfo(info.getPhone()));
+			if (entity.getIs_real()) {
+				throw new RuntimeException("已实名认证");
+			} else {
+				info.setIs_real(true);
+				infoService.modify(info);
+			}
+		} catch (Exception e) {
+			message.setErrorCode(ErrorCode.INFO_ERROR);
+			StaticLogger.error("user info real error", e);
 		}
 		return message;
 	}

@@ -1,7 +1,7 @@
 package com.caogen.jfd.entity.user;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * 
@@ -17,7 +17,8 @@ public class AppUserInfo implements Serializable {
 	private String nickname;
 	private Integer level;
 	private Gender gender;
-	private LocalDateTime birthday;
+	private LocalDate birthday;
+	private String birth;
 	private String occupation;
 	private Boolean is_real;
 	private String name;
@@ -47,10 +48,10 @@ public class AppUserInfo implements Serializable {
 	@Override
 	public String toString() {
 		return "AppUserInfo [id=" + id + ", phone=" + phone + ", photo_url=" + photo_url + ", nickname=" + nickname
-				+ ", level=" + level + ", gender=" + gender + ", birthday=" + birthday + ", occupation=" + occupation
-				+ ", is_real=" + is_real + ", name=" + name + ", identity_number=" + identity_number
-				+ ", identity_front_url=" + identity_front_url + ", identity_back_url=" + identity_back_url
-				+ ", balance=" + balance + "]";
+				+ ", level=" + level + ", gender=" + gender + ", birthday=" + birthday + ", birth=" + birth
+				+ ", occupation=" + occupation + ", is_real=" + is_real + ", name=" + name + ", identity_number="
+				+ identity_number + ", identity_front_url=" + identity_front_url + ", identity_back_url="
+				+ identity_back_url + ", balance=" + balance + "]";
 	}
 
 	public Integer getId() {
@@ -101,11 +102,11 @@ public class AppUserInfo implements Serializable {
 		this.gender = gender;
 	}
 
-	public LocalDateTime getBirthday() {
+	public LocalDate getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(LocalDateTime birthday) {
+	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 	}
 
@@ -163,6 +164,14 @@ public class AppUserInfo implements Serializable {
 
 	public void setBalance(Double balance) {
 		this.balance = balance;
+	}
+
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
 
 }
