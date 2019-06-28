@@ -54,7 +54,7 @@ public class AppUserOrderController {
 	}
 
 	/**
-	 * 获取未完成的订单列表
+	 * 获取进行中的订单列表
 	 * 
 	 * @param data
 	 * @return
@@ -115,7 +115,8 @@ public class AppUserOrderController {
 			AppUserSite origin = Constants.gson.fromJson(order.getOrigin(), AppUserSite.class);
 			AppUserSite[] destination = Constants.gson.fromJson(order.getDestination(), AppUserSite[].class);
 			int distance = orderService.getDistance(origin, destination);
-			AppUserOrder entity = orderService.getPrice(order, distance);
+			order.setKilometre(distance * 0.001);
+			AppUserOrder entity = orderService.getPrice(order);
 			message.setData(entity, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.ORDER_ERROR);
@@ -136,6 +137,8 @@ public class AppUserOrderController {
 		Message message = new Message();
 		try {
 			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
+			AppUser user = userService.getByPhone(order.getPhone());
+			order.setUser_id(user.getId());
 			orderService.create(order);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.ORDER_ERROR);
@@ -159,7 +162,7 @@ public class AppUserOrderController {
 			orderService.evaluate(order);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.ORDER_ERROR);
-			StaticLogger.error("user order edit error", e);
+			StaticLogger.error("user order evaluate error", e);
 		}
 		return message;
 	}
@@ -181,7 +184,7 @@ public class AppUserOrderController {
 			message.setData(entity, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.ORDER_ERROR);
-			StaticLogger.error("user order get one error", e);
+			StaticLogger.error("user order get details error", e);
 		}
 		return message;
 	}

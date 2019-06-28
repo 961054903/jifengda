@@ -47,10 +47,9 @@ public interface AppUserOrderService extends BaseService<AppUserOrder> {
 	 * 计算价格
 	 * 
 	 * @param order
-	 * @param distance
 	 * @return
 	 */
-	AppUserOrder getPrice(AppUserOrder order, int distance);
+	AppUserOrder getPrice(AppUserOrder order);
 
 	/**
 	 * 查询

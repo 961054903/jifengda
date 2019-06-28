@@ -126,7 +126,7 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 	}
 
 	@Override
-	public AppUserOrder getPrice(AppUserOrder order, int distance) {
+	public AppUserOrder getPrice(AppUserOrder order) {
 		double price = 0.0;// 订单金额
 		int model_id = order.getModel_id();
 		VehicleModel vm = modelDao.get(new VehicleModel(model_id));
@@ -165,12 +165,12 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 		case single:// 单点订单
 			double startPrice = list.get(0).getPrice();
 			for (int i = 1; i < list.size(); i++) {
-				if (distance >= list.get(i).getEnd_space()) {
+				if (order.getKilometre() >= list.get(i).getEnd_space()) {
 					gap = list.get(i).getEnd_space() - list.get(i).getStart_space();
-				} else if (distance < list.get(i).getStart_space()) {
+				} else if (order.getKilometre() < list.get(i).getStart_space()) {
 					break;
 				} else {
-					gap = distance - list.get(i).getStart_space();
+					gap = order.getKilometre() - list.get(i).getStart_space();
 				}
 				price += gap * (list.get(i).getPrice() + order.getTraffic_jam_cost());
 			}
@@ -178,12 +178,12 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 			break;
 		case multiple:// 多点订单
 			for (VehiclePrice item : list) {
-				if (distance >= item.getEnd_space()) {
+				if (order.getKilometre() >= item.getEnd_space()) {
 					gap = item.getEnd_space() - item.getStart_space();
-				} else if (distance < item.getStart_space()) {
+				} else if (order.getKilometre() < item.getStart_space()) {
 					break;
 				} else {
-					gap = distance - item.getStart_space();
+					gap = order.getKilometre() - item.getStart_space();
 				}
 				price += gap * (item.getPrice() + order.getTraffic_jam_cost());
 			}
@@ -191,9 +191,12 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 		default:
 			throw new RuntimeException("订单类型错误");
 		}
-		order.setOrder_money(price);
-		order.setKilometre(distance * 0.001);
-		return order;
+		AppUserOrder result = new AppUserOrder();
+		result.setOrder_money(price);
+		result.setKilometre(order.getKilometre());
+		result.setNight_service_cost(order.getNight_service_cost());
+		result.setTraffic_jam_cost(order.getTraffic_jam_cost());
+		return result;
 	}
 
 	@Override
