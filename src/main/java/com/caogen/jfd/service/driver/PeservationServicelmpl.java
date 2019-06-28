@@ -1,22 +1,17 @@
 package com.caogen.jfd.service.driver;
 
 import com.caogen.jfd.common.Constants;
-import com.caogen.jfd.dao.driver.AppDriverDao;
-import com.caogen.jfd.dao.driver.PersonalDao;
-import com.caogen.jfd.dao.driver.PeservationDao;
-import com.caogen.jfd.dao.driver.VehicleDao;
-import com.caogen.jfd.entity.driver.AppDriver;
-import com.caogen.jfd.entity.driver.Personal;
-import com.caogen.jfd.entity.driver.Peservation;
+import com.caogen.jfd.dao.driver.*;
+import com.caogen.jfd.entity.driver.*;
 
 import com.caogen.jfd.entity.user.AppUserSite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.caogen.jfd.entity.driver.Complete.Type.multiple;
-import static com.caogen.jfd.entity.driver.Complete.Type.single;
+
 
 
 @Service
@@ -36,6 +31,10 @@ public class PeservationServicelmpl implements PeservationService {
     private PersonalDao personalDao;
     @Autowired
     private VehicleDao vehicleDao;
+    @Autowired
+    private TaskService taskService;
+    @Autowired
+    private CompleteDao completeDao;
     @Override
     public void create(Peservation entity) {
 
@@ -119,6 +118,7 @@ public class PeservationServicelmpl implements PeservationService {
                     //公里自定义
                     if (ss<=5){
                     //推送
+
                     }
             }
         }
@@ -149,6 +149,92 @@ public class PeservationServicelmpl implements PeservationService {
     }
 
 
+    @Autowired
+    private TaskDao taskDao;
+    @Override
+    public void getfenjie(String code) {
+        Peservation peservation = new Peservation();
+        peservation.setCode(code);
+        Peservation  peservations = peservationDao.getss(peservation);
+        String destination = peservations.getDestination();
+
+        AppUserSite[] appUserSite = Constants.gson.fromJson(destination,AppUserSite[].class);
+        for (int i =0;i<appUserSite.length;i++){
+            Task task = new Task();
+            String s = Constants.gson.toJson(appUserSite[i]);
+            task.setDestination(s);
+            task.setCode(code);
+            String a = Integer.toString(i);
+            task.setSerial(a);
+            task.setStatus(0);
+            taskDao.insert(task);
+        }
+
+        }
+
+    @Override
+    public void gettake(String phone, String code) {
+        Peservation peservation = new Peservation();
+        Complete complete = new Complete();
+        peservation.setCode(code);
+        peservation.setPhone(phone);
+        Peservation  peservations = peservationDao.get6(peservation);
+        String code1 = peservations.getCode();
+        String phone1 = peservations.getPhone();
+        LocalDateTime create_date = peservations.getCreate_date();
+        Integer status = peservations.getStatus();
+        Peservation.Mode mode = peservations.getMode();
+        String origin = peservations.getOrigin();
+        String destination = peservations.getDestination();
+        Double kilometre = peservations.getKilometre();
+        Double bonus = peservations.getBonus();
+        Integer user_id = peservations.getUser_id();
+        Integer driver_id = peservations.getDriver_id();
+        Integer model_id = peservations.getModel_id();
+        Peservation.Type type = peservations.getType();
+        LocalDateTime appoint_date = peservations.getAppoint_date();
+        Peservation.Label label = peservations.getLabel();
+        String name = peservations.getName();
+        Double night_service_cost = peservations.getNight_service_cost();
+        Double traffic_jam_cost = peservations.getTraffic_jam_cost();
+        Boolean is_support = peservations.getIs_support();
+        Double support_money = peservations.getSupport_money();
+        Double support_cost = peservations.getSupport_cost();
+        Double order_money = peservations.getOrder_money();
+        Double ticket_money = peservations.getTicket_money();
+        Double actually_paid = peservations.getActually_paid();
 
 
+        complete.setActually_paid(actually_paid);
+        complete.setTicket_money(ticket_money);
+        complete.setOrder_money(order_money);
+        complete.setSupport_cost(support_cost);
+        complete.setSupport_money(support_money);
+         complete.setIs_support(is_support);
+         complete.setTraffic_jam_cost(traffic_jam_cost);
+       complete.setNight_service_cost(night_service_cost);
+        complete.setName(name);
+        complete.setLabel(label);
+        complete.setAppoint_date(appoint_date);
+       complete.setType(type);
+        complete.setModel_id(model_id);
+        complete.setDriver_id(driver_id);
+        complete.setUser_id(user_id);
+        complete.setCode(code1);
+        complete.setPhone(phone1);
+        complete.setCreate_date(create_date);
+        complete.setStatus(status);
+       complete.setMode(mode);
+        complete.setOrigin(origin);
+        complete.setDestination(destination);
+        complete.setKilometre(kilometre);
+        complete.setBonus(bonus);
+        complete.setFinish_date(LocalDateTime.now());
+        completeDao.insert(complete);
+
+        peservationDao.delete(peservation);
+
+    }
 }
+
+

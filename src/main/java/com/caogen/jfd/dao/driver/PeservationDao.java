@@ -14,4 +14,12 @@ public interface PeservationDao extends BaseDao<Peservation> {
     Peservation find1(Personal personal);
 
   Peservation getdsp(Peservation peservation);
+
+    Peservation get1(Peservation peservation);
+
+    Peservation getss(Peservation peservation);
+
+    Peservation get6(Peservation peservation);
+
+    void delete(Peservation peservation);
 }

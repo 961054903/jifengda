@@ -1,5 +1,4 @@
 package com.caogen.jfd.controller.driver.dome;
-
 import cn.jiguang.common.resp.APIConnectionException;
 import cn.jiguang.common.resp.APIRequestException;
 import cn.jpush.api.JPushClient;
@@ -14,8 +13,8 @@ import cn.jpush.api.push.model.notification.IosNotification;
 import cn.jpush.api.push.model.notification.Notification;
 import java.util.Map;
 public class JPush {
-    // 设置好账号的app_key和masterSecret是必须的
 
+    // 设置好账号的app_key和masterSecret是必须的
 //    用户端:
 //    AppKey:8b5ddabea93b9becb8e12dd2
 //    Master Secret: 85ddffcf80676ae95c95a3f0
@@ -41,6 +40,7 @@ public class JPush {
                 //这里是指定开发环境,不用设置也没关系
                 .setMessage(Message.content(parm.get("msg")))//自定义信息
                 .build();
+
         try {
             PushResult pu = jpushClient.sendPush(payload);
         } catch (APIConnectionException e) {
@@ -49,6 +49,7 @@ public class JPush {
             e.printStackTrace();
         }
     }
+
     //极光推送>>ios
     //Map<String, String> parm是我自己传过来的参数,同学们可以自定义参数
     public static  void jpushIOS(Map<String, String> parm) {
@@ -82,34 +83,34 @@ public class JPush {
 
     //极光推送>>All所有平台
     public static void jpushAll(Map<String, String> parm) {
-        //创建JPushClient
-        JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY);
-        //创建option
-        PushPayload payload = PushPayload.newBuilder()
-                .setPlatform(Platform.all())  //所有平台的用户
-                .setAudience(Audience.registrationId(parm.get("id")))//registrationId指定用户
-                .setNotification(Notification.newBuilder()
-                        .addPlatformNotification(IosNotification.newBuilder() //发送ios
-                                .setAlert(parm.get("msg")) //消息体
-                                .setBadge(+1)
-                                .setSound("happy") //ios提示音
-                                .addExtras(parm) //附加参数
-                                .build())
-                        .addPlatformNotification(AndroidNotification.newBuilder() //发送android
-                                .addExtras(parm) //附加参数
-                                .setAlert(parm.get("msg")) //消息体
-                                .build())
-                        .build())
-                .setOptions(Options.newBuilder().setApnsProduction(true).build())//指定开发环境 true为生产模式 false 为测试模式 (android不区分模式,ios区分模式)
-                .setMessage(Message.newBuilder().setMsgContent(parm.get("msg")).addExtras(parm).build())//自定义信息
-                .build();
+            //创建JPushClient
+            JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY);
+            //创建option
+            PushPayload payload = PushPayload.newBuilder()
+                    .setPlatform(Platform.all())  //所有平台的用户
+                    .setAudience(Audience.registrationId(parm.get("id")))//registrationId指定用户
+                    .setNotification(Notification.newBuilder()
+                            .addPlatformNotification(IosNotification.newBuilder() //发送ios
+                                    .setAlert(parm.get("msg")) //消息体
+                                    .setBadge(+1)
+                                    .setSound("happy") //ios提示音
+                                    .addExtras(parm) //附加参数
+                                    .build())
+                            .addPlatformNotification(AndroidNotification.newBuilder() //发送android
+                                    .addExtras(parm) //附加参数
+                                    .setAlert(parm.get("msg")) //消息体
+                                    .build())
+                            .build())
+                    .setOptions(Options.newBuilder().setApnsProduction(true).build())//指定开发环境 true为生产模式 false 为测试模式 (android不区分模式,ios区分模式)
+                    .setMessage(Message.newBuilder().setMsgContent(parm.get("msg")).addExtras(parm).build())//自定义信息
+                    .build();
 
-        try {
-            PushResult pu = jpushClient.sendPush(payload);
-            System.out.println(pu.toString());
-        } catch (APIConnectionException e) {
-            e.printStackTrace();
-        } catch (APIRequestException e) {
+            try {
+                PushResult pu = jpushClient.sendPush(payload);
+                System.out.println(pu.toString());
+            } catch (APIConnectionException e) {
+                e.printStackTrace();
+            } catch (APIRequestException e) {
             e.printStackTrace();
         }
     }

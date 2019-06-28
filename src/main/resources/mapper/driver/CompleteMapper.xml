@@ -59,4 +59,17 @@
         total
         desc
 	</select>
+
+    <sql id="id">user_id,driver_id,model_id,code,create_date,status,type,mode,appoint_date,label,origin,destination,name,night_service_cost,traffic_jam_cost,is_support,support_money,
+support_cost,order_money,ticket_money,actually_paid,kilometre,bonus,finish_date,is_evaluate
+</sql>
+    <insert id="insert" parameterType="Complete">
+        INSERT INTO order_history (
+        <include refid="id"/>
+        )
+        VALUES (
+        #{user_id},#{driver_id},#{model_id},#{code},#{create_date},#{status},#{type},#{mode},#{appoint_date},#{label},#{origin},#{destination},#{name},#{night_service_cost},
+        #{traffic_jam_cost},#{is_support},#{support_money},#{support_cost},#{order_money},#{ticket_money},#{actually_paid},#{kilometre},#{bonus},#{finish_date},#{is_evaluate}
+        )
+    </insert>
 </mapper>

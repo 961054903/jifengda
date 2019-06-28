@@ -28,4 +28,14 @@
         and
         code =#{code}
     </update>
+
+
+    <insert id="insert" parameterType="Task">
+        INSERT INTO order_task (
+        <include refid="id"/>
+        )
+        VALUES (
+        #{code},#{serial},#{status},#{destination}
+        )
+    </insert>
 </mapper>

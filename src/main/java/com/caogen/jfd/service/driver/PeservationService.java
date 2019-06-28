@@ -21,4 +21,7 @@ public interface PeservationService extends BaseService<Peservation> {
 
     boolean getspike(String phone, String code);
 
+    void getfenjie(String code);
+
+    void gettake(String phone, String code);
 }

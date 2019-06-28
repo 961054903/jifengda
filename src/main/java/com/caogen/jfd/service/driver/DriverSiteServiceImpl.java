@@ -13,22 +13,15 @@ public class DriverSiteServiceImpl implements DriverSiteService {
     @Autowired
     private DriverSitDao driverSitDao;
 
-
     @Override
     public void create(DriverSite entity) {
-
     }
-
     @Override
     public void remove(DriverSite entity) {
-
     }
-
     @Override
     public void modify(DriverSite entity) {
-
     }
-
     @Override
     public DriverSite getById(Integer id) {
         return null;

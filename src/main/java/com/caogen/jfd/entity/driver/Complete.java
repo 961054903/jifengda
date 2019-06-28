@@ -12,10 +12,10 @@ public class Complete implements Serializable {
     private String code;//订单号
     private LocalDateTime create_date;//创建时间
     private Integer status;//订单状态 0：待付款；1：待接单；2：已接单；3：已取货；4：已完成；5：已取消；6：已退款
-    private Type type; //'订单类型：单点订单、多点订单',
-    private Mode mode;//订单模式：普通订单、预约订单
+    private Peservation.Type type; //'订单类型：单点订单、多点订单',
+    private Peservation.Mode mode;//订单模式：普通订单、预约订单
     private LocalDateTime appoint_date;//预约时间
-    private Label label;//订单标签：改派订单、投诉订单、抢单订单、平台分配
+    private Peservation.Label label;//订单标签：改派订单、投诉订单、抢单订单、平台分配
     private String origin;//发货地址
     private String destination;//收货地址
     private String name;//货物名称
@@ -40,58 +40,6 @@ public class Complete implements Serializable {
     private Boolean aa;
     private String start;//开始时间
     private String end;//结束时间
-
-    public String getStart() {
-        return start;
-    }
-
-    public void setStart(String start) {
-        this.start = start;
-    }
-
-    public String getEnd() {
-        return end;
-    }
-
-    public void setEnd(String end) {
-        this.end = end;
-    }
-
-    public Integer getCc() {
-        return cc;
-    }
-
-    public void setCc(Integer cc) {
-        this.cc = cc;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public enum Type {
-        single, multiple
-    }
-
-    public enum Mode {
-        common, appoint
-    }
-
-    public enum Label {
-        none, change, complain, rob, distribution
-    }
-
-    public Boolean getAa() {
-        return aa;
-    }
-
-    public void setAa(Boolean aa) {
-        this.aa = aa;
-    }
 
     @Override
     public String toString() {
@@ -127,6 +75,9 @@ public class Complete implements Serializable {
                 ", Total=" + Total +
                 ", cc=" + cc +
                 ", phone='" + phone + '\'' +
+                ", aa=" + aa +
+                ", start='" + start + '\'' +
+                ", end='" + end + '\'' +
                 '}';
     }
 
@@ -182,19 +133,19 @@ public class Complete implements Serializable {
         this.status = status;
     }
 
-    public Type getType() {
+    public Peservation.Type getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(Peservation.Type type) {
         this.type = type;
     }
 
-    public Mode getMode() {
+    public Peservation.Mode getMode() {
         return mode;
     }
 
-    public void setMode(Mode mode) {
+    public void setMode(Peservation.Mode mode) {
         this.mode = mode;
     }
 
@@ -206,11 +157,11 @@ public class Complete implements Serializable {
         this.appoint_date = appoint_date;
     }
 
-    public Label getLabel() {
+    public Peservation.Label getLabel() {
         return label;
     }
 
-    public void setLabel(Label label) {
+    public void setLabel(Peservation.Label label) {
         this.label = label;
     }
 
@@ -364,5 +315,45 @@ public class Complete implements Serializable {
 
     public void setTotal(Integer total) {
         Total = total;
+    }
+
+    public Integer getCc() {
+        return cc;
+    }
+
+    public void setCc(Integer cc) {
+        this.cc = cc;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Boolean getAa() {
+        return aa;
+    }
+
+    public void setAa(Boolean aa) {
+        this.aa = aa;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getEnd() {
+        return end;
+    }
+
+    public void setEnd(String end) {
+        this.end = end;
     }
 }

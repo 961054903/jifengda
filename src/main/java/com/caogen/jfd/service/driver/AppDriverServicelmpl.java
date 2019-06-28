@@ -8,6 +8,7 @@ import com.caogen.jfd.exception.DefinedException;
 
 import com.caogen.jfd.util.PasswordHelper;
 import com.caogen.jfd.util.SecretUtils;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,6 +87,7 @@ public class AppDriverServicelmpl implements AppDriverService {
     public AppDriver getByPhone(String phone) {
             AppDriver entity = new AppDriver();
             entity.setDriverphone(phone);
+        System.out.println(entity);
             return appDriverDao.get(entity);
         }
 

@@ -5,4 +5,5 @@ import com.caogen.jfd.entity.driver.Time;
 
 
 public interface TimeDao extends BaseDao<Time> {
+
 }

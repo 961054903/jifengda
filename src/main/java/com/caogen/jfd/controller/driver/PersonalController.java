@@ -196,6 +196,7 @@ public class PersonalController {
             AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
             User user = userService.getuser(appDriver.getCode());
             Peservation peservation = peservationService.getma(appDriver.getCode());
+            System.out.println(peservation);
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(user);
             ASD.add(peservation);
@@ -482,6 +483,9 @@ public class PersonalController {
             Peservation appDriver = Constants.gson.fromJson(data,Peservation.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
             boolean peservations = peservationService.getspike(appDriver.getPhone(),appDriver.getCode());
+            if (peservations){
+                peservationService.getfenjie(appDriver.getCode());
+            }
             message.setData(peservations,driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -516,4 +520,69 @@ public class PersonalController {
         }
         return message;
     }
+
+    /**
+     * 配送中
+     * @param data
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = {"peisong","app/peisong"})
+    public Message peisong(String data) {
+        Message message = new Message();
+        try {
+            Task appDriver = Constants.gson.fromJson(data,Task.class);
+            taskService.getpei(appDriver.getCode(),appDriver.getSerial());
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
+
+    /**
+     * 已送达
+     * @param data
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = {"da","app/da"})
+    public Message da(String data) {
+        Message message = new Message();
+        try {
+            Task appDriver = Constants.gson.fromJson(data,Task.class);
+            taskService.getda(appDriver.getCode(),appDriver.getSerial());
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
+
+
+    /**
+     * 存入历史
+     */
+    @ResponseBody
+    @RequestMapping("cunru")
+    public Message cunru(String phone ,String code) {
+        Message message = new Message();
+        try {
+             peservationService.gettake(phone,code);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
+
 }

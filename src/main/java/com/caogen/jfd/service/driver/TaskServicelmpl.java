@@ -44,4 +44,28 @@ public class TaskServicelmpl implements TaskService {
         }
 
     }
+
+    @Override
+    public void getpei(String code, String serial) {
+        Task task = new Task();
+        task.setCode(code);
+        task.setSerial(serial);
+        Task tasks = taskDao.get(task);
+        if (tasks!=null){
+            tasks.setStatus(2);
+            taskDao.update(tasks);
+        }
+    }
+
+    @Override
+    public void getda(String code, String serial) {
+        Task task = new Task();
+        task.setCode(code);
+        task.setSerial(serial);
+        Task tasks = taskDao.get(task);
+        if (tasks!=null){
+            tasks.setStatus(3);
+            taskDao.update(tasks);
+        }
+    }
 }

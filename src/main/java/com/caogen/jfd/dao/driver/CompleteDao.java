@@ -1,11 +1,12 @@
 package com.caogen.jfd.dao.driver;
 
+import com.caogen.jfd.dao.BaseDao;
 import com.caogen.jfd.entity.driver.Complete;
 
 
 import java.util.List;
 
-public interface CompleteDao {
+public interface CompleteDao extends BaseDao<Complete> {
     /**
      * 今天订单
      * @param
