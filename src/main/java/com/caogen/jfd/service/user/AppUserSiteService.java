@@ -27,4 +27,14 @@ public interface AppUserSiteService extends BaseService<AppUserSite> {
 	 */
 	List<AppUserSite> getAll(AppUserSite entity);
 
+	/**
+	 * 根据车型获取车辆位置
+	 * 
+	 * @param longitude
+	 * @param latitude
+	 * @param model_id
+	 * @return
+	 */
+	List<AppUserSite> getDriverLocation(double longitude, double latitude, double distance, Integer model_id);
+
 }

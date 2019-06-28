@@ -1,5 +1,7 @@
 package com.caogen.jfd.dao.user;
 
+import java.util.List;
+
 import com.caogen.jfd.dao.BaseDao;
 import com.caogen.jfd.entity.user.AppUserSite;
 
@@ -9,5 +11,11 @@ import com.caogen.jfd.entity.user.AppUserSite;
  *
  */
 public interface AppUserSiteDao extends BaseDao<AppUserSite> {
+	/**
+	 * 
+	 * @param model_id
+	 * @return
+	 */
+	List<AppUserSite> findLocation(Integer model_id);
 
 }

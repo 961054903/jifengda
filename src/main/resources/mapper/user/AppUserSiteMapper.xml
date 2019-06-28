@@ -45,4 +45,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM app_user_site
 		WHERE phone = #{phone}
 	</select>
+	<select id="findLocation" parameterType="Integer"
+		resultType="AppUserSite">
+		SELECT
+		di.longitude,
+		di.latitude
+		FROM
+		app_driver_info di
+		JOIN
+		vehicle v ON v.driver_id = di.user_id
+		JOIN vehicle_model vm ON vm.id =
+		v.model_id
+		JOIN order_info oi ON oi.driver_id != di.user_id
+		WHERE
+		vm.id =
+		#{model_id}
+	</select>
 </mapper>

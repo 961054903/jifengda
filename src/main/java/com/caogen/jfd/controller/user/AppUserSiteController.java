@@ -12,9 +12,11 @@ import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.entity.user.AppUserSite;
+import com.caogen.jfd.entity.user.SysConfig;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.user.AppUserService;
 import com.caogen.jfd.service.user.AppUserSiteService;
+import com.caogen.jfd.service.user.ConfigService;
 
 /**
  * 
@@ -28,6 +30,8 @@ public class AppUserSiteController {
 	private AppUserService userService;
 	@Autowired
 	private AppUserSiteService siteService;
+	@Autowired
+	private ConfigService configService;
 
 	@ResponseBody
 	@RequestMapping(value = { "add", "api/add" })
@@ -99,6 +103,23 @@ public class AppUserSiteController {
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.SITE_ERROR);
 			StaticLogger.error("user site get all error", e);
+		}
+		return message;
+	}
+
+	@ResponseBody
+	@RequestMapping("location")
+	public Message location(AppUserSite site, Integer model_id) {
+		Message message = new Message();
+		try {
+			SysConfig config = configService.getByItem("scope");
+			double distance = Double.valueOf(config.getItem_value());
+			List<AppUserSite> list = siteService.getDriverLocation(site.getLongitude(), site.getLatitude(), distance,
+					model_id);
+			message.setData(list);
+		} catch (Exception e) {
+			message.setErrorCode(ErrorCode.SITE_ERROR);
+			StaticLogger.error("user site get driver location error", e);
 		}
 		return message;
 	}
