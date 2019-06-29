@@ -18,6 +18,7 @@ import com.caogen.jfd.entity.user.AppUser.State;
 import com.caogen.jfd.entity.user.AppUserInfo;
 import com.caogen.jfd.entity.user.AppUserSms;
 import com.caogen.jfd.entity.user.AppUserThird;
+import com.caogen.jfd.entity.user.VehicleModel;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.model.Signin;
@@ -26,6 +27,7 @@ import com.caogen.jfd.service.user.AppUserService;
 import com.caogen.jfd.service.user.AppUserSmsService;
 import com.caogen.jfd.service.user.AppUserThirdService;
 import com.caogen.jfd.service.user.ConfigService;
+import com.caogen.jfd.service.user.VehicleModelService;
 import com.caogen.jfd.util.PasswordHelper;
 import com.caogen.jfd.util.SmsUtils;
 import com.google.gson.Gson;
@@ -48,6 +50,8 @@ public class AppUserController {
 	private AppUserSmsService smsService;
 	@Autowired
 	private ConfigService configService;
+	@Autowired
+	private VehicleModelService modelService;
 
 	/**
 	 * 密码登录
@@ -286,6 +290,25 @@ public class AppUserController {
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.SMS_MISMATCHING);
 			StaticLogger.error("sms error", e);
+		}
+		return message;
+	}
+
+	/**
+	 * 获取车型信息
+	 * 
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("model")
+	public Message model() {
+		Message message = new Message();
+		try {
+			List<VehicleModel> list = modelService.getAll();
+			message.setData(list);
+		} catch (Exception e) {
+			message.setErrorCode(ErrorCode.FAIL);
+			StaticLogger.error("get vehicle model error", e);
 		}
 		return message;
 	}

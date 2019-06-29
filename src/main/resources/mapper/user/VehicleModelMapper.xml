@@ -12,4 +12,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM vehicle_model
 		WHERE id = #{id}
 	</select>
+	<select id="find" parameterType="VehicleModel"
+		resultType="VehicleModel">
+		SELECT id,
+		<include refid="model" />
+		FROM vehicle_model
+		<where>
+			<if test="model != null">model = #{model}</if>
+		</where>
+	</select>
 </mapper>

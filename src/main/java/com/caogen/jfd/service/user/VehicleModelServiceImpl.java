@@ -1,5 +1,7 @@
 package com.caogen.jfd.service.user;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,11 @@ public class VehicleModelServiceImpl implements VehicleModelService {
 	@Override
 	public VehicleModel getById(Integer id) {
 		return modelDao.get(new VehicleModel(id));
+	}
+
+	@Override
+	public List<VehicleModel> getAll() {
+		return modelDao.find(new VehicleModel());
 	}
 
 }
