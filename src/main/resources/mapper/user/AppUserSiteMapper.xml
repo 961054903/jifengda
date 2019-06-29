@@ -52,13 +52,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		di.latitude
 		FROM
 		app_driver_info di
-		JOIN
-		vehicle v ON v.driver_id = di.user_id
-		JOIN vehicle_model vm ON vm.id =
-		v.model_id
+		JOIN vehicle v ON v.driver_id = di.user_id
+		JOIN vehicle_model vm ON vm.id = v.model_id
 		JOIN order_info oi ON oi.driver_id != di.user_id
 		WHERE
-		vm.id =
-		#{model_id}
+		di.is_online = TRUE
+		AND vm.id = #{model_id}
 	</select>
 </mapper>
