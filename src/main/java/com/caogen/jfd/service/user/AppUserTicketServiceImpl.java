@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.caogen.jfd.dao.user.AppUserTicketDao;
 import com.caogen.jfd.entity.user.AppUserTicket;
-import com.caogen.jfd.util.FormatUtils;
 
 /**
  * 
@@ -41,14 +40,7 @@ public class AppUserTicketServiceImpl implements AppUserTicketService {
 
 	@Override
 	public List<AppUserTicket> getAll(AppUserTicket entity) {
-		List<AppUserTicket> list = ticketDao.find(entity);
-		for (AppUserTicket item : list) {
-			item.setStartDate(FormatUtils.dateToStr(item.getStart_date()));
-			item.setStart_date(null);
-			item.setEndDate(FormatUtils.dateToStr(item.getEnd_date()));
-			item.setEnd_date(null);
-		}
-		return list;
+		return ticketDao.find(entity);
 	}
 
 }

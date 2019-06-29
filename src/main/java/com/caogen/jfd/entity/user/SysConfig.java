@@ -3,6 +3,10 @@ package com.caogen.jfd.entity.user;
 import java.io.Serializable;
 import java.time.LocalTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * sys_config 实体类
  * 
@@ -17,7 +21,11 @@ public class SysConfig implements Serializable {
 	private String item_key;
 	private String item_value;
 	private String description;
+	@DateTimeFormat(pattern = "HHmmss")
+	@JsonFormat(pattern = "HHmmss", timezone = "GMT+8")
 	private LocalTime start_time;
+	@DateTimeFormat(pattern = "HHmmss")
+	@JsonFormat(pattern = "HHmmss", timezone = "GMT+8")
 	private LocalTime end_time;
 	private Boolean flag;
 

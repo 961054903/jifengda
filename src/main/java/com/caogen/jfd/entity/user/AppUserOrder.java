@@ -3,6 +3,10 @@ package com.caogen.jfd.entity.user;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * 
  * @author Spuiln
@@ -16,13 +20,15 @@ public class AppUserOrder implements Serializable {
 	private Integer driver_id;
 	private Integer model_id;
 	private String code;
+	@DateTimeFormat(pattern = "yyyyMMddHHmmss")
+	@JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "GMT+8")
 	private LocalDateTime create_date;
-	private String createDate;
 	private Integer status;
 	private Type type;
 	private Mode mode;
+	@DateTimeFormat(pattern = "yyyyMMddHHmmss")
+	@JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "GMT+8")
 	private LocalDateTime appoint_date;
-	private String appointDate;
 	private Label label;
 	private String origin;
 	private String destination;
@@ -72,14 +78,14 @@ public class AppUserOrder implements Serializable {
 	@Override
 	public String toString() {
 		return "AppUserOrder [id=" + id + ", user_id=" + user_id + ", driver_id=" + driver_id + ", model_id=" + model_id
-				+ ", code=" + code + ", create_date=" + create_date + ", createDate=" + createDate + ", status="
-				+ status + ", type=" + type + ", mode=" + mode + ", appoint_date=" + appoint_date + ", appointDate="
-				+ appointDate + ", label=" + label + ", origin=" + origin + ", destination=" + destination + ", name="
-				+ name + ", night_service_cost=" + night_service_cost + ", traffic_jam_cost=" + traffic_jam_cost
-				+ ", is_support=" + is_support + ", support_money=" + support_money + ", support_cost=" + support_cost
-				+ ", order_money=" + order_money + ", ticket_money=" + ticket_money + ", actually_paid=" + actually_paid
-				+ ", kilometre=" + kilometre + ", bonus=" + bonus + ", is_evaluate=" + is_evaluate + ", evaluate_grade="
-				+ evaluate_grade + ", evaluate_content=" + evaluate_content + ", phone=" + phone + "]";
+				+ ", code=" + code + ", create_date=" + create_date + ", status=" + status + ", type=" + type
+				+ ", mode=" + mode + ", appoint_date=" + appoint_date + ", label=" + label + ", origin=" + origin
+				+ ", destination=" + destination + ", name=" + name + ", night_service_cost=" + night_service_cost
+				+ ", traffic_jam_cost=" + traffic_jam_cost + ", is_support=" + is_support + ", support_money="
+				+ support_money + ", support_cost=" + support_cost + ", order_money=" + order_money + ", ticket_money="
+				+ ticket_money + ", actually_paid=" + actually_paid + ", kilometre=" + kilometre + ", bonus=" + bonus
+				+ ", is_evaluate=" + is_evaluate + ", evaluate_grade=" + evaluate_grade + ", evaluate_content="
+				+ evaluate_content + ", phone=" + phone + "]";
 	}
 
 	public Integer getId() {
@@ -304,22 +310,6 @@ public class AppUserOrder implements Serializable {
 
 	public void setEvaluate_content(String evaluate_content) {
 		this.evaluate_content = evaluate_content;
-	}
-
-	public String getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
-	}
-
-	public String getAppointDate() {
-		return appointDate;
-	}
-
-	public void setAppointDate(String appointDate) {
-		this.appointDate = appointDate;
 	}
 
 }

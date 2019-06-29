@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.caogen.jfd.dao.user.AppUserIssueDao;
 import com.caogen.jfd.entity.user.AppUserIssue;
 import com.caogen.jfd.entity.user.AppUserIssue.Type;
-import com.caogen.jfd.util.FormatUtils;
 
 /**
  * 
@@ -52,12 +51,7 @@ public class AppUserIssueServiceImpl implements AppUserIssueService {
 
 	@Override
 	public List<AppUserIssue> getHistory(AppUserIssue entity) {
-		List<AppUserIssue> list = issueDao.find(entity);
-		for (AppUserIssue item : list) {
-			item.setCreateDate(FormatUtils.dateToStr(item.getCreate_date()));
-			item.setCreate_date(null);
-		}
-		return list;
+		return issueDao.find(entity);
 	}
 
 }
