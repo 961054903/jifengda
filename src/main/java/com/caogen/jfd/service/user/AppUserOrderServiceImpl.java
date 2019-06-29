@@ -19,12 +19,14 @@ import com.caogen.jfd.dao.user.VehicleModelDao;
 import com.caogen.jfd.dao.user.VehiclePriceDao;
 import com.caogen.jfd.entity.user.AppUserOrder;
 import com.caogen.jfd.entity.user.AppUserOrder.Label;
+import com.caogen.jfd.entity.user.AppUserOrder.Mode;
 import com.caogen.jfd.entity.user.AppUserSite;
 import com.caogen.jfd.entity.user.SysConfig;
 import com.caogen.jfd.entity.user.VehicleModel;
 import com.caogen.jfd.entity.user.VehiclePrice;
 import com.caogen.jfd.model.Distance;
 import com.caogen.jfd.model.Distance.Result;
+import com.caogen.jfd.util.FormatUtils;
 import com.caogen.jfd.util.HttpClientUtils;
 import com.caogen.jfd.util.PasswordHelper;
 
@@ -47,6 +49,9 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 	@Override
 	public void create(AppUserOrder entity) {
 		entity.setCreate_date(LocalDateTime.now());
+		if (entity.getMode().equals(Mode.appoint)) {
+			entity.setAppoint_date(FormatUtils.strToDateTime(entity.getAppointDate()));
+		}
 		entity.setCode(PasswordHelper.generateNumber());
 		entity.setStatus(0);
 		entity.setLabel(Label.none);
@@ -134,7 +139,7 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 			order.setNight_service_cost(night.getFlag() ? vm.getNight_cost() : 0.0);
 			break;
 		case appoint:// 预约订单
-			LocalTime time = order.getAppoint_date().toLocalTime();
+			LocalTime time = FormatUtils.strToDateTime(order.getAppointDate()).toLocalTime();
 			// 高峰期加价
 			if (time.isAfter(jam.getStart_time()) && time.isBefore(jam.getEnd_time())) {
 				order.setTraffic_jam_cost(vm.getJam_cost());
@@ -199,6 +204,12 @@ public class AppUserOrderServiceImpl implements AppUserOrderService {
 		AppUserOrder order = orderDao.getUnderway(entity);
 		if (order == null) {
 			order = orderDao.getFinish(entity);
+		}
+		order.setCreateDate(FormatUtils.dateToStr(order.getCreate_date()));
+		order.setCreate_date(null);
+		if (order.getAppoint_date() != null) {
+			order.setAppointDate(FormatUtils.dateToStr(order.getAppoint_date()));
+			order.setAppoint_date(null);
 		}
 		return order;
 	}

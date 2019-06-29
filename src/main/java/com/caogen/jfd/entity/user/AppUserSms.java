@@ -3,10 +3,6 @@ package com.caogen.jfd.entity.user;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 /**
  * 
  * @author Spuiln
@@ -18,8 +14,6 @@ public class AppUserSms implements Serializable {
 	private Integer id;
 	private String phone;
 	private String code;
-	@DateTimeFormat(pattern = "yyyyMMddHHmmss")
-	@JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "GMT+8")
 	private LocalDateTime create_date;
 
 	public AppUserSms() {

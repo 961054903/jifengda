@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.caogen.jfd.dao.user.AppUserInfoDao;
 import com.caogen.jfd.entity.user.AppUserInfo;
 import com.caogen.jfd.entity.user.AppUserInfo.Gender;
+import com.caogen.jfd.util.FormatUtils;
 
 /**
  * 
@@ -43,7 +44,12 @@ public class AppUserInfoServiceImpl implements AppUserInfoService {
 
 	@Override
 	public AppUserInfo getOne(AppUserInfo entity) {
-		return infoDao.get(entity);
+		AppUserInfo info = infoDao.get(entity);
+		if (info.getBirthday() != null) {
+			info.setBirth(FormatUtils.dateToStr(info.getBirthday()));
+			info.setBirthday(null);
+		}
+		return info;
 	}
 
 }

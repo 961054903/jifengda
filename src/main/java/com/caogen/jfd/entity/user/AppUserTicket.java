@@ -3,10 +3,6 @@ package com.caogen.jfd.entity.user;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 /**
  * 
  * @author Spuiln
@@ -26,11 +22,9 @@ public class AppUserTicket implements Serializable {
 	private Double money;
 	private Type type;
 	private Double sill;
-	@DateTimeFormat(pattern = "yyyyMMddHHmmss")
-	@JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "GMT+8")
 	private LocalDateTime start_date;
-	@DateTimeFormat(pattern = "yyyyMMddHHmmss")
-	@JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "GMT+8")
+	private String startDate;
+	private LocalDateTime end_date;
 	private String endDate;
 	private Double duration;
 
@@ -60,8 +54,8 @@ public class AppUserTicket implements Serializable {
 	public String toString() {
 		return "AppUserTicket [id=" + id + ", phone=" + phone + ", ticket_id=" + ticket_id + ", available=" + available
 				+ ", reason=" + reason + ", title=" + title + ", description=" + description + ", money=" + money
-				+ ", type=" + type + ", sill=" + sill + ", start_date=" + start_date + ", endDate=" + endDate
-				+ ", duration=" + duration + "]";
+				+ ", type=" + type + ", sill=" + sill + ", start_date=" + start_date + ", startDate=" + startDate
+				+ ", end_date=" + end_date + ", endDate=" + endDate + ", duration=" + duration + "]";
 	}
 
 	public Integer getId() {
@@ -150,6 +144,22 @@ public class AppUserTicket implements Serializable {
 
 	public void setStart_date(LocalDateTime start_date) {
 		this.start_date = start_date;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDateTime getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(LocalDateTime end_date) {
+		this.end_date = end_date;
 	}
 
 	public String getEndDate() {

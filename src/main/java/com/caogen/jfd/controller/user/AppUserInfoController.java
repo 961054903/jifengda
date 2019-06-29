@@ -2,6 +2,7 @@ package com.caogen.jfd.controller.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -13,6 +14,7 @@ import com.caogen.jfd.entity.user.AppUserInfo;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.user.AppUserInfoService;
 import com.caogen.jfd.service.user.AppUserService;
+import com.caogen.jfd.util.FormatUtils;
 
 /**
  * 
@@ -39,6 +41,9 @@ public class AppUserInfoController {
 		Message message = new Message();
 		try {
 			AppUserInfo info = Constants.gson.fromJson(data, AppUserInfo.class);
+			if (!StringUtils.isEmpty(info.getBirth())) {
+				info.setBirthday(FormatUtils.strToDate(info.getBirth()));
+			}
 			infoService.modify(info);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.INFO_ERROR);

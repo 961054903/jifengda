@@ -3,10 +3,6 @@ package com.caogen.jfd.entity.user;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 /**
  * 
  * @author Spuiln
@@ -19,9 +15,8 @@ public class AppUserIssue implements Serializable {
 	private String title;
 	private String content;
 	private String photo_url;
-	@DateTimeFormat(pattern = "yyyyMMddHHmmss")
-	@JsonFormat(pattern = "yyyyMMddHHmmss", timezone = "GMT+8")
 	private LocalDateTime create_date;
+	private String createDate;
 	private String name;
 	private String phone;
 	private Boolean is_check;
@@ -43,8 +38,8 @@ public class AppUserIssue implements Serializable {
 	@Override
 	public String toString() {
 		return "AppUserIssue [id=" + id + ", title=" + title + ", content=" + content + ", photo_url=" + photo_url
-				+ ", create_date=" + create_date + ", name=" + name + ", phone=" + phone + ", is_check=" + is_check
-				+ ", type=" + type + "]";
+				+ ", create_date=" + create_date + ", createDate=" + createDate + ", name=" + name + ", phone=" + phone
+				+ ", is_check=" + is_check + ", type=" + type + "]";
 	}
 
 	public Integer getId() {
@@ -117,6 +112,14 @@ public class AppUserIssue implements Serializable {
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
 	}
 
 }
