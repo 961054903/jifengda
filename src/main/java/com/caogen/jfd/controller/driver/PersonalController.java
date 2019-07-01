@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("PersonalCenter")
@@ -196,7 +198,6 @@ public class PersonalController {
             AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
             User user = userService.getuser(appDriver.getCode());
             Peservation peservation = peservationService.getma(appDriver.getCode());
-            System.out.println(peservation);
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(user);
             ASD.add(peservation);
@@ -459,8 +460,8 @@ public class PersonalController {
     public Message push() {
         Message message = new Message();
         try {
-            List<Peservation> peservations = peservationService.getput();
-            message.setData(peservations);
+
+            peservationService.getput();
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {

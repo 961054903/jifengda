@@ -38,7 +38,7 @@
 
         </where>
     </select>
-    <sql id="month">origin,destination,kilometre,status</sql>
+    <sql id="month">origin,destination,kilometre,status,model_id,status</sql>
     <select id="findput"
             resultType="Peservation">
         SELECT

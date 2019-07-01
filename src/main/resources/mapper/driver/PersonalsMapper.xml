@@ -35,7 +35,6 @@
     </select>
 
 
-
     <sql id="sql">phone,photo_url,name,grade</sql>
     <select id="get1" parameterType="Personal"
             resultType="Personal">
@@ -90,12 +89,12 @@
             <if test="contacts_gender != null"> contacts_gender = #{contacts_gender},</if>
             <if test="contacts_relation != null">contacts_relation = #{contacts_relation}</if>
         </set>
+
         <where>
             <if test="id != null">id = #{id},</if>
             <if test="phone != null"> phone = #{phone}</if>
         </where>
     </update>
-
 
     <sql id="sq">phone,photo_url,name,grade</sql>
     <select id="get6" parameterType="Personal"
@@ -113,13 +112,28 @@
     </select>
 
     <sql id="per">user_id,is_online,longitude,latitude</sql>
-    <select id="fand1" parameterType="Personal"
+    <select id="find3" parameterType="Personal"
             resultType="Personal">
         SELECT
         <include refid="per" />
         FROM app_driver_info
+        <where>
+            <if test="id != null"> id = #{id}</if>
+            <if test="user_id != null">AND user_id = #{user_id}</if>
+            <if test="is_online != null">AND is_online = #{is_online}</if>
+        </where>
     </select>
 
+
+    <update id="update2" parameterType="Personal">
+        UPDATE
+        app_driver_info
+        SET
+        longitude =#{longitude},
+        latitude =#{latitude}
+        WHERE
+        phone =#{phone}
+    </update>
 
 
 </mapper>

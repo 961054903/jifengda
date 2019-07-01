@@ -1,17 +1,18 @@
 package com.caogen.jfd.service.driver;
-
+import cn.jpush.api.push.PushResult;
 import com.caogen.jfd.common.Constants;
+import com.caogen.jfd.controller.driver.dome.JPush;
+import com.caogen.jfd.controller.driver.dome.JPushUtil;
 import com.caogen.jfd.dao.driver.*;
 import com.caogen.jfd.entity.driver.*;
-
 import com.caogen.jfd.entity.user.AppUserSite;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
-
-
+import java.util.Map;
 
 
 @Service
@@ -35,6 +36,7 @@ public class PeservationServicelmpl implements PeservationService {
     private TaskService taskService;
     @Autowired
     private CompleteDao completeDao;
+
     @Override
     public void create(Peservation entity) {
 
@@ -75,56 +77,71 @@ public class PeservationServicelmpl implements PeservationService {
         return peservationDao.get(peservation);
     }
     @Override
-    public List<Peservation> getput() {
+    public void  getput() {
         Personal personal = new Personal();
-        //司机
-        List<Personal> personalDao1 = personalDao.find1(personal);
-        for (int s =0;s<=personalDao1.size();s++) {
+        Vehicle vehicle = new Vehicle();
+        Peservation peservation = new Peservation();
+
+        List<Vehicle> vehicles = vehicleDao.find(vehicle);
+        for (int c =0; c<vehicles.size();c++){
+            Integer id = vehicles.get(c).getModel_id();
+
+
+        List<Personal> personalDao1 = personalDao.find3(personal);
+        for (int s = 0; s < personalDao1.size(); s++) {
             Double longitude1 = personalDao1.get(s).getLongitude();
             Double latitude1 = personalDao1.get(s).getLatitude();
-            Integer id = vehicleDao.get1(personalDao1.get(s).getId()).getModel_id();
 
-        //订单
-            List<Peservation> peservations = peservationDao.findput();
-            for (int i = 0; i <= peservations.size(); i++) {
-                Integer status = peservations.get(i).getStatus();
-                String origin = peservations.get(i).getOrigin();
-                Integer model_id = peservations.get(i).getModel_id();
-                AppUserSite appUserSite = Constants.gson.fromJson(origin,AppUserSite.class);
-                Double latitude2 = appUserSite.getLatitude();
-                Double longitude2 = appUserSite.getLongitude();
+            //订单
 
-                if (id !=model_id){
+                List<Peservation> peservations = peservationDao.findput(peservation);
+                for (int i = 0; i < peservations.size(); i++) {
+                    Integer status = peservations.get(i).getStatus();
+                    String origin = peservations.get(i).getOrigin();
+                    Integer model_id = peservations.get(i).getModel_id();
+                    AppUserSite appUserSite = Constants.gson.fromJson(origin, AppUserSite.class);
+                    Double latitude2 = appUserSite.getLatitude();
+                    Double longitude2 = appUserSite.getLongitude();
+                if (id != model_id) {
                     continue;
                 }
-                if (status !=1){
+
+
+                if (status != 1) {
                     continue;
                 }
-                    // 纬度
-                    double lat1 = Math.toRadians(latitude1);
-                    double lat2 = Math.toRadians(latitude2);
-                    // 经度
-                    double lng1 = Math.toRadians(longitude1);
-                    double lng2 = Math.toRadians(longitude2);
-                    // 纬度之差
-                    double a = lat1 - lat2;
-                    // 经度之差
-                    double b = lng1 - lng2;
-                    // 计算两点距离的公式
-                    double ss = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) +
-                            Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(b / 2), 2)));
-                    // 弧长乘地球半径, 返回单位: 千米
-                    ss = ss * EARTH_RADIUS;
-                    //公里自定义
-                    if (ss<=5){
+                // 纬度
+                    System.out.println(appUserSite);
+                double lat1 = Math.toRadians(latitude1);
+                double lat2 = Math.toRadians(latitude2);
+                    System.out.println(lat2);
+                // 经度
+                double lng1 = Math.toRadians(longitude1);
+                double lng2 = Math.toRadians(longitude2);
+                // 纬度之差
+                double a = lat1 - lat2;
+                // 经度之差
+                double b = lng1 - lng2;
+                // 计算两点距离的公式
+                double ss = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) +
+                        Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(b / 2), 2)));
+                // 弧长乘地球半径, 返回单位: 千米
+                ss = ss * EARTH_RADIUS;
+                    System.out.println(ss);
+                //公里自定义
+                if (ss <= 100000000) {
                     //推送
+                    JPush.jpushAndroid(peservations);
 
-                    }
+                }
+
             }
         }
-      return  null;
+        }
 
     }
+
+
     @Override
     public boolean getspike(String phone, String code) {
         AppDriver appDriver = new AppDriver();
@@ -210,13 +227,13 @@ public class PeservationServicelmpl implements PeservationService {
         complete.setOrder_money(order_money);
         complete.setSupport_cost(support_cost);
         complete.setSupport_money(support_money);
-         complete.setIs_support(is_support);
-         complete.setTraffic_jam_cost(traffic_jam_cost);
-       complete.setNight_service_cost(night_service_cost);
+        complete.setIs_support(is_support);
+        complete.setTraffic_jam_cost(traffic_jam_cost);
+        complete.setNight_service_cost(night_service_cost);
         complete.setName(name);
         complete.setLabel(label);
         complete.setAppoint_date(appoint_date);
-       complete.setType(type);
+        complete.setType(type);
         complete.setModel_id(model_id);
         complete.setDriver_id(driver_id);
         complete.setUser_id(user_id);
@@ -224,13 +241,14 @@ public class PeservationServicelmpl implements PeservationService {
         complete.setPhone(phone1);
         complete.setCreate_date(create_date);
         complete.setStatus(status);
-       complete.setMode(mode);
+        complete.setMode(mode);
         complete.setOrigin(origin);
         complete.setDestination(destination);
         complete.setKilometre(kilometre);
         complete.setBonus(bonus);
         complete.setFinish_date(LocalDateTime.now());
         completeDao.insert(complete);
+
 
         peservationDao.delete(peservation);
 

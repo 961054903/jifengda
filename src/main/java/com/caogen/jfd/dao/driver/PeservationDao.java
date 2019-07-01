@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface PeservationDao extends BaseDao<Peservation> {
 
-    List<Peservation> findput();
+    List<Peservation> findput(Peservation peservation);
 
     Peservation find1(Personal personal);
 

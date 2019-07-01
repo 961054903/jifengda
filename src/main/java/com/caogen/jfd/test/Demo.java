@@ -63,7 +63,7 @@ public class Demo {
 
 	@Test
 	public void test3() throws Exception {
-		String str = "OObAgwJtuKc=" +
+		String str = "160a3797c8760e8ae76" +
 				"";
 		System.out.println(SecretUtils.desedeDecode(str, key, iv));
 	}

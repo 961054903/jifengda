@@ -1,7 +1,9 @@
 package com.caogen.jfd.service.driver;
 
 import com.caogen.jfd.dao.driver.DriverSitDao;
+import com.caogen.jfd.dao.driver.PersonalDao;
 import com.caogen.jfd.entity.driver.DriverSite;
+import com.caogen.jfd.entity.driver.Personal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import java.time.LocalDateTime;
 public class DriverSiteServiceImpl implements DriverSiteService {
     @Autowired
     private DriverSitDao driverSitDao;
+    @Autowired
+    private PersonalDao personalDao;
 
     @Override
     public void create(DriverSite entity) {
@@ -31,11 +35,19 @@ public class DriverSiteServiceImpl implements DriverSiteService {
     @Override
     public void getWhole(String phone, Double longitude, Double latitude) {
         DriverSite driverSite =new DriverSite();
+        Personal personal = new Personal();
+        personal.setPhone(phone);
+        personal.setLongitude(longitude);
+        personal.setLatitude(latitude);
         LocalDateTime no =LocalDateTime.now();
         driverSite.setCreate_date(no);
         driverSite.setPhone(phone);
         driverSite.setLatitude(latitude);
         driverSite.setLongitude(longitude);
         driverSitDao.insert(driverSite);
+        personalDao.update2(personal);
     }
+
+
+
 }
