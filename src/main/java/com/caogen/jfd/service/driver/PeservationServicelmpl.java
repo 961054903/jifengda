@@ -7,6 +7,8 @@ import com.caogen.jfd.dao.driver.*;
 import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.entity.user.AppUserSite;
 
+import com.google.gson.JsonArray;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -81,19 +83,17 @@ public class PeservationServicelmpl implements PeservationService {
         Personal personal = new Personal();
         Vehicle vehicle = new Vehicle();
         Peservation peservation = new Peservation();
+        Map<String,String> wt = new HashMap<>();
 
         List<Vehicle> vehicles = vehicleDao.find(vehicle);
         for (int c =0; c<vehicles.size();c++){
             Integer id = vehicles.get(c).getModel_id();
 
-
         List<Personal> personalDao1 = personalDao.find3(personal);
         for (int s = 0; s < personalDao1.size(); s++) {
             Double longitude1 = personalDao1.get(s).getLongitude();
             Double latitude1 = personalDao1.get(s).getLatitude();
-
             //订单
-
                 List<Peservation> peservations = peservationDao.findput(peservation);
                 for (int i = 0; i < peservations.size(); i++) {
                     Integer status = peservations.get(i).getStatus();
@@ -104,17 +104,18 @@ public class PeservationServicelmpl implements PeservationService {
                     Double longitude2 = appUserSite.getLongitude();
                 if (id != model_id) {
                     continue;
+
                 }
 
 
                 if (status != 1) {
                     continue;
                 }
+
+                peservations.get(i).setModel_id(null);
                 // 纬度
-                    System.out.println(appUserSite);
                 double lat1 = Math.toRadians(latitude1);
                 double lat2 = Math.toRadians(latitude2);
-                    System.out.println(lat2);
                 // 经度
                 double lng1 = Math.toRadians(longitude1);
                 double lng2 = Math.toRadians(longitude2);
@@ -128,9 +129,11 @@ public class PeservationServicelmpl implements PeservationService {
                 // 弧长乘地球半径, 返回单位: 千米
                 ss = ss * EARTH_RADIUS;
                 //公里自定义
-                if (ss <= 100000000) {
+                    String s1 = Constants.gson.toJson(peservations);
+                   wt.put("id",s1);
+                    if (ss <= 100000000) {
                     //推送
-                    JPush.jpushAll(peservations);
+                    JPush.jpushIOS(wt);
 
                 }
 

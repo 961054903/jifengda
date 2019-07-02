@@ -15,6 +15,7 @@ public class Model implements Serializable {
     private Double empty_cost;//空时费
     private Double night_cost;//夜间服务费
     private Double jam_cost;
+    private String photo_url;
 
     @Override
     public String toString() {
@@ -30,7 +31,16 @@ public class Model implements Serializable {
                 ", empty_cost=" + empty_cost +
                 ", night_cost=" + night_cost +
                 ", jam_cost=" + jam_cost +
+                ", photo_url='" + photo_url + '\'' +
                 '}';
+    }
+
+    public String getPhoto_url() {
+        return photo_url;
+    }
+
+    public void setPhoto_url(String photo_url) {
+        this.photo_url = photo_url;
     }
 
     public static long getSerialVersionUID() {
