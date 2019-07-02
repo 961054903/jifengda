@@ -21,6 +21,7 @@ public class VehicleModel implements Serializable {
 	private Double empty_cost;
 	private Double night_cost;
 	private Double jam_cost;
+	private String photo_url;
 
 	public VehicleModel() {
 		super();
@@ -35,7 +36,8 @@ public class VehicleModel implements Serializable {
 	public String toString() {
 		return "VehicleModel [id=" + id + ", brand=" + brand + ", model=" + model + ", length=" + length + ", width="
 				+ width + ", height=" + height + ", volume=" + volume + ", capacity=" + capacity + ", empty_cost="
-				+ empty_cost + ", night_cost=" + night_cost + ", jam_cost=" + jam_cost + "]";
+				+ empty_cost + ", night_cost=" + night_cost + ", jam_cost=" + jam_cost + ", photo_url=" + photo_url
+				+ "]";
 	}
 
 	public Integer getId() {
@@ -124,6 +126,14 @@ public class VehicleModel implements Serializable {
 
 	public void setJam_cost(Double jam_cost) {
 		this.jam_cost = jam_cost;
+	}
+
+	public String getPhoto_url() {
+		return photo_url;
+	}
+
+	public void setPhoto_url(String photo_url) {
+		this.photo_url = photo_url;
 	}
 
 }
