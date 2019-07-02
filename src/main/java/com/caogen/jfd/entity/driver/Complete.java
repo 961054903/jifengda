@@ -40,6 +40,7 @@ public class Complete implements Serializable {
     private Boolean aa;
     private String start;//开始时间
     private String end;//结束时间
+    private String tim;
 
     @Override
     public String toString() {
@@ -355,5 +356,13 @@ public class Complete implements Serializable {
 
     public void setEnd(String end) {
         this.end = end;
+    }
+
+    public String getTim() {
+        return tim;
+    }
+
+    public void setTim(String tim) {
+        this.tim = tim;
     }
 }

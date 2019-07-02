@@ -127,11 +127,10 @@ public class PeservationServicelmpl implements PeservationService {
                         Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(b / 2), 2)));
                 // 弧长乘地球半径, 返回单位: 千米
                 ss = ss * EARTH_RADIUS;
-                    System.out.println(ss);
                 //公里自定义
                 if (ss <= 100000000) {
                     //推送
-                    JPush.jpushAndroid(peservations);
+                    JPush.jpushAll(peservations);
 
                 }
 

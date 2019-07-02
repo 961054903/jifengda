@@ -212,30 +212,31 @@ public class PersonalController {
         return message;
 
     }
-    /**
-     * 计算在线时间
-     */
+
     @Autowired
     private  DetaiService detaiService;
 
-    @ResponseBody
-    @RequestMapping(value = {"cout","app/cout"})
-    public Message cout(String data) {
-        Message message = new Message();
-        try {
-            Detail appDriver = Constants.gson.fromJson(data,Detail.class);
-            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
-            String cc = detaiService.getime(appDriver.getPhone());
-            message.setData(cc,driver.getDes_key(),driver.getDes_iv());
-            message.setCode(ErrorCode.SUCCEED.getCode());
-            message.setDesc(ErrorCode.SUCCEED.getDesc());
-        } catch (Exception e) {
-            message.setCode(ErrorCode.FAIL.getCode());
-            message.setDesc(ErrorCode.FAIL.getDesc());
-            StaticLogger.logger().error(message.getDesc(), e);
-        }
-        return message;
-    }
+    /**
+     * 计算在线时间
+     */
+//    @ResponseBody
+//    @RequestMapping(value = {"cout","app/cout"})
+//    public Message cout(String data) {
+//        Message message = new Message();
+//        try {
+//            Detail appDriver = Constants.gson.fromJson(data,Detail.class);
+//            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
+//            String cc = detaiService.getime(appDriver.getPhone());
+//            message.setData(cc,driver.getDes_key(),driver.getDes_iv());
+//            message.setCode(ErrorCode.SUCCEED.getCode());
+//            message.setDesc(ErrorCode.SUCCEED.getDesc());
+//        } catch (Exception e) {
+//            message.setCode(ErrorCode.FAIL.getCode());
+//            message.setDesc(ErrorCode.FAIL.getDesc());
+//            StaticLogger.logger().error(message.getDesc(), e);
+//        }
+//        return message;
+//    }
 
     /**
      * 取出时间
@@ -269,7 +270,7 @@ public class PersonalController {
        @Autowired
        private  CompleteService completeService;
     /**
-     * 今日提成
+     * 今日
      * @param
      * @return
      */
@@ -281,6 +282,9 @@ public class PersonalController {
             Complete appDriver = Constants.gson.fromJson(data,Complete.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
         List <Complete> peservation = completeService.getto(appDriver.getPhone());
+            String cc = detaiService.getime(appDriver.getPhone());
+
+            int size = peservation.size();
         Double aa =0.0;
     for(int i = 0;i<peservation.size();i++){
         Double ss = peservation.get(i).getBonus();
@@ -288,6 +292,8 @@ public class PersonalController {
     }
         List<Object>ASD = new ArrayList<Object>( );
         ASD.add(aa);
+        ASD.add(size);
+        ASD.add(cc);
         if (appDriver.getAa()){
             ASD.add(peservation);
         }
@@ -302,66 +308,66 @@ public class PersonalController {
         return message;
 
 }
+//
+//    /**
+//     * 今日接单
+//     * @return
+//     */
+//    @ResponseBody
+//    @RequestMapping(value = {"receipt","app/receipt"})
+//    public Message receipt(String data) {
+//        Message message = new Message();
+//        try {
+//            Complete appDriver = Constants.gson.fromJson(data,Complete.class);
+//            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
+//            List <Complete> peservation = completeService.getto(appDriver.getPhone());
+//            int size = peservation.size();
+//            List<Object>ASD = new ArrayList<Object>( );
+//            ASD.add(size);
+//            if (appDriver.getAa()){
+//                ASD.add(peservation);
+//            }
+//            message.setData(ASD,driver.getDes_key(),driver.getDes_iv());
+//            message.setCode(ErrorCode.SUCCEED.getCode());
+//            message.setDesc(ErrorCode.SUCCEED.getDesc());
+//        } catch (Exception e) {
+//            message.setCode(ErrorCode.FAIL.getCode());
+//            message.setDesc(ErrorCode.FAIL.getDesc());
+//            StaticLogger.logger().error(message.getDesc(), e);
+//        }
+//        return message;
 
-    /**
-     * 今日接单
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = {"receipt","app/receipt"})
-    public Message receipt(String data) {
-        Message message = new Message();
-        try {
-            Complete appDriver = Constants.gson.fromJson(data,Complete.class);
-            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
-            List <Complete> peservation = completeService.getto(appDriver.getPhone());
-            int size = peservation.size();
-            List<Object>ASD = new ArrayList<Object>( );
-            ASD.add(size);
-            if (appDriver.getAa()){
-                ASD.add(peservation);
-            }
-            message.setData(ASD,driver.getDes_key(),driver.getDes_iv());
-            message.setCode(ErrorCode.SUCCEED.getCode());
-            message.setDesc(ErrorCode.SUCCEED.getDesc());
-        } catch (Exception e) {
-            message.setCode(ErrorCode.FAIL.getCode());
-            message.setDesc(ErrorCode.FAIL.getDesc());
-            StaticLogger.logger().error(message.getDesc(), e);
-        }
-        return message;
 
-    }
-
-    /**
-     * 本月接单
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = {"month","app/month"})
-    public Message month(String data) {
-        Message message = new Message();
-        try {
-            Complete appDriver = Constants.gson.fromJson(data,Complete.class);
-            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
-            List <Complete> peservation = completeService.getmon(appDriver.getPhone());
-            int size = peservation.size();
-            List<Object>ASD = new ArrayList<Object>( );
-            ASD.add(size);
-            if (appDriver.getAa()){
-                ASD.add(peservation);
-            }
-            message.setData(ASD,driver.getDes_key(),driver.getDes_iv());
-            message.setCode(ErrorCode.SUCCEED.getCode());
-            message.setDesc(ErrorCode.SUCCEED.getDesc());
-        } catch (Exception e) {
-            message.setCode(ErrorCode.FAIL.getCode());
-            message.setDesc(ErrorCode.FAIL.getDesc());
-            StaticLogger.logger().error(message.getDesc(), e);
-        }
-        return message;
-
-    }
+//
+//    /**
+//     * 本月接单
+//     * @return
+//     */
+//    @ResponseBody
+//    @RequestMapping(value = {"month","app/month"})
+//    public Message month(String data) {
+//        Message message = new Message();
+//        try {
+//            Complete appDriver = Constants.gson.fromJson(data,Complete.class);
+//            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
+//            List <Complete> peservation = completeService.getmon(appDriver.getPhone());
+//            int size = peservation.size();
+//            List<Object>ASD = new ArrayList<Object>( );
+//            ASD.add(size);
+//            if (appDriver.getAa()){
+//                ASD.add(peservation);
+//            }
+//            message.setData(ASD,driver.getDes_key(),driver.getDes_iv());
+//            message.setCode(ErrorCode.SUCCEED.getCode());
+//            message.setDesc(ErrorCode.SUCCEED.getDesc());
+//        } catch (Exception e) {
+//            message.setCode(ErrorCode.FAIL.getCode());
+//            message.setDesc(ErrorCode.FAIL.getDesc());
+//            StaticLogger.logger().error(message.getDesc(), e);
+//        }
+//        return message;
+//
+//    }
 
     /**
      * 本月提成
@@ -380,8 +386,10 @@ public class PersonalController {
                 Double ss = peservation.get(i).getBonus();
                 aa += ss;
             }
+            int size = peservation.size();
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(aa);
+            ASD.add(size);
             if (appDriver.getAa()){
                 ASD.add(peservation);
             }
@@ -460,7 +468,6 @@ public class PersonalController {
     public Message push() {
         Message message = new Message();
         try {
-
             peservationService.getput();
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());

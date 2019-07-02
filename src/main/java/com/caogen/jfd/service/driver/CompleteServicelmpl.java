@@ -56,6 +56,7 @@ public class CompleteServicelmpl implements CompleteService {
         Integer id = appDriverDao.get(appDriver).getId();
         complete.setDriver_id(id);
         List<Complete> completes = completeDao.find1(complete);
+        System.out.println(complete);
         return completes;
     }
 

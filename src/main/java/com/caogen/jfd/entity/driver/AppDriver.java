@@ -15,6 +15,7 @@ public class AppDriver implements Serializable {
     private String des_iv; // 3DES算法所需向量
     private String token;
 
+
     public AppDriver() {
         super();
     }
