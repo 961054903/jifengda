@@ -9,6 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.caogen.jfd.common.ErrorCode;
+import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.user.AppUser;
 
 import static com.caogen.jfd.common.Constants.*;
