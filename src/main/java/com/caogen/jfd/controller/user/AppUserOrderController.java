@@ -188,4 +188,18 @@ public class AppUserOrderController {
 		}
 		return message;
 	}
+
+	@ResponseBody
+	@RequestMapping(value = { "cancel", "api/cancel" })
+	public Message cancel(String data) {
+		Message message = new Message();
+		try {
+			// TODO
+		} catch (Exception e) {
+			message.setErrorCode(ErrorCode.ORDER_ERROR);
+			StaticLogger.error("user order get details error", e);
+		}
+		return message;
+	}
+
 }

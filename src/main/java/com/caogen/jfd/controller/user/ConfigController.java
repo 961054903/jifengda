@@ -41,11 +41,8 @@ public class ConfigController {
 			String city = configService.getByItem("city").getItem_value();
 			List<String> cities = Arrays.asList(city.split(","));
 			message.setData(cities);
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.FAIL.getCode());
-			message.setDesc(ErrorCode.FAIL.getDesc());
+			message.setErrorCode(ErrorCode.FAIL);
 			StaticLogger.logger().error(message.getDesc(), e);
 		}
 		return message;
@@ -62,11 +59,8 @@ public class ConfigController {
 		Message message = new Message();
 		try {
 			message.setData(IndustryHelper.getIndustry());
-			message.setCode(ErrorCode.SUCCEED.getCode());
-			message.setDesc(ErrorCode.SUCCEED.getDesc());
 		} catch (Exception e) {
-			message.setCode(ErrorCode.FAIL.getCode());
-			message.setDesc(ErrorCode.FAIL.getDesc());
+			message.setErrorCode(ErrorCode.FAIL);
 			StaticLogger.logger().error(message.getDesc(), e);
 		}
 		return message;

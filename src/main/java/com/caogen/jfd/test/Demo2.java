@@ -143,7 +143,7 @@ public class Demo2 {
 
 	@Test
 	public void pwd() {
-		String pwd = "123456";
+		String pwd = "111111";
 		String salt = PasswordHelper.generateSalt();
 		System.out.println(salt);
 		System.out.println(PasswordHelper.encryptPassword(pwd, salt));

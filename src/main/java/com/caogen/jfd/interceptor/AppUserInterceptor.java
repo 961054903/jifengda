@@ -1,5 +1,15 @@
 package com.caogen.jfd.interceptor;
 
+import static com.caogen.jfd.common.Constants.DECODE_DEFAULT;
+import static com.caogen.jfd.common.Constants.DECODE_SECRETKEY;
+import static com.caogen.jfd.common.Constants.DES_IV;
+import static com.caogen.jfd.common.Constants.DES_KEY;
+import static com.caogen.jfd.common.Constants.PATH_REPLACEMENT;
+import static com.caogen.jfd.common.Constants.PATH_TARGET_USER;
+import static com.caogen.jfd.common.Constants.REQUEST_BODY;
+import static com.caogen.jfd.common.Constants.REQUEST_HEAD;
+import static com.caogen.jfd.common.Constants.REQUEST_TOKEN;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,8 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.user.AppUser;
-
-import static com.caogen.jfd.common.Constants.*;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.service.user.AppUserService;
 import com.caogen.jfd.util.SecretUtils;
@@ -33,6 +41,11 @@ public class AppUserInterceptor implements HandlerInterceptor {
 		String token = request.getParameter(REQUEST_TOKEN);
 		String head = request.getParameter(REQUEST_HEAD);
 		String ciphertext = request.getParameter(REQUEST_BODY);
+		
+		StaticLogger.info("===head=== " + head);
+		StaticLogger.info("===token=== " + token);
+		StaticLogger.info("===ciphertext=== " + ciphertext);
+		
 		// 检查参数
 		if (StringUtils.isEmpty(head) || StringUtils.isEmpty(token) || StringUtils.isEmpty(ciphertext)) {
 			throw new DefinedException(ErrorCode.PARAM_MISSING);
@@ -54,6 +67,7 @@ public class AppUserInterceptor implements HandlerInterceptor {
 			throw new DefinedException(ErrorCode.PARAM_ILLEGALITY);
 		}
 		String plaintext = SecretUtils.desedeDecode(ciphertext.replace(" ", "+"), key, iv);
+		StaticLogger.info("===plaintext=== " + plaintext);
 		// 转发
 		WrappedRequest wr = new WrappedRequest(request);
 		wr.setParameter("data", plaintext);
