@@ -47,7 +47,11 @@ public class AppUserIssueServiceImpl implements AppUserIssueService {
 	public List<AppUserIssue> getFAQ() {
 		AppUserIssue entity = new AppUserIssue();
 		entity.setType(Type.faq);
-		return issueDao.find(entity);
+		List<AppUserIssue> list = issueDao.find(entity);
+		for (AppUserIssue item : list) {
+			item.setCreate_date(null);
+		}
+		return list;
 	}
 
 	@Override
