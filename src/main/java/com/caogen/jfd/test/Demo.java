@@ -20,8 +20,8 @@ public class Demo {
 	BigInteger p = new BigInteger(Constants.DH_P, 16);
 	BigInteger a = new BigInteger(a_str, 16);
 
-	String iv = "C8F8761A";
-	String key = "B21DD5E00359954F1AE0C934";
+	String iv = "5F39B105";
+	String key = "D55B6D611BD5D19D9B9FA967";
 
 	@Test
 	public void signinReq() throws Exception {
@@ -51,9 +51,8 @@ public class Demo {
 
 	@Test
 	public void test2() throws Exception {
-		Complete entity = new Complete();
+		Reward entity = new Reward();
 		entity.setPhone("123456");
-		entity.setAa(true);
 		String json = gson.toJson(entity);
 		System.out.println(json);
 		String result = SecretUtils.desedeEncode(json, key, iv);
@@ -63,7 +62,7 @@ public class Demo {
 
 	@Test
 	public void test3() throws Exception {
-		String str = "bnmgUwPmgaRCuiUEI936xm7CL9WaZRE+uh4gqxJsCg0mwtzwxPjjnYektAt6cTtSjvUJqYcLfxeyTF+F068+TSx70FEX33VkgZ+l7fPZvnJ4M5n4ZeKsQhDGbgWeuXC/DvIrW86zisdlzB4E8EGOtNpjSnDg8pbhBBUCuuVvjDhW68e5eAcmTJzlvgLv3xHG95hbimWhXi1jqh3AKYA22w==" +
+		String str = "Znb4Q/rEi6B0AAj8WXMJSW1QH9OdAYmvYfwu5l3XxY/SPCljSIT0YY/Blkf6XG8VGAKcUTceeZZu4B6vfuifuVjOh/mXJLiBonYL0VBXmfePZ2MI+fWuQl3VzNNmWhLMPN7pnsQw8Lg5/HpteX8I84g1xAFGIJVvyCRECMwXGJwHZF5msXotIHP0tSNc0LeFxYBreZUP/41XYvIsTRJREXvLX6oDk/3Q" +
 				"";
 		System.out.println(SecretUtils.desedeDecode(str, key, iv));
 	}

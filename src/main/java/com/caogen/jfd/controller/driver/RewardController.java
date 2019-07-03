@@ -1,11 +1,14 @@
 package com.caogen.jfd.controller.driver;
 
 
+import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
+import com.caogen.jfd.entity.driver.AppDriver;
 import com.caogen.jfd.entity.driver.Model;
 import com.caogen.jfd.entity.driver.Reward;
 import com.caogen.jfd.model.Message;
+import com.caogen.jfd.service.driver.AppDriverService;
 import com.caogen.jfd.service.driver.RewardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,8 @@ public class RewardController {
     @Autowired
     private RewardService rewardService;
 
+     @Autowired
+     private AppDriverService appDriverService;
 
     /**
      * 奖励活动
@@ -28,13 +33,14 @@ public class RewardController {
      */
 
     @ResponseBody
-    @RequestMapping("content")
-    public Message  content(){
+    @RequestMapping(value = {"content","app/content"})
+    public Message  content(String data){
         Message message  = new Message();
-
         try {
-            List<Reward> rewards = rewardService.getContent();
-            message.setData(rewards);
+            Reward appDriver = Constants.gson.fromJson(data,Reward.class);
+            AppDriver driver =appDriverService.getByPhone(appDriver.getPhone());
+            List<Reward> rewards = rewardService.getContent(appDriver.getPhone());
+            message.setData(rewards,driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {

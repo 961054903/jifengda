@@ -1,14 +1,10 @@
 package com.caogen.jfd.service.driver;
-import cn.jpush.api.push.PushResult;
 import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.controller.driver.dome.JPush;
-import com.caogen.jfd.controller.driver.dome.JPushUtil;
 import com.caogen.jfd.dao.driver.*;
 import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.entity.user.AppUserSite;
 
-import com.google.gson.JsonArray;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -136,7 +132,6 @@ public class PeservationServicelmpl implements PeservationService {
                     JPush.jpushIOS(wt);
 
                 }
-
             }
         }
         }
@@ -223,7 +218,6 @@ public class PeservationServicelmpl implements PeservationService {
         Double ticket_money = peservations.getTicket_money();
         Double actually_paid = peservations.getActually_paid();
 
-
         complete.setActually_paid(actually_paid);
         complete.setTicket_money(ticket_money);
         complete.setOrder_money(order_money);
@@ -250,10 +244,7 @@ public class PeservationServicelmpl implements PeservationService {
         complete.setBonus(bonus);
         complete.setFinish_date(LocalDateTime.now());
         completeDao.insert(complete);
-
-
         peservationDao.delete(peservation);
-
     }
 }
 

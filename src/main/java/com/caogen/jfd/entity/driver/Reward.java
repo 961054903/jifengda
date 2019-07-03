@@ -11,7 +11,7 @@ public class Reward implements Serializable {
     private String activityname;//奖励内容
     private LocalDateTime  create_date; //创建时间
     private Double money;//奖励金额
-
+    private String phone;
 
     @Override
     public String toString() {
@@ -20,7 +20,16 @@ public class Reward implements Serializable {
                 ", activityname='" + activityname + '\'' +
                 ", create_date=" + create_date +
                 ", money=" + money +
+                ", phone='" + phone + '\'' +
                 '}';
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public static long getSerialVersionUID() {

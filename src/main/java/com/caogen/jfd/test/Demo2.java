@@ -6,8 +6,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
-
 import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.entity.user.AppUserOrder;
 import com.caogen.jfd.entity.user.AppUserOrder.Mode;
@@ -19,6 +17,7 @@ import com.caogen.jfd.util.HttpClientUtils;
 import com.caogen.jfd.util.PasswordHelper;
 import com.caogen.jfd.util.SecretUtils;
 import com.google.gson.Gson;
+import org.junit.jupiter.api.Test;
 
 public class Demo2 {
 	Gson gson = new Gson();

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface RewardService extends BaseService<Reward> {
 
-    List<Reward>getContent();
+    List<Reward>getContent(String phone);
 }
