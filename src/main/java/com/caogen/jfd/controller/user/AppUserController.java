@@ -85,10 +85,10 @@ public class AppUserController {
 			message.setData(generateToken(user.getPhone()));
 		} catch (DefinedException e) {
 			message.setErrorCode(e.getError());
-			StaticLogger.error("user login error", e);
+			StaticLogger.error(message.getDesc(), e);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.LOGIN_ERROR);
-			StaticLogger.error("user login error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
@@ -117,10 +117,10 @@ public class AppUserController {
 			message.setData(generateToken(user.getPhone()));
 		} catch (DefinedException e) {
 			message.setErrorCode(e.getError());
-			StaticLogger.error("user login error", e);
+			StaticLogger.error(message.getDesc(), e);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.LOGIN_ERROR);
-			StaticLogger.error("user login error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
@@ -156,10 +156,10 @@ public class AppUserController {
 			message.setData(generateToken(user.getPhone()));
 		} catch (DefinedException e) {
 			message.setErrorCode(e.getError());
-			StaticLogger.error("user login error", e);
+			StaticLogger.error(message.getDesc(), e);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.LOGIN_ERROR);
-			StaticLogger.error("user login error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
@@ -183,7 +183,7 @@ public class AppUserController {
 			userService.modify(entity);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.LOGOUT_ERROR);
-			StaticLogger.error("user loginout error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
@@ -276,7 +276,7 @@ public class AppUserController {
 			}
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.SMS_SEND_ERROR);
-			StaticLogger.error("send sms error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
@@ -289,7 +289,7 @@ public class AppUserController {
 			contrastSms(phone, code);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.SMS_MISMATCHING);
-			StaticLogger.error("sms error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
@@ -308,7 +308,7 @@ public class AppUserController {
 			message.setData(list);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.FAIL);
-			StaticLogger.error("get vehicle model error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
