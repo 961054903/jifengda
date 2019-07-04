@@ -31,14 +31,16 @@ public class AppUserPathController {
 
 	@ResponseBody
 	@RequestMapping(value = { "add", "api/add" })
-	public Message add(String data) {
+	public Message add(Message data) {
 		Message message = new Message();
 		try {
-			AppUserPath path = Constants.gson.fromJson(data, AppUserPath.class);
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserPath path = Constants.gson.fromJson((String) data.getData(), AppUserPath.class);
+			path.setUser_id(user.getId());
 			pathService.create(path);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.PATH_ERROR);
-			StaticLogger.error("user path add error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
@@ -52,7 +54,7 @@ public class AppUserPathController {
 			pathService.remove(path);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.PATH_ERROR);
-			StaticLogger.error("user path del error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
@@ -66,55 +68,57 @@ public class AppUserPathController {
 			pathService.modify(path);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.PATH_ERROR);
-			StaticLogger.error("user path edit error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = { "one", "api/one" })
-	public Message one(String data) {
+	public Message one(Message data) {
 		Message message = new Message();
 		try {
-			AppUserPath path = Constants.gson.fromJson(data, AppUserPath.class);
-			AppUser user = userService.getByPhone(path.getPhone());
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserPath path = Constants.gson.fromJson((String) data.getData(), AppUserPath.class);
 			AppUserPath entity = pathService.getOne(path);
 			message.setData(entity, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.PATH_ERROR);
-			StaticLogger.error("user path get one error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = { "all", "api/all" })
-	public Message all(String data) {
+	public Message all(Message data) {
 		Message message = new Message();
 		try {
-			AppUserPath path = Constants.gson.fromJson(data, AppUserPath.class);
-			AppUser user = userService.getByPhone(path.getPhone());
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserPath path = new AppUserPath();
+			path.setUser_id(user.getId());
 			List<AppUserPath> list = pathService.getAll(path);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.PATH_ERROR);
-			StaticLogger.error("user path get all error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = { "count", "api/count" })
-	public Message count(String data) {
+	public Message count(Message data) {
 		Message message = new Message();
 		try {
-			AppUserPath path = Constants.gson.fromJson(data, AppUserPath.class);
-			AppUser user = userService.getByPhone(path.getPhone());
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserPath path = new AppUserPath();
+			path.setUser_id(user.getId());
 			Integer num = pathService.count(path);
 			message.setData(num, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.PATH_ERROR);
-			StaticLogger.error("user path count error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}

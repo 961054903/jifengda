@@ -35,14 +35,16 @@ public class AppUserSiteController {
 
 	@ResponseBody
 	@RequestMapping(value = { "add", "api/add" })
-	public Message add(String data) {
+	public Message add(Message data) {
 		Message message = new Message();
 		try {
-			AppUserSite site = Constants.gson.fromJson(data, AppUserSite.class);
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserSite site = Constants.gson.fromJson((String) data.getData(), AppUserSite.class);
+			site.setUser_id(user.getId());
 			siteService.create(site);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.SITE_ERROR);
-			StaticLogger.error("user site add error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
@@ -56,7 +58,7 @@ public class AppUserSiteController {
 			siteService.remove(site);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.SITE_ERROR);
-			StaticLogger.error("user site del error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
@@ -70,39 +72,42 @@ public class AppUserSiteController {
 			siteService.modify(site);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.SITE_ERROR);
-			StaticLogger.error("user site edit error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
 
 	@ResponseBody
+
 	@RequestMapping(value = { "one", "api/one" })
-	public Message one(String data) {
+	public Message one(Message data) {
 		Message message = new Message();
 		try {
-			AppUserSite site = Constants.gson.fromJson(data, AppUserSite.class);
-			AppUser user = userService.getByPhone(site.getPhone());
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserSite site = Constants.gson.fromJson((String) data.getData(), AppUserSite.class);
 			AppUserSite entity = siteService.getOne(site);
 			message.setData(entity, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.SITE_ERROR);
-			StaticLogger.error("user site get one error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
 
 	@ResponseBody
+
 	@RequestMapping(value = { "all", "api/all" })
-	public Message all(String data) {
+	public Message all(Message data) {
 		Message message = new Message();
 		try {
-			AppUserSite site = Constants.gson.fromJson(data, AppUserSite.class);
-			AppUser user = userService.getByPhone(site.getPhone());
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserSite site = new AppUserSite();
+			site.setUser_id(user.getId());
 			List<AppUserSite> list = siteService.getAll(site);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.SITE_ERROR);
-			StaticLogger.error("user site get all error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
@@ -119,7 +124,7 @@ public class AppUserSiteController {
 			message.setData(list);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.SITE_ERROR);
-			StaticLogger.error("user site get driver location error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}

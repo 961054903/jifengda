@@ -3,20 +3,17 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.user.AppUserPathDao">
-	<sql id="path">phone,name,description,origin,destination</sql>
+	<sql id="path">user_id,name,description,origin,destination</sql>
 	<insert id="insert" parameterType="AppUserPath">
 		insert into app_user_path (
 		<include refid="path" />
 		) values (
-		#{phone},#{name},#{description},#{origin},#{destination}
+		#{user_id},#{name},#{description},#{origin},#{destination}
 		)
 	</insert>
 	<delete id="delete" parameterType="AppUserPath">
 		DELETE FROM app_user_path
-		<where>
-			<if test="id != null">id = #{id}</if>
-			<if test="phone != null">AND phone = #{phone}</if>
-		</where>
+		WHERE id = #{id}
 	</delete>
 	<update id="update" parameterType="AppUserPath">
 		update app_user_path
@@ -40,10 +37,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT id,
 		<include refid="path" />
 		FROM app_user_path
-		WHERE phone = #{phone}
+		WHERE user_id = #{user_id}
 	</select>
 	<select id="count" parameterType="AppUserPath"
 		resultType="Integer">
-		SELECT count(id) FROM app_user_path WHERE phone = #{phone}
+		SELECT count(id) FROM app_user_path WHERE user_id =
+		#{user_id}
 	</select>
 </mapper>

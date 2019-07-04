@@ -11,7 +11,7 @@ public class AppUserPath implements Serializable {
 
 	private static final long serialVersionUID = 1829157775148787101L;
 	private Integer id;
-	private String phone;
+	private Integer user_id;
 	private String name;
 	private String description;
 	private String origin;
@@ -28,7 +28,7 @@ public class AppUserPath implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AppUserPath [id=" + id + ", phone=" + phone + ", name=" + name + ", description=" + description
+		return "AppUserPath [id=" + id + ", user_id=" + user_id + ", name=" + name + ", description=" + description
 				+ ", origin=" + origin + ", destination=" + destination + "]";
 	}
 
@@ -40,12 +40,12 @@ public class AppUserPath implements Serializable {
 		this.id = id;
 	}
 
-	public String getPhone() {
-		return phone;
+	public Integer getUser_id() {
+		return user_id;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getName() {

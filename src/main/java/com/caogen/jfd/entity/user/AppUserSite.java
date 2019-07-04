@@ -11,7 +11,7 @@ public class AppUserSite implements Serializable {
 
 	private static final long serialVersionUID = 2455774296222366921L;
 	private Integer id;
-	private String phone;
+	private Integer user_id;
 	private String name;
 	private String description;
 	private Double longitude;
@@ -30,7 +30,7 @@ public class AppUserSite implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AppUserSite [id=" + id + ", phone=" + phone + ", name=" + name + ", description=" + description
+		return "AppUserSite [id=" + id + ", user_id=" + user_id + ", name=" + name + ", description=" + description
 				+ ", longitude=" + longitude + ", latitude=" + latitude + ", contacts_name=" + contacts_name
 				+ ", contacts_phone=" + contacts_phone + "]";
 	}
@@ -43,12 +43,12 @@ public class AppUserSite implements Serializable {
 		this.id = id;
 	}
 
-	public String getPhone() {
-		return phone;
+	public Integer getUser_id() {
+		return user_id;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getName() {
