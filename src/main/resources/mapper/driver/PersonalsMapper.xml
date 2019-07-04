@@ -20,7 +20,7 @@
         SET
         is_online =#{is_online}
         WHERE
-        phone =#{phone}
+        user_id =#{user_id}
     </update>
 
     <select id="find" parameterType="Personal"
@@ -35,7 +35,7 @@
     </select>
 
 
-    <sql id="sql">phone,photo_url,name,grade</sql>
+    <sql id="sql">user_id,phone,photo_url,name,grade</sql>
     <select id="get1" parameterType="Personal"
             resultType="Personal">
         SELECT
@@ -43,6 +43,7 @@
         FROM app_driver_info
         <where>
             <if test="id != null">id = #{id}</if>
+            <if test="user_id != null">AND user_id = #{user_id}</if>
             <if test="phone != null">AND phone = #{phone}</if>
             <if test="photo_url != null">AND photo_url = #{photo_url}</if>
             <if test="name != null">AND name = #{name}</if>
@@ -50,7 +51,7 @@
         </where>
     </select>
 
-    <sql id="whole">photo_url,name,phone,gender,birthday,licence_url,identity_front_url,identity_back_url,identity_take_url,contacts_name,contacts_phone,contacts_gender,contacts_relation</sql>
+    <sql id="whole">user_id,photo_url,name,phone,gender,birthday,licence_url,identity_front_url,identity_back_url,identity_take_url,contacts_name,contacts_phone,contacts_gender,contacts_relation</sql>
     <select id="get2" parameterType="Personal"
             resultType="Personal">
         SELECT
@@ -59,6 +60,7 @@
         <where>
             <if test="id != null">id = #{id}</if>
             <if test="phone != null">AND phone = #{phone}</if>
+            <if test="user_id != null">AND user_id = #{user_id}</if>
             <if test="photo_url != null">AND photo_url = #{photo_url}</if>
             <if test="name != null">AND name = #{name}</if>
             <if test="gender != null">AND gender = #{gender}</if>
@@ -77,6 +79,7 @@
         UPDATE app_driver_info
         <set>
             <if test="photo_url != null"> photo_url = #{photo_url}</if>
+            <if test="phone != null"> phone= #{phone},</if>
             <if test="name != null"> name = #{name},</if>
             <if test="gender != null"> gender = #{gender},</if>
             <if test="birthday != null"> birthday = #{birthday},</if>
@@ -92,7 +95,7 @@
 
         <where>
             <if test="id != null">id = #{id},</if>
-            <if test="phone != null"> phone = #{phone}</if>
+            <if test="user_id != null"> user_id = #{user_id}</if>
         </where>
     </update>
 

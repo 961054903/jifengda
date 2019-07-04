@@ -69,24 +69,23 @@ public class PersonalServicelmpl implements PersonalService {
     }
 
     @Override
-    public Personal getmany(String phone) {
+    public Personal getmany(Integer user_id) {
         Personal personal = new Personal();
-        personal.setPhone(phone);
+        personal.setUser_id(user_id);
         return personalDao.get1(personal);
     }
 
     @Override
-    public Personal getwhole(String phone) {
+    public Personal getwhole(Integer user_id) {
         Personal personal = new Personal();
 
-        personal.setPhone(phone);
+        personal.setUser_id(user_id);
 
         return  personalDao.get2(personal);
     }
 
     @Override
     public void getmodify(Personal cities) {
-
         personalDao.update1(cities);
     }
     @Override

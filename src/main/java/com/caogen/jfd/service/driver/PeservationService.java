@@ -7,7 +7,7 @@ import com.caogen.jfd.service.BaseService;
 import java.util.List;
 
 public interface PeservationService extends BaseService<Peservation> {
-   List<Peservation> getmake(String phone, Peservation.Mode mode);
+   List<Peservation> getmake(Integer driver_id, Peservation.Mode mode);
 
    /**
     * 获取订单详情
@@ -19,9 +19,11 @@ public interface PeservationService extends BaseService<Peservation> {
 
     void getput();
 
-    boolean getspike(String phone, String code);
+    boolean getspike(Integer driver_id, String code);
 
     void getfenjie(String code);
 
     void gettake(String phone, String code);
+
+   List <Peservation> gettui();
 }

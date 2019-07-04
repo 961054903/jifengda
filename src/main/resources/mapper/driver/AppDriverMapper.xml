@@ -6,7 +6,7 @@
     <sql id="sql">id,driverphone,password,status,salt,create_date,des_key,des_iv,token</sql>
     <select id="get" parameterType="AppDriver"
             resultType="AppDriver">
-        SELECT id,
+        SELECT
         <include refid="sql" />
         FROM app_driver
         <where>

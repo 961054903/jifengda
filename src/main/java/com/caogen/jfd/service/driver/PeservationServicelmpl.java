@@ -57,12 +57,9 @@ public class PeservationServicelmpl implements PeservationService {
 
 
     @Override
-    public List<Peservation> getmake(String phone, Peservation.Mode mode) {
-        AppDriver appDriver = new AppDriver();
+    public List<Peservation> getmake(Integer driver_id, Peservation.Mode mode) { ;
         Peservation peservation = new Peservation();
-        appDriver.setDriverphone(phone);
-        Integer id = appDriverDao.get(appDriver).getId();
-        peservation.setDriver_id(id);
+        peservation.setDriver_id(driver_id);
         peservation.setMode(mode);
         List<Peservation>peservations = peservationDao.find(peservation);
         return peservations;
@@ -143,10 +140,10 @@ public class PeservationServicelmpl implements PeservationService {
 
 
     @Override
-    public boolean getspike(String phone, String code) {
+    public boolean getspike(Integer driver_id, String code) {
         AppDriver appDriver = new AppDriver();
         Peservation peservation = new Peservation();
-        appDriver.setDriverphone(phone);
+        appDriver.setId(driver_id);
         Integer id = appDriverDao.get(appDriver).getId();
         peservation.setDriver_id(id);
         peservation.setCode(code);
@@ -248,6 +245,13 @@ public class PeservationServicelmpl implements PeservationService {
         complete.setFinish_date(LocalDateTime.now());
         completeDao.insert(complete);
         peservationDao.delete(peservation);
+    }
+
+    @Override
+    public List <Peservation> gettui() {
+        Peservation peservation = new Peservation();
+        List<Peservation> aaa =  peservationDao.find8(peservation);
+        return aaa;
     }
 }
 

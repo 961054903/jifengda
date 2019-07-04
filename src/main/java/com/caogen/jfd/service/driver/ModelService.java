@@ -16,5 +16,5 @@ public interface ModelService extends BaseService<Model> {
      * @param
      * @return
      */
-    Model getvehicle(String phone);
+    Model getvehicle(Integer user_id);
 }

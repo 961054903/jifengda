@@ -21,17 +21,16 @@ public interface PersonalService extends BaseService<Personal> {
 
     /**
      * 个人信息四条
-     * @param phone
+
      * @return
      */
-    Personal getmany(String phone);
+    Personal getmany(Integer user_id);
 
     /**
      * 获取个人全部信息
-     * @param phone
      * @return
      */
-    Personal getwhole(String phone);
+    Personal getwhole(Integer user_id);
 
     /**
      * 修改信息

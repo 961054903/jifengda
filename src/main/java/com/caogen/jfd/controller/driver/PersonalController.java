@@ -9,6 +9,7 @@ import com.caogen.jfd.service.driver.*;
 import com.caogen.jfd.service.user.AppUserService;
 import com.sun.jmx.snmp.tasks.TaskServer;
 import com.sun.org.apache.bcel.internal.generic.GETFIELD;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -53,7 +54,7 @@ public class PersonalController {
         return message;
     }
     /**
-     * 查询是否在线
+     * 修改上下线在线
      *
      */
     @ResponseBody
@@ -85,7 +86,7 @@ public class PersonalController {
         try {
             Personal appDriver = Constants.gson.fromJson(data,Personal.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getUser_id());
-            Personal cities = personalService.getmany(appDriver.getPhone());
+            Personal cities = personalService.getmany(appDriver.getUser_id());
             message.setData(cities,driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -111,8 +112,8 @@ public class PersonalController {
         try {
             Personal appDriver = Constants.gson.fromJson(data,Personal.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getUser_id());
-            Personal cities = personalService.getwhole(appDriver.getPhone());
-            Model vehicle = modelService.getvehicle(appDriver.getPhone());
+            Personal cities = personalService.getwhole(appDriver.getUser_id());
+            Model vehicle = modelService.getvehicle(appDriver.getUser_id());
             List<Object>ASD = new ArrayList<Object>( );
             ASD.add(cities);
             ASD.add(vehicle);
@@ -166,7 +167,7 @@ public class PersonalController {
         try {
             Peservation appDriver = Constants.gson.fromJson(data,Peservation.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getDriver_id());
-           List <Peservation> personals = peservationService.getmake(appDriver.getPhone(),appDriver.getMode());
+           List <Peservation> personals = peservationService.getmake(appDriver.getDriver_id(),appDriver.getMode());
             message.setData(personals,driver.getDes_key(),driver.getDes_iv());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -459,25 +460,25 @@ public class PersonalController {
         return message;
         }
 
-    /**
-     * 推送
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping("push")
-    public Message push() {
-        Message message = new Message();
-        try {
-            peservationService.getput();
-            message.setCode(ErrorCode.SUCCEED.getCode());
-            message.setDesc(ErrorCode.SUCCEED.getDesc());
-        } catch (Exception e) {
-            message.setCode(ErrorCode.FAIL.getCode());
-            message.setDesc(ErrorCode.FAIL.getDesc());
-            StaticLogger.logger().error(message.getDesc(), e);
-        }
-        return message;
-    }
+//    /**
+//     * 推送
+//     * @return
+//     */
+//    @ResponseBody
+//    @RequestMapping("push")
+//    public Message push() {
+//        Message message = new Message();
+//        try {
+//            peservationService.getput();
+//            message.setCode(ErrorCode.SUCCEED.getCode());
+//            message.setDesc(ErrorCode.SUCCEED.getDesc());
+//        } catch (Exception e) {
+//            message.setCode(ErrorCode.FAIL.getCode());
+//            message.setDesc(ErrorCode.FAIL.getDesc());
+//            StaticLogger.logger().error(message.getDesc(), e);
+//        }
+//        return message;
+//    }
 
     /**
      * 抢单
@@ -490,7 +491,7 @@ public class PersonalController {
         try {
             Peservation appDriver = Constants.gson.fromJson(data,Peservation.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getDriver_id());
-            boolean peservations = peservationService.getspike(appDriver.getPhone(),appDriver.getCode());
+            boolean peservations = peservationService.getspike(appDriver.getDriver_id(),appDriver.getCode());
             if (peservations){
                 peservationService.getfenjie(appDriver.getCode());
             }
@@ -593,4 +594,26 @@ public class PersonalController {
         return message;
     }
 
+//
+//    /**
+//     * 推送订单
+//     * @return
+//     */
+//    @ResponseBody
+//    @RequestMapping("tuis")
+//    public Message tuis( ) {
+//        Message message = new Message();
+//        try {
+//           List <Peservation> peservation = peservationService.gettui();
+//            message.setData(peservation);
+//            message.setCode(ErrorCode.SUCCEED.getCode());
+//            message.setDesc(ErrorCode.SUCCEED.getDesc());
+//        } catch (Exception e) {
+//            message.setCode(ErrorCode.FAIL.getCode());
+//            message.setDesc(ErrorCode.FAIL.getDesc());
+//            StaticLogger.logger().error(message.getDesc(), e);
+//        }
+//        return message;
+//
+//    }
 }

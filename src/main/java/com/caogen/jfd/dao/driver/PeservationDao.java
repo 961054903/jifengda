@@ -22,4 +22,6 @@ public interface PeservationDao extends BaseDao<Peservation> {
     Peservation get6(Peservation peservation);
 
     void delete(Peservation peservation);
+
+    List<Peservation> find8(Peservation peservation);
 }

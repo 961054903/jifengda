@@ -61,10 +61,10 @@ public class ModelServicelmpl implements ModelService {
 
 
     @Override
-    public Model getvehicle(String phone) {
+    public Model getvehicle(Integer user_id) {
         Model model = new Model();
         Personal personal = new Personal();
-        personal.setPhone(phone);
+        personal.setUser_id(user_id);
         model.setId(personalDao.get2(personal).getId());
         return modelDao.get3(model);
 
