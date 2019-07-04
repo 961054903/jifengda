@@ -105,5 +105,11 @@ public class PersonalServicelmpl implements PersonalService {
         return personalDao6;
     }
 
+    @Override
+    public Personal getId(AppDriver driver) {
+  Personal aa =  personalDao.get8();
+        return aa;
+    }
+
 
 }

@@ -4,6 +4,7 @@ import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.dao.driver.AppDriverDao;
 import com.caogen.jfd.entity.driver.AppDriver;
+import com.caogen.jfd.entity.driver.Personal;
 import com.caogen.jfd.exception.DefinedException;
 
 import com.caogen.jfd.util.PasswordHelper;
@@ -114,5 +115,13 @@ public class AppDriverServicelmpl implements AppDriverService {
         modify(user);
     }
 
+    @Override
+    public AppDriver getId(AppDriver driver) {
+        AppDriver appDriver = appDriverDao.get(driver);
+        return appDriver;
+    }
 
 }
+
+
+

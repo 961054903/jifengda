@@ -2,6 +2,7 @@ package com.caogen.jfd.service.driver;
 
 
 import com.caogen.jfd.entity.driver.AppDriver;
+import com.caogen.jfd.entity.driver.Personal;
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.service.BaseService;
 
@@ -40,4 +41,6 @@ public interface AppDriverService extends BaseService<AppDriver> {
     String[] exchange(String result, String phone) throws Exception;
 
     void changePassword(String driverphone, String password);
+
+    AppDriver getId(AppDriver driver);
 }

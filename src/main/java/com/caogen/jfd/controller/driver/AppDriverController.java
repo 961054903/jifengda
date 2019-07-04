@@ -6,18 +6,23 @@ import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.driver.AppDriver;
 import com.caogen.jfd.entity.driver.DriverSite;
+import com.caogen.jfd.entity.driver.Personal;
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.model.Signin;
 import com.caogen.jfd.service.driver.AppDriverService;
 import com.caogen.jfd.service.driver.DriverSiteService;
+import com.caogen.jfd.service.driver.PersonalService;
 import com.caogen.jfd.util.PasswordHelper;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -26,7 +31,8 @@ public class AppDriverController {
 
     @Autowired
     private AppDriverService appDriverService;
-
+   @Autowired
+   private PersonalService personalService;
     /**
      * 登录
      *
@@ -40,8 +46,12 @@ public class AppDriverController {
         String token = null;
         try {
             token = appDriverService.passwordLogin(driver);
-
-            message.setData(token);
+            AppDriver byId = appDriverService.getId(driver);
+            Integer id = byId.getId();
+            List<Object>appDrivers = new ArrayList<>();
+            appDrivers.add(token);
+            appDrivers.add(id);
+            message.setData(appDrivers);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (DefinedException e) {

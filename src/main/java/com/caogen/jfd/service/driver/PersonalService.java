@@ -2,6 +2,7 @@ package com.caogen.jfd.service.driver;
 
 import java.util.List;
 
+import com.caogen.jfd.entity.driver.AppDriver;
 import com.caogen.jfd.entity.driver.Personal;
 import com.caogen.jfd.service.BaseService;
 
@@ -42,4 +43,10 @@ public interface PersonalService extends BaseService<Personal> {
     void getmodify(Personal cities);
 
     Personal getchampion();
+
+
+    /*
+    获取司机id
+     */
+    Personal getId(AppDriver driver);
 }

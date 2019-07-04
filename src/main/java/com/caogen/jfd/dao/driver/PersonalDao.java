@@ -35,4 +35,6 @@ public interface PersonalDao extends BaseDao<Personal> {
 
 
     List<Personal> find3(Personal personal);
+
+    Personal get8();
 }

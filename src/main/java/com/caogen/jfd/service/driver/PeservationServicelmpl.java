@@ -80,6 +80,7 @@ public class PeservationServicelmpl implements PeservationService {
         Vehicle vehicle = new Vehicle();
         Peservation peservation = new Peservation();
         Map<String,String> wt = new HashMap<>();
+        Map<String,String> dd = new HashMap<>();
 
         List<Vehicle> vehicles = vehicleDao.find(vehicle);
         for (int c =0; c<vehicles.size();c++){
@@ -132,6 +133,8 @@ public class PeservationServicelmpl implements PeservationService {
                     JPush.jpushIOS(wt);
 
                 }
+                 dd.put("cc","司机已接单");
+                    JPush.jpush(dd);
             }
         }
         }

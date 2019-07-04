@@ -135,5 +135,16 @@
         phone =#{phone}
     </update>
 
+    <sql id="ll">user_id</sql>
+    <select id="get8" parameterType="Personal"
+            resultType="Personal">
+        SELECT
+        <include refid="ll" />
+        FROM app_driver_info
+        <where>
+            <if test="id != null"> id = #{id}</if>
+            <if test="user_id != null">AND user_id = #{user_id}</if>
+        </where>
+    </select>
 
 </mapper>
