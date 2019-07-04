@@ -39,10 +39,19 @@ public interface AppDriverService extends BaseService<AppDriver> {
 
 
 
-    String[] exchange(String result, Integer driver_id) throws Exception;
-
     void changePassword(Integer id, String password);
 
 
     AppDriver getId(AppDriver driver);
+
+    /**
+     * 密钥交换
+     *
+     * @param A
+     * @param token
+     * @return
+     * @throws Exception
+     */
+    String[] exchangeKe(String A, String token) throws Exception;
+
 }

@@ -94,28 +94,28 @@ public class AppDriverController {
         }
         return message;
     }
-//    /**
-//     * 密钥交换
-//     *
-//     * @param data
-//     * @return
-//     */
-//    @ResponseBody
-//    @RequestMapping(value = {"signin", "app/signin"})
-//    public Message signin(String data) {
-//        Message message = new Message();
-//        try {
-//            Signin signin = new Gson().fromJson(data, Signin.class);
-//            String[] array = appDriverService.exchange(signin.getResult(), signin.getPhone());
-//            signin.setResult(array[0]);
-//            signin.setVerify(array[1]);
-//            message.setData(signin, Constants.DES_KEY, Constants.DES_IV);
-//        } catch (Exception e) {
-//            message.setErrorCode(ErrorCode.SIGNIN_ERROR);
-//            StaticLogger.error(message.getCode(), e);
-//        }
-//        return message;
-//    }
+    /**
+     * 密钥交换
+     *
+     * @param data
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = {"signin", "app/signin"})
+    public Message signin(Message data) {
+        Message message = new Message();
+        try {
+            Signin signin = new Gson().fromJson((String) data.getData(), Signin.class);
+            String[] array = appDriverService.exchangeKe(signin.getResult(), data.getDesc());
+            signin.setResult(array[0]);
+            signin.setVerify(array[1]);
+            message.setData(signin, Constants.DES_KEY, Constants.DES_IV);
+        } catch (Exception e) {
+            message.setErrorCode(ErrorCode.SIGNIN_ERROR);
+            StaticLogger.error(message.getCode(), e);
+        }
+        return message;
+    }
 
     /**
      * 修改密码
