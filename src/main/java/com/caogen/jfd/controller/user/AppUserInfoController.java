@@ -37,10 +37,12 @@ public class AppUserInfoController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "edit", "api/edit" })
-	public Message edit(String data) {
+	public Message edit(Message data) {
 		Message message = new Message();
 		try {
-			AppUserInfo info = Constants.gson.fromJson(data, AppUserInfo.class);
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserInfo info = Constants.gson.fromJson((String) data.getData(), AppUserInfo.class);
+			info.setUser_id(user.getId());
 			if (!StringUtils.isEmpty(info.getBirth())) {
 				info.setBirthday(FormatUtils.strToDate(info.getBirth()));
 			}
@@ -60,14 +62,18 @@ public class AppUserInfoController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "real", "api/real" })
-	public Message real(String data) {
+	public Message real(Message data) {
 		Message message = new Message();
 		try {
-			AppUserInfo info = Constants.gson.fromJson(data, AppUserInfo.class);
-			AppUserInfo entity = infoService.getOne(new AppUserInfo(info.getPhone()));
-			if (entity.getIs_real()) {
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserInfo entity = new AppUserInfo();
+			entity.setUser_id(user.getId());
+			if (infoService.getOne(entity).getIs_real()) {
+				// TODO
 				throw new RuntimeException("已实名认证");
 			} else {
+				AppUserInfo info = Constants.gson.fromJson((String) data.getData(), AppUserInfo.class);
+				info.setUser_id(user.getId());
 				info.setIs_real(true);
 				infoService.modify(info);
 			}
@@ -86,11 +92,12 @@ public class AppUserInfoController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "one", "api/one" })
-	public Message one(String data) {
+	public Message one(Message data) {
 		Message message = new Message();
 		try {
-			AppUserInfo info = Constants.gson.fromJson(data, AppUserInfo.class);
-			AppUser user = userService.getByPhone(info.getPhone());
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserInfo info = new AppUserInfo();
+			info.setUser_id(user.getId());
 			AppUserInfo entity = infoService.getOne(info);
 			message.setData(entity, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {

@@ -38,11 +38,11 @@ public class AppUserOrderController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "count", "api/count" })
-	public Message count(String data) {
+	public Message count(Message data) {
 		Message message = new Message();
 		try {
-			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
-			AppUser user = userService.getByPhone(order.getPhone());
+			AppUserOrder order = Constants.gson.fromJson((String) data.getData(), AppUserOrder.class);
+			AppUser user = userService.getByToken(data.getDesc());
 			order.setUser_id(user.getId());
 			Integer num = orderService.count(order);
 			message.setData(num, user.getDes_key(), user.getDes_iv());

@@ -12,6 +12,7 @@ public class AppUserInfo implements Serializable {
 
 	private static final long serialVersionUID = 8293865348126760421L;
 	private Integer id;
+	private Integer user_id;
 	private String phone;
 	private String photo_url;
 	private String nickname;
@@ -47,11 +48,11 @@ public class AppUserInfo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AppUserInfo [id=" + id + ", phone=" + phone + ", photo_url=" + photo_url + ", nickname=" + nickname
-				+ ", level=" + level + ", gender=" + gender + ", birthday=" + birthday + ", birth=" + birth
-				+ ", occupation=" + occupation + ", is_real=" + is_real + ", name=" + name + ", identity_number="
-				+ identity_number + ", identity_front_url=" + identity_front_url + ", identity_back_url="
-				+ identity_back_url + ", balance=" + balance + "]";
+		return "AppUserInfo [id=" + id + ", user_id=" + user_id + ", phone=" + phone + ", photo_url=" + photo_url
+				+ ", nickname=" + nickname + ", level=" + level + ", gender=" + gender + ", birthday=" + birthday
+				+ ", birth=" + birth + ", occupation=" + occupation + ", is_real=" + is_real + ", name=" + name
+				+ ", identity_number=" + identity_number + ", identity_front_url=" + identity_front_url
+				+ ", identity_back_url=" + identity_back_url + ", balance=" + balance + "]";
 	}
 
 	public Integer getId() {
@@ -60,6 +61,14 @@ public class AppUserInfo implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getPhone() {
