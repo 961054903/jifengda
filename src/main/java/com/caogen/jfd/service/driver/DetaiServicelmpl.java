@@ -42,11 +42,10 @@ public class DetaiServicelmpl implements DetaiService {
     }
 
     @Override
-    public String getime(String phone) {
+    public String getime(Integer driver_id) {
         Detail detail = new Detail();
-        detail.setPhone(phone);
+        detail.setDriver_id(driver_id);
         List<Detail> zz = detaiDao.find(detail);
-        System.out.println(zz);
         long aa = 0;
         if (zz.get(zz.size()-1).getOperation().equals(online)) {
             Detail detai2 = new Detail();

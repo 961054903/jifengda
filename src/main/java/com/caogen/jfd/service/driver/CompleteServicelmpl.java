@@ -49,24 +49,18 @@ public class CompleteServicelmpl implements CompleteService {
     }
 
     @Override
-    public List<Complete> getto(String phone) {
-        AppDriver appDriver = new AppDriver();
+    public List<Complete> getto(Integer driver_id) {
         Complete complete = new Complete();
-        appDriver.setDriverphone(phone);
-        Integer id = appDriverDao.get(appDriver).getId();
-        complete.setDriver_id(id);
+        complete.setDriver_id(driver_id);
         List<Complete> completes = completeDao.find1(complete);
         System.out.println(complete);
         return completes;
     }
 
     @Override
-    public List<Complete> getmon(String phone) {
-        AppDriver appDriver = new AppDriver();
+    public List<Complete> getmon(Integer driver_id) {
         Complete complete = new Complete();
-        appDriver.setDriverphone(phone);
-        Integer id = appDriverDao.get(appDriver).getId();
-        complete.setDriver_id(id);
+        complete.setDriver_id(driver_id);
         List<Complete> completes = completeDao.find2(complete);
         return completes;
     }

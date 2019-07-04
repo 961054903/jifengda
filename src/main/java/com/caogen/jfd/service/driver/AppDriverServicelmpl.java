@@ -86,17 +86,16 @@ public class AppDriverServicelmpl implements AppDriverService {
 
 
     @Override
-    public AppDriver getByPhone(String phone) {
+    public AppDriver getByPhone(Integer driver_id) {
             AppDriver entity = new AppDriver();
-            entity.setDriverphone(phone);
-        System.out.println(entity);
+            entity.setId(driver_id);
             return appDriverDao.get(entity);
         }
 
     @Override
-    public String[] exchange(String result, String phone) throws Exception {
+    public String[] exchange(String result, Integer driver_id) throws Exception {
 
-            AppDriver user = getByPhone(phone);
+            AppDriver user = getByPhone(driver_id);
             String[] ss = SecretUtils.dh(result, Constants.DH_G, Constants.DH_P);
             String B = ss[0];
             String iv = ss[1].substring(Constants.IV_START, Constants.IV_END);
@@ -109,8 +108,8 @@ public class AppDriverServicelmpl implements AppDriverService {
         }
 
     @Override
-    public void changePassword(String driverphone, String password) {
-        AppDriver user = getByPhone(driverphone);
+    public void changePassword(Integer id, String password) {
+        AppDriver user = getByPhone(id);
         user.setSalt(PasswordHelper.generateSalt());
         user.setPassword(PasswordHelper.encryptPassword(password, user.getSalt()));
         modify(user);

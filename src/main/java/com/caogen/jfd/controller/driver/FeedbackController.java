@@ -35,12 +35,12 @@ public class FeedbackController {
     private AppDriverService appDriverService;
     @RequestMapping("problem")
     @ResponseBody
-    public Message problem( FeedBack name){
+    public Message problem(FeedBack driver_id){
 
         Message message = new Message();
         try {
 
-            feedbackService.getProblem(name);
+            feedbackService.getProblem(driver_id);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class FeedbackController {
         Message message = new Message();
         try {
             FeedBack feedBack = Constants.gson.fromJson(data,FeedBack.class);
-            AppDriver user = appDriverService.getByPhone(feedBack.getPhone());
+            AppDriver user = appDriverService.getByPhone(feedBack.getDriver_id());
             List<FeedBack> list = feedbackService.getHistory(feedBack);
             message.setData(list, user.getDes_key(), user.getDes_iv());
         } catch (Exception e) {

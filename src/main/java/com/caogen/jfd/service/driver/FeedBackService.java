@@ -10,7 +10,7 @@ import java.util.List;
 public interface FeedBackService extends BaseService<FeedBack> {
 
 
-    void getProblem(FeedBack name);
+    void getProblem(FeedBack driver_id);
 
     /**
      * 获取历史反馈列表

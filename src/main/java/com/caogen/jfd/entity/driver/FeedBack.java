@@ -14,7 +14,7 @@ public class    FeedBack implements Serializable {
     private Boolean is_check;// 是否查看
     private LocalDateTime create_date;//创建时间
     private String createDate;
-    private String phone;
+    private Integer driver_id;
 
     @Override
     public String toString() {
@@ -28,7 +28,7 @@ public class    FeedBack implements Serializable {
                 ", is_check=" + is_check +
                 ", create_date=" + create_date +
                 ", createDate='" + createDate + '\'' +
-                ", phone='" + phone + '\'' +
+                ", driver_id=" + driver_id +
                 '}';
     }
 
@@ -108,11 +108,11 @@ public class    FeedBack implements Serializable {
         this.createDate = createDate;
     }
 
-    public String getPhone() {
-        return phone;
+    public Integer getDriver_id() {
+        return driver_id;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setDriver_id(Integer driver_id) {
+        this.driver_id = driver_id;
     }
 }

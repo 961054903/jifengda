@@ -8,5 +8,5 @@ public interface DriverSiteService extends BaseService<DriverSite> {
      * 经纬度
      * @return
      */
-    void getWhole(String phone,Double longitude,Double latitude);
+    void getWhole(Integer driver_id,Double longitude,Double latitude);
 }

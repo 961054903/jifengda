@@ -36,10 +36,10 @@ public class FeedBackServiceImpl implements FeedBackService {
     }
 
     @Override
-    public void getProblem(FeedBack name) {
+    public void getProblem(FeedBack driver_id) {
         LocalDateTime no =LocalDateTime.now();
-        name.setCreate_date(no);
-      feedBackDao.insert(name);
+        driver_id.setCreate_date(no);
+      feedBackDao.insert(driver_id);
 
     }
 

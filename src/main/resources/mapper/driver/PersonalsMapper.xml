@@ -11,7 +11,7 @@
         <include refid="personal" />
         FROM app_driver_info
         where
-        phone =#{phone}
+        user_id =#{user_id}
     </select>
 
     <update id="update" parameterType="Personal">

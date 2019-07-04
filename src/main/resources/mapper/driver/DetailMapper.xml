@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.driver.DetaiDao">
-    <sql id="time">operation,create_date,phone</sql>
+    <sql id="time">operation,create_date,driver_id</sql>
     <select id="find" parameterType="Detail"
             resultType="Detail">
         SELECT
@@ -12,7 +12,7 @@
         log_driver_online
         <where>
             <if test="id != null">id = #{id}</if>
-            <if test="phone != null">and phone = #{phone}</if>
+            <if test="driver_id != null">and driver_id = #{driver_id}</if>
         </where>
     </select>
 </mapper>

@@ -9,17 +9,15 @@ import com.caogen.jfd.service.BaseService;
 public interface PersonalService extends BaseService<Personal> {
     /**
      *获取上下线状态
-     * @param phone
      * @return
      */
-    Personal getss(String phone);
+    Personal getss(Integer user_id);
 
     /**
      * 接收上下线状态
      * @param is_online
-     * @param phone
      */
-    void getstate(Boolean is_online ,String phone);
+    void getstate(Boolean is_online ,Integer user_id);
 
     /**
      * 个人信息四条

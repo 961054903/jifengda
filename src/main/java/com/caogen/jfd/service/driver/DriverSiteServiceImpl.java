@@ -33,15 +33,15 @@ public class DriverSiteServiceImpl implements DriverSiteService {
 
 
     @Override
-    public void getWhole(String phone, Double longitude, Double latitude) {
+    public void getWhole(Integer driver_id, Double longitude, Double latitude) {
         DriverSite driverSite =new DriverSite();
         Personal personal = new Personal();
-        personal.setPhone(phone);
+        personal.setUser_id(driver_id);
         personal.setLongitude(longitude);
         personal.setLatitude(latitude);
         LocalDateTime no =LocalDateTime.now();
         driverSite.setCreate_date(no);
-        driverSite.setPhone(phone);
+        driverSite.setDriver_id(driver_id);
         driverSite.setLatitude(latitude);
         driverSite.setLongitude(longitude);
         driverSitDao.insert(driverSite);

@@ -14,14 +14,13 @@ public interface CompleteService extends BaseService<Complete> {
      * @param
      * @return
      */
-    List<Complete> getto(String phone);
+    List<Complete> getto(Integer driver_id);
 
     /**
      * 本月提成
-     * @param phone
      * @return
      */
-    List<Complete> getmon(String phone);
+    List<Complete> getmon(Integer driver_id);
 
     /**
      * 历史收入

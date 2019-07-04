@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 public class DriverSite implements Serializable {
     private static final long serialVersionUID = -1975707114992664047L;
     private Integer id; //id
-    private String phone;//手机号
+    private Integer driver_id;//司机id
     private LocalDateTime create_date;//创建时间
     private Double longitude;//经度
     private Double latitude;//维度
@@ -15,7 +15,7 @@ public class DriverSite implements Serializable {
     public String toString() {
         return "DriverSite{" +
                 "id=" + id +
-                ", phone='" + phone + '\'' +
+                ", driver_id=" + driver_id +
                 ", create_date=" + create_date +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
@@ -34,12 +34,12 @@ public class DriverSite implements Serializable {
         this.id = id;
     }
 
-    public String getPhone() {
-        return phone;
+    public Integer getDriver_id() {
+        return driver_id;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setDriver_id(Integer driver_id) {
+        this.driver_id = driver_id;
     }
 
     public LocalDateTime getCreate_date() {

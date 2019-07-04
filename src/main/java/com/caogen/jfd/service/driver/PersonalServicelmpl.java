@@ -49,16 +49,16 @@ public class PersonalServicelmpl implements PersonalService {
     }
 
     @Override
-    public Personal getss(String phone) {
+    public Personal getss(Integer user_id) {
         Personal personal = new Personal();
-        personal.setPhone(phone);
+        personal.setUser_id(user_id);
         return  personalDao.get(personal);
     }
 
     @Override
-    public void getstate(Boolean is_online ,String phone) {
+    public void getstate(Boolean is_online ,Integer user_id) {
         Personal personal = new Personal();
-        personal.setPhone(phone);
+        personal.setUser_id(user_id);
         if (is_online) {
             personal.setIs_online(true);
         } else {

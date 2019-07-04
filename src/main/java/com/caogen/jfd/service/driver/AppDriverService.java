@@ -34,13 +34,15 @@ public interface AppDriverService extends BaseService<AppDriver> {
     AppDriver getByToken(String token);
 
 
-    AppDriver getByPhone(String phone);
+    AppDriver getByPhone(Integer driver_id);
 
 
 
-    String[] exchange(String result, String phone) throws Exception;
 
-    void changePassword(String driverphone, String password);
+    String[] exchange(String result, Integer driver_id) throws Exception;
+
+    void changePassword(Integer id, String password);
+
 
     AppDriver getId(AppDriver driver);
 }

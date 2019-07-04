@@ -80,7 +80,7 @@ public class AppDriverController {
         Message message = new Message();
         try {
             AppDriver appDriver = Constants.gson.fromJson(data, AppDriver.class);
-            AppDriver entity = appDriverService.getByPhone(appDriver.getDriverphone());
+            AppDriver entity = appDriverService.getByPhone(appDriver.getId());
             entity.setToken(null);
             entity.setDes_key(null);
             entity.setDes_iv(null);
@@ -94,28 +94,28 @@ public class AppDriverController {
         }
         return message;
     }
-    /**
-     * 密钥交换
-     *
-     * @param data
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = {"signin", "app/signin"})
-    public Message signin(String data) {
-        Message message = new Message();
-        try {
-            Signin signin = new Gson().fromJson(data, Signin.class);
-            String[] array = appDriverService.exchange(signin.getResult(), signin.getPhone());
-            signin.setResult(array[0]);
-            signin.setVerify(array[1]);
-            message.setData(signin, Constants.DES_KEY, Constants.DES_IV);
-        } catch (Exception e) {
-            message.setErrorCode(ErrorCode.SIGNIN_ERROR);
-            StaticLogger.error(message.getCode(), e);
-        }
-        return message;
-    }
+//    /**
+//     * 密钥交换
+//     *
+//     * @param data
+//     * @return
+//     */
+//    @ResponseBody
+//    @RequestMapping(value = {"signin", "app/signin"})
+//    public Message signin(String data) {
+//        Message message = new Message();
+//        try {
+//            Signin signin = new Gson().fromJson(data, Signin.class);
+//            String[] array = appDriverService.exchange(signin.getResult(), signin.getPhone());
+//            signin.setResult(array[0]);
+//            signin.setVerify(array[1]);
+//            message.setData(signin, Constants.DES_KEY, Constants.DES_IV);
+//        } catch (Exception e) {
+//            message.setErrorCode(ErrorCode.SIGNIN_ERROR);
+//            StaticLogger.error(message.getCode(), e);
+//        }
+//        return message;
+//    }
 
     /**
      * 修改密码
@@ -129,7 +129,7 @@ public class AppDriverController {
         Message message = new Message();
         try {
             AppDriver user = Constants.gson.fromJson(data, AppDriver.class);
-            appDriverService.changePassword(user.getDriverphone(), user.getPassword());
+            appDriverService.changePassword(user.getId(), user.getPassword());
         } catch (Exception e) {
             message.setErrorCode(ErrorCode.CIPHER_ERROR);
             StaticLogger.error(message.getCode(), e);
@@ -145,10 +145,10 @@ public class AppDriverController {
     private DriverSiteService driverSiteService;
     @ResponseBody
     @RequestMapping("dingwei")
-    public Message dingwei(String phone, Double longitude, Double latitude) {
+    public Message dingwei(Integer driver_id, Double longitude, Double latitude) {
         Message message = new Message();
         try {
-           driverSiteService.getWhole(phone,longitude,latitude);
+           driverSiteService.getWhole(driver_id,longitude,latitude);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
