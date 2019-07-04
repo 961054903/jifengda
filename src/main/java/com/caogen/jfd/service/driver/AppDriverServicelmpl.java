@@ -5,6 +5,7 @@ import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.dao.driver.AppDriverDao;
 import com.caogen.jfd.entity.driver.AppDriver;
 import com.caogen.jfd.entity.driver.Personal;
+import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.exception.DefinedException;
 
 import com.caogen.jfd.util.PasswordHelper;
@@ -93,19 +94,18 @@ public class AppDriverServicelmpl implements AppDriverService {
         }
 
     @Override
-    public String[] exchange(String result, Integer driver_id) throws Exception {
-
-            AppDriver user = getByPhone(driver_id);
-            String[] ss = SecretUtils.dh(result, Constants.DH_G, Constants.DH_P);
-            String B = ss[0];
-            String iv = ss[1].substring(Constants.IV_START, Constants.IV_END);
-            String key = ss[1].substring(Constants.KEY_START, Constants.KEY_END);
-            user.setDes_iv(iv);
-            user.setDes_key(key);
-            String verify = SecretUtils.desedeEncode(Constants.DES_IV, key, iv);
-            modify(user);
-            return new String[] { B, verify };
-        }
+    public String[] exchangeKe(String A, String token) throws Exception {
+        AppDriver user = getByToken(token);
+        String[] result = SecretUtils.dh(A, Constants.DH_G, Constants.DH_P);
+        String B = result[0];
+        String iv = result[1].substring(Constants.IV_START, Constants.IV_END);
+        String key = result[1].substring(Constants.KEY_START, Constants.KEY_END);
+        user.setDes_iv(iv);
+        user.setDes_key(key);
+        String verify = SecretUtils.desedeEncode(Constants.DES_IV, key, iv);
+        modify(user);
+        return new String[] { B, verify };
+    }
 
     @Override
     public void changePassword(Integer id, String password) {
