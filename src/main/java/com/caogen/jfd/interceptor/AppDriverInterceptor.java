@@ -11,6 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.caogen.jfd.common.ErrorCode;
+import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.driver.AppDriver;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.service.driver.AppDriverService;
@@ -32,6 +33,8 @@ public class AppDriverInterceptor implements HandlerInterceptor {
 		String token = request.getParameter(REQUEST_TOKEN);
 		String head = request.getParameter(REQUEST_HEAD);
 		String ciphertext = request.getParameter(REQUEST_BODY);
+
+		StaticLogger.info(token + " " + head + " " + ciphertext);
 		// 检查参数
 		if (StringUtils.isEmpty(head) || StringUtils.isEmpty(token)) {
 			throw new DefinedException(ErrorCode.PARAM_MISSING);
