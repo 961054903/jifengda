@@ -41,8 +41,8 @@ public class AppUserOrderController {
 	public Message count(Message data) {
 		Message message = new Message();
 		try {
-			AppUserOrder order = Constants.gson.fromJson((String) data.getData(), AppUserOrder.class);
 			AppUser user = userService.getByToken(data.getDesc());
+			AppUserOrder order = new AppUserOrder();
 			order.setUser_id(user.getId());
 			Integer num = orderService.count(order);
 			message.setData(num, user.getDes_key(), user.getDes_iv());
@@ -61,11 +61,11 @@ public class AppUserOrderController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "underway", "api/underway" })
-	public Message underway(String data) {
+	public Message underway(Message data) {
 		Message message = new Message();
 		try {
-			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
-			AppUser user = userService.getByPhone(order.getPhone());
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserOrder order = new AppUserOrder();
 			order.setUser_id(user.getId());
 			List<AppUserOrder> list = orderService.getUnderway(order);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
@@ -84,11 +84,11 @@ public class AppUserOrderController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "finish", "api/finish" })
-	public Message finish(String data) {
+	public Message finish(Message data) {
 		Message message = new Message();
 		try {
-			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
-			AppUser user = userService.getByPhone(order.getPhone());
+			AppUserOrder order = Constants.gson.fromJson((String) data.getData(), AppUserOrder.class);
+			AppUser user = userService.getByToken(data.getDesc());
 			order.setUser_id(user.getId());
 			List<AppUserOrder> list = orderService.getFinish(order);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
@@ -107,11 +107,11 @@ public class AppUserOrderController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "calculate", "api/calculate" })
-	public Message calculate(String data) {
+	public Message calculate(Message data) {
 		Message message = new Message();
 		try {
-			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
-			AppUser user = userService.getByPhone(order.getPhone());
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserOrder order = Constants.gson.fromJson((String) data.getData(), AppUserOrder.class);
 			AppUserSite origin = Constants.gson.fromJson(order.getOrigin(), AppUserSite.class);
 			AppUserSite[] destination = Constants.gson.fromJson(order.getDestination(), AppUserSite[].class);
 			int distance = orderService.getDistance(origin, destination);
@@ -133,11 +133,11 @@ public class AppUserOrderController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "add", "api/add" })
-	public Message add(String data) {
+	public Message add(Message data) {
 		Message message = new Message();
 		try {
-			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
-			AppUser user = userService.getByPhone(order.getPhone());
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserOrder order = Constants.gson.fromJson((String) data.getData(), AppUserOrder.class);
 			order.setUser_id(user.getId());
 			orderService.create(order);
 		} catch (Exception e) {
@@ -175,11 +175,11 @@ public class AppUserOrderController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "details", "api/details" })
-	public Message details(String data) {
+	public Message details(Message data) {
 		Message message = new Message();
 		try {
-			AppUserOrder order = Constants.gson.fromJson(data, AppUserOrder.class);
-			AppUser user = userService.getByPhone(order.getPhone());
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserOrder order = Constants.gson.fromJson((String) data.getData(), AppUserOrder.class);
 			AppUserOrder entity = orderService.getOne(order);
 			message.setData(entity, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
@@ -191,7 +191,7 @@ public class AppUserOrderController {
 
 	@ResponseBody
 	@RequestMapping(value = { "cancel", "api/cancel" })
-	public Message cancel(String data) {
+	public Message cancel(Message data) {
 		Message message = new Message();
 		try {
 			// TODO
