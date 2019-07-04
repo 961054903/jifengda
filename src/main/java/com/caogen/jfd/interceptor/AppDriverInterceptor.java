@@ -33,9 +33,12 @@ public class AppDriverInterceptor implements HandlerInterceptor {
 		String head = request.getParameter(REQUEST_HEAD);
 		String ciphertext = request.getParameter(REQUEST_BODY);
 		// 检查参数
-		if (StringUtils.isEmpty(head) || StringUtils.isEmpty(token) || StringUtils.isEmpty(ciphertext)) {
+		if (StringUtils.isEmpty(head) || StringUtils.isEmpty(token)) {
 			throw new DefinedException(ErrorCode.PARAM_MISSING);
-
+		}
+		// 不需要解密操作
+		if (StringUtils.isEmpty(ciphertext)) {
+			return true;
 		}
 		// 验证用户
 		AppDriver driver = driverService.getByToken(token);
