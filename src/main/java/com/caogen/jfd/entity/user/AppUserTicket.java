@@ -12,7 +12,7 @@ public class AppUserTicket implements Serializable {
 
 	private static final long serialVersionUID = -1216643014979706211L;
 	private Integer id;
-	private String phone;
+	private Integer user_id;
 	private Integer ticket_id;
 	private Boolean available;
 	private Reason reason;
@@ -45,17 +45,12 @@ public class AppUserTicket implements Serializable {
 		this.id = id;
 	}
 
-	public AppUserTicket(String phone) {
-		super();
-		this.phone = phone;
-	}
-
 	@Override
 	public String toString() {
-		return "AppUserTicket [id=" + id + ", phone=" + phone + ", ticket_id=" + ticket_id + ", available=" + available
-				+ ", reason=" + reason + ", title=" + title + ", description=" + description + ", money=" + money
-				+ ", type=" + type + ", sill=" + sill + ", start_date=" + start_date + ", startDate=" + startDate
-				+ ", end_date=" + end_date + ", endDate=" + endDate + ", duration=" + duration + "]";
+		return "AppUserTicket [id=" + id + ", user_id=" + user_id + ", ticket_id=" + ticket_id + ", available="
+				+ available + ", reason=" + reason + ", title=" + title + ", description=" + description + ", money="
+				+ money + ", type=" + type + ", sill=" + sill + ", start_date=" + start_date + ", startDate="
+				+ startDate + ", end_date=" + end_date + ", endDate=" + endDate + ", duration=" + duration + "]";
 	}
 
 	public Integer getId() {
@@ -66,12 +61,12 @@ public class AppUserTicket implements Serializable {
 		this.id = id;
 	}
 
-	public String getPhone() {
-		return phone;
+	public Integer getUser_id() {
+		return user_id;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
 	}
 
 	public Integer getTicket_id() {

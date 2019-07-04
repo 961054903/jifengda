@@ -3,15 +3,13 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.user.AppUserDetailDao">
-	<sql id="detail">phone,title,description,type,money,create_date</sql>
 	<select id="find" parameterType="AppUserDetail"
 		resultType="AppUserDetail">
-		SELECT id,
-		<include refid="detail" />
-		FROM app_user_detail
-		<where>
-			<if test="phone != null">phone = #{phone}</if>
-			<if test="type != null">AND type = #{type}</if>
-		</where>
+		SELECT
+			title,description,type,money,create_date
+		FROM
+			app_user_detail
+		WHERE 
+			user_id = #{user_id}
 	</select>
 </mapper>

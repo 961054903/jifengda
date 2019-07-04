@@ -172,11 +172,10 @@ public class AppUserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "logout", "api/logout" })
-	public Message logout(String data) {
+	public Message logout(Message data) {
 		Message message = new Message();
 		try {
-			AppUser user = Constants.gson.fromJson(data, AppUser.class);
-			AppUser entity = userService.getByPhone(user.getPhone());
+			AppUser entity = userService.getByToken(data.getDesc());
 			entity.setToken(null);
 			entity.setDes_key(null);
 			entity.setDes_iv(null);
@@ -196,11 +195,11 @@ public class AppUserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "signin", "api/signin" })
-	public Message signin(String data) {
+	public Message signin(Message data) {
 		Message message = new Message();
 		try {
-			Signin signin = new Gson().fromJson(data, Signin.class);
-			String[] array = userService.exchangeKey(signin.getResult(), signin.getPhone());
+			Signin signin = new Gson().fromJson((String) data.getData(), Signin.class);
+			String[] array = userService.exchangeKey(signin.getResult(), data.getDesc());
 			signin.setResult(array[0]);
 			signin.setVerify(array[1]);
 			message.setData(signin, Constants.DES_KEY, Constants.DES_IV);
@@ -219,10 +218,10 @@ public class AppUserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "cipher", "api/cipher" })
-	public Message cipher(String data) {
+	public Message cipher(Message data) {
 		Message message = new Message();
 		try {
-			AppUser user = Constants.gson.fromJson(data, AppUser.class);
+			AppUser user = Constants.gson.fromJson((String) data.getData(), AppUser.class);
 			userService.changePassword(user.getPhone(), user.getPassword());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.CIPHER_ERROR);

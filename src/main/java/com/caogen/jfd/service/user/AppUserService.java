@@ -21,7 +21,7 @@ public interface AppUserService extends BaseService<AppUser> {
 	AppUser getByToken(String token);
 
 	/**
-	 * 根据用户名查询
+	 * 根据手机号查询
 	 * 
 	 * @param phone
 	 * @return
@@ -32,11 +32,11 @@ public interface AppUserService extends BaseService<AppUser> {
 	 * 密钥交换
 	 * 
 	 * @param A
-	 * @param phone
+	 * @param token
 	 * @return
 	 * @throws Exception
 	 */
-	String[] exchangeKey(String A, String phone) throws Exception;
+	String[] exchangeKey(String A, String token) throws Exception;
 
 	/**
 	 * 更改密码

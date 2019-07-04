@@ -18,27 +18,30 @@ import com.caogen.jfd.util.FormatUtils;
 public class AppUserDetailServiceImpl implements AppUserDetailService {
 	@Autowired
 	private AppUserDetailDao detailDao;
-	
+
 	@Override
 	public void create(AppUserDetail entity) {
-		detailDao.insert(entity);
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void remove(AppUserDetail entity) {
-		detailDao.delete(entity);
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void modify(AppUserDetail entity) {
-		detailDao.update(entity);
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public AppUserDetail getById(Integer id) {
-		return detailDao.get(new AppUserDetail(id));
+		// TODO Auto-generated method stub
+		return null;
 	}
-
 
 	@Override
 	public List<AppUserDetail> getAll(AppUserDetail entity) {

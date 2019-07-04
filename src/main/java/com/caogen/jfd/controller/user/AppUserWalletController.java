@@ -40,16 +40,17 @@ public class AppUserWalletController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "detail/all", "detail/api/all" })
-	public Message detail(String data) {
+	public Message detail(Message data) {
 		Message message = new Message();
 		try {
-			AppUserDetail detail = Constants.gson.fromJson(data, AppUserDetail.class);
-			AppUser user = userService.getByPhone(detail.getPhone());
-			List<AppUserDetail> list = detailService.getAll(detail);
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserDetail entity = new AppUserDetail();
+			entity.setUser_id(user.getId());
+			List<AppUserDetail> list = detailService.getAll(entity);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.DETAIL_ERROR);
-			StaticLogger.error("get user detail list error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}
@@ -62,16 +63,17 @@ public class AppUserWalletController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "ticket/all", "ticket/api/all" })
-	public Message ticket(String data) {
+	public Message ticket(Message data) {
 		Message message = new Message();
 		try {
-			AppUserTicket ticket = Constants.gson.fromJson(data, AppUserTicket.class);
-			AppUser user = userService.getByPhone(ticket.getPhone());
+			AppUser user = userService.getByToken(data.getDesc());
+			AppUserTicket ticket = Constants.gson.fromJson((String) data.getData(), AppUserTicket.class);
+			ticket.setUser_id(user.getId());
 			List<AppUserTicket> list = ticketService.getAll(ticket);
 			message.setData(list, user.getDes_key(), user.getDes_iv());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.TICKET_ERROR);
-			StaticLogger.error("get user ticket list error", e);
+			StaticLogger.error(message.getDesc(), e);
 		}
 		return message;
 	}

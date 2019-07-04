@@ -3,18 +3,17 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.user.AppUserTicketDao">
-	<sql id="ticket">phone,ticket_id,available,reason</sql>
 	<select id="find" parameterType="AppUserTicket"
 		resultType="AppUserTicket">
 		SELECT
-		ut.available, ut.reason, t.*
+			ut.available, ut.reason, t.*
 		FROM
-		app_user_ticket ut
+			app_user_ticket ut
 		JOIN
-		app_ticket t ON ut.ticket_id = t.id
+			app_ticket t ON ut.ticket_id = t.id
 		<where>
-			<if test="phone != null">phone = #{phone}</if>
-			<if test="available != null">AND available = #{available}</if>
+			<if test="user_id != null">ut.user_id = #{user_id}</if>
+			<if test="available != null">AND ut.available = #{available}</if>
 		</where>
 	</select>
 </mapper>

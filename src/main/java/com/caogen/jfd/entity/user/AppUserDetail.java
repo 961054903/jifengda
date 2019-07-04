@@ -12,7 +12,7 @@ public class AppUserDetail implements Serializable {
 
 	private static final long serialVersionUID = 8503617011345576928L;
 	private Integer id;
-	private String phone;
+	private Integer user_id;
 	private String title;
 	private String description;
 	private Type type;
@@ -33,14 +33,9 @@ public class AppUserDetail implements Serializable {
 		this.id = id;
 	}
 
-	public AppUserDetail(String phone) {
-		super();
-		this.phone = phone;
-	}
-
 	@Override
 	public String toString() {
-		return "AppUserDetail [id=" + id + ", phone=" + phone + ", title=" + title + ", description=" + description
+		return "AppUserDetail [id=" + id + ", user_id=" + user_id + ", title=" + title + ", description=" + description
 				+ ", type=" + type + ", money=" + money + ", create_date=" + create_date + ", createDate=" + createDate
 				+ "]";
 	}
@@ -53,12 +48,12 @@ public class AppUserDetail implements Serializable {
 		this.id = id;
 	}
 
-	public String getPhone() {
-		return phone;
+	public Integer getUser_id() {
+		return user_id;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setUser_id(Integer user_id) {
+		this.user_id = user_id;
 	}
 
 	public String getTitle() {

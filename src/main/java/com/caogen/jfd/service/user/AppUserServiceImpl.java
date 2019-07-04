@@ -61,8 +61,8 @@ public class AppUserServiceImpl implements AppUserService {
 	}
 
 	@Override
-	public String[] exchangeKey(String A, String phone) throws Exception {
-		AppUser user = getByPhone(phone);
+	public String[] exchangeKey(String A, String token) throws Exception {
+		AppUser user = getByToken(token);
 		String[] result = SecretUtils.dh(A, Constants.DH_G, Constants.DH_P);
 		String B = result[0];
 		String iv = result[1].substring(Constants.IV_START, Constants.IV_END);

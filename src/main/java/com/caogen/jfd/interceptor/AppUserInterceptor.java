@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.user.AppUser;
+import com.caogen.jfd.entity.user.AppUser.State;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.service.user.AppUserService;
 import com.caogen.jfd.util.SecretUtils;
@@ -38,19 +39,24 @@ public class AppUserInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		StaticLogger.info("===path=== " + request.getServletPath());
 		String token = request.getParameter(REQUEST_TOKEN);
 		String head = request.getParameter(REQUEST_HEAD);
 		String ciphertext = request.getParameter(REQUEST_BODY);
 		// 检查参数
-		if (StringUtils.isEmpty(head) || StringUtils.isEmpty(token) || StringUtils.isEmpty(ciphertext)) {
+		if (StringUtils.isEmpty(head) || StringUtils.isEmpty(token)) {
 			throw new DefinedException(ErrorCode.PARAM_MISSING);
+		}
+		// 不需要解密操作
+		if (StringUtils.isEmpty(ciphertext)) {
+			return true;
 		}
 		// 验证用户
 		AppUser user = userService.getByToken(token);
-		if (user == null) {
-			throw new DefinedException(ErrorCode.FAIL);
+		if (user == null || !user.getState().equals(State.normal)) {
+			throw new DefinedException(ErrorCode.LOGIN_USER_ERROR);
 		}
-		// 解密
+		// 解密密钥和向量
 		String key, iv;
 		if (head.equals(DECODE_DEFAULT)) {
 			key = DES_KEY;
@@ -61,13 +67,13 @@ public class AppUserInterceptor implements HandlerInterceptor {
 		} else {
 			throw new DefinedException(ErrorCode.PARAM_ILLEGALITY);
 		}
+		// 解密
 		String plaintext = SecretUtils.desedeDecode(ciphertext.replace(" ", "+"), key, iv);
 		StaticLogger.info("<<<<<<" + plaintext);
 		// 转发
 		WrappedRequest wr = new WrappedRequest(request);
-		wr.setParameter("data", plaintext);
+		wr.setParameter(REQUEST_BODY, plaintext);
 		String path = request.getServletPath().replace(PATH_TARGET_USER, PATH_REPLACEMENT);
-		StaticLogger.info("===path=== " + path);
 		request.getRequestDispatcher(path).forward(wr, response);
 		return false;
 	}
