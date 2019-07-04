@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -48,9 +50,9 @@ public class AppDriverController {
             token = appDriverService.passwordLogin(driver);
             AppDriver byId = appDriverService.getId(driver);
             Integer id = byId.getId();
-            List<Object>appDrivers = new ArrayList<>();
-            appDrivers.add(token);
-            appDrivers.add(id);
+            Map<String,Object> appDrivers = new HashMap<>();
+            appDrivers.put("token",token);
+            appDrivers.put("id",id);
             message.setData(appDrivers);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
