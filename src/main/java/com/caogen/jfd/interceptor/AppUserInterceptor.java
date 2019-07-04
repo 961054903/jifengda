@@ -41,11 +41,6 @@ public class AppUserInterceptor implements HandlerInterceptor {
 		String token = request.getParameter(REQUEST_TOKEN);
 		String head = request.getParameter(REQUEST_HEAD);
 		String ciphertext = request.getParameter(REQUEST_BODY);
-		
-		StaticLogger.info("===head=== " + head);
-		StaticLogger.info("===token=== " + token);
-		StaticLogger.info("===ciphertext=== " + ciphertext);
-		
 		// 检查参数
 		if (StringUtils.isEmpty(head) || StringUtils.isEmpty(token) || StringUtils.isEmpty(ciphertext)) {
 			throw new DefinedException(ErrorCode.PARAM_MISSING);
@@ -67,11 +62,12 @@ public class AppUserInterceptor implements HandlerInterceptor {
 			throw new DefinedException(ErrorCode.PARAM_ILLEGALITY);
 		}
 		String plaintext = SecretUtils.desedeDecode(ciphertext.replace(" ", "+"), key, iv);
-		StaticLogger.info("===plaintext=== " + plaintext);
+		StaticLogger.info("<<<<<<" + plaintext);
 		// 转发
 		WrappedRequest wr = new WrappedRequest(request);
 		wr.setParameter("data", plaintext);
 		String path = request.getServletPath().replace(PATH_TARGET_USER, PATH_REPLACEMENT);
+		StaticLogger.info("===path=== " + path);
 		request.getRequestDispatcher(path).forward(wr, response);
 		return false;
 	}

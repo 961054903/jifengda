@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
+import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.util.SecretUtils;
 
 /**
@@ -47,6 +48,7 @@ public class Message implements Serializable {
 
 	public void setData(Object data, String key, String iv) throws Exception {
 		String plaintext = Constants.gson.toJson(data);
+		StaticLogger.info(">>>>>>" + plaintext);
 		this.data = SecretUtils.desedeEncode(plaintext, key, iv);
 	}
 
