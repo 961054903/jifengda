@@ -277,10 +277,10 @@ public class PersonalController {
      */
     @ResponseBody
     @RequestMapping(value = {"royalty","app/royalty"})
-    public Message royalty(String data) {
+    public Message royalty(Message data) {
         Message message = new Message();
         try {
-            Complete appDriver = Constants.gson.fromJson(data,Complete.class);
+            Complete appDriver = Constants.gson.fromJson((String)data.getData(),Complete.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getDriver_id());
             List <Complete> peservation = completeService.getto(appDriver.getDriver_id());
             String cc = detaiService.getime(appDriver.getDriver_id());

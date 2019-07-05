@@ -51,13 +51,11 @@ public class Demo {
 
 	@Test
 	public void test2() throws Exception {
-		AppDriver entity = new AppDriver();
-		entity.setId(2);
-		entity.setPassword("123456");
+		Complete entity = new Complete();
+		entity.setDriver_id(2);
+		entity.setAa(true);
 		String json = gson.toJson(entity);
 		System.out.println(json);
-		String result = SecretUtils.desedeEncode(json, key, iv);
-		System.out.println(result);
 
 	}
 
