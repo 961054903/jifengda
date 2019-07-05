@@ -52,7 +52,6 @@ public class Demo {
 	@Test
 	public void test2() throws Exception {
 		Complete entity = new Complete();
-		entity.setDriver_id(2);
 		entity.setAa(true);
 		String json = gson.toJson(entity);
 		System.out.println(json);
