@@ -281,6 +281,7 @@ public class PersonalController {
         Message message = new Message();
         try {
             Complete appDriver = Constants.gson.fromJson((String)data.getData(),Complete.class);
+            System.out.println(appDriver);
             AppDriver driver =appDriverService.getByPhone(appDriver.getDriver_id());
             List <Complete> peservation = completeService.getto(appDriver.getDriver_id());
             String cc = detaiService.getime(appDriver.getDriver_id());
