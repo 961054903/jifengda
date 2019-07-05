@@ -222,7 +222,7 @@ public class AppUserController {
 		Message message = new Message();
 		try {
 			AppUser user = Constants.gson.fromJson((String) data.getData(), AppUser.class);
-			userService.changePassword(user.getPhone(), user.getPassword());
+			userService.changePassword(data.getDesc(), user.getPassword());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.CIPHER_ERROR);
 			StaticLogger.error(message.getCode(), e);
@@ -238,11 +238,10 @@ public class AppUserController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = { "referrer", "api/referrer" })
-	public Message referrer(String data) {
+	public Message referrer(Message data) {
 		Message message = new Message();
 		try {
-			AppUser user = Constants.gson.fromJson(data, AppUser.class);
-			AppUser entity = userService.getByPhone(user.getPhone());
+			AppUser entity = userService.getByToken(data.getDesc());
 			List<AppUser> list = userService.getLowerList(entity);
 			message.setData(list, entity.getDes_key(), entity.getDes_iv());
 		} catch (Exception e) {

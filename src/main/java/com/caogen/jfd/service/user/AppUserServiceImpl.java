@@ -75,8 +75,8 @@ public class AppUserServiceImpl implements AppUserService {
 	}
 
 	@Override
-	public void changePassword(String username, String password) {
-		AppUser user = getByPhone(username);
+	public void changePassword(String token, String password) {
+		AppUser user = getByToken(token);
 		user.setSalt(PasswordHelper.generateSalt());
 		user.setPassword(PasswordHelper.encryptPassword(password, user.getSalt()));
 		modify(user);

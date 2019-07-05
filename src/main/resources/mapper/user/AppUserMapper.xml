@@ -26,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</set>
 		<where>
 			<if test="id != null">id = #{id}</if>
+			<if test="token != null">AND token = #{token}</if>
 			<if test="phone != null">AND phone = #{phone}</if>
 		</where>
 	</update>
