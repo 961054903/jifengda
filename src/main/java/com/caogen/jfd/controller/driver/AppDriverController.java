@@ -76,10 +76,10 @@ public class AppDriverController {
      */
     @ResponseBody
     @RequestMapping(value = {"tuicu", "app/tuicu"})
-    public Message logout(String data) {
+    public Message logout(Message data) {
         Message message = new Message();
         try {
-            AppDriver appDriver = Constants.gson.fromJson(data, AppDriver.class);
+            AppDriver appDriver = Constants.gson.fromJson((String) data.getData(), AppDriver.class);
             AppDriver entity = appDriverService.getByPhone(appDriver.getId());
             entity.setToken(null);
             entity.setDes_key(null);

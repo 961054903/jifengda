@@ -37,10 +37,10 @@ public class PersonalController {
      */
     @ResponseBody
     @RequestMapping(value = {"upAndDown","app/upAndDown"})
-    public Message upAndDown(String data) {
+    public Message upAndDown(Message data) {
         Message message = new Message();
         try {
-            Personal appDriver = Constants.gson.fromJson(data,Personal.class);
+            Personal appDriver = Constants.gson.fromJson((String) data.getData(),Personal.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getUser_id());
             Personal cities = personalService.getss(appDriver.getUser_id());
             message.setData(cities.getIs_online(),driver.getDes_key(),driver.getDes_iv());
@@ -59,10 +59,10 @@ public class PersonalController {
      */
     @ResponseBody
     @RequestMapping(value = {"state","app/state"})
-    public Message state(String data)  {
+    public Message state(Message data)  {
         Message message = new Message();
         try {
-            Personal appDriver = Constants.gson.fromJson(data,Personal.class);
+            Personal appDriver = Constants.gson.fromJson((String) data.getData(),Personal.class);
              personalService.getstate(appDriver.getIs_online(),appDriver.getUser_id());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -81,10 +81,10 @@ public class PersonalController {
 
     @ResponseBody
     @RequestMapping(value = {"information","app/information"})
-    public Message information(String data)  {
+    public Message information(Message data)  {
         Message message = new Message();
         try {
-            Personal appDriver = Constants.gson.fromJson(data,Personal.class);
+            Personal appDriver = Constants.gson.fromJson((String) data.getData(),Personal.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getUser_id());
             Personal cities = personalService.getmany(appDriver.getUser_id());
             message.setData(cities,driver.getDes_key(),driver.getDes_iv());
@@ -107,10 +107,10 @@ public class PersonalController {
 
     @ResponseBody
     @RequestMapping(value = {"whole","app/whole"})
-    public Message whole(String data)  {
+    public Message whole(Message data)  {
         Message message = new Message();
         try {
-            Personal appDriver = Constants.gson.fromJson(data,Personal.class);
+            Personal appDriver = Constants.gson.fromJson((String) data.getData(),Personal.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getUser_id());
             Personal cities = personalService.getwhole(appDriver.getUser_id());
             Model vehicle = modelService.getvehicle(appDriver.getUser_id());
@@ -133,10 +133,10 @@ public class PersonalController {
      */
     @ResponseBody
     @RequestMapping(value = {"edit","app/edit"})
-    public Message edit(String data) {
+    public Message edit(Message data) {
         Message message = new Message();
         try {
-            Personal appDriver = Constants.gson.fromJson(data,Personal.class);
+            Personal appDriver = Constants.gson.fromJson((String) data.getData(),Personal.class);
             personalService.getmodify(appDriver);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -161,11 +161,11 @@ public class PersonalController {
 
     @ResponseBody
     @RequestMapping(value = {"make","app/make"})
-    public Message make(String data) {
+    public Message make(Message data) {
 
         Message message = new Message();
         try {
-            Peservation appDriver = Constants.gson.fromJson(data,Peservation.class);
+            Peservation appDriver = Constants.gson.fromJson((String) data.getData(),Peservation.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getDriver_id());
            List <Peservation> personals = peservationService.getmake(appDriver.getDriver_id(),appDriver.getMode());
             message.setData(personals,driver.getDes_key(),driver.getDes_iv());
@@ -192,10 +192,10 @@ public class PersonalController {
     private RoyaltyService royaltyService;
     @ResponseBody
     @RequestMapping(value = {"details","app/details"})
-    public Message details(String data) {
+    public Message details(Message data) {
         Message message = new Message();
         try {
-            Peservation appDriver = Constants.gson.fromJson(data,Peservation.class);
+            Peservation appDriver = Constants.gson.fromJson((String) data.getData(),Peservation.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getDriver_id());
             User user = userService.getuser(appDriver.getCode());
             Peservation peservation = peservationService.getma(appDriver.getCode());
@@ -249,10 +249,10 @@ public class PersonalController {
 
     @ResponseBody
     @RequestMapping(value = {"cumulative","app/cumulative"})
-    public Message cumulative(String data) {
+    public Message cumulative(Message data) {
         Message message = new Message();
         try {
-            Time appDriver = Constants.gson.fromJson(data,Time.class);
+            Time appDriver = Constants.gson.fromJson((String) data.getData(),Time.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getId());
             Time cc = timeService.gettime(appDriver.getPhone(),appDriver.getTim());
             message.setData(cc,driver.getDes_key(),driver.getDes_iv());
@@ -376,10 +376,10 @@ public class PersonalController {
      */
     @ResponseBody
     @RequestMapping(value = {"mont","app/mont"})
-    public Message mont(String data){
+    public Message mont(Message data){
         Message message = new Message();
         try {
-            Complete appDriver = Constants.gson.fromJson(data,Complete.class);
+            Complete appDriver = Constants.gson.fromJson((String)data.getData(),Complete.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getDriver_id());
             List <Complete> peservation = completeService.getmon(appDriver.getDriver_id());
             Double aa =0.0;
@@ -412,10 +412,10 @@ public class PersonalController {
      */
     @ResponseBody
     @RequestMapping(value = {"history","app/history"})
-    public Message history(String data) {
+    public Message history(Message data) {
         Message message = new Message();
         try {
-            Complete appDriver = Constants.gson.fromJson(data,Complete.class);
+            Complete appDriver = Constants.gson.fromJson((String)data.getData(),Complete.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getDriver_id());
           List <Complete> completes = completeService.gethistory(appDriver.getDriver_id(),appDriver.getStart(),appDriver.getEnd());
             Double aa =0.0;
@@ -486,10 +486,10 @@ public class PersonalController {
      */
     @ResponseBody
     @RequestMapping(value = {"spike","app/spike"})
-    public Message spike(String data) {
+    public Message spike(Message data) {
         Message message = new Message();
         try {
-            Peservation appDriver = Constants.gson.fromJson(data,Peservation.class);
+            Peservation appDriver = Constants.gson.fromJson((String) data.getData(),Peservation.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getDriver_id());
             boolean peservations = peservationService.getspike(appDriver.getDriver_id(),appDriver.getCode());
             if (peservations){
@@ -515,10 +515,10 @@ public class PersonalController {
 
     @ResponseBody
     @RequestMapping(value = {"arrive","app/arrive"})
-    public Message arrive(String data) {
+    public Message arrive(Message data) {
         Message message = new Message();
         try {
-            Task appDriver = Constants.gson.fromJson(data,Task.class);
+            Task appDriver = Constants.gson.fromJson((String) data.getData(),Task.class);
             taskService.getarrive(appDriver.getCode(),appDriver.getSerial());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -537,10 +537,10 @@ public class PersonalController {
      */
     @ResponseBody
     @RequestMapping(value = {"peisong","app/peisong"})
-    public Message peisong(String data) {
+    public Message peisong(Message data) {
         Message message = new Message();
         try {
-            Task appDriver = Constants.gson.fromJson(data,Task.class);
+            Task appDriver = Constants.gson.fromJson((String) data.getData(),Task.class);
             taskService.getpei(appDriver.getCode(),appDriver.getSerial());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -559,10 +559,10 @@ public class PersonalController {
      */
     @ResponseBody
     @RequestMapping(value = {"da","app/da"})
-    public Message da(String data) {
+    public Message da(Message data) {
         Message message = new Message();
         try {
-            Task appDriver = Constants.gson.fromJson(data,Task.class);
+            Task appDriver = Constants.gson.fromJson((String) data.getData(),Task.class);
             taskService.getda(appDriver.getCode(),appDriver.getSerial());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());

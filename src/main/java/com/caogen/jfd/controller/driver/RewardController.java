@@ -27,10 +27,10 @@ public class RewardController {
 
     @ResponseBody
     @RequestMapping(value = {"content","app/content"})
-    public Message  content(String data){
+    public Message  content(Message data){
         Message message  = new Message();
         try {
-            Reward appDriver = Constants.gson.fromJson(data,Reward.class);
+            Reward appDriver = Constants.gson.fromJson((String) data.getData(),Reward.class);
             AppDriver driver =appDriverService.getByPhone(appDriver.getDriver_id());
             List<Reward> rewards = rewardService.getContent(appDriver.getDriver_id());
             message.setData(rewards,driver.getDes_key(),driver.getDes_iv());
