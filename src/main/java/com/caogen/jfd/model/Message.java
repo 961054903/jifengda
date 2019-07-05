@@ -2,10 +2,8 @@ package com.caogen.jfd.model;
 
 import java.io.Serializable;
 
-import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
-import com.caogen.jfd.util.SecretUtils;
 
 /**
  * 返回给客户端的实体类
@@ -44,6 +42,7 @@ public class Message implements Serializable {
 
 	public void setData(Object data) {
 		this.data = data;
+		StaticLogger.info(">>>>>>" + data);
 	}
 
 	public void setData(Object data, String key, String iv) throws Exception {

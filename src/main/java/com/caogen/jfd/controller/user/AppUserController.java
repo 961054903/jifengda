@@ -21,7 +21,6 @@ import com.caogen.jfd.entity.user.AppUserThird;
 import com.caogen.jfd.entity.user.VehicleModel;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.model.Message;
-import com.caogen.jfd.model.Signin;
 import com.caogen.jfd.service.user.AppUserInfoService;
 import com.caogen.jfd.service.user.AppUserService;
 import com.caogen.jfd.service.user.AppUserSmsService;
@@ -30,7 +29,6 @@ import com.caogen.jfd.service.user.ConfigService;
 import com.caogen.jfd.service.user.VehicleModelService;
 import com.caogen.jfd.util.PasswordHelper;
 import com.caogen.jfd.util.SmsUtils;
-import com.google.gson.Gson;
 
 /**
  * 
