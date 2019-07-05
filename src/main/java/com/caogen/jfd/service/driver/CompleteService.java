@@ -24,14 +24,13 @@ public interface CompleteService extends BaseService<Complete> {
 
     /**
      * 历史收入
-     * @param phone
      * @param start
      * @param end
      * @return
      * @throws ParseException
      */
 
-    List<Complete> gethistory(String phone, String start, String end) throws ParseException;
+    List<Complete> gethistory(Integer driver_id, String start, String end) throws ParseException;
 
     /**
      * 月冠军

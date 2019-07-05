@@ -44,8 +44,10 @@ public class FeedBackServiceImpl implements FeedBackService {
     }
 
     @Override
-    public List<FeedBack> getHistory(FeedBack entity) {
-            List<FeedBack> list = feedBackDao.find(entity);
+    public List<FeedBack> getHistory(Integer driver_id) {
+            FeedBack feedBack = new FeedBack();
+            feedBack.setDriver_id(driver_id);
+            List<FeedBack> list = feedBackDao.find(feedBack);
             for (FeedBack item : list) {
                 item.setCreateDate(FormatUtils.dateToStr(item.getCreate_date()));
                 item.setCreate_date(null);

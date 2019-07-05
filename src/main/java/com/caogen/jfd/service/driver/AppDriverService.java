@@ -39,7 +39,7 @@ public interface AppDriverService extends BaseService<AppDriver> {
 
 
 
-    void changePassword(Integer id, String password);
+    void changePassword(String driver, String password);
 
 
     AppDriver getId(AppDriver driver);

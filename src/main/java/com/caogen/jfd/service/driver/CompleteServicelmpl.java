@@ -66,12 +66,9 @@ public class CompleteServicelmpl implements CompleteService {
     }
 
     @Override
-    public List<Complete> gethistory(String phone, String start, String end) throws ParseException {
-        AppDriver appDriver = new AppDriver();
+    public List<Complete> gethistory(Integer driver_id, String start, String end) throws ParseException {
         Complete complete = new Complete();
-        appDriver.setDriverphone(phone);
-        Integer id = appDriverDao.get(appDriver).getId();
-        complete.setDriver_id(id);
+        complete.setDriver_id(driver_id);
         List<Complete> completes = completeDao.find3(complete);
         for (int i = 0; i < completes.size(); i++) {
             LocalDateTime SS = completes.get(i).getFinish_date();

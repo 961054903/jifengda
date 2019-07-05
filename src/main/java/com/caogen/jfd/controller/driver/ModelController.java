@@ -51,11 +51,11 @@ public class ModelController {
 
     @RequestMapping("/vehicle")
     @ResponseBody
-    public Message vehicle(Integer id) {
+    public Message vehicle(Integer driver_id) {
         Message message = new Message();
 
         try {
-            Model model = modelService.getModel(id);
+            Model model = modelService.getModel(driver_id);
             message.setData(model);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
