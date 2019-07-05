@@ -193,6 +193,7 @@ public class AppUserController {
 	 * @param data
 	 * @return
 	 */
+	/*-
 	@ResponseBody
 	@RequestMapping(value = { "signin", "api/signin" })
 	public Message signin(Message data) {
@@ -208,7 +209,7 @@ public class AppUserController {
 			StaticLogger.error(message.getCode(), e);
 		}
 		return message;
-	}
+	}*/
 
 	/**
 	 * 修改密码
