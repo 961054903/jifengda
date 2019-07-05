@@ -16,5 +16,6 @@ public interface FeedBackService extends BaseService<FeedBack> {
      * 获取历史反馈列表
      *
      */
-    List<FeedBack>getHistory(FeedBack entity);
+    List<FeedBack>getHistory(Integer driver_id);
+
 }

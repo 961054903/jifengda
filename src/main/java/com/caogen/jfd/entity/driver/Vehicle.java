@@ -3,7 +3,7 @@ package com.caogen.jfd.entity.driver;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Vehicle implements Serializable {
+public class Vehicle extends Model implements Serializable {
     private static final long serialVersionUID = -3977307114992384041L;
     private Integer id; //id
     private Integer model_id;//车型id

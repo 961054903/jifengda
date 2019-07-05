@@ -66,7 +66,7 @@ public class FeedbackController {
         try {
             FeedBack feedBack = Constants.gson.fromJson(data,FeedBack.class);
             AppDriver user = appDriverService.getByPhone(feedBack.getDriver_id());
-            List<FeedBack> list = feedbackService.getHistory(feedBack);
+            List<FeedBack> list = feedbackService.getHistory(feedBack.getDriver_id());
             message.setData(list, user.getDes_key(), user.getDes_iv());
         } catch (Exception e) {
             message.setErrorCode(ErrorCode.ISSUE_ERROR);

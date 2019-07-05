@@ -51,9 +51,9 @@ public class Demo {
 
 	@Test
 	public void test2() throws Exception {
-		Peservation entity = new Peservation();
-		entity.setDriver_id(2);
-		entity.setCode("1");
+		AppDriver entity = new AppDriver();
+		entity.setId(2);
+		entity.setPassword("123456");
 		String json = gson.toJson(entity);
 		System.out.println(json);
 		String result = SecretUtils.desedeEncode(json, key, iv);
@@ -63,7 +63,7 @@ public class Demo {
 
 	@Test
 	public void test3() throws Exception {
-		String str = "C2NZReTP0eTBk7M5Tua/wJxy3zILqVICUEHMGkDLpmecEv1hzTN23LXBSZeJxZimMiMrctrojX2IMI3w822Zf+N9RohPLEZrFj9C7BRM0ewlNTLrsia/ofJs0XgKVclpYuZ/U05zhfn/tDySvIHmmzIr892JDl4txXgxvNKj/4rAfuh9yFA/xBHiRuFBh4IPvCacF+UFtJGjO3oF9iyvYsTSEKl89LDNr14R2sNmn4KEPFVzx9ZH70FcoEQUu/ZwEznV9OO9U3Bqkkpx0a7fDWJw6mCXbIrJstIMK7OblHq+zPThn1YDwFJ2cpwMXX0L+kJzAtsHIYlNlRft2en19IiX1VA+3dBOwrRCtzBhgJou5PMltO1dbop9nr9txFrQnOCyfJD0NbRKsfkluBoSFPtZsIltPFbJXfJ2gmcYdgfefuuBMxOOzgcAlrSsUvvQQkwSp5zHE9dlgZjgib8lnkiAEc6nG7wBLpL1c9y6NJc++AXe92ogme1pcEEZDl4S3XggOkN+Sn2XebQsMLfG5VR2dXNct77s6od2oqYz1mfm1bB/m3JA6dirLFtJlDo1iAX3CKqFsUmj3GNbPp+EWwjTf2UV17Ym+WLEJfDRVesxVIlH+Skaky6rQa01pUiIvdAczMT2yku1IouGr3qQh8m9Wv+VxHTm2B4J8qv3yFvDXztZIvJmE+tooBGmiHXNyxmJDq3CJVJRINX8mp/dPFDcABEtR8BLzBuuN9rZldHWr47RwqzeV9fwLwppbAZCagPAfK1EHMfFoUFeFV2FLeFNYXu5kcQ3NgCSHS6DyqChRZTBu67i255nKYP8ojF6z1uudsouqEgIHnOEMZvRKYKOA4qNkrpZ1UlEmD6YGzyxY2lnvGIe9ganxgm+IwCdf3JwAz4A74g+gnJbzk09FHkRngrsGoag"+
+		String str = "tHLAHjw11c3LoQxCrV8FPbJQ6RLjLnZMnMIc8dY/0HOma/heCcDaYptpIIRoXXbAE2BrxH+uJDxws0syooCuF7yBPvl+4fWGMOUSw5Kq+2JfeNiv6VXaTNCl+Dq52SlbWEylNOlyUA28i8uqwaHPejG/FmpCRuoqGADJvogB1a2YUk08Xq2Py1E0JtJlvhJwXTrhyEy+LftrdjER9P4KsQ=="+
 				"";
 		System.out.println(SecretUtils.desedeDecode(str, key, iv));
 	}

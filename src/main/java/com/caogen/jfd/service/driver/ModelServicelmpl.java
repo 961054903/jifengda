@@ -6,6 +6,7 @@ import com.caogen.jfd.entity.driver.IssueFaq;
 import com.caogen.jfd.entity.driver.Model;
 import com.caogen.jfd.entity.driver.Personal;
 
+import com.caogen.jfd.entity.driver.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,10 +46,11 @@ public class ModelServicelmpl implements ModelService {
 
 
     @Override
-    public Model getModel(Integer id) {
-        Model model = new Model();
-        model.setId(id);
-        return  modelDao.get(model);
+    public Model getModel(Integer driver_id) {
+        Vehicle vehicle = new Vehicle();
+
+        vehicle.setDriver_id(driver_id);
+        return modelDao.get(vehicle);
 
     }
 

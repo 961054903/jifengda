@@ -108,8 +108,8 @@ public class AppDriverServicelmpl implements AppDriverService {
     }
 
     @Override
-    public void changePassword(Integer id, String password) {
-        AppDriver user = getByPhone(id);
+    public void changePassword(String token, String password) {
+        AppDriver user = getByToken(token);
         user.setSalt(PasswordHelper.generateSalt());
         user.setPassword(PasswordHelper.encryptPassword(password, user.getSalt()));
         modify(user);

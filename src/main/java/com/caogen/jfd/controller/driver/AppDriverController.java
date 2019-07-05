@@ -125,11 +125,11 @@ public class AppDriverController {
      */
     @ResponseBody
     @RequestMapping(value = {"cipher", "app/cipher"})
-    public Message cipher(String data) {
+    public Message cipher(Message data) {
         Message message = new Message();
         try {
-            AppDriver user = Constants.gson.fromJson(data, AppDriver.class);
-            appDriverService.changePassword(user.getId(), user.getPassword());
+            AppDriver user = Constants.gson.fromJson((String) data.getData(), AppDriver.class);
+            appDriverService.changePassword(data.getDesc(), user.getPassword());
         } catch (Exception e) {
             message.setErrorCode(ErrorCode.CIPHER_ERROR);
             StaticLogger.error(message.getCode(), e);

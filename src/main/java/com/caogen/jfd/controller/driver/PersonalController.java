@@ -416,8 +416,8 @@ public class PersonalController {
         Message message = new Message();
         try {
             Complete appDriver = Constants.gson.fromJson(data,Complete.class);
-            AppDriver driver =appDriverService.getByPhone(appDriver.getId());
-          List <Complete> completes = completeService.gethistory(appDriver.getPhone(),appDriver.getStart(),appDriver.getEnd());
+            AppDriver driver =appDriverService.getByPhone(appDriver.getDriver_id());
+          List <Complete> completes = completeService.gethistory(appDriver.getDriver_id(),appDriver.getStart(),appDriver.getEnd());
             Double aa =0.0;
             for(int i = 0;i<completes.size();i++){
                 Double ss = completes.get(i).getBonus();

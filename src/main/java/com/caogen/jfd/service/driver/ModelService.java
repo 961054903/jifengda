@@ -8,7 +8,7 @@ import com.caogen.jfd.entity.driver.Personal;
 import com.caogen.jfd.service.BaseService;
 
 public interface ModelService extends BaseService<Model> {
-    Model getModel(Integer id);
+    Model getModel(Integer driver_id);
     List<Model>getWhole();
 
     /**
