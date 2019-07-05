@@ -47,11 +47,13 @@ public class Message implements Serializable {
 	}
 
 	public void setData(Object data, String key, String iv) throws Exception {
+		setData(data);
+		/*-
 		if (data != null) {
 			String plaintext = Constants.gson.toJson(data);
 			StaticLogger.info(">>>>>>" + plaintext);
 			this.data = SecretUtils.desedeEncode(plaintext, key, iv);
-		}
+		}*/
 	}
 
 	public String getCode() {

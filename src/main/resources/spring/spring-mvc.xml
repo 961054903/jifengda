@@ -27,6 +27,7 @@
 	</bean>
 	<!-- 开启 Shiro Spring AOP 权限注解 -->
 	<!-- <aop:config proxy-target-class="true"></aop:config> -->
+	<!-- 
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*/api/*" />
@@ -37,4 +38,5 @@
 			<bean class="com.caogen.jfd.interceptor.AppDriverInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+	 -->
 </beans>  
