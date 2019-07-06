@@ -37,6 +37,8 @@ public class AppUserPathController {
 			AppUser user = userService.getByToken(data.getDesc());
 			AppUserPath path = Constants.gson.fromJson((String) data.getData(), AppUserPath.class);
 			path.setUser_id(user.getId());
+//			path.setOrigin(Constants.gson.toJson(path.getOrigin_obj()));
+//			path.setDestination(Constants.gson.toJson(path.getDestination_obj()));
 			pathService.create(path);
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.PATH_ERROR);

@@ -1,6 +1,9 @@
 package com.caogen.jfd.entity.user;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.google.gson.annotations.SerializedName;
 
 /**
  * 
@@ -14,8 +17,14 @@ public class AppUserPath implements Serializable {
 	private Integer user_id;
 	private String name;
 	private String description;
+//	@SerializedName("origin_str")
 	private String origin;
+//	@SerializedName("origin")
+	private AppUserSite origin_obj;
+//	@SerializedName("destination_str")
 	private String destination;
+//	@SerializedName("destination")
+	private List<AppUserSite> destination_obj;
 
 	public AppUserPath() {
 		super();
@@ -29,7 +38,8 @@ public class AppUserPath implements Serializable {
 	@Override
 	public String toString() {
 		return "AppUserPath [id=" + id + ", user_id=" + user_id + ", name=" + name + ", description=" + description
-				+ ", origin=" + origin + ", destination=" + destination + "]";
+				+ ", origin=" + origin + ", origin_obj=" + origin_obj + ", destination=" + destination
+				+ ", destination_obj=" + destination_obj + "]";
 	}
 
 	public Integer getId() {
@@ -78,6 +88,22 @@ public class AppUserPath implements Serializable {
 
 	public void setDestination(String destination) {
 		this.destination = destination;
+	}
+
+	public AppUserSite getOrigin_obj() {
+		return origin_obj;
+	}
+
+	public void setOrigin_obj(AppUserSite origin_obj) {
+		this.origin_obj = origin_obj;
+	}
+
+	public List<AppUserSite> getDestination_obj() {
+		return destination_obj;
+	}
+
+	public void setDestination_obj(List<AppUserSite> destination_obj) {
+		this.destination_obj = destination_obj;
 	}
 
 }
