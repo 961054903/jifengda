@@ -9,6 +9,7 @@ import com.caogen.jfd.entity.driver.AppDriver;
 import com.caogen.jfd.entity.driver.Complete;
 import com.caogen.jfd.entity.driver.Personal;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -89,7 +90,6 @@ public class PersonalServicelmpl implements PersonalService {
     @Override
     public Personal getchampion() {
             AppDriver appDriver = new AppDriver();
-            Complete complete = new Complete();
             Personal personal = new Personal();
             List<Complete> completes = completeDao.find4();
             Complete complete1 = completes.get(0);
@@ -98,13 +98,13 @@ public class PersonalServicelmpl implements PersonalService {
             AppDriver app = appDriverDao.get(appDriver);
             String  phone =  app.getDriverphone();
             personal.setPhone(phone);
-        Personal personalDao6 = personalDao.get6(personal);
-        return personalDao6;
+            return  personalDao.get6(personal);
+
     }
 
     @Override
     public Personal getId(AppDriver driver) {
-  Personal aa =  personalDao.get8();
+   Personal aa =  personalDao.get8();
         return aa;
     }
 

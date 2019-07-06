@@ -33,10 +33,10 @@ public class TaskServicelmpl implements TaskService {
     }
 
     @Override
-    public void getarrive(String code,String serial) {
+    public void getarrive(String code,Integer status) {
         Task task = new Task();
         task.setCode(code);
-        task.setSerial(serial);
+        task.setStatus(status);
         Task tasks = taskDao.get(task);
         if (tasks!=null){
             tasks.setStatus(1);
@@ -46,10 +46,10 @@ public class TaskServicelmpl implements TaskService {
     }
 
     @Override
-    public void getpei(String code, String serial) {
+    public void getpei(String code, Integer status) {
         Task task = new Task();
         task.setCode(code);
-        task.setSerial(serial);
+        task.setStatus(status);
         Task tasks = taskDao.get(task);
         if (tasks!=null){
             tasks.setStatus(2);
@@ -58,10 +58,10 @@ public class TaskServicelmpl implements TaskService {
     }
 
     @Override
-    public void getda(String code, String serial) {
+    public void getda(String code,Integer status) {
         Task task = new Task();
         task.setCode(code);
-        task.setSerial(serial);
+        task.setStatus(status);
         Task tasks = taskDao.get(task);
         if (tasks!=null){
             tasks.setStatus(3);

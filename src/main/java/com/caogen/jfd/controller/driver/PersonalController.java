@@ -450,10 +450,10 @@ public class PersonalController {
      */
     @ResponseBody
         @RequestMapping("champion")
-    public Message champion( ) {
+    public Message champion() {
         Message message = new Message();
         try {
-         Personal personal = personalService.getchampion();
+           Personal personal = personalService.getchampion();
             message.setData(personal);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -524,7 +524,7 @@ public class PersonalController {
         Message message = new Message();
         try {
             Task appDriver = Constants.gson.fromJson((String) data.getData(),Task.class);
-            taskService.getarrive(appDriver.getCode(),appDriver.getSerial());
+            taskService.getarrive(appDriver.getCode(),appDriver.getStatus());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -546,7 +546,7 @@ public class PersonalController {
         Message message = new Message();
         try {
             Task appDriver = Constants.gson.fromJson((String) data.getData(),Task.class);
-            taskService.getpei(appDriver.getCode(),appDriver.getSerial());
+            taskService.getpei(appDriver.getCode(),appDriver.getStatus());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -568,7 +568,7 @@ public class PersonalController {
         Message message = new Message();
         try {
             Task appDriver = Constants.gson.fromJson((String) data.getData(),Task.class);
-            taskService.getda(appDriver.getCode(),appDriver.getSerial());
+            taskService.getda(appDriver.getCode(),appDriver.getStatus());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -580,26 +580,26 @@ public class PersonalController {
     }
 
 
-    /**
-     * 存入历史
-     */
-    @ResponseBody
-    @RequestMapping("cunru")
-    public Message cunru(String phone ,String code) {
-        Message message = new Message();
-        try {
-             peservationService.gettake(phone,code);
-            message.setCode(ErrorCode.SUCCEED.getCode());
-            message.setDesc(ErrorCode.SUCCEED.getDesc());
-        } catch (Exception e) {
-            message.setCode(ErrorCode.FAIL.getCode());
-            message.setDesc(ErrorCode.FAIL.getDesc());
-            StaticLogger.logger().error(message.getDesc(), e);
-        }
-        return message;
-    }
-
+//    /**
+//     * 存入历史
+//     */
+//    @ResponseBody
+//    @RequestMapping("cunru")
+//    public Message cunru(String phone ,String code) {
+//        Message message = new Message();
+//        try {
+//             peservationService.gettake(phone,code);
+//            message.setCode(ErrorCode.SUCCEED.getCode());
+//            message.setDesc(ErrorCode.SUCCEED.getDesc());
+//        } catch (Exception e) {
+//            message.setCode(ErrorCode.FAIL.getCode());
+//            message.setDesc(ErrorCode.FAIL.getDesc());
+//            StaticLogger.logger().error(message.getDesc(), e);
+//        }
+//        return message;
+//    }
 //
+////
 //    /**
 //     * 推送订单
 //     * @return

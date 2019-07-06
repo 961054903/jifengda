@@ -42,7 +42,7 @@
             <if test="kilometre != null">AND kilometre = #{kilometre}</if>
             <if test="bonus != null">AND bonus = #{bonus}</if>
             <if test="finish_date != null">AND finish_date = #{finish_date}</if>
-
+            <if test="driver_id != null">AND driver_id = #{driver_id}</if>
         </where>
     </select>
 

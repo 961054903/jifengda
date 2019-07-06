@@ -52,9 +52,9 @@ public class Demo {
 
 	@Test
 	public void test2() throws Exception {
-		Complete entity = new Complete();
-	     entity.setStart("2019-6-10");
-	     entity.setEnd("2019-7-8");
+		Task entity = new Task();
+	     entity.setStatus(1);
+	     entity.setCode("2");
 		String json = gson.toJson(entity);
 		System.out.println(json);
 

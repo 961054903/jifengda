@@ -37,9 +37,8 @@ public class RewardServicelmpl implements RewardService {
 
 
     @Override
-    public List<Reward> getContent(Integer driver_id) {
+    public List<Reward> getContent() {
         Reward reward = new Reward();
-        reward.setDriver_id(driver_id);
         List<Reward> rewards = rewardDao.find(reward);
         return rewards;
     }
