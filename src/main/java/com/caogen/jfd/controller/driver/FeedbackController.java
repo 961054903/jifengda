@@ -64,10 +64,9 @@ public class FeedbackController {
     public Message history(Message data) {
         Message message = new Message();
         try {
-            FeedBack feedBack = Constants.gson.fromJson((String) data.getData(),FeedBack.class);
-            AppDriver user = appDriverService.getByPhone(feedBack.getDriver_id());
-            List<FeedBack> list = feedbackService.getHistory(feedBack.getDriver_id());
-            message.setData(list, user.getDes_key(), user.getDes_iv());
+            AppDriver driver =appDriverService.getByToken(data.getDesc());
+            List<FeedBack> list = feedbackService.getHistory(driver.getId());
+            message.setData(list);
         } catch (Exception e) {
             message.setErrorCode(ErrorCode.ISSUE_ERROR);
             StaticLogger.error("get history feedback list error", e);

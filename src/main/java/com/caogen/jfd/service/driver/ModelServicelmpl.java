@@ -67,7 +67,7 @@ public class ModelServicelmpl implements ModelService {
         Model model = new Model();
         Personal personal = new Personal();
         personal.setUser_id(user_id);
-        model.setId(personalDao.get2(personal).getId());
+        model.setId(personalDao.get2(personal).getUser_id());
         return modelDao.get3(model);
 
     }

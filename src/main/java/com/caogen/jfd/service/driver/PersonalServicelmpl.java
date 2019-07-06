@@ -78,9 +78,7 @@ public class PersonalServicelmpl implements PersonalService {
     @Override
     public Personal getwhole(Integer user_id) {
         Personal personal = new Personal();
-
         personal.setUser_id(user_id);
-
         return  personalDao.get2(personal);
     }
 

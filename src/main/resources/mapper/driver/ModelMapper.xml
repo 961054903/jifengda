@@ -33,14 +33,20 @@
 
 
     <sql id="vehicle">model</sql>
-    <select id="get3" parameterType="Model"
+    <select id="get3" parameterType="Personal"
             resultType="Model">
         SELECT
-        <include refid="vehicle" />
-        FROM vehicle_model
+        bb.model
+        FROM
+        app_driver_info aa
+        left
+        JOIN
+        vehicle_model  bb
+        on
+        bb.id =aa.user_id
         <where>
-            <if test="id != null">id = #{id}</if>
-            <if test="model != null">AND model = #{model}</if>
+            <if test="id != null">bb.id = #{id}</if>
+            <if test="model != null">AND bb. model = #{model}</if>
         </where>
     </select>
 

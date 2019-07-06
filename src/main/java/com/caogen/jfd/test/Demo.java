@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 
 import static com.caogen.jfd.entity.driver.Peservation.Mode.appoint;
+import static com.caogen.jfd.entity.driver.Peservation.Mode.common;
 
 public class Demo {
 	Gson gson = new Gson();
@@ -52,7 +53,8 @@ public class Demo {
 	@Test
 	public void test2() throws Exception {
 		Complete entity = new Complete();
-		entity.setAa(true);
+	     entity.setStart("2019-6-10");
+	     entity.setEnd("2019-7-8");
 		String json = gson.toJson(entity);
 		System.out.println(json);
 

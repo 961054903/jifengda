@@ -3,7 +3,7 @@ package com.caogen.jfd.entity.driver;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Personal implements Serializable{
+public class Personal implements Serializable {
 
     private static final long serialVersionUID = -3975707114992384038L;
     private Integer id; //id
@@ -14,7 +14,7 @@ public class Personal implements Serializable{
     private String identity_number;//身份证号码
     private Integer grade;//评分
     private String gender; //性别 unknown,female,male
-    private LocalDateTime  birthday;//生日
+    private LocalDateTime birthday;//生日
     private String licence_url;//驾驶证照片
     private String identity_front_url;//身份证正面
     private String identity_back_url;//身份证背面

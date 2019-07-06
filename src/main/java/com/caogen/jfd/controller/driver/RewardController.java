@@ -31,9 +31,9 @@ public class RewardController {
         Message message  = new Message();
         try {
             Reward appDriver = Constants.gson.fromJson((String) data.getData(),Reward.class);
-            AppDriver driver =appDriverService.getByPhone(appDriver.getDriver_id());
+            AppDriver driver =appDriverService.getByToken(data.getDesc());
             List<Reward> rewards = rewardService.getContent(appDriver.getDriver_id());
-            message.setData(rewards,driver.getDes_key(),driver.getDes_iv());
+            message.setData(rewards);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {

@@ -23,7 +23,7 @@
     <sql id="Order">code,origin,destination,kilometre,create_date,mode,bonus,user_id,driver_id</sql>
     <select id="get" parameterType="Peservation"
             resultType="Peservation">
-        SELECT
+        SELECT id,
         <include refid="Order" />
         FROM order_info
         <where>

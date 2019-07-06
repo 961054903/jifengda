@@ -6,13 +6,13 @@
     <sql id="sql">driverphone,password,status,salt,create_date,des_key,des_iv,token</sql>
     <select id="get" parameterType="AppDriver"
             resultType="AppDriver">
-        SELECT
+        SELECT id,
         <include refid="sql" />
         FROM app_driver
         <where>
             <if test="id != null">id = #{id}</if>
-            <if test="driverphone != null">AND driverphone = #{driverphone}</if>
-            <if test="token != null">AND token = #{token}</if>
+            <if test="driverphone != null">AND driverphone =#{driverphone}</if>
+            <if test="token != null">AND token =#{token}</if>
         </where>
     </select>
 

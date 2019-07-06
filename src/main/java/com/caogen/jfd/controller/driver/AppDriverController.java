@@ -79,8 +79,8 @@ public class AppDriverController {
     public Message logout(Message data) {
         Message message = new Message();
         try {
-            AppDriver appDriver = Constants.gson.fromJson((String) data.getData(), AppDriver.class);
-            AppDriver entity = appDriverService.getByPhone(appDriver.getId());
+
+            AppDriver entity =appDriverService.getByToken(data.getDesc());
             entity.setToken(null);
             entity.setDes_key(null);
             entity.setDes_iv(null);

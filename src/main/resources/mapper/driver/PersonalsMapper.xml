@@ -11,7 +11,7 @@
         <include refid="personal" />
         FROM app_driver_info
         where
-        user_id =#{user_id}
+        token =#{token}
     </select>
 
     <update id="update" parameterType="Personal">
@@ -78,7 +78,7 @@
     <update id="update1" parameterType="Personal">
         UPDATE app_driver_info
         <set>
-            <if test="photo_url != null"> photo_url = #{photo_url}</if>
+            <if test="photo_url != null"> photo_url =#{photo_url},</if>
             <if test="phone != null"> phone= #{phone},</if>
             <if test="name != null"> name = #{name},</if>
             <if test="gender != null"> gender = #{gender},</if>

@@ -53,7 +53,6 @@ public class CompleteServicelmpl implements CompleteService {
         Complete complete = new Complete();
         complete.setDriver_id(driver_id);
         List<Complete> completes = completeDao.find1(complete);
-        System.out.println(complete);
         return completes;
     }
 

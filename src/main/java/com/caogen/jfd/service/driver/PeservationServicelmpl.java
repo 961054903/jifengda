@@ -144,8 +144,8 @@ public class PeservationServicelmpl implements PeservationService {
         AppDriver appDriver = new AppDriver();
         Peservation peservation = new Peservation();
         appDriver.setId(driver_id);
-        Integer id = appDriverDao.get(appDriver).getId();
-        peservation.setDriver_id(id);
+        Integer id1 = appDriverDao.get(appDriver).getId();
+        peservation.setDriver_id(id1);
         peservation.setCode(code);
         Peservation  peservations = peservationDao.getdsp(peservation);
         //判断库存
@@ -157,7 +157,7 @@ public class PeservationServicelmpl implements PeservationService {
         if (peservations.getDriver_id()!=null) {
             return false;
         }
-        peservations.setDriver_id(id);
+        peservations.setDriver_id(id1);
         peservationDao.update(peservation);
         return true;
     }
