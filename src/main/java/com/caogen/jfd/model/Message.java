@@ -2,7 +2,6 @@ package com.caogen.jfd.model;
 
 import java.io.Serializable;
 
-import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
 
@@ -43,7 +42,7 @@ public class Message implements Serializable {
 
 	public void setData(Object data) {
 		StaticLogger.info("响应数据>>>>>>" + data);
-		this.data = Constants.gson.toJson(data);
+		this.data = data;
 	}
 
 	public void setData(Object data, String key, String iv) throws Exception {

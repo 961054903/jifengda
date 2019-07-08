@@ -1,20 +1,6 @@
 package com.caogen.jfd.common;
 
-import java.lang.reflect.Type;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 
 /**
  * 静态常量
@@ -24,44 +10,7 @@ import com.google.gson.JsonSerializer;
  */
 public class Constants {
 
-	public static final Gson gson = new GsonBuilder()
-			.registerTypeAdapter(LocalDateTime.class, new JsonSerializer<LocalDateTime>() {
-				@Override
-				public JsonElement serialize(LocalDateTime src, Type typeOfSrc, JsonSerializationContext context) {
-					return new JsonPrimitive(src.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
-				}
-			}).registerTypeAdapter(LocalDate.class, new JsonSerializer<LocalDate>() {
-				@Override
-				public JsonElement serialize(LocalDate src, Type typeOfSrc, JsonSerializationContext context) {
-					return new JsonPrimitive(src.format(DateTimeFormatter.ofPattern("yyyyMMdd")));
-				}
-			}).registerTypeAdapter(LocalTime.class, new JsonSerializer<LocalTime>() {
-				@Override
-				public JsonElement serialize(LocalTime src, Type typeOfSrc, JsonSerializationContext context) {
-					return new JsonPrimitive(src.format(DateTimeFormatter.ofPattern("HHmmss")));
-				}
-			}).registerTypeAdapter(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
-				@Override
-				public LocalDateTime deserialize(JsonElement json, Type type,
-						JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-					String datetime = json.getAsJsonPrimitive().getAsString();
-					return LocalDateTime.parse(datetime, DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-				}
-			}).registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
-				@Override
-				public LocalDate deserialize(JsonElement json, Type type,
-						JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-					String datetime = json.getAsJsonPrimitive().getAsString();
-					return LocalDate.parse(datetime, DateTimeFormatter.ofPattern("yyyyMMdd"));
-				}
-			}).registerTypeAdapter(LocalTime.class, new JsonDeserializer<LocalTime>() {
-				@Override
-				public LocalTime deserialize(JsonElement json, Type type,
-						JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-					String datetime = json.getAsJsonPrimitive().getAsString();
-					return LocalTime.parse(datetime, DateTimeFormatter.ofPattern("HHmmss"));
-				}
-			}).create();
+	public static final Gson gson = new Gson();
 	// 请求报文参数
 	public static final String REQUEST_TOKEN = "desc";
 	public static final String REQUEST_HEAD = "code";
