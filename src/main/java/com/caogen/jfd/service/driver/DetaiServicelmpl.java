@@ -46,10 +46,8 @@ public class DetaiServicelmpl implements DetaiService {
         Detail detail = new Detail();
         detail.setDriver_id(driver_id);
         List<Detail> zz = detaiDao.find(detail);
-        System.out.println(zz);
         long aa = 0;
         if (zz.get(zz.size()-1).getOperation().equals(online)) {
-            ;
             Detail detai2 = new Detail();
             detai2.setCreate_date(LocalDateTime.now());
             detai2.setOperation(offline);
