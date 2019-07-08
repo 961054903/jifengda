@@ -19,7 +19,6 @@ public class AppUserIssue implements Serializable {
 	private String createDate;
 	private String name;
 	private String phone;
-	private Boolean is_check;
 	private Type type;
 
 	public enum Type {
@@ -39,7 +38,7 @@ public class AppUserIssue implements Serializable {
 	public String toString() {
 		return "AppUserIssue [id=" + id + ", title=" + title + ", content=" + content + ", photo_url=" + photo_url
 				+ ", create_date=" + create_date + ", createDate=" + createDate + ", name=" + name + ", phone=" + phone
-				+ ", is_check=" + is_check + ", type=" + type + "]";
+				+ ", type=" + type + "]";
 	}
 
 	public Integer getId() {
@@ -96,14 +95,6 @@ public class AppUserIssue implements Serializable {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	public Boolean getIs_check() {
-		return is_check;
-	}
-
-	public void setIs_check(Boolean is_check) {
-		this.is_check = is_check;
 	}
 
 	public Type getType() {

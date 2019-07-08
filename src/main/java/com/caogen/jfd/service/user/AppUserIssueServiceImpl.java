@@ -23,7 +23,6 @@ public class AppUserIssueServiceImpl implements AppUserIssueService {
 
 	@Override
 	public void create(AppUserIssue entity) {
-		entity.setIs_check(false);
 		entity.setCreate_date(LocalDateTime.now());
 		issueDao.insert(entity);
 	}

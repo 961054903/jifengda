@@ -221,7 +221,7 @@ public class AppUserController {
 		Message message = new Message();
 		try {
 			AppUser user = Constants.gson.fromJson((String) data.getData(), AppUser.class);
-			userService.changePassword(data.getDesc(), user.getPassword());
+			userService.changePassword(user.getPhone(), user.getPassword());
 		} catch (Exception e) {
 			message.setErrorCode(ErrorCode.CIPHER_ERROR);
 			StaticLogger.error(message.getCode(), e);

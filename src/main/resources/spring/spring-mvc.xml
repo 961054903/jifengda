@@ -27,16 +27,16 @@
 	</bean>
 	<!-- 开启 Shiro Spring AOP 权限注解 -->
 	<!-- <aop:config proxy-target-class="true"></aop:config> -->
-	<!-- 
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/*/api/*" />
+			<mvc:mapping path="/**" />
 			<bean class="com.caogen.jfd.interceptor.AppUserInterceptor" />
 		</mvc:interceptor>
+	<!-- 
 		<mvc:interceptor>
 			<mvc:mapping path="/*/app/*" />
 			<bean class="com.caogen.jfd.interceptor.AppDriverInterceptor" />
 		</mvc:interceptor>
-	</mvc:interceptors>
 	 -->
+	</mvc:interceptors>
 </beans>  

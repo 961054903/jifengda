@@ -66,7 +66,7 @@ public class AppUserInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		StaticLogger.info("===path=== " + request.getServletPath());
-		StaticLogger.info("<<<<<<" + request.getParameter(REQUEST_BODY));
+		StaticLogger.info("请求数据<<<<<<" + request.getParameter(REQUEST_BODY));
 		return true;
 	}
 

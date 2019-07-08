@@ -42,7 +42,7 @@ public class Message implements Serializable {
 
 	public void setData(Object data) {
 		this.data = data;
-		StaticLogger.info(">>>>>>" + data);
+		StaticLogger.info("响应数据>>>>>>" + data);
 	}
 
 	public void setData(Object data, String key, String iv) throws Exception {

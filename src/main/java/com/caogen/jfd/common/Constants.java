@@ -39,7 +39,7 @@ public class Constants {
 	public static final String GD_DISTANCE_URL = "https://restapi.amap.com/v3/distance";
 	public static final String GD_DISTANCE_TYPE = "1";
 	// 短信参数
-	public static final String SMS_SIGN_NAME = "草根同城";
+	public static final String SMS_SIGN_NAME = "草根同城";// 吉蜂达即配
 	public static final String SMS_TEMPLATE_CODE = "SMS_117610019";
 
 }
