@@ -1,6 +1,7 @@
 package com.caogen.jfd.entity.driver;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Complete implements Serializable {
@@ -41,6 +42,8 @@ public class Complete implements Serializable {
     private String start;//开始时间
     private String end;//结束时间
     private String tim;
+    private String createDate;
+
 
     @Override
     public String toString() {
@@ -364,5 +367,8 @@ public class Complete implements Serializable {
 
     public void setTim(String tim) {
         this.tim = tim;
+    }
+
+    public void setCreatedate(String data) {
     }
 }

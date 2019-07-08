@@ -3,10 +3,8 @@ package com.caogen.jfd.service.driver;
 import com.caogen.jfd.dao.driver.AppDriverDao;
 import com.caogen.jfd.dao.driver.CompleteDao;
 import com.caogen.jfd.dao.driver.PersonalDao;
-import com.caogen.jfd.entity.driver.AppDriver;
-import com.caogen.jfd.entity.driver.Complete;
-import com.caogen.jfd.entity.driver.Personal;
-import com.caogen.jfd.entity.driver.User;
+import com.caogen.jfd.entity.driver.*;
+import com.caogen.jfd.util.FormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,9 +47,10 @@ public class CompleteServicelmpl implements CompleteService {
     }
 
     @Override
-    public List<Complete> getto(Integer driver_id) {
+    public List<Complete> getto(Integer driver_id,Boolean aa) {
         Complete complete = new Complete();
         complete.setDriver_id(driver_id);
+        complete.setAa(aa);
         List<Complete> completes = completeDao.find1(complete);
         return completes;
     }

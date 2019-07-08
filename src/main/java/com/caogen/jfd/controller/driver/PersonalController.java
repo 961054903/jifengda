@@ -7,12 +7,14 @@ import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.driver.*;
 import com.caogen.jfd.service.user.AppUserService;
+import com.caogen.jfd.util.FormatUtils;
 import com.sun.jmx.snmp.tasks.TaskServer;
 import com.sun.org.apache.bcel.internal.generic.GETFIELD;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -101,7 +103,6 @@ public class PersonalController {
 
     /**
      * 个人信息全部
-     *
      */
     @Autowired
     private ModelService modelService;
@@ -286,8 +287,8 @@ public class PersonalController {
         Message message = new Message();
         try {
             AppDriver driver =appDriverService.getByToken(data.getDesc());
-            Complete appDriver = Constants.gson.fromJson((String)data.getData(),Complete.class);
-            List <Complete> peservation = completeService.getto(driver.getId());
+             Complete appDriver = Constants.gson.fromJson((String)data.getData(),Complete.class);
+            List <Complete> peservation = completeService.getto(driver.getId(),appDriver.getAa());
             String cc = detaiService.getime(driver.getId());
 
             int size = peservation.size();
@@ -301,8 +302,8 @@ public class PersonalController {
        appDrivers.put("time",cc);
        appDrivers.put("royalty",aa);
         if (appDriver.getAa()){
-            appDrivers.put("orde",peservation);
-        }
+                appDrivers.put("orde",peservation);
+            }
         message.setData(appDrivers);
         message.setCode(ErrorCode.SUCCEED.getCode());
         message.setDesc(ErrorCode.SUCCEED.getDesc());

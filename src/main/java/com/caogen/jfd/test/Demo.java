@@ -52,9 +52,9 @@ public class Demo {
 
 	@Test
 	public void test2() throws Exception {
-		Task entity = new Task();
-	     entity.setStatus(1);
-	     entity.setCode("2");
+		AppDriver entity = new AppDriver();
+	     entity.setDriverphone("123456");
+	     entity.setPassword("123456");
 		String json = gson.toJson(entity);
 		System.out.println(json);
 

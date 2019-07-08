@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.driver.CompleteDao">
-    <sql id="roya">code,origin,destination,kilometre,bonus</sql>
+    <sql id="roya">code,origin,destination,kilometre,bonus,create_date,status,type,mode,label,name</sql>
     <select id="find1" parameterType="Complete"
             resultType="Complete">
         SELECT
@@ -15,11 +15,10 @@
         TO_DAYS(create_date) = TO_DAYS(NOW())
     </select>
 
-    <sql id="month">code,origin,destination,kilometre,bonus</sql>
     <select id="find2" parameterType="Complete"
             resultType="Complete">
         SELECT
-        <include refid="month" />
+        <include refid="roya" />
         FROM order_history
         where
         driver_id =#{driver_id}

@@ -252,8 +252,7 @@ public class AppUserController {
 
 	/**
 	 * 获取短信验证码
-	 * 
-	 * @param data
+
 	 * @return
 	 */
 	@ResponseBody

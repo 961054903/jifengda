@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.driver.PeservationDao">
-    <sql id="peservation">driver_id,create_date,mode,label,origin,destination,kilometre</sql>
+    <sql id="peservation">driver_id,create_date,mode,label,origin,destination,kilometre,code,status,type,name</sql>
     <select id="find" parameterType="Peservation"
             resultType="Peservation">
         SELECT id,
@@ -16,7 +16,10 @@
             <if test="origin != null">AND origin = #{origin}</if>
             <if test="destination != null">AND destination = #{destination}</if>
             <if test="kilometre != null">AND kilometre = #{kilometre}</if>
-            <if test="label != null">AND label = #{label}</if>
+            <if test="code != null">AND code = #{code}</if>
+            <if test="status != null">AND status = #{status}</if>
+            <if test="type != null">AND type = #{type}</if>
+            <if test="name != null">AND name = #{name}</if>
         </where>
     </select>
 
