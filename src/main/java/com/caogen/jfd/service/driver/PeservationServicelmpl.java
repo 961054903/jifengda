@@ -5,6 +5,7 @@ import com.caogen.jfd.dao.driver.*;
 import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.entity.user.AppUserSite;
 
+import com.caogen.jfd.util.FormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
@@ -69,7 +70,10 @@ public class PeservationServicelmpl implements PeservationService {
     public  Peservation getma(String code) {
         Peservation peservation = new Peservation();
         peservation.setCode(code);
-        return peservationDao.get(peservation);
+        Peservation peservation1 = peservationDao.get(peservation);
+        String s = FormatUtils.dateToStr(peservation1.getCreate_date());
+        peservation1.setCreatedate(s);
+        return  peservation1;
     }
     @Override
     public void  getput() {

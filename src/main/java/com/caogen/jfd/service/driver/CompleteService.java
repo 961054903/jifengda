@@ -14,7 +14,7 @@ public interface CompleteService extends BaseService<Complete> {
      * @param
      * @return
      */
-    List<Complete> getto(Integer driver_id,Boolean aa);
+    List<Complete> getto(Integer driver_id);
 
     /**
      * 本月提成

@@ -44,8 +44,16 @@ public class Complete implements Serializable {
     private String tim;
     private String createDate;
 
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
 
     @Override
+
     public String toString() {
         return "Complete{" +
                 "id=" + id +
@@ -82,6 +90,8 @@ public class Complete implements Serializable {
                 ", aa=" + aa +
                 ", start='" + start + '\'' +
                 ", end='" + end + '\'' +
+                ", tim='" + tim + '\'' +
+                ", createDate='" + createDate + '\'' +
                 '}';
     }
 
@@ -369,6 +379,4 @@ public class Complete implements Serializable {
         this.tim = tim;
     }
 
-    public void setCreatedate(String data) {
-    }
 }

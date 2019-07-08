@@ -47,11 +47,14 @@ public class CompleteServicelmpl implements CompleteService {
     }
 
     @Override
-    public List<Complete> getto(Integer driver_id,Boolean aa) {
+    public List<Complete> getto(Integer driver_id) {
         Complete complete = new Complete();
         complete.setDriver_id(driver_id);
-        complete.setAa(aa);
         List<Complete> completes = completeDao.find1(complete);
+        for (Complete item : completes) {
+            item.setCreateDate(FormatUtils.dateToStr(item.getCreate_date()));
+            item.setCreate_date(null);
+        }
         return completes;
     }
 
@@ -60,6 +63,10 @@ public class CompleteServicelmpl implements CompleteService {
         Complete complete = new Complete();
         complete.setDriver_id(driver_id);
         List<Complete> completes = completeDao.find2(complete);
+        for (Complete item : completes) {
+            item.setCreateDate(FormatUtils.dateToStr(item.getCreate_date()));
+            item.setCreate_date(null);
+        }
         return completes;
     }
 
@@ -68,6 +75,10 @@ public class CompleteServicelmpl implements CompleteService {
         Complete complete = new Complete();
         complete.setDriver_id(driver_id);
         List<Complete> completes = completeDao.find3(complete);
+        for (Complete item : completes) {
+            item.setCreateDate(FormatUtils.dateToStr(item.getCreate_date()));
+            item.setCreate_date(null);
+        }
         for (int i = 0; i < completes.size(); i++) {
             LocalDateTime SS = completes.get(i).getFinish_date();
             Long newss = SS.toInstant(ZoneOffset.of("+8")).toEpochMilli();

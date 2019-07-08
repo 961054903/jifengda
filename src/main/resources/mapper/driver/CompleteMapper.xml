@@ -26,7 +26,7 @@
         DATE_FORMAT(create_date,'%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
     </select>
 
-    <sql id="ccc">create_date,code,origin,destination,kilometre,bonus,finish_date,driver_id</sql>
+    <sql id="ccc">create_date,code,origin,destination,kilometre,bonus,finish_date,driver_id,status,type,mode,label,name</sql>
     <select id="find3" parameterType="Complete"
             resultType="Complete">
         SELECT
@@ -42,6 +42,11 @@
             <if test="bonus != null">AND bonus = #{bonus}</if>
             <if test="finish_date != null">AND finish_date = #{finish_date}</if>
             <if test="driver_id != null">AND driver_id = #{driver_id}</if>
+            <if test="status != null">AND kilometre = #{kilometre}</if>
+            <if test="type != null">AND type = #{type}</if>
+            <if test="mode != null">AND mode = #{mode}</if>
+            <if test="label != null">AND label = #{label}</if>
+            <if test="name != null">AND name = #{name}</if>
         </where>
     </select>
 

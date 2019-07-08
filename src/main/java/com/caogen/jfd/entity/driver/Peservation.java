@@ -31,7 +31,15 @@ public class Peservation implements Serializable {
     private Double kilometre;//公里
     private Double bonus;//提成
     private String phone;
+    private String Createdate;
 
+    public String getCreatedate() {
+        return Createdate;
+    }
+
+    public void setCreatedate(String createdate) {
+        Createdate = createdate;
+    }
 
     public enum Type {
         single, multiple

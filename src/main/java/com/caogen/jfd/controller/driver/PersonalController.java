@@ -207,7 +207,7 @@ public class PersonalController {
             Peservation peservation = peservationService.getma(appDriver.getCode());
             Map<String,Object> appDrivers = new HashMap<>();
             appDrivers.put("user",user);
-            appDrivers.put("user",peservation);
+            appDrivers.put("order",peservation);
             message.setData(appDrivers);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -288,9 +288,8 @@ public class PersonalController {
         try {
             AppDriver driver =appDriverService.getByToken(data.getDesc());
              Complete appDriver = Constants.gson.fromJson((String)data.getData(),Complete.class);
-            List <Complete> peservation = completeService.getto(driver.getId(),appDriver.getAa());
+            List <Complete> peservation = completeService.getto(driver.getId());
             String cc = detaiService.getime(driver.getId());
-
             int size = peservation.size();
         Double aa =0.0;
     for(int i = 0;i<peservation.size();i++){
@@ -301,9 +300,6 @@ public class PersonalController {
        appDrivers.put("order",size);
        appDrivers.put("time",cc);
        appDrivers.put("royalty",aa);
-        if (appDriver.getAa()){
-                appDrivers.put("orde",peservation);
-            }
         message.setData(appDrivers);
         message.setCode(ErrorCode.SUCCEED.getCode());
         message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -397,9 +393,6 @@ public class PersonalController {
             Map<String,Object> appDrivers = new HashMap<>();
             appDrivers.put("order",size);
             appDrivers.put("royalty",aa);
-            if (appDriver.getAa()){
-                appDrivers.put("order",peservation);
-            }
             message.setData(appDrivers);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
