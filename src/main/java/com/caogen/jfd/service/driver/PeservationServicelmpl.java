@@ -63,7 +63,10 @@ public class PeservationServicelmpl implements PeservationService {
         peservation.setDriver_id(driver_id);
         peservation.setMode(mode);
         List<Peservation>peservations = peservationDao.find(peservation);
-        return peservations;
+        for (Peservation item : peservations) {
+            item.setCreatedate(FormatUtils.dateToStr(item.getCreate_date()));
+            item.setCreate_date(null);
+        }        return peservations;
     }
 
     @Override
