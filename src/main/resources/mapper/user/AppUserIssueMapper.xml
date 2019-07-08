@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<sql id="issue">type,title,content,photo_url,create_date,name,phone
 	</sql>
 	<insert id="insert" parameterType="AppUserIssue">
-		INSERT INTO app_user_issue (
+		INSERT INTO app_issue (
 		<include refid="issue" />
 		)
 		VALUES (
@@ -17,14 +17,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="AppUserIssue">
 		SELECT id,
 		<include refid="issue" />
-		FROM app_user_issue
+		FROM app_issue
 		WHERE id = #{id}
 	</select>
 	<select id="find" parameterType="AppUserIssue"
 		resultType="AppUserIssue">
 		SELECT id,
 		<include refid="issue" />
-		FROM app_user_issue
+		FROM app_issue
 		<where>
 			<if test="type != null">type = #{type}</if>
 			<if test="phone != null">AND phone = #{phone}</if>
