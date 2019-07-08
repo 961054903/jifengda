@@ -34,7 +34,7 @@ public interface AppDriverService extends BaseService<AppDriver> {
     AppDriver getByToken(String token);
 
 
-    AppDriver getByPhone(Integer driver_id);
+    AppDriver getByPhone(String phone);
 
 
 

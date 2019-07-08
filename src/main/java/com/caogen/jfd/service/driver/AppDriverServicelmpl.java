@@ -87,9 +87,9 @@ public class AppDriverServicelmpl implements AppDriverService {
 
 
     @Override
-    public AppDriver getByPhone(Integer driver_id) {
+    public AppDriver getByPhone(String phone) {
             AppDriver entity = new AppDriver();
-            entity.setId(driver_id);
+            entity.setDriverphone(phone);
             return appDriverDao.get(entity);
         }
 
@@ -109,7 +109,7 @@ public class AppDriverServicelmpl implements AppDriverService {
 
     @Override
     public void changePassword(String token, String password) {
-        AppDriver user = getByToken(token);
+        AppDriver user = getByPhone(token);
         user.setSalt(PasswordHelper.generateSalt());
         user.setPassword(PasswordHelper.encryptPassword(password, user.getSalt()));
         modify(user);

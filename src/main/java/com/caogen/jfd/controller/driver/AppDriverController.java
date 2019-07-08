@@ -129,7 +129,7 @@ public class AppDriverController {
         Message message = new Message();
         try {
             AppDriver user = Constants.gson.fromJson((String) data.getData(), AppDriver.class);
-            appDriverService.changePassword(data.getDesc(), user.getPassword());
+            appDriverService.changePassword(user.getDriverphone(), user.getPassword());
         } catch (Exception e) {
             message.setErrorCode(ErrorCode.CIPHER_ERROR);
             StaticLogger.error(message.getCode(), e);
