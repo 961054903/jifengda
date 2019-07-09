@@ -24,4 +24,6 @@ public interface CompleteDao extends BaseDao<Complete> {
     List<Complete> find3(Complete complete);
 
     List<Complete> find4();
+
+    List<Complete>find5(Complete complete);
 }

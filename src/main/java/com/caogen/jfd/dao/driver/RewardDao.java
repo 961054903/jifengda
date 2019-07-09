@@ -6,5 +6,5 @@ import com.caogen.jfd.entity.driver.Reward;
 public interface RewardDao extends BaseDao<Reward> {
 
 
-
+    Reward get1(Reward reward);
 }

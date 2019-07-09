@@ -1,6 +1,7 @@
 package com.caogen.jfd.service.driver;
 
 import java.util.List;
+import java.util.Map;
 
 import com.caogen.jfd.entity.driver.AppDriver;
 import com.caogen.jfd.entity.driver.Personal;
@@ -39,7 +40,7 @@ public interface PersonalService extends BaseService<Personal> {
      */
     void getmodify(Personal cities);
 
-    Personal getchampion();
+    Map<String,Object> getchampion();
 
 
     /*

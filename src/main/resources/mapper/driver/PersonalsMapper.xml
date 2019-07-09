@@ -51,7 +51,7 @@
         </where>
     </select>
 
-    <sql id="whole">user_id,photo_url,name,phone,gender,birthday,licence_url,identity_front_url,identity_back_url,identity_take_url,contacts_name,contacts_phone,contacts_gender,contacts_relation</sql>
+    <sql id="whole">user_id,photo_url,name,phone,gender,birthday,licence_url,identity_front_url,identity_back_url,identity_take_url,contacts_name,contacts_phone,contacts_gender,contacts_relation,grade</sql>
     <select id="get2" parameterType="Personal"
             resultType="Personal">
         SELECT
@@ -73,6 +73,7 @@
             <if test="contacts_phone != null">AND contacts_phone = #{contacts_phone}</if>
             <if test="contacts_gender != null">AND contacts_gender = #{contacts_gender}</if>
             <if test="contacts_relation != null">AND contacts_relation = #{contacts_relation}</if>
+            <if test="grade != null">AND grade = #{grade}</if>
         </where>
     </select>
     <update id="update1" parameterType="Personal">
@@ -107,7 +108,6 @@
         FROM app_driver_info
      where
        user_id =#{user_id}
-
     </select>
 
     <sql id="per">user_id,is_online,longitude,latitude</sql>

@@ -447,8 +447,8 @@ public class PersonalController {
     public Message champion() {
         Message message = new Message();
         try {
-           Personal personal = personalService.getchampion();
-            message.setData(personal);
+            Map<String,Object>cc = personalService.getchampion();
+            message.setData(cc);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {

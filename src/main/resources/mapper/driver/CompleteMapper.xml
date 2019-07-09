@@ -82,4 +82,16 @@ support_cost,order_money,ticket_money,actually_paid,kilometre,bonus,finish_date,
         #{traffic_jam_cost},#{is_support},#{support_money},#{support_cost},#{order_money},#{ticket_money},#{actually_paid},#{kilometre},#{bonus},#{finish_date},#{is_evaluate}
         )
     </insert>
+
+
+    <select id="find5" parameterType="Complete"
+            resultType="Complete">
+        SELECT
+        <include refid="roya" />
+        FROM order_history
+        where
+        driver_id =#{driver_id}
+        and
+        PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format(finish_date, '%Y%m' ) ) =1
+    </select>
 </mapper>

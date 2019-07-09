@@ -17,4 +17,14 @@
             <if test="driver_id != null">AND driver_id =#{driver_id} </if>
         </where>
     </select>
+
+
+    <sql id="ss">money</sql>
+
+    <select id="get1" parameterType="Reward"
+            resultType="Reward">
+        SELECT
+        <include refid="ss" />
+        FROM driver_reward
+    </select>
 </mapper>
