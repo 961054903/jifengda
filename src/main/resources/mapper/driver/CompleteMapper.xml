@@ -60,7 +60,7 @@
         LEFT JOIN
         app_driver bb
         on
-        aa.driver_id = bb.driverphone
+        aa.driver_id = bb.id
        where
         DATE_FORMAT(finish_date,'%Y%m') = DATE_FORMAT( CURDATE( ) ,'%Y%m' )
         group by
