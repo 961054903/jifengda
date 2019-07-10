@@ -6,6 +6,7 @@ import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.driver.AppDriver;
 import com.caogen.jfd.entity.driver.DriverSite;
+import com.caogen.jfd.entity.driver.Online;
 import com.caogen.jfd.entity.driver.Personal;
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.exception.DefinedException;
@@ -13,6 +14,7 @@ import com.caogen.jfd.model.Message;
 import com.caogen.jfd.model.Signin;
 import com.caogen.jfd.service.driver.AppDriverService;
 import com.caogen.jfd.service.driver.DriverSiteService;
+import com.caogen.jfd.service.driver.OnlineSeriver;
 import com.caogen.jfd.service.driver.PersonalService;
 import com.caogen.jfd.util.PasswordHelper;
 import com.google.gson.Gson;
@@ -149,6 +151,33 @@ public class AppDriverController {
         Message message = new Message();
         try {
            driverSiteService.getWhole(driver_id,longitude,latitude);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
+
+    @Autowired
+   private OnlineSeriver onlineSeriver;
+
+    /**
+     * 接收上下线
+     *
+     * @param data
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = {"Receive","app/Receive"})
+    public Message Receive(Message data) {
+        Message message = new Message();
+        try {
+            AppDriver driver =appDriverService.getByToken(data.getDesc());
+            Online appDriver = Constants.gson.fromJson((String)data.getData(),Online.class);
+            onlineSeriver.in(driver.getId(),appDriver.getOperation());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {

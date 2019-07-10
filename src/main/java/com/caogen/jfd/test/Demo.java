@@ -11,6 +11,7 @@ import com.caogen.jfd.util.SecretUtils;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;
 
+import static com.caogen.jfd.entity.driver.Online.Operation.online;
 import static com.caogen.jfd.entity.driver.Peservation.Mode.appoint;
 import static com.caogen.jfd.entity.driver.Peservation.Mode.common;
 
@@ -52,9 +53,8 @@ public class Demo {
 
 	@Test
 	public void test2() throws Exception {
-		AppDriver entity = new AppDriver();
-	     entity.setDriverphone("123456");
-	     entity.setPassword("123456");
+		Online entity = new Online();
+		entity.setOperation(online);
 		String json = gson.toJson(entity);
 		System.out.println(json);
 

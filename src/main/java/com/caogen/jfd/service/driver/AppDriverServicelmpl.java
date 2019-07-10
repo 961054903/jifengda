@@ -4,6 +4,7 @@ import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.dao.driver.AppDriverDao;
 import com.caogen.jfd.entity.driver.AppDriver;
+import com.caogen.jfd.entity.driver.Online;
 import com.caogen.jfd.entity.driver.Personal;
 import com.caogen.jfd.entity.user.AppUser;
 import com.caogen.jfd.exception.DefinedException;
@@ -14,6 +15,8 @@ import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class AppDriverServicelmpl implements AppDriverService {
@@ -44,6 +47,7 @@ public class AppDriverServicelmpl implements AppDriverService {
         if (!ciphertext.equals(entity.getPassword())) {
             throw new DefinedException(ErrorCode.LOGIN_PASSWORD_ERROR);
         }
+
         return generateToken(driverphone.getDriverphone());
     }
 
