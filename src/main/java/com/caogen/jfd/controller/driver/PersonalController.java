@@ -299,12 +299,9 @@ public class PersonalController {
        appDrivers.put("time",cc);
        appDrivers.put("royalty",aa);
         message.setData(appDrivers);
-        message.setCode(ErrorCode.SUCCEED.getCode());
-        message.setDesc(ErrorCode.SUCCEED.getDesc());
     } catch (Exception e) {
-        message.setCode(ErrorCode.FAIL.getCode());
-        message.setDesc(ErrorCode.FAIL.getDesc());
-        StaticLogger.logger().error(message.getDesc(), e);
+            message.setErrorCode(ErrorCode.FAIL);
+            StaticLogger.error("user order count error", e);
     }
         return message;
 
