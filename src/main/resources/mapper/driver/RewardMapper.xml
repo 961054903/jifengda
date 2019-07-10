@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.driver.RewardDao">
-    <sql id="reward">activityname,create_date,money,driver_id</sql>
+    <sql id="reward">activityname,create_date,money</sql>
 
     <select id="find" parameterType="Reward"
             resultType="Reward">
@@ -14,7 +14,6 @@
             <if test="id != null">id = #{id}</if>
             <if test="activityname != null">AND activityname = #{activityname}</if>
             <if test="create_date != null">AND create_date = #{create_date}</if>
-            <if test="driver_id != null">AND driver_id =#{driver_id} </if>
         </where>
     </select>
 

@@ -12,6 +12,15 @@ public class Reward implements Serializable {
     private LocalDateTime  create_date; //创建时间
     private Double money;//奖励金额
     private Integer driver_id;
+    private String CreateDate;
+
+    public String getCreateDate() {
+        return CreateDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        CreateDate = createDate;
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
