@@ -25,8 +25,8 @@ public class OnlineSeriverlmpl implements OnlineSeriver {
         Personal personal = new Personal();
         personal.setUser_id(driver_id);
         online1.setDriver_id(driver_id);
-        Online.Operation operation1 = online1.getOperation();
         online1.setOperation(operation);
+        Online.Operation operation1 = online1.getOperation();
         online1.setCreate_date(LocalDateTime.now());
 
         System.out.println(operation1);
