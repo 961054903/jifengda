@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+import static com.caogen.jfd.entity.driver.Online.Operation.online;
+
+
 @Service
 public class OnlineSeriverlmpl implements OnlineSeriver {
     @Autowired
@@ -18,14 +21,22 @@ public class OnlineSeriverlmpl implements OnlineSeriver {
 
     @Override
     public void in(Integer driver_id, Online.Operation operation) {
-        Online online =new Online();
+        Online online1 =new Online();
         Personal personal = new Personal();
-
         personal.setUser_id(driver_id);
-        online.setDriver_id(driver_id);
-        online.setOperation(operation);
-        online.setCreate_date(LocalDateTime.now());
-        onlineDao.insert(online);
+        online1.setDriver_id(driver_id);
+        Online.Operation operation1 = online1.getOperation();
+        online1.setOperation(operation);
+        online1.setCreate_date(LocalDateTime.now());
+
+        System.out.println(operation1);
+        if (operation1.equals(online)) {
+            personal.setIs_online(true);
+        } else {
+            personal.setIs_online(false);
+        }
+        personalDao.update(personal);
+        onlineDao.insert(online1);
 
     }
 
