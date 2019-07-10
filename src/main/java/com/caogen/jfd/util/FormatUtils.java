@@ -11,8 +11,8 @@ import java.time.format.DateTimeFormatter;
  *
  */
 public class FormatUtils {
-	private static DateTimeFormatter datetime = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-	private static DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	private static DateTimeFormatter datetime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	private static DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private static DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 	/**
