@@ -59,7 +59,7 @@ public class FeedbackController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = { "history", "api/history" })
+    @RequestMapping(value = { "history", "app/history" })
     public Message history(String data) {
         Message message = new Message();
         try {
