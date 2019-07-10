@@ -29,6 +29,24 @@ public class Personal implements Serializable {
     private  String Age;
     private jinji  urgent;
     private Model model;
+    private Complete oreder;
+    private Reward reward;
+
+    public Complete getOreder() {
+        return oreder;
+    }
+
+    public void setOreder(Double oreder) {
+   
+    }
+
+    public Reward getReward() {
+        return reward;
+    }
+
+    public void setReward(Reward reward) {
+        this.reward = reward;
+    }
 
     @Override
     public String toString() {

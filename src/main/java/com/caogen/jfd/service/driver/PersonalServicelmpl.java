@@ -116,7 +116,7 @@ public class PersonalServicelmpl implements PersonalService {
         personalDao.update1(cities);
     }
     @Override
-    public Map<String,Object>  getchampion() {
+    public Personal  getchampion() {
         Map<String,Object>aa =new HashMap<>();
             AppDriver appDriver = new AppDriver();
             Personal personal = new Personal();
@@ -136,11 +136,9 @@ public class PersonalServicelmpl implements PersonalService {
             cc += ss;
         }
         Reward reward1 = rewardDao.get1(reward);
-
-        aa.put("information",personalDao6);
-        aa.put("oreder",cc);
-        aa.put("reward",reward1);
-        return  aa;
+        personalDao6.setOreder(cc);
+        personalDao6.setReward(reward1);
+        return  personalDao6;
     }
 
     @Override
