@@ -137,7 +137,7 @@ public class PersonalServicelmpl implements PersonalService {
         }
         Reward reward1 = rewardDao.get1(reward);
         Double money = reward1.getMoney();
-        personalDao6.setOreder(qq);
+        personalDao6.setOrder(qq);
         personalDao6.setMoney(money);
         return  personalDao6;
     }

@@ -19,6 +19,9 @@ public class OnlineSeriverlmpl implements OnlineSeriver {
     @Override
     public void in(Integer driver_id, Online.Operation operation) {
         Online online =new Online();
+        Personal personal = new Personal();
+
+        personal.setUser_id(driver_id);
         online.setDriver_id(driver_id);
         online.setOperation(operation);
         online.setCreate_date(LocalDateTime.now());

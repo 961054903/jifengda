@@ -29,15 +29,15 @@ public class Personal implements Serializable {
     private  String Age;
     private jinji  urgent;
     private Model model;
-    private Double oreder;
+    private Double order;
     private Double money;
 
-    public Double getOreder() {
-        return oreder;
+    public Double getOrder() {
+        return order;
     }
 
-    public void setOreder(Double oreder) {
-        this.oreder = oreder;
+    public void setOrder(Double order) {
+        this.order = order;
     }
 
     public Double getMoney() {
