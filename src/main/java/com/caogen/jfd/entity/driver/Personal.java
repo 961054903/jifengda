@@ -29,23 +29,23 @@ public class Personal implements Serializable {
     private  String Age;
     private jinji  urgent;
     private Model model;
-    private Complete oreder;
-    private Reward reward;
+    private Double oreder;
+    private Double money;
 
-    public Complete getOreder() {
+    public Double getOreder() {
         return oreder;
     }
 
     public void setOreder(Double oreder) {
-   
+        this.oreder = oreder;
     }
 
-    public Reward getReward() {
-        return reward;
+    public Double getMoney() {
+        return money;
     }
 
-    public void setReward(Reward reward) {
-        this.reward = reward;
+    public void setMoney(Double money) {
+        this.money = money;
     }
 
     @Override

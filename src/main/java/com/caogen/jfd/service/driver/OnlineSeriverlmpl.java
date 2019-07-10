@@ -1,7 +1,9 @@
 package com.caogen.jfd.service.driver;
 
 import com.caogen.jfd.dao.driver.OnlineDao;
+import com.caogen.jfd.dao.driver.PersonalDao;
 import com.caogen.jfd.entity.driver.Online;
+import com.caogen.jfd.entity.driver.Personal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import java.time.LocalDateTime;
 public class OnlineSeriverlmpl implements OnlineSeriver {
     @Autowired
     private OnlineDao onlineDao;
+    @Autowired
+    private PersonalDao personalDao;
 
     @Override
     public void in(Integer driver_id, Online.Operation operation) {

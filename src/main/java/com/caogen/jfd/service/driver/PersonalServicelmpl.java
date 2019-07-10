@@ -130,14 +130,15 @@ public class PersonalServicelmpl implements PersonalService {
             //用户信息
         Personal personalDao6 = personalDao.get6(personal);
        List <Complete> complete2 = completeDao.find5(complete);
-        Double cc =0.0;
+        Double qq =0.0;
         for(int i = 0;i<complete2.size();i++){
             Double ss = complete2.get(i).getBonus();
-            cc += ss;
+            qq += ss;
         }
         Reward reward1 = rewardDao.get1(reward);
-        personalDao6.setOreder(cc);
-        personalDao6.setReward(reward1);
+        Double money = reward1.getMoney();
+        personalDao6.setOreder(qq);
+        personalDao6.setMoney(money);
         return  personalDao6;
     }
 
