@@ -1,6 +1,7 @@
 package com.caogen.jfd.entity.driver;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Systemm implements Serializable {
@@ -9,7 +10,8 @@ public class Systemm implements Serializable {
     private Integer id; //id
     private String title;//标题
     private String content;//内容
-    private LocalTime create_date;//创建时间
+    private LocalDateTime create_date;//创建时间
+    private String CreateDate;
 
     @Override
     public String toString() {
@@ -19,6 +21,14 @@ public class Systemm implements Serializable {
                 ", content='" + content + '\'' +
                 ", create_date=" + create_date +
                 '}';
+    }
+
+    public String getCreateDate() {
+        return CreateDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        CreateDate = createDate;
     }
 
     public static long getSerialVersionUID() {
@@ -49,11 +59,11 @@ public class Systemm implements Serializable {
         this.content = content;
     }
 
-    public LocalTime getCreate_date() {
+    public LocalDateTime getCreate_date() {
         return create_date;
     }
 
-    public void setCreate_date(LocalTime create_date) {
+    public void setCreate_date(LocalDateTime create_date) {
         this.create_date = create_date;
     }
 }

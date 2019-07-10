@@ -11,9 +11,9 @@ import java.time.format.DateTimeFormatter;
  *
  */
 public class FormatUtils {
-	private static DateTimeFormatter datetime = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-	private static DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyyMMdd");
-	private static DateTimeFormatter time = DateTimeFormatter.ofPattern("HHmmss");
+	private static DateTimeFormatter datetime = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+	private static DateTimeFormatter date = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	private static DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
 
 	/**
 	 * 字符串转时间
@@ -36,7 +36,7 @@ public class FormatUtils {
 
 	/**
 	 * 字符串转时间
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -46,7 +46,7 @@ public class FormatUtils {
 
 	/**
 	 * 时间转字符串
-	 * 
+	 *
 	 * @return
 	 */
 	public static String dateToStr(LocalDate local) {
@@ -55,7 +55,7 @@ public class FormatUtils {
 
 	/**
 	 * 字符串转时间
-	 * 
+	 *
 	 * @param str
 	 * @return
 	 */
@@ -65,7 +65,7 @@ public class FormatUtils {
 
 	/**
 	 * 时间转字符串
-	 * 
+	 *
 	 * @return
 	 */
 	public static String dateToStr(LocalTime local) {

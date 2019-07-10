@@ -2,8 +2,10 @@ package com.caogen.jfd.service.driver;
 
 import com.caogen.jfd.dao.driver.SystemmDao;
 
+import com.caogen.jfd.entity.driver.Complete;
 import com.caogen.jfd.entity.driver.Reward;
 import com.caogen.jfd.entity.driver.Systemm;
+import com.caogen.jfd.util.FormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +42,10 @@ public class SystemmServicelmpl implements SystemmService {
     public List<Systemm> getrules() {
 
         List<Systemm> systemms = systemmDao.find( new Systemm());
+        for (Systemm item : systemms) {
+            item.setCreateDate(FormatUtils.dateToStr(item.getCreate_date()));
+            item.setCreate_date(null);
+        }
         return systemms;
 
     }
