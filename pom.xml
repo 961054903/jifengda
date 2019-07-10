@@ -4,9 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.caogen</groupId>
 	<artifactId>jfd</artifactId>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>jfd Maven Webapp</name>
+    <modules>
+        <module>ceshi</module>
+    </modules>
+    <name>jfd Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<version.spring>4.3.23.RELEASE</version.spring>
@@ -209,15 +212,28 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
-			<version>4.1.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-messaging</artifactId>
-			<version>4.1.9.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>4.3.23.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>4.3.23.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
+
+
 	<build>
 		<finalName>jfd</finalName>
 		<plugins>

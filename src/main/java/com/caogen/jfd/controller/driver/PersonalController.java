@@ -115,10 +115,8 @@ public class PersonalController {
             AppDriver driver =appDriverService.getByToken(data.getDesc());
             Personal appDriver = Constants.gson.fromJson((String) data.getData(),Personal.class);
             Personal cities = personalService.getwhole(driver.getId());
-            Model vehicle = modelService.getvehicle(driver.getId());
             Map<String,Object> appDrivers = new HashMap<>();
             appDrivers.put("information",cities);
-            appDrivers.put("type",vehicle);
             message.setData(appDrivers);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());

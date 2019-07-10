@@ -1,16 +1,11 @@
 package com.caogen.jfd.service.driver;
 
 
-import com.caogen.jfd.dao.driver.AppDriverDao;
-import com.caogen.jfd.dao.driver.CompleteDao;
-import com.caogen.jfd.dao.driver.PersonalDao;
+import com.caogen.jfd.dao.driver.*;
 
-import com.caogen.jfd.dao.driver.RewardDao;
-import com.caogen.jfd.entity.driver.AppDriver;
-import com.caogen.jfd.entity.driver.Complete;
-import com.caogen.jfd.entity.driver.Personal;
+import com.caogen.jfd.entity.driver.*;
 
-import com.caogen.jfd.entity.driver.Reward;
+import com.caogen.jfd.util.FormatUtils;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +26,8 @@ public class PersonalServicelmpl implements PersonalService {
     private AppDriverDao appDriverDao;
     @Autowired
     private RewardDao rewardDao;
+    @Autowired
+    private ModelDao modelDao;
 
 
 
@@ -85,8 +82,33 @@ public class PersonalServicelmpl implements PersonalService {
     @Override
     public Personal getwhole(Integer user_id) {
         Personal personal = new Personal();
+        Model model = new Model();
+        jinji  k =new jinji();
         personal.setUser_id(user_id);
-        return  personalDao.get2(personal);
+        model.setId(user_id);
+        Personal personalDao2 = personalDao.get2(personal);
+        Model modelDao3 = modelDao.get3(model);
+        String contacts_gender = personalDao2.getContacts_gender();
+        String contacts_name = personalDao2.getContacts_name();
+        String contacts_phone = personalDao2.getContacts_phone();
+        String contacts_relation = personalDao2.getContacts_relation();
+        k.setContacts_gender(contacts_gender);
+        k.setContacts_name(contacts_name);
+        k.setContacts_phone(contacts_phone);
+        k.setContacts_relation(contacts_relation);
+        personalDao2.setModel(modelDao3);
+        personalDao2.setUrgent(k);
+        String s = FormatUtils.dateToStr(personalDao2.getBirthday());
+        personalDao2.setAge(s);
+
+
+        personalDao2.setUser_id(null);
+        personalDao2.setBirthday(null);
+        personalDao2.setContacts_gender(null);
+        personalDao2.setContacts_name(null);
+        personalDao2.setContacts_phone(null);
+        personalDao2.setContacts_relation(null);
+      return personalDao2;
     }
 
     @Override

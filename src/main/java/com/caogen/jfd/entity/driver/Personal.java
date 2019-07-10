@@ -26,6 +26,9 @@ public class Personal implements Serializable {
     private Boolean is_online;//是否在线
     private Double longitude;//经度
     private Double latitude;//维度
+    private  String Age;
+    private jinji  urgent;
+    private Model model;
 
     @Override
     public String toString() {
@@ -51,6 +54,30 @@ public class Personal implements Serializable {
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
                 '}';
+    }
+
+    public jinji getUrgent() {
+        return urgent;
+    }
+
+    public void setUrgent(jinji urgent) {
+        this.urgent = urgent;
+    }
+
+    public String getAge() {
+        return Age;
+    }
+
+    public void setAge(String age) {
+        Age = age;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
     }
 
     public static long getSerialVersionUID() {
@@ -216,4 +243,6 @@ public class Personal implements Serializable {
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
+
+
 }
