@@ -54,6 +54,7 @@ public class DetaiServicelmpl implements DetaiService {
                 Detail detai2 = new Detail();
                 detai2.setCreate_date(LocalDateTime.now());
                 detai2.setOperation(offline);
+                zz.add(detai2);
             }
             for (int i = 0; i < zz.size(); i += 2) {
                 LocalDateTime SS = zz.get(i).getCreate_date();
