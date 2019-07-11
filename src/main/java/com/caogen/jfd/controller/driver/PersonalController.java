@@ -294,7 +294,12 @@ public class PersonalController {
     }
       Map<String,Object> appDrivers = new HashMap<>();
        appDrivers.put("order",size);
-       appDrivers.put("time",cc);
+       if (cc==null){
+           appDrivers.put("time",0);
+
+       }else {
+           appDrivers.put("time",cc);
+       }
        appDrivers.put("royalty",aa);
         message.setData(appDrivers);
     } catch (Exception e) {

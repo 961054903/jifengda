@@ -10,9 +10,9 @@
         <include refid="time" />
         FROM
         log_driver_online
-        <where>
-            <if test="id != null">id = #{id}</if>
-            <if test="driver_id != null">and driver_id = #{driver_id}</if>
-        </where>
+        where
+        driver_id =#{driver_id}
+        and
+        to_days(create_date) = to_days(now())
     </select>
 </mapper>
