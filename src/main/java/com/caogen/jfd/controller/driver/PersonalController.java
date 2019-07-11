@@ -422,8 +422,8 @@ public class PersonalController {
             }
             int size = completes.size();
             Map<String,Object>qq =new HashMap<>();
-             qq.put("order",aa);
-             qq.put("royalty",size);
+             qq.put("royalty",aa);
+             qq.put("order",size);
              qq.put("information",completes);
 
             message.setData(qq);
