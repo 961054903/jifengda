@@ -425,7 +425,6 @@ public class PersonalController {
              qq.put("royalty",aa);
              qq.put("order",size);
              qq.put("information",completes);
-
             message.setData(qq);
         message.setCode(ErrorCode.SUCCEED.getCode());
         message.setDesc(ErrorCode.SUCCEED.getDesc());

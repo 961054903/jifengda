@@ -32,6 +32,8 @@
         SELECT
         <include refid="ccc" />
         FROM order_history
+        where
+        driver_id=#{driver_id}
     </select>
 
     <select id="find4" parameterType="Complete"
