@@ -421,11 +421,12 @@ public class PersonalController {
                 aa += ss;
             }
             int size = completes.size();
-            List<Object>ASD = new ArrayList<Object>( );
-                ASD.add(aa);
-                ASD.add(size);
-                ASD.add(completes);
-            message.setData(ASD);
+            Map<String,Object>qq =new HashMap<>();
+             qq.put("order",aa);
+             qq.put("royalty",size);
+             qq.put("information",completes);
+
+            message.setData(qq);
         message.setCode(ErrorCode.SUCCEED.getCode());
         message.setDesc(ErrorCode.SUCCEED.getDesc());
     } catch (Exception e) {
