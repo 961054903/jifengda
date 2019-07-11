@@ -20,8 +20,7 @@ public interface AppUserIssueService extends BaseService<AppUserIssue> {
 
 	/**
 	 * 获取历史反馈列表
-	 * 
-	 * @param issue
+	 *
 	 * @return
 	 */
 	List<AppUserIssue> getHistory(AppUserIssue entity);

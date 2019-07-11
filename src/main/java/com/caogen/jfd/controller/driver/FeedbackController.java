@@ -29,7 +29,7 @@ import java.util.List;
 public class FeedbackController {
 
     @Autowired
-    private AppUserService userService;
+    private AppDriverService appDriverService;
     @Autowired
     private AppUserIssueService issueService;
 
@@ -63,9 +63,9 @@ public class FeedbackController {
     public Message history(Message data) {
         Message message = new Message();
         try {
-            AppUser user = userService.getByToken(data.getDesc());
+            AppDriver user = appDriverService.getByToken(data.getDesc());
             AppUserIssue issue = new AppUserIssue();
-            issue.setPhone(user.getPhone());
+            issue.setPhone(user.getDriverphone());
             List<AppUserIssue> list = issueService.getHistory(issue);
             message.setData(list, user.getDes_key(), user.getDes_iv());
         } catch (Exception e) {
