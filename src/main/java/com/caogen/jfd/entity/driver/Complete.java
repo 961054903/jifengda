@@ -43,6 +43,15 @@ public class Complete implements Serializable {
     private String end;//结束时间
     private String tim;
     private String createDate;
+    private String Finishdate;
+
+    public String getFinishdate() {
+        return Finishdate;
+    }
+
+    public void setFinishdate(String finishdate) {
+        Finishdate = finishdate;
+    }
 
     public String getCreateDate() {
         return createDate;

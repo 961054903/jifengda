@@ -75,10 +75,6 @@ public class CompleteServicelmpl implements CompleteService {
         Complete complete = new Complete();
         complete.setDriver_id(driver_id);
         List<Complete> completes = completeDao.find3(complete);
-        for (Complete item : completes) {
-            item.setCreateDate(FormatUtils.dateToStr(item.getCreate_date()));
-            item.setCreate_date(null);
-        }
         for (int i = 0; i < completes.size(); i++) {
             LocalDateTime SS = completes.get(i).getFinish_date();
             Long newss = SS.toInstant(ZoneOffset.of("+8")).toEpochMilli();
@@ -87,11 +83,19 @@ public class CompleteServicelmpl implements CompleteService {
             Date date = sdf.parse(start);
             //结束
             Date date1 = sdf.parse(end);
-            if (date.getTime() <= newss && newss >= date1.getTime()) {
+            if (date.getTime() >= newss && newss <= date1.getTime()) {
 
             } else {
                 completes.remove(i);
             }
+
+
+        }
+        for (Complete item : completes) {
+            item.setCreateDate(FormatUtils.dateToStr(item.getCreate_date()));
+            item.setFinishdate(FormatUtils.dateToStr(item.getFinish_date()));
+            item.setCreate_date(null);
+            item.setFinish_date(null);
         }
         return completes;
     }
