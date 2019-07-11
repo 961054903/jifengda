@@ -79,16 +79,7 @@
     <update id="update1" parameterType="Personal">
         UPDATE app_driver_info
         <set>
-            <if test="photo_url != null"> photo_url =#{photo_url},</if>
-            <if test="phone != null"> phone= #{phone},</if>
-            <if test="name != null"> name = #{name},</if>
-            <if test="gender != null"> gender = #{gender},</if>
-            <if test="birthday != null"> birthday = #{birthday},</if>
-            <if test="licence_url != null"> licence_url = #{licence_url},</if>
-            <if test="identity_front_url != null"> identity_front_url = #{identity_front_url},</if>
-            <if test="identity_back_url != null"> identity_back_url = #{identity_back_url},</if>
-            <if test="identity_take_url != null"> identity_take_url = #{identity_take_url},</if>
-            <if test="contacts_name != null"> contacts_name = #{contacts_name},</if>
+            <if test="contacts_name != null"> contacts_name = #{contacts_name}</if>
             <if test="contacts_phone != null"> contacts_phone = #{contacts_phone},</if>
             <if test="contacts_gender != null"> contacts_gender = #{contacts_gender},</if>
             <if test="contacts_relation != null">contacts_relation = #{contacts_relation}</if>
