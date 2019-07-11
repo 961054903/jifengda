@@ -60,16 +60,17 @@ public class FeedbackController {
      */
     @ResponseBody
     @RequestMapping(value = { "history", "app/history" })
-    public Message history(String data) {
+    public Message history(Message data) {
         Message message = new Message();
         try {
-            AppUserIssue issue = Constants.gson.fromJson(data, AppUserIssue.class);
-            AppUser user = userService.getByPhone(issue.getPhone());
+            AppUser user = userService.getByToken(data.getDesc());
+            AppUserIssue issue = new AppUserIssue();
+            issue.setPhone(user.getPhone());
             List<AppUserIssue> list = issueService.getHistory(issue);
             message.setData(list, user.getDes_key(), user.getDes_iv());
         } catch (Exception e) {
-            message.setErrorCode(ErrorCode.ISSUE_ERROR);
-            StaticLogger.error("get history feedback list error", e);
+            message.setErrorCode(ErrorCode.FAIL);
+            StaticLogger.error(message.getDesc(), e);
         }
         return message;
     }
