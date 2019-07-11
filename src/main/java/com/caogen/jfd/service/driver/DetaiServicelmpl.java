@@ -48,7 +48,6 @@ public class DetaiServicelmpl implements DetaiService {
         List<Detail> zz = detaiDao.find(detail);
         if (zz.size()>0) {
 
-
             long aa = 0;
             if (zz.get(zz.size() - 1).getOperation().equals(online)) {
                 Detail detai2 = new Detail();
