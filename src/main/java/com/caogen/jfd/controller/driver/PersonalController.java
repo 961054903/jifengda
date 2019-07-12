@@ -503,20 +503,26 @@ public class PersonalController {
         return message;
     }
 
-    /**
-     * 已到达
-     * @return
-     */
+
+
+
+
       @Autowired
       private TaskService taskService;
 
+    /**
+     * 多点订单状态
+     * @param data
+     * @return
+     */
     @ResponseBody
-    @RequestMapping(value = {"arrive","app/arrive"})
-    public Message arrive(Message data) {
+    @RequestMapping(value = {"already","app/already"})
+    public Message already(Message data) {
         Message message = new Message();
         try {
+            AppDriver driver =appDriverService.getByToken(data.getDesc());
             Task appDriver = Constants.gson.fromJson((String) data.getData(),Task.class);
-            taskService.getarrive(appDriver.getCode(),appDriver.getStatus());
+            taskService.getalready(driver.getId(),appDriver.getCode(),appDriver.getSerial());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -528,39 +534,19 @@ public class PersonalController {
     }
 
     /**
-     * 配送中
+     * 单点订单状态
      * @param data
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = {"peisong","app/peisong"})
-    public Message peisong(Message data) {
+    @RequestMapping(value = {"Single","app/Single"})
+    public Message Single(Message data) {
         Message message = new Message();
         try {
-            Task appDriver = Constants.gson.fromJson((String) data.getData(),Task.class);
-            taskService.getpei(appDriver.getCode(),appDriver.getStatus());
-            message.setCode(ErrorCode.SUCCEED.getCode());
-            message.setDesc(ErrorCode.SUCCEED.getDesc());
-        } catch (Exception e) {
-            message.setCode(ErrorCode.FAIL.getCode());
-            message.setDesc(ErrorCode.FAIL.getDesc());
-            StaticLogger.logger().error(message.getDesc(), e);
-        }
-        return message;
-    }
-
-    /**
-     * 已送达
-     * @param data
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = {"da","app/da"})
-    public Message da(Message data) {
-        Message message = new Message();
-        try {
-            Task appDriver = Constants.gson.fromJson((String) data.getData(),Task.class);
-            taskService.getda(appDriver.getCode(),appDriver.getStatus());
+            AppDriver driver =appDriverService.getByToken(data.getDesc());
+            Peservation appDriver = Constants.gson.fromJson((String) data.getData(),Peservation.class);
+            peservationService.getsingle(driver.getId(),appDriver.getCode());
+            //peservationService.gettake(driver.getId(),appDriver.getCode());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {

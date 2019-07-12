@@ -178,7 +178,6 @@ public class PeservationServicelmpl implements PeservationService {
         peservation.setCode(code);
         Peservation  peservations = peservationDao.getss(peservation);
         String destination = peservations.getDestination();
-
         AppUserSite[] appUserSite = Constants.gson.fromJson(destination,AppUserSite[].class);
         for (int i =0;i<appUserSite.length;i++){
             Task task = new Task();
@@ -194,11 +193,11 @@ public class PeservationServicelmpl implements PeservationService {
         }
 
     @Override
-    public void gettake(String phone, String code) {
+    public void gettake(Integer id, String code) {
         Peservation peservation = new Peservation();
         Complete complete = new Complete();
         peservation.setCode(code);
-        peservation.setPhone(phone);
+        peservation.setDriver_id(id);
         Peservation  peservations = peservationDao.get6(peservation);
         String code1 = peservations.getCode();
         String phone1 = peservations.getPhone();
@@ -260,6 +259,32 @@ public class PeservationServicelmpl implements PeservationService {
         List<Peservation> aaa =  peservationDao.find8(peservation);
         return aaa;
     }
+
+    @Override
+    public void getsingle(Integer id, String code) {
+       Peservation peservation =new Peservation();
+        peservation.setDriver_id(id);
+        peservation.setCode(code);
+        Peservation task = peservationDao.get8(peservation);
+        if(task.getStatus() == 1){
+            task.setStatus(2);
+            peservationDao.update1(task);
+        }else if (task.getStatus()== 2) {
+            task.setStatus(3);
+            peservationDao.update1(task);
+        }else if (task.getStatus()== 3) {
+            task.setStatus(4);
+            peservationDao.update1(task);
+        }else if (task.getStatus()== 4) {
+            task.setStatus(5);
+            peservationDao.update1(task);
+        }else if (task.getStatus()== 5) {
+            task.setStatus(6);
+            peservationDao.update1(task);
+            gettake(id,code);
+        }
+    }
+
 }
 
 

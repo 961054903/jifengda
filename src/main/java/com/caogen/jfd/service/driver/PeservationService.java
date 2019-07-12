@@ -23,7 +23,9 @@ public interface PeservationService extends BaseService<Peservation> {
 
     void getfenjie(String code);
 
-    void gettake(String phone, String code);
+    void gettake(Integer id, String code);
 
    List <Peservation> gettui();
+
+    void getsingle(Integer id, String code);
 }

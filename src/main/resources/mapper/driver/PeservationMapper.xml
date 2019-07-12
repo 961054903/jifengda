@@ -149,4 +149,25 @@ is_support,support_money,support_cost,order_money,ticket_money,actually_paid</sq
 
     </select>
 
+
+    <update id="update1" parameterType="Peservation">
+        UPDATE
+        order_info
+        SET
+        status =#{status}
+        WHERE
+        code =#{code}
+    </update>
+
+
+
+    <select id="get8" parameterType="Peservation"
+            resultType="Peservation">
+        SELECT
+        <include refid="Oder" />
+        FROM order_info
+       where
+        driver_id = #{driver_id}
+    </select>
+
 </mapper>

@@ -32,40 +32,30 @@ public class TaskServicelmpl implements TaskService {
         return null;
     }
 
-    @Override
-    public void getarrive(String code,Integer status) {
-        Task task = new Task();
-        task.setCode(code);
-        task.setStatus(status);
-        Task tasks = taskDao.get(task);
-        if (tasks!=null){
-            tasks.setStatus(1);
-            taskDao.update(tasks);
-        }
-
-    }
 
     @Override
-    public void getpei(String code, Integer status) {
+    public void getalready(Integer id, String code ,String serial) {
         Task task = new Task();
+        task.setId(id);
         task.setCode(code);
-        task.setStatus(status);
+        task.setSerial(serial);
         Task tasks = taskDao.get(task);
-        if (tasks!=null){
+         if(tasks.getStatus() == 1){
             tasks.setStatus(2);
             taskDao.update(tasks);
-        }
-    }
-
-    @Override
-    public void getda(String code,Integer status) {
-        Task task = new Task();
-        task.setCode(code);
-        task.setStatus(status);
-        Task tasks = taskDao.get(task);
-        if (tasks!=null){
+        }else if (tasks.getStatus()== 2) {
             tasks.setStatus(3);
+            taskDao.update(tasks);
+        }else if (tasks.getStatus()== 3) {
+            tasks.setStatus(4);
+            taskDao.update(tasks);
+        }else if (tasks.getStatus()== 4) {
+            tasks.setStatus(5);
+            taskDao.update(tasks);
+        }else if (tasks.getStatus()== 5) {
+            tasks.setStatus(6);
             taskDao.update(tasks);
         }
     }
+
 }

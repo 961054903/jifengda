@@ -9,13 +9,8 @@
         SELECT id,
         <include refid="id"/>
         FROM order_task
-        <where>
-            <if test="id != null">id = #{id}</if>
-            <if test="code != null">AND code = #{code}</if>
-            <if test="serial != null">AND serial = #{serial}</if>
-            <if test="status != null">AND status = #{status}</if>
-            <if test="destination != null">AND destination = #{destination}</if>
-        </where>
+       where
+        id =#{id}
     </select>
 
     <update id="update" parameterType="Task">

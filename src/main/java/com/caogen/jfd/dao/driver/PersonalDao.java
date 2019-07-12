@@ -23,7 +23,6 @@ public interface PersonalDao extends BaseDao<Personal> {
      */
     Personal get2(Personal phone);
 
-    void update1(Personal cities);
 
     Personal get6(Personal personal);
 
@@ -37,4 +36,6 @@ public interface PersonalDao extends BaseDao<Personal> {
     List<Personal> find3(Personal personal);
 
     Personal get8();
+
+    void update1(Personal cities);
 }
