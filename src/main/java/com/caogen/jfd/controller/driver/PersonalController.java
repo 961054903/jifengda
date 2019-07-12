@@ -546,7 +546,6 @@ public class PersonalController {
             AppDriver driver =appDriverService.getByToken(data.getDesc());
             Peservation appDriver = Constants.gson.fromJson((String) data.getData(),Peservation.class);
             peservationService.getsingle(driver.getId(),appDriver.getCode());
-            //peservationService.gettake(driver.getId(),appDriver.getCode());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
