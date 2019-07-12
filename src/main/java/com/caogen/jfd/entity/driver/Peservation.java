@@ -15,7 +15,7 @@ public class Peservation implements Serializable {
     private Type type; //'订单类型：单点订单、多点订单',
     private Mode mode;//订单模式：普通订单、预约订单
     private LocalDateTime appoint_date;//预约时间
-    private Label label;//订单标签：改派订单、投诉订单、抢单订单、平台分配
+    private String label;//订单标签：1:改派订单、2:投诉订单、3:抢单订单、4:平台分配
     private String origin;//发货地址
     private String destination;//收货地址
     private String name;//货物名称
@@ -160,11 +160,11 @@ public class Peservation implements Serializable {
         this.appoint_date = appoint_date;
     }
 
-    public Label getLabel() {
+    public String getLabel() {
         return label;
     }
 
-    public void setLabel(Label label) {
+    public void setLabel(String label) {
         this.label = label;
     }
 

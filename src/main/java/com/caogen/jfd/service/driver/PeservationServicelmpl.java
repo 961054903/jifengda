@@ -16,8 +16,6 @@ import java.util.Map;
 
 @Service
 public class PeservationServicelmpl implements PeservationService {
-
-
     /**
      * 地球半径,单位 km
      */
@@ -213,7 +211,7 @@ public class PeservationServicelmpl implements PeservationService {
         Integer model_id = peservations.getModel_id();
         Peservation.Type type = peservations.getType();
         LocalDateTime appoint_date = peservations.getAppoint_date();
-        Peservation.Label label = peservations.getLabel();
+        String label = peservations.getLabel();
         String name = peservations.getName();
         Double night_service_cost = peservations.getNight_service_cost();
         Double traffic_jam_cost = peservations.getTraffic_jam_cost();

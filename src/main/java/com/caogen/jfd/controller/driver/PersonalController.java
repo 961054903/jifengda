@@ -414,7 +414,7 @@ public class PersonalController {
         try {
             AppDriver driver =appDriverService.getByToken(data.getDesc());
             Complete appDriver = Constants.gson.fromJson((String)data.getData(),Complete.class);
-          List <Complete> completes = completeService.gethistory(driver.getId(),appDriver.getStart(),appDriver.getEnd());
+           List <Complete> completes = completeService.gethistory(driver.getId(),appDriver.getStart(),appDriver.getEnd());
             Double aa =0.0;
             for(int i = 0;i<completes.size();i++){
                 Double ss = completes.get(i).getBonus();
@@ -425,7 +425,7 @@ public class PersonalController {
              qq.put("royalty",aa);
              qq.put("order",size);
              qq.put("information",completes);
-            message.setData(qq);
+             message.setData(qq);
         message.setCode(ErrorCode.SUCCEED.getCode());
         message.setDesc(ErrorCode.SUCCEED.getDesc());
     } catch (Exception e) {

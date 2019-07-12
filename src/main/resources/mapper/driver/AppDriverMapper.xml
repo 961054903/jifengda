@@ -33,7 +33,6 @@
             des_key = #{des_key},
             des_iv =#{des_iv},
             token = #{token}
-
         </set>
         <where>
             <if test="id != null">id = #{id}</if>
