@@ -30,14 +30,14 @@ public class Personal implements Serializable {
     private  String Age;
     private jinji  urgent;
     private Model model;
-    private Double order;
+    private Integer order;
     private Double money;
 
-    public Double getOrder() {
+    public Integer getOrder() {
         return order;
     }
 
-    public void setOrder(Double order) {
+    public void setOrder(Integer order) {
         this.order = order;
     }
 

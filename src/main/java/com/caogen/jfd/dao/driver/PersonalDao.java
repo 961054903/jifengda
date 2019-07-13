@@ -24,8 +24,6 @@ public interface PersonalDao extends BaseDao<Personal> {
     Personal get2(Personal phone);
 
 
-    Personal get6(Personal personal);
-
     List<Personal> find1(Personal personal);
 
     Personal getdsp(Peservation peservation);
@@ -38,4 +36,9 @@ public interface PersonalDao extends BaseDao<Personal> {
     Personal get8();
 
     void update1(Personal cities);
+
+    List<Personal> find6(Personal personal);
+
+
+    Personal get6(Personal personal);
 }

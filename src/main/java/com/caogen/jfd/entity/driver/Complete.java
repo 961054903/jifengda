@@ -44,7 +44,15 @@ public class Complete implements Serializable {
     private String tim;
     private String createDate;
     private String Finishdate;
+    private Double order;
 
+    public Double getOrder() {
+        return order;
+    }
+
+    public void setOrder(Double order) {
+        this.order = order;
+    }
 
     public String getFinishdate() {
         return Finishdate;
@@ -388,5 +396,6 @@ public class Complete implements Serializable {
     public void setTim(String tim) {
         this.tim = tim;
     }
+
 
 }

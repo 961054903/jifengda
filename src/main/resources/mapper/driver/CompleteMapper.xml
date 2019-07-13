@@ -39,21 +39,18 @@
     <select id="find4" parameterType="Complete"
             resultType="Complete">
         SELECT
-          aa.driver_id as cc,
-          count(aa.driver_id) as total
+        driver_id,
+        count(id) as  aa
         FROM
-         order_history aa
-        LEFT JOIN
-        app_driver bb
-        on
-        aa.driver_id = bb.id
+        order_history
        where
-        DATE_FORMAT(finish_date,'%Y%m') = DATE_FORMAT( CURDATE( ) ,'%Y%m' )
+          PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( create_date, '%Y%m' ) ) =1
         group by
-         aa.driver_id
+        driver_id
         order  by
-        total
+        aa
         desc
+        limit 3
 	</select>
 
     <sql id="id">user_id,driver_id,model_id,code,create_date,status,type,mode,appoint_date,label,origin,destination,name,night_service_cost,traffic_jam_cost,is_support,support_money,
@@ -72,12 +69,11 @@ support_cost,order_money,ticket_money,actually_paid,kilometre,bonus,finish_date,
 
     <select id="find5" parameterType="Complete"
             resultType="Complete">
-        SELECT
-        <include refid="roya" />
-        FROM order_history
-        where
-        driver_id =#{driver_id}
-        and
-        PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format(finish_date, '%Y%m' ) ) =1
+      SELECT * FROM
+      order_history
+      WHERE
+      driver_id =#{driver_id}
+      and
+      PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( create_date, '%Y%m' ) ) =1
     </select>
 </mapper>

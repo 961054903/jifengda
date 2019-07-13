@@ -17,11 +17,15 @@
     </select>
 
 
-    <sql id="ss">money</sql>
-    <select id="get1" parameterType="Reward"
+
+    <select id="find1" parameterType="Reward"
             resultType="Reward">
         SELECT
-        <include refid="ss" />
-        FROM driver_reward
+         *
+        FROM
+         driver_reward
+        order  by
+        money
+        desc
     </select>
 </mapper>

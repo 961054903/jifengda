@@ -6,11 +6,14 @@ import com.caogen.jfd.dao.driver.*;
 import com.caogen.jfd.entity.driver.*;
 
 import com.caogen.jfd.util.FormatUtils;
+import com.sun.javafx.collections.MappingChange;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import com.sun.xml.internal.ws.api.message.HeaderList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -116,32 +119,29 @@ public class PersonalServicelmpl implements PersonalService {
         personalDao.update1(cities);
     }
     @Override
-    public Personal  getchampion() {
-        Map<String,Object>aa =new HashMap<>();
-            AppDriver appDriver = new AppDriver();
-            Personal personal = new Personal();
-            Reward reward =new Reward();
-             Complete complete =new Complete();
-            List<Complete> completes = completeDao.find4();
-            Complete complete1 = completes.get(0);
-            Integer driver_id = complete1.getCc();
+    public List<Personal>  getchampion() {
+        List AAA  =new LinkedList();
+        Personal personal = new Personal();
+        Reward reward = new Reward();
+        Complete complete = new Complete();
+        List<Complete> completes = completeDao.find4();
+        for (int i = 0; i < completes.size(); i++) {
+            Integer driver_id = completes.get(i).getDriver_id();
             personal.setUser_id(driver_id);
             complete.setDriver_id(driver_id);
             //用户信息
-        Personal personalDao6 = personalDao.get6(personal);
-       List <Complete> complete2 = completeDao.find5(complete);
-        Double qq =0.0;
-        for(int i = 0;i<complete2.size();i++){
-            Double ss = complete2.get(i).getBonus();
-            qq += ss;
-        }
-        Reward reward1 = rewardDao.get1(reward);
-        Double money = reward1.getMoney();
-        personalDao6.setOrder(qq);
-        personalDao6.setMoney(money);
-        return  personalDao6;
-    }
+            Personal personalDao6 = personalDao.get6(personal);
+            List<Complete> complete2 = completeDao.find5(complete);
+            int size = complete2.size();
 
+           List <Reward> reward1 = rewardDao.find1(reward);
+              Double money = reward1.get(i).getMoney();
+              personalDao6.setMoney(money);
+            personalDao6.setOrder(size);
+            AAA.add(personalDao6);
+        }
+        return AAA;
+    }
     @Override
     public Personal getId(AppDriver driver) {
    Personal aa =  personalDao.get8();

@@ -445,7 +445,7 @@ public class PersonalController {
     public Message champion() {
         Message message = new Message();
         try {
-            Personal cc = personalService.getchampion();
+           List <Personal> cc = personalService.getchampion();
             message.setData(cc);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());

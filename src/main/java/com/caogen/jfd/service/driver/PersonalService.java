@@ -40,7 +40,7 @@ public interface PersonalService extends BaseService<Personal> {
      */
     void getmodify(Personal cities);
 
-    Personal getchampion();
+    List<Personal> getchampion();
 
 
     /*
