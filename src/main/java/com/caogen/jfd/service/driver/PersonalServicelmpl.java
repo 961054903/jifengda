@@ -1,21 +1,24 @@
 package com.caogen.jfd.service.driver;
 
 
-import com.caogen.jfd.dao.driver.*;
+import java.util.LinkedList;
+import java.util.List;
 
-import com.caogen.jfd.entity.driver.*;
-
-import com.caogen.jfd.util.FormatUtils;
-import com.sun.javafx.collections.MappingChange;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import com.sun.xml.internal.ws.api.message.HeaderList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import com.caogen.jfd.dao.driver.AppDriverDao;
+import com.caogen.jfd.dao.driver.CompleteDao;
+import com.caogen.jfd.dao.driver.ModelDao;
+import com.caogen.jfd.dao.driver.PersonalDao;
+import com.caogen.jfd.dao.driver.RewardDao;
+import com.caogen.jfd.entity.driver.AppDriver;
+import com.caogen.jfd.entity.driver.Complete;
+import com.caogen.jfd.entity.driver.Model;
+import com.caogen.jfd.entity.driver.Personal;
+import com.caogen.jfd.entity.driver.Reward;
+import com.caogen.jfd.entity.driver.jinji;
+import com.caogen.jfd.util.FormatUtils;
 
 
 @Service
