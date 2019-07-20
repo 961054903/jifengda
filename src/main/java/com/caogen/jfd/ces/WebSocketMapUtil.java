@@ -83,7 +83,7 @@ public class WebSocketMapUtil {
                 // 清空有效Set
                 effectiveSet.clear();
             }
-        }, 5000,10000 );
+        }, 1000,20000 );
     }
 
 

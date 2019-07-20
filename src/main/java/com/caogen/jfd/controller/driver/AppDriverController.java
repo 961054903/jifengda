@@ -4,31 +4,19 @@ import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
 
 import com.caogen.jfd.common.StaticLogger;
+import com.caogen.jfd.entity.driver.Config;
 import com.caogen.jfd.entity.driver.AppDriver;
-import com.caogen.jfd.entity.driver.DriverSite;
 import com.caogen.jfd.entity.driver.Online;
-import com.caogen.jfd.entity.driver.Personal;
-import com.caogen.jfd.entity.AppUser;
-import com.caogen.jfd.entity.Config;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.model.Message;
-import com.caogen.jfd.model.Signin;
-import com.caogen.jfd.service.driver.AppDriverService;
-import com.caogen.jfd.service.driver.DriverSiteService;
-import com.caogen.jfd.service.driver.OnlineSeriver;
-import com.caogen.jfd.service.driver.PersonalService;
-import com.caogen.jfd.service.ConfigService;
-import com.caogen.jfd.util.PasswordHelper;
-import com.google.gson.Gson;
+import com.caogen.jfd.service.driver.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 

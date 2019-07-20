@@ -1,6 +1,5 @@
 package com.caogen.jfd.service.driver;
 
-import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.dao.driver.AppDriverDao;
 import com.caogen.jfd.dao.driver.CompleteDao;
 import com.caogen.jfd.dao.driver.PersonalDao;
@@ -99,6 +98,7 @@ public class CompleteServicelmpl implements CompleteService {
         }
         return completes;
     }
+
 
 
 

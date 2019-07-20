@@ -1,27 +1,19 @@
 package com.caogen.jfd.controller.driver;
 
 
-import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.driver.AppDriver;
-import com.caogen.jfd.entity.driver.FeedBack;
-import com.caogen.jfd.entity.AppUser;
-import com.caogen.jfd.entity.AppUserIssue;
+import com.caogen.jfd.entity.driver.AppUserIssue;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.driver.AppDriverService;
-import com.caogen.jfd.service.driver.FeedBackService;
 
-import com.caogen.jfd.service.AppUserIssueService;
-import com.caogen.jfd.service.AppUserService;
+import com.caogen.jfd.service.driver.AppUserIssueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
