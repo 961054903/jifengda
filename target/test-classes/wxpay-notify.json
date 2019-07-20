@@ -1,0 +1,17 @@
+{
+	"transaction_id": "4200000357201907187560340205",
+	"nonce_str": "fb207570a688480ab62809138ddd5796",
+	"bank_type": "CFT",
+	"openid": "oMaNSw_M81VEao48n9-ZANnMEGWU",
+	"fee_type": "CNY",
+	"mch_id": "1487406822",
+	"cash_fee": "1",
+	"out_trade_no": "67478EF1631A47BFB32C1BA955C78672",
+	"appid": "wx3c8ca807138bfa30",
+	"total_fee": "1",
+	"trade_type": "APP",
+	"result_code": "SUCCESS",
+	"time_end": "20190718084005",
+	"is_subscribe": "N",
+	"return_code": "SUCCESS"
+}

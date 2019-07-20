@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.driver.PersonalDao">
+    <sql id="personal">user_id,is_online,phone,photo_url,name,identity_number,grade,gender,birthday,licence_url,identity_front_url,identity_back_url,identity_take_url,contacts_name,contacts_phone,contacts_gender,contacts_relation,is_online,longitude,latitude,vehicle_id</sql>
+
+    <select id="get" parameterType="Personal"
+            resultType="Personal">
+        SELECT
+        <include refid="personal" />
+        FROM app_driver_info
+        where
+        token =#{token}
+    </select>
+
+    <update id="update" parameterType="Personal">
+        UPDATE
+        app_driver_info
+        SET
+        is_online =#{is_online}
+        WHERE
+        user_id =#{user_id}
+    </update>
+
+    <select id="find" parameterType="Personal"
+            resultType="Personal">
+        SELECT id,
+        <include refid="personal" />
+        FROM app_driver_info
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="name != null">AND name = #{name}</if>
+        </where>
+    </select>
+
+
+    <sql id="sql">user_id,phone,photo_url,name,grade</sql>
+    <select id="get1" parameterType="Personal"
+            resultType="Personal">
+        SELECT
+        <include refid="sql" />
+        FROM app_driver_info
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="user_id != null">AND user_id = #{user_id}</if>
+            <if test="phone != null">AND phone = #{phone}</if>
+            <if test="photo_url != null">AND photo_url = #{photo_url}</if>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="grade != null">AND grade = #{grade}</if>
+        </where>
+    </select>
+
+    <sql id="whole">user_id,photo_url,name,phone,gender,birthday,licence_url,identity_front_url,identity_back_url,identity_take_url,contacts_name,contacts_phone,contacts_gender,contacts_relation,grade</sql>
+    <select id="get2" parameterType="Personal"
+            resultType="Personal">
+        SELECT
+        <include refid="whole" />
+        FROM app_driver_info
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="phone != null">AND phone = #{phone}</if>
+            <if test="user_id != null">AND user_id = #{user_id}</if>
+            <if test="photo_url != null">AND photo_url = #{photo_url}</if>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="gender != null">AND gender = #{gender}</if>
+            <if test="birthday != null">AND birthday = #{birthday}</if>
+            <if test="licence_url != null">AND licence_url = #{licence_url}</if>
+            <if test="identity_front_url != null">AND identity_front_url = #{identity_front_url}</if>
+            <if test="identity_back_url != null">AND identity_back_url = #{identity_back_url}</if>
+            <if test="identity_take_url != null">AND identity_take_url = #{identity_take_url}</if>
+            <if test="contacts_name != null">AND contacts_name = #{contacts_name}</if>
+            <if test="contacts_phone != null">AND contacts_phone = #{contacts_phone}</if>
+            <if test="contacts_gender != null">AND contacts_gender = #{contacts_gender}</if>
+            <if test="contacts_relation != null">AND contacts_relation = #{contacts_relation}</if>
+            <if test="grade != null">AND grade = #{grade}</if>
+        </where>
+    </select>
+    <update id="update1" parameterType="Personal">
+        UPDATE app_driver_info
+        <set>
+            <if test="contacts_name != null"> contacts_name = #{contacts_name}</if>
+            <if test="contacts_phone != null"> contacts_phone = #{contacts_phone},</if>
+            <if test="contacts_gender != null"> contacts_gender = #{contacts_gender},</if>
+            <if test="contacts_relation != null">contacts_relation = #{contacts_relation}</if>
+        </set>
+
+        <where>
+            <if test="id != null">id = #{id},</if>
+            <if test="user_id != null"> user_id = #{user_id}</if>
+        </where>
+    </update>
+
+    <sql id="sq">phone,photo_url,name,grade</sql>
+    <select id="get6" parameterType="Personal"
+            resultType="Personal">
+        SELECT
+        <include refid="sq" />
+        FROM app_driver_info
+     where
+       user_id =#{user_id}
+    </select>
+
+    <sql id="per">user_id,is_online,longitude,latitude,vehicle_id</sql>
+    <select id="find3" parameterType="Personal"
+            resultType="Personal">
+        SELECT
+        <include refid="personal" />
+        FROM app_driver_info
+        <where>
+            <if test="id != null"> id = #{id}</if>
+            <if test="user_id != null">AND user_id = #{user_id}</if>
+            <if test="is_online != null">AND is_online = #{is_online}</if>
+            and
+            vehicle_id is not null
+        </where>
+    </select>
+
+
+    <update id="update2" parameterType="Personal">
+        UPDATE
+        app_driver_info
+        SET
+        longitude =#{longitude},
+        latitude =#{latitude}
+        WHERE
+        phone =#{phone}
+    </update>
+
+    <sql id="ll">user_id</sql>
+    <select id="get8" parameterType="Personal"
+            resultType="Personal">
+        SELECT
+        <include refid="ll" />
+        FROM app_driver_info
+        <where>
+            <if test="id != null"> id = #{id}</if>
+            <if test="user_id != null">AND user_id = #{user_id}</if>
+        </where>
+    </select>
+
+</mapper>

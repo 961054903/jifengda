@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.driver.RewardDao">
+    <sql id="reward">activityname,create_date,money</sql>
+    <select id="find" parameterType="Reward"
+            resultType="Reward">
+        SELECT
+        <include refid="reward" />
+        FROM driver_reward
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="activityname != null">AND activityname = #{activityname}</if>
+            <if test="create_date != null">AND create_date = #{create_date}</if>
+        </where>
+    </select>
+
+
+
+    <select id="find1" parameterType="Reward"
+            resultType="Reward">
+        SELECT
+         *
+        FROM
+         driver_reward
+        order  by
+        money
+        desc
+    </select>
+</mapper>

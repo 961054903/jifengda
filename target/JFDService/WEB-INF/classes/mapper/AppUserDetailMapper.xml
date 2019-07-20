@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.user.AppUserDetailDao">
+	<sql id="detail">user_id,title,description,type,money,create_date</sql>
+	<insert id="insert" parameterType="AppUserDetail">
+		INSERT INTO app_user_detail (
+		<include refid="detail" />
+		) VALUES (
+		#{user_id},#{title},#{description},#{type},#{money},#{create_date}
+		)
+	</insert>
+	<select id="find" parameterType="AppUserDetail"
+		resultType="AppUserDetail">
+		SELECT
+			title,description,type,money,create_date
+		FROM
+			app_user_detail
+		WHERE
+			user_id = #{user_id}
+	</select>
+</mapper>
