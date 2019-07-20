@@ -45,14 +45,14 @@ public class ModelServicelmpl implements ModelService {
     }
 
 
-    @Override
-    public Model getModel(Integer driver_id) {
-        Vehicle vehicle = new Vehicle();
-
-        vehicle.setDriver_id(driver_id);
-        return modelDao.get(vehicle);
-
-    }
+//    @Override
+//    public Model getModel(Integer driver_id) {
+//        Vehicle vehicle = new Vehicle();
+//
+//        vehicle.setDriver_id(driver_id);
+//        return modelDao.get(vehicle);
+//
+//    }
 
 
     @Override

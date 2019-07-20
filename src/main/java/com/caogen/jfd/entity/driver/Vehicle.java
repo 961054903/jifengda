@@ -13,7 +13,6 @@ public class Vehicle extends Model implements Serializable {
     private String photo_url; //车辆照片URL
     private String license_url;//行驶证照片URL
     private Boolean is_allot;//是否分配司机
-    private Integer driver_id;//司机id
 
     public enum  Type{
         owned,affiliated
@@ -30,7 +29,6 @@ public class Vehicle extends Model implements Serializable {
                 ", photo_url='" + photo_url + '\'' +
                 ", license_url='" + license_url + '\'' +
                 ", is_allot=" + is_allot +
-                ", driver_id=" + driver_id +
                 '}';
     }
 
@@ -102,11 +100,4 @@ public class Vehicle extends Model implements Serializable {
         this.is_allot = is_allot;
     }
 
-    public Integer getDriver_id() {
-        return driver_id;
-    }
-
-    public void setDriver_id(Integer driver_id) {
-        this.driver_id = driver_id;
-    }
 }

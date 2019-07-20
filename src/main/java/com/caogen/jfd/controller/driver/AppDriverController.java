@@ -9,6 +9,7 @@ import com.caogen.jfd.entity.driver.DriverSite;
 import com.caogen.jfd.entity.driver.Online;
 import com.caogen.jfd.entity.driver.Personal;
 import com.caogen.jfd.entity.user.AppUser;
+import com.caogen.jfd.entity.user.SysConfig;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.model.Signin;
@@ -16,13 +17,16 @@ import com.caogen.jfd.service.driver.AppDriverService;
 import com.caogen.jfd.service.driver.DriverSiteService;
 import com.caogen.jfd.service.driver.OnlineSeriver;
 import com.caogen.jfd.service.driver.PersonalService;
+import com.caogen.jfd.service.user.ConfigService;
 import com.caogen.jfd.util.PasswordHelper;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.springframework.scheduling.quartz.QuartzJobBean;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,8 +39,9 @@ public class AppDriverController {
 
     @Autowired
     private AppDriverService appDriverService;
-   @Autowired
-   private PersonalService personalService;
+    @Autowired
+    private PersonalService personalService;
+
     /**
      * 登录
      *
@@ -52,9 +57,9 @@ public class AppDriverController {
             token = appDriverService.passwordLogin(driver);
             AppDriver byId = appDriverService.getId(driver);
             Integer id = byId.getId();
-            Map<String,Object> appDrivers = new HashMap<>();
-            appDrivers.put("token",token);
-            appDrivers.put("id",id);
+            Map<String, Object> appDrivers = new HashMap<>();
+            appDrivers.put("token", token);
+            appDrivers.put("id", id);
             message.setData(appDrivers);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -82,7 +87,7 @@ public class AppDriverController {
         Message message = new Message();
         try {
 
-            AppDriver entity =appDriverService.getByToken(data.getDesc());
+            AppDriver entity = appDriverService.getByToken(data.getDesc());
             entity.setToken(null);
             entity.setDes_key(null);
             entity.setDes_iv(null);
@@ -145,12 +150,13 @@ public class AppDriverController {
      */
     @Autowired
     private DriverSiteService driverSiteService;
+
     @ResponseBody
     @RequestMapping("dingwei")
     public Message dingwei(Integer driver_id, Double longitude, Double latitude) {
         Message message = new Message();
         try {
-           driverSiteService.getWhole(driver_id,longitude,latitude);
+            driverSiteService.getWhole(driver_id, longitude, latitude);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
@@ -162,7 +168,7 @@ public class AppDriverController {
     }
 
     @Autowired
-   private OnlineSeriver onlineSeriver;
+    private OnlineSeriver onlineSeriver;
 
     /**
      * 接收上下线
@@ -171,20 +177,47 @@ public class AppDriverController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = {"Receive","app/Receive"})
+    @RequestMapping(value = {"Receive", "app/Receive"})
     public Message Receive(Message data) {
         Message message = new Message();
         try {
-            AppDriver driver =appDriverService.getByToken(data.getDesc());
-            Online appDriver = Constants.gson.fromJson((String)data.getData(),Online.class);
-            onlineSeriver.in(driver.getId(),appDriver.getOperation());
+            AppDriver driver = appDriverService.getByToken(data.getDesc());
+            Online appDriver = Constants.gson.fromJson((String) data.getData(), Online.class);
+            onlineSeriver.in(driver.getId(), appDriver.getOperation());
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
-            message.setCode(ErrorCode.FAIL.getCode());
-            message.setDesc(ErrorCode.FAIL.getDesc());
+            message.setCode(ErrorCode.FAILAA.getCode());
+            message.setDesc(ErrorCode.FAILAA.getDesc());
             StaticLogger.logger().error(message.getDesc(), e);
         }
         return message;
     }
+
+
+    /**
+     * 记录版本号
+     */
+
+    @Autowired
+    private ConfigService configService;
+
+    @ResponseBody
+    @RequestMapping("version")
+    public Message version(Boolean flag) {
+        Message message = new Message();
+        try {
+            String platform = flag ? "driver_version_android" : "driver_version_ios";
+            SysConfig config = configService.getByItem(platform);
+            SysConfig entity = new SysConfig();
+            entity.setItem_value(config.getItem_value());
+            entity.setFlag(config.getFlag());
+            message.setData(entity);
+        } catch (Exception e) {
+            message.setErrorCode(ErrorCode.FAIL);
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
+
 }

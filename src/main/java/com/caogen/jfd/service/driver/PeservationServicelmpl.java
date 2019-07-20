@@ -1,4 +1,6 @@
 package com.caogen.jfd.service.driver;
+import com.caogen.jfd.ces.WebSocketMapUtil;
+import com.caogen.jfd.ces.WebSocketServer;
 import com.caogen.jfd.common.Constants;
 import com.caogen.jfd.controller.driver.dome.JPush;
 import com.caogen.jfd.dao.driver.*;
@@ -6,10 +8,15 @@ import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.entity.user.AppUserSite;
 
 import com.caogen.jfd.util.FormatUtils;
+import com.sun.javafx.collections.MappingChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.websocket.EncodeException;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -76,42 +83,57 @@ public class PeservationServicelmpl implements PeservationService {
         peservation1.setCreatedate(s);
         return  peservation1;
     }
+
+
     @Override
     public void  getput() {
         Personal personal = new Personal();
         Vehicle vehicle = new Vehicle();
         Peservation peservation = new Peservation();
-        Map<String,String> wt = new HashMap<>();
-        Map<String,String> dd = new HashMap<>();
 
-        List<Vehicle> vehicles = vehicleDao.find(vehicle);
-        for (int c =0; c<vehicles.size();c++){
-            Integer id = vehicles.get(c).getModel_id();
+        //取出所有新订单
+        List<Peservation> peservations = peservationDao.findput(peservation);
+        for (int i = 0; i < peservations.size(); i++) {
+            Map<String, Object> message = new HashMap<>();
+            String name = peservations.get(i).getName();
+            String code = peservations.get(i).getCode();
+            Integer status = peservations.get(i).getStatus();
+            String origin = peservations.get(i).getOrigin();
+            String destination = peservations.get(i).getDestination();
+            Integer model_id = peservations.get(i).getModel_id();
+            System.out.println(model_id);
+            AppUserSite appUserSite = Constants.gson.fromJson(origin, AppUserSite.class);
+            Double latitude2 = appUserSite.getLatitude();
+            Double longitude2 = appUserSite.getLongitude();
+            LocalDateTime create_date = peservations.get(i).getCreate_date();
 
-        List<Personal> personalDao1 = personalDao.find3(personal);
-        for (int s = 0; s < personalDao1.size(); s++) {
-            Double longitude1 = personalDao1.get(s).getLongitude();
-            Double latitude1 = personalDao1.get(s).getLatitude();
-            //订单
-                List<Peservation> peservations = peservationDao.findput(peservation);
-                for (int i = 0; i < peservations.size(); i++) {
-                    Integer status = peservations.get(i).getStatus();
-                    String origin = peservations.get(i).getOrigin();
-                    Integer model_id = peservations.get(i).getModel_id();
-                    AppUserSite appUserSite = Constants.gson.fromJson(origin, AppUserSite.class);
-                    Double latitude2 = appUserSite.getLatitude();
-                    Double longitude2 = appUserSite.getLongitude();
-                if (id != model_id) {
+            message.put("name", name);
+            message.put("code", code);
+            message.put("status", status);
+            message.put("origin", origin);
+            message.put("destination", destination);
+            message.put("create_date", create_date);
+
+            //司机
+            List<Personal> personalDao1 = personalDao.find3(personal);
+            List<String> aa = new LinkedList<>();
+            for (int s = 0; s < personalDao1.size(); s++) {
+                Integer user_id = personalDao1.get(s).getUser_id();
+                String s2 = Integer.toString(user_id);
+                System.out.println(s2);
+                Double latitude1 = personalDao1.get(s).getLatitude();
+                Double longitude1 = personalDao1.get(s).getLongitude();
+                Integer vehicle_id = personalDao1.get(s).getVehicle_id();
+                vehicle.setId(vehicle_id);
+                Vehicle vehicle1 = vehicleDao.get(vehicle);
+                Integer model_id1 = vehicle1.getModel_id();
+                if (model_id != model_id1) {
                     continue;
 
                 }
-
-
                 if (status != 1) {
                     continue;
                 }
-
-                peservations.get(i).setModel_id(null);
                 // 纬度
                 double lat1 = Math.toRadians(latitude1);
                 double lat2 = Math.toRadians(latitude2);
@@ -128,20 +150,49 @@ public class PeservationServicelmpl implements PeservationService {
                 // 弧长乘地球半径, 返回单位: 千米
                 ss = ss * EARTH_RADIUS;
                 //公里自定义
-                    String s1 = Constants.gson.toJson(peservations);
-                   wt.put("id",s1);
-                    if (ss <= 100000000) {
-                    //推送
-                    JPush.jpushIOS(wt);
-
+                if (ss <= 100000000) {
+                    System.out.println("添加司机：" + s2);
+                    aa.add(s2);
                 }
-                 dd.put("cc","司机已接单");
-                    JPush.jpush(dd);
+
+
             }
+            String[] driverIds = aa.toArray(new String[aa.size()]);
+            try {
+                System.out.println("准备发送：" + message);
+                WebSocketMapUtil.sendNewOrderMessage(message, driverIds);
+            } catch (Exception e){}
+
+//            try {
+//                WebSocketServer.sendMessageAll(message);
+//            }catch (Exception ew){
+//
+//            }
+
+
+
+//            System.out.println("准备司机");
+//
+//                System.out.println("driverIds"+driverIds);
+//            System.out.println("driverIds.length："+driverIds.length);
+//                //循环找出司机
+//                for (int j = 0; j < driverIds.length; j++) {
+//                    String id = driverIds[j];
+//                    System.out.println("driver id :" + id);
+//                    //取出司机对象， 发送订单消息
+//                    WebSocketServer obj = WebSocketMapUtil.get("1");
+//                    System.out.println(obj);
+//                    if (obj != null) {
+//                        System.out.println("非空");
+//                        try {
+//                            System.out.println("准备发送：" + message);
+//                            obj.sendMessage("message");
+//                        } catch (Exception e){}
+//                    }
+//                }
         }
         }
 
-    }
 
 
     @Override

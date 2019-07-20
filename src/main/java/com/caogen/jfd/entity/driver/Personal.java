@@ -27,6 +27,7 @@ public class Personal implements Serializable {
     private Boolean is_online;//是否在线
     private Double longitude;//经度
     private Double latitude;//维度
+    private Integer vehicle_id;//车辆id
     private  String Age;
     private jinji  urgent;
     private Model model;
@@ -72,7 +73,21 @@ public class Personal implements Serializable {
                 ", is_online=" + is_online +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
+                ", vehicle_id=" + vehicle_id +
+                ", Age='" + Age + '\'' +
+                ", urgent=" + urgent +
+                ", model=" + model +
+                ", order=" + order +
+                ", money=" + money +
                 '}';
+    }
+
+    public Integer getVehicle_id() {
+        return vehicle_id;
+    }
+
+    public void setVehicle_id(Integer vehicle_id) {
+        this.vehicle_id = vehicle_id;
     }
 
     public jinji getUrgent() {

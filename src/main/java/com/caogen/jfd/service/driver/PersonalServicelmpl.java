@@ -12,6 +12,8 @@ import com.sun.xml.internal.ws.api.message.HeaderList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,6 +26,8 @@ public class PersonalServicelmpl implements PersonalService {
     private PersonalDao personalDao;
     @Autowired
     private CompleteDao completeDao;
+    @Autowired
+    private PriceDao priceDao;
 
     @Autowired
     private AppDriverDao appDriverDao;
@@ -63,17 +67,27 @@ public class PersonalServicelmpl implements PersonalService {
     }
 
     @Override
-    public void getstate(Boolean is_online ,Integer user_id) {
-        Personal personal = new Personal();
-        personal.setUser_id(user_id);
-        if (is_online) {
-            personal.setIs_online(true);
-        } else {
-            personal.setIs_online(false);
-        }
-        personalDao.update(personal);
+    public void getstate(Boolean is_online, Integer user_id) {
 
     }
+
+//    @Override
+//    public void getstate(Boolean is_online ,Integer user_id) {
+//        Personal personal = new Personal();
+//        personal.setUser_id(user_id);
+//        price price = priceDao.get1();
+//        LocalTime work_start = price.getWork_start();
+//        LocalTime work_end = price.getWork_end();
+//        LocalTime time2 = LocalTime.now();
+//       // if (time2.isAfter(work_start) || time2.isBefore(work_end)) {
+//            if (is_online) {
+//                personal.setIs_online(true);
+//            } else {
+//                personal.setIs_online(false);
+//           // }
+//        }
+//        personalDao.update(personal);
+//    }
 
     @Override
     public Personal getmany(Integer user_id) {

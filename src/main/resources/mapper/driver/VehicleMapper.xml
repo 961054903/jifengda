@@ -4,13 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.driver.VehicleDao">
     <sql id="sql">model_id</sql>
-    <select id="find" parameterType="Vehicle"
+    <select id="get" parameterType="Vehicle"
             resultType="Vehicle">
-        SELECT
-        <include refid="sql" />
-        FROM vehicle
+        SELECT *
+        FROM  vehicle
         <where>
-            <if test="model_id != null"> model_id = #{model_id}</if>
+            <if test="id != null">id = #{id}</if>
+            <if test="model_id != null">AND model_id = #{model_id}</if>
         </where>
     </select>
 </mapper>

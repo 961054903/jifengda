@@ -29,6 +29,7 @@ public enum ErrorCode {
 	TICKET_ERROR("1090", "用户红包操作异常"), 
 	DETAIL_ERROR("1100", "用户账户明细操作异常"), 
 	ORDER_ERROR("1110", "用户订单操作异常"),
+	FAILAA("11111","非上班时间不允许登录"),
 	
 	END("1018","已抢完"),
 	SUCCESS("1019","抢单成功");
