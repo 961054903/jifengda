@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.user.AppUserSiteDao">
+	<sql id="site">user_id,name,description,longitude,latitude,contacts_name,contacts_phone
+	</sql>
+	<insert id="insert" parameterType="AppUserSite">
+		INSERT INTO app_user_site (
+		<include refid="site" />
+		) VALUES (
+		#{user_id},#{name},#{description},#{longitude},#{latitude},#{contacts_name},#{contacts_phone}
+		)
+	</insert>
+	<delete id="delete" parameterType="AppUserSite">
+		DELETE FROM app_user_site
+		WHERE id = #{id}
+	</delete>
+	<update id="update" parameterType="AppUserSite">
+		UPDATE app_user_site
+		<set>
+			description = #{description},
+			<if test="name != null">name = #{name},</if>
+			<if test="longitude != null">longitude = #{longitude},</if>
+			<if test="latitude != null">latitude = #{latitude},</if>
+			<if test="contacts_name != null">contacts_name = #{contacts_name},</if>
+			<if test="contacts_phone != null">contacts_phone = #{contacts_phone}</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	<select id="get" parameterType="AppUserSite"
+		resultType="AppUserSite">
+		SELECT id,
+		<include refid="site" />
+		FROM app_user_site
+		WHERE id = #{id}
+	</select>
+	<select id="find" parameterType="AppUserSite"
+		resultType="AppUserSite">
+		SELECT id,
+		<include refid="site" />
+		FROM app_user_site
+		WHERE user_id = #{user_id}
+	</select>
+	<select id="findLocation" parameterType="Integer"
+		resultType="AppUserSite">
+		SELECT
+		di.longitude,
+		di.latitude
+		FROM
+		app_driver_info di
+		JOIN
+		vehicle v ON v.driver_id = di.user_id
+		JOIN vehicle_model vm ON vm.id =
+		v.model_id
+		JOIN order_info oi ON oi.driver_id != di.user_id
+		WHERE
+		di.is_online = TRUE
+		AND vm.id = #{model_id}
+	</select>
+</mapper>
