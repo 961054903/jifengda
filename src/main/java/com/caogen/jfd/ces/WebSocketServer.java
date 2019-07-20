@@ -10,10 +10,6 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArraySet;
-
-import static com.caogen.jfd.ces.WebSocketMapUtil.addOnlineCount;
 import static com.caogen.jfd.ces.WebSocketMapUtil.subOnlineCount;
 
 
