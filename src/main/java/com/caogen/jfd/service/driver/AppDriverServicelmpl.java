@@ -1,22 +1,16 @@
 package com.caogen.jfd.service.driver;
 
-import com.caogen.jfd.common.Constants;
-import com.caogen.jfd.common.ErrorCode;
-import com.caogen.jfd.dao.driver.AppDriverDao;
-import com.caogen.jfd.entity.driver.AppDriver;
-import com.caogen.jfd.entity.driver.Online;
-import com.caogen.jfd.entity.driver.Personal;
-import com.caogen.jfd.entity.user.AppUser;
-import com.caogen.jfd.exception.DefinedException;
-
-import com.caogen.jfd.util.PasswordHelper;
-import com.caogen.jfd.util.SecretUtils;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import com.caogen.jfd.common.Constants;
+import com.caogen.jfd.common.ErrorCode;
+import com.caogen.jfd.dao.driver.AppDriverDao;
+import com.caogen.jfd.entity.driver.AppDriver;
+import com.caogen.jfd.exception.DefinedException;
+import com.caogen.jfd.util.PasswordHelper;
+import com.caogen.jfd.util.SecretUtils;
 
 @Service
 public class AppDriverServicelmpl implements AppDriverService {
