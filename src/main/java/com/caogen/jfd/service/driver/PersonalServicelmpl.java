@@ -7,18 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-=======
 import com.caogen.jfd.dao.driver.AppDriverDao;
 import com.caogen.jfd.dao.driver.CompleteDao;
 import com.caogen.jfd.dao.driver.ModelDao;
 import com.caogen.jfd.dao.driver.PersonalDao;
+import com.caogen.jfd.dao.driver.PriceDao;
 import com.caogen.jfd.dao.driver.RewardDao;
 import com.caogen.jfd.entity.driver.AppDriver;
 import com.caogen.jfd.entity.driver.Complete;
@@ -27,7 +20,6 @@ import com.caogen.jfd.entity.driver.Personal;
 import com.caogen.jfd.entity.driver.Reward;
 import com.caogen.jfd.entity.driver.jinji;
 import com.caogen.jfd.util.FormatUtils;
->>>>>>> c993feb4a90c9ce5a26d6c4eb4bfbc144141b7d3
 
 
 @Service

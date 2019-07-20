@@ -1,24 +1,29 @@
 package com.caogen.jfd.service.driver;
-import com.caogen.jfd.ces.WebSocketMapUtil;
-import com.caogen.jfd.ces.WebSocketServer;
-import com.caogen.jfd.common.Constants;
-import com.caogen.jfd.controller.driver.dome.JPush;
-import com.caogen.jfd.dao.driver.*;
-import com.caogen.jfd.entity.driver.*;
-import com.caogen.jfd.entity.user.AppUserSite;
-
-import com.caogen.jfd.util.FormatUtils;
-import com.sun.javafx.collections.MappingChange;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.websocket.EncodeException;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.caogen.jfd.ces.WebSocketMapUtil;
+import com.caogen.jfd.common.Constants;
+import com.caogen.jfd.dao.driver.AppDriverDao;
+import com.caogen.jfd.dao.driver.CompleteDao;
+import com.caogen.jfd.dao.driver.PersonalDao;
+import com.caogen.jfd.dao.driver.PeservationDao;
+import com.caogen.jfd.dao.driver.TaskDao;
+import com.caogen.jfd.dao.driver.VehicleDao;
+import com.caogen.jfd.entity.driver.AppDriver;
+import com.caogen.jfd.entity.driver.Complete;
+import com.caogen.jfd.entity.driver.Personal;
+import com.caogen.jfd.entity.driver.Peservation;
+import com.caogen.jfd.entity.driver.Task;
+import com.caogen.jfd.entity.driver.Vehicle;
+import com.caogen.jfd.entity.user.AppUserSite;
+import com.caogen.jfd.util.FormatUtils;
 
 
 @Service
