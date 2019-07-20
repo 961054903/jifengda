@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.driver.TaskDao">
+    <sql id="id">code,serial,status,destination</sql>
+    <select id="get" parameterType="Task"
+            resultType="Task">
+        SELECT id,
+        <include refid="id"/>
+        FROM order_task
+       where
+        id =#{id}
+    </select>
+
+    <update id="update" parameterType="Task">
+        UPDATE
+        order_task
+        SET
+        status =#{status}
+        WHERE
+        serial =#{serial}
+        and
+        code =#{code}
+    </update>
+
+
+    <insert id="insert" parameterType="Task">
+        INSERT INTO order_task (
+        <include refid="id"/>
+        )
+        VALUES (
+        #{code},#{serial},#{status},#{destination}
+        )
+    </insert>
+</mapper>
