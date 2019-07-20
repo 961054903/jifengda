@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.user.VehiclePriceDao">
+	<sql id="price">model_id,start_space,end_space,price</sql>
+	<select id="find" parameterType="VehiclePrice"
+		resultType="VehiclePrice">
+		SELECT id,
+		<include refid="price" />
+		FROM vehicle_price
+		WHERE model_id = #{model_id}
+		ORDER BY start_space
+	</select>
+</mapper>

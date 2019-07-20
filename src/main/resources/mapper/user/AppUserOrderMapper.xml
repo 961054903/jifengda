@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.user.AppUserOrderDao">
+	<sql id="orderUnderway">user_id,driver_id,model_id,code,create_date,status,type,mode,appoint_date,label,origin,destination,name,night_service_cost,traffic_jam_cost,is_support,support_money,support_cost,order_money,ticket_money,actually_paid,kilometre,bonus
+	</sql>
+	<sql id="orderFinish">user_id,driver_id,model_id,code,create_date,status,type,mode,appoint_date,label,origin,destination,name,night_service_cost,traffic_jam_cost,is_support,support_money,support_cost,order_money,ticket_money,actually_paid,kilometre,bonus,is_evaluate,evaluate_grade,evaluate_content
+	</sql>
+	<insert id="insert" parameterType="AppUserOrder">
+		INSERT INTO order_info (
+		<include refid="orderUnderway" />
+		) VALUES (
+		#{user_id},#{model_id},#{code},#{create_date},#{status},#{type},#{mode},#{appoint_date},#{label},#{origin},#{destination},#{name},#{night_service_cost},#{traffic_jam_cost},#{is_support},#{support_money},#{support_cost},#{order_money},#{ticket_money},#{actually_paid},#{kilometre},#{bonus},#{is_evaluate},#{evaluate_grade},#{evaluate_content}
+		)
+	</insert>
+	<update id="evaluate" parameterType="AppUserOrder">
+		UPDATE order_history
+		<set>
+			<if test="is_evaluate != null">is_evaluate = #{is_evaluate},</if>
+			<if test="evaluate_grade != null">evaluate_grade = #{evaluate_grade},</if>
+			<if test="evaluate_content != null">evaluate_content = #{evaluate_content},</if>
+		</set>
+		WHERE code = #{code}
+	</update>
+	<select id="countInfo" parameterType="AppUserOrder"
+		resultType="Integer">
+		SELECT COUNT(id) FROM order_info WHERE user_id = #{user_id}
+	</select>
+	<select id="countHistory" parameterType="AppUserOrder"
+		resultType="Integer">
+		SELECT COUNT(id) FROM order_history WHERE user_id =
+		#{user_id}
+	</select>
+	<sql id="roughUnderway">code,status,origin,destination,actually_paid</sql>
+	<select id="findUnderway" parameterType="AppUserOrder"
+		resultType="AppUserOrder">
+		SELECT id,
+		<include refid="roughUnderway" />
+		FROM order_info
+		<where>
+			<if test="user_id != null">user_id = #{user_id}</if>
+			<if test="status != null">AND status = #{status}</if>
+		</where>
+	</select>
+	<sql id="roughFinish">code,status,origin,destination,actually_paid,is_evaluate,evaluate_grade,evaluate_content</sql>
+	<select id="findFinish" parameterType="AppUserOrder"
+		resultType="AppUserOrder">
+		SELECT id,
+		<include refid="roughFinish" />
+		FROM order_history
+		<where>
+			<if test="user_id != null">user_id = #{user_id}</if>
+			<if test="status != null">AND status = #{status}</if>
+			<if test="is_evaluate != null">AND is_evaluate = #{is_evaluate}</if>
+		</where>
+	</select>
+	<select id="getUnderway" parameterType="AppUserOrder"
+		resultType="AppUserOrder">
+		SELECT id,
+		<include refid="orderUnderway" />
+		FROM order_info
+		WHERE code = #{code}
+	</select>
+	<select id="getFinish" parameterType="AppUserOrder"
+		resultType="AppUserOrder">
+		SELECT id,
+		<include refid="orderFinish" />
+		FROM order_history
+		WHERE code = #{code}
+	</select>
+
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.driver.OnlineDao">
+    <sql id="aa">operation,create_date,driver_id</sql>
+    <insert id="insert" parameterType="Online">
+        INSERT INTO log_driver_online (
+        <include refid="aa"/>
+        )
+        VALUES (
+        #{operation},#{create_date},#{driver_id}
+        )
+    </insert>
+</mapper>
