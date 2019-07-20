@@ -6,10 +6,10 @@
 	<artifactId>jfd</artifactId>
 	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-    <!--<modules>-->
-        <!--<module>ceshi</module>-->
-    <!--</modules>-->
-    <name>jfd Maven Webapp</name>
+	<!--<modules> -->
+	<!--<module>ceshi</module> -->
+	<!--</modules> -->
+	<name>jfd Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<version.spring>4.3.23.RELEASE</version.spring>
@@ -266,28 +266,18 @@
 			<artifactId>gson</artifactId>
 			<version>2.3</version>
 		</dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>5.1.0.BUILD-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
-        </dependency>
 		<dependency>
-			<groupId>com.stylefeng</groupId>
-			<artifactId>guns-core</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
 		</dependency>
-        <dependency>
-            <groupId>ant</groupId>
-            <artifactId>ant</artifactId>
-            <version>1.6.5</version>
-        </dependency>
+		<dependency>
+			<groupId>ant</groupId>
+			<artifactId>ant</artifactId>
+			<version>1.6.5</version>
+		</dependency>
 
-    </dependencies>
+	</dependencies>
 	<build>
 		<finalName>jfd</finalName>
 		<plugins>
