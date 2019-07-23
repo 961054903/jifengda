@@ -39,7 +39,7 @@ public class AppUserOrder implements Serializable {
 	private Double order_money;
 	private Double ticket_money;
 	private Double actually_paid;
-	private Double kilometre;
+	private Double kilometer;
 	private Double bonus;
 	private String city;
 	private String gap;
@@ -80,7 +80,7 @@ public class AppUserOrder implements Serializable {
 				+ ", destination=" + destination + ", name=" + name + ", night_cost=" + night_cost + ", jam_cost="
 				+ jam_cost + ", empty_cost=" + empty_cost + ", is_support=" + is_support + ", support_money="
 				+ support_money + ", support_cost=" + support_cost + ", order_money=" + order_money + ", ticket_money="
-				+ ticket_money + ", actually_paid=" + actually_paid + ", kilometre=" + kilometre + ", bonus=" + bonus
+				+ ticket_money + ", actually_paid=" + actually_paid + ", kilometer=" + kilometer + ", bonus=" + bonus
 				+ ", city=" + city + ", gap=" + gap + ", cancel=" + cancel + ", complaint=" + complaint
 				+ ", is_evaluate=" + is_evaluate + ", evaluate_grade=" + evaluate_grade + ", evaluate_content="
 				+ evaluate_content + "]";
@@ -270,12 +270,12 @@ public class AppUserOrder implements Serializable {
 		this.actually_paid = actually_paid;
 	}
 
-	public Double getKilometre() {
-		return kilometre;
+	public Double getKilometer() {
+		return kilometer;
 	}
 
-	public void setKilometre(Double kilometre) {
-		this.kilometre = kilometre;
+	public void setKilometer(Double kilometer) {
+		this.kilometer = kilometer;
 	}
 
 	public Double getBonus() {

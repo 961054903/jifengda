@@ -93,7 +93,7 @@ public class Demo2 {
 		entity.setJam_cost(30.0);
 		entity.setEmpty_cost(10.0);
 		entity.setOrder_money(20127.96);
-		entity.setKilometre(385.466);
+		entity.setKilometer(385.466);
 		entity.setGap("102313|283153|");
 		entity.setIs_support(true);
 		entity.setSupport_money(10000.0);

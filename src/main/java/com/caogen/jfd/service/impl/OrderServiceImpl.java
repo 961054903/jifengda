@@ -141,12 +141,12 @@ public class OrderServiceImpl implements AppUserOrderService {
 		list.remove(0);
 		order.setDestination(Constants.gson.toJson(list));
 		order.setGap(sb.toString());
-		order.setKilometre(distance * 0.001);
+		order.setKilometer(distance * 0.001);
 	}
 
 	@Override
 	public void calculatePrice(AppUserOrder order) {
-		Double distance = order.getKilometre();
+		Double distance = order.getKilometer();
 		// 获取价格
 		VehiclePrice entity = new VehiclePrice();
 		entity.setCity(order.getCity());
