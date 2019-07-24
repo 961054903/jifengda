@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.driver.CompleteDao">
+    <sql id="roya">code,origin,destination,kilometer,bonus,create_date,status,type,mode,label,name</sql>
+    <select id="find1" parameterType="Complete"
+            resultType="Complete">
+        SELECT
+        <include refid="roya" />
+        FROM order_history
+        where
+        driver_id =#{driver_id}
+        and
+        TO_DAYS(create_date) = TO_DAYS(NOW())
+    </select>
+
+    <select id="find2" parameterType="Complete"
+            resultType="Complete">
+        SELECT
+        <include refid="roya" />
+        FROM order_history
+        where
+        driver_id =#{driver_id}
+        and
+        DATE_FORMAT(create_date,'%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+    </select>
+
+    <sql id="ccc">create_date,code,origin,destination,kilometer,bonus,finish_date,driver_id,status,type,mode,label,name</sql>
+    <select id="find3" parameterType="Complete"
+            resultType="Complete">
+        SELECT
+        <include refid="ccc" />
+        FROM order_history
+        where
+        driver_id=#{driver_id}
+    </select>
+
+    <select id="find4" parameterType="Complete"
+            resultType="Complete">
+        SELECT
+        driver_id,
+        count(id) as  aa
+        FROM
+        order_history
+       where
+          PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( create_date, '%Y%m' ) ) =1
+        group by
+        driver_id
+        order  by
+        aa
+        desc
+        limit 3
+	</select>
+
+    <sql id="id">user_id,driver_id,model_id,code,create_date,status,type,mode,appoint_date,label,origin,destination,name,night_service_cost,traffic_jam_cost,is_support,support_money,
+support_cost,order_money,ticket_money,actually_paid,kilometer,bonus,finish_date,is_evaluate
+</sql>
+    <insert id="insert" parameterType="Complete">
+        INSERT INTO order_history (
+        <include refid="id"/>
+        )
+        VALUES (
+        #{user_id},#{driver_id},#{model_id},#{code},#{create_date},#{status},#{type},#{mode},#{appoint_date},#{label},#{origin},#{destination},#{name},#{night_service_cost},
+        #{traffic_jam_cost},#{is_support},#{support_money},#{support_cost},#{order_money},#{ticket_money},#{actually_paid},#{kilometer},#{bonus},#{finish_date},#{is_evaluate}
+        )
+    </insert>
+
+
+    <select id="find5" parameterType="Complete"
+            resultType="Complete">
+      SELECT * FROM
+      order_history
+      WHERE
+      driver_id =#{driver_id}
+      and
+      PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format( create_date, '%Y%m' ) ) =1
+    </select>
+</mapper>

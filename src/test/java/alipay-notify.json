@@ -1,0 +1,32 @@
+{
+	"gmt_create": "2019-07-1908:54:52",
+	"charset": "UTF-8",
+	"seller_email": "sdcgkd@163.com",
+	"subject": "吉蜂达即配-下单",
+	"sign": "j48bT8gXUKb34kA4S0i661fujs4ld5auoAUJ0ZyI2NccAm0jvLCm4QQKLeOCIs8aAO0vTXsq7/5cwsoYKGJjrv1/b4x4ralEp1GzdzWc5/Ub5FDStKjxXwwpKzGL+OJAGqC6YMOIH3rYsI5AI4cpuDMvCZiVe0Y164+zSD9D4y0/SIgZRhkDiM6qonnXq7GjTL/NmGZUuy/ba5Z0p54hrhBmtXyiSNdJn94IzfAPoqReKoNfEXyTzaUBKKUefokUgpduSD8onH0vw4tQguHQc/yB717XkRG44W1LZP9bdfU34B4keRmmtl2uMSqsnm8/jz+ew7IaVQlrQPPeWViO6g==",
+	"buyer_id": "2088222285851553",
+	"invoice_amount": "0.01",
+	"notify_id": "2019071900222085453051550509197438",
+	"fund_bill_list": [
+		{
+			"amount": "0.01",
+			"fundChannel": "ALIPAYACCOUNT"
+		}
+	],
+	"notify_type": "trade_status_sync",
+	"trade_status": "TRADE_SUCCESS",
+	"receipt_amount": "0.01",
+	"app_id": "2019070565783296",
+	"buyer_pay_amount": "0.01",
+	"sign_type": "RSA2",
+	"seller_id": "2088421464739642",
+	"gmt_payment": "2019-07-1908:54:53",
+	"notify_time": "2019-07-1908:54:53",
+	"version": "1.0",
+	"out_trade_no": "68163FE2A6CF455BA2DAE2AFBB8AD2F5",
+	"total_amount": "0.01",
+	"trade_no": "2019071922001451550565235576",
+	"auth_app_id": "2019070565783296",
+	"buyer_logon_id": "157****8240",
+	"point_amount": "0.00"
+}
