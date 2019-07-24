@@ -28,7 +28,7 @@ public class Peservation implements Serializable {
     private Double ticket_money;//红包金额
     private Double actually_paid;//实付金额
     private Integer driver_id;//司机id
-    private Double kilometre;//公里
+    private Double kilometer;//公里
     private Double bonus;//提成
     private String phone;
     private String Createdate;
@@ -78,7 +78,7 @@ public class Peservation implements Serializable {
                 ", ticket_money=" + ticket_money +
                 ", actually_paid=" + actually_paid +
                 ", driver_id=" + driver_id +
-                ", kilometre=" + kilometre +
+                ", kilometer=" + kilometer +
                 ", bonus=" + bonus +
                 ", phone='" + phone + '\'' +
                 '}';
@@ -264,12 +264,12 @@ public class Peservation implements Serializable {
         this.driver_id = driver_id;
     }
 
-    public Double getKilometre() {
-        return kilometre;
+    public Double getKilometer() {
+        return kilometer;
     }
 
-    public void setKilometre(Double kilometre) {
-        this.kilometre = kilometre;
+    public void setKilometer(Double kilometre) {
+        this.kilometer = kilometre;
     }
 
     public Double getBonus() {

@@ -93,10 +93,10 @@ public class PeservationServicelmpl implements PeservationService {
     public void  getput(String code) {
         Personal personal = new Personal();
         Vehicle vehicle = new Vehicle();
-        Peservation peservation = new Peservation();
-        peservation.setCode(code);
+
         //取出新订单
-        Peservation peservations = peservationDao.findput(peservation);
+        Peservation peservations = peservationDao.findput(code);
+        System.out.println(peservations);
         Map<String, Object> message = new HashMap<>();
         String name = peservations.getName();
         Integer status = peservations.getStatus();
@@ -246,7 +246,7 @@ public class PeservationServicelmpl implements PeservationService {
         Peservation.Mode mode = peservations.getMode();
         String origin = peservations.getOrigin();
         String destination = peservations.getDestination();
-        Double kilometre = peservations.getKilometre();
+        Double kilometre = peservations.getKilometer();
         Double bonus = peservations.getBonus();
         Integer user_id = peservations.getUser_id();
         Integer driver_id = peservations.getDriver_id();
