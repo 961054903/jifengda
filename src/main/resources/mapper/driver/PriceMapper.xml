@@ -6,7 +6,7 @@
 <sql id="price">scope,duration,is_work,work_start,work_end,city</sql>
 <select id="get1" parameterType="price"
         resultType="price">
-    SELECT id,
+    SELECT
     <include refid="price" />
     FROM  sys_setting
     <where>

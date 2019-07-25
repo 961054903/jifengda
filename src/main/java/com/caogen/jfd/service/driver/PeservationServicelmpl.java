@@ -118,7 +118,6 @@ public class PeservationServicelmpl implements PeservationService {
         message.put("gap",gap);
         message.put("destination", destination);
         message.put("create_date", create_date);
-
         message.put("isShow","y");
 
         //司机
@@ -240,7 +239,6 @@ public class PeservationServicelmpl implements PeservationService {
         }
 
         }
-
     @Override
     public void gettake(Integer id, String code) {
         Peservation peservation = new Peservation();
