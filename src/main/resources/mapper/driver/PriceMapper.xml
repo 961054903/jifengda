@@ -8,7 +8,7 @@
         resultType="price">
     SELECT id,
     <include refid="price" />
-    FROM  sys_dispatch
+    FROM  sys_setting
     <where>
         <if test="id != null">id = #{id}</if>
         <if test="work_start != null">AND work_start = #{work_start}</if>

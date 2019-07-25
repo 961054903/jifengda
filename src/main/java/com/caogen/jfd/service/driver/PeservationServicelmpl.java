@@ -38,6 +38,8 @@ public class PeservationServicelmpl implements PeservationService {
     private TaskService taskService;
     @Autowired
     private CompleteDao completeDao;
+    @Autowired
+    private PriceDao priceDao;
 
     @Override
     public void create(Peservation entity) {
@@ -96,7 +98,6 @@ public class PeservationServicelmpl implements PeservationService {
 
         //取出新订单
         Peservation peservations = peservationDao.findput(code);
-        System.out.println(peservations);
         Map<String, Object> message = new HashMap<>();
         String name = peservations.getName();
         Integer status = peservations.getStatus();
@@ -115,13 +116,14 @@ public class PeservationServicelmpl implements PeservationService {
         message.put("origin", origin);
         message.put("destination", destination);
         message.put("create_date", create_date);
+        message.put("isShow","y");
 
         //司机
         List<Personal> personalDao1 = personalDao.find3(personal);
         List<String> aa = new LinkedList<>();
         for (int s = 0; s < personalDao1.size(); s++) {
             Integer user_id = personalDao1.get(s).getUser_id();
-            String s2 = Integer.toString(user_id);
+            String s2 = String.valueOf(user_id);
             System.out.println(s2);
             Double latitude1 = personalDao1.get(s).getLatitude();
             Double longitude1 = personalDao1.get(s).getLongitude();
@@ -151,7 +153,9 @@ public class PeservationServicelmpl implements PeservationService {
             // 弧长乘地球半径, 返回单位: 千米
             ss = ss * EARTH_RADIUS;
             //公里自定义
-            if (ss <= 100000000) {
+            price priceDao1 = priceDao.get1();
+            Double scope = priceDao1.getScope();
+            if (ss <= scope) {
                 System.out.println("添加司机：" + s2);
                 aa.add(s2);
             }
@@ -174,6 +178,8 @@ public class PeservationServicelmpl implements PeservationService {
                 if (driver_id == null) {
                     //未被抢：a.删除司机手机关于此订单的信息 b.推送给管理后台
                     try {
+                        message.put("isShow","n");
+                        WebSocketMapUtil.sendNewOrderMessage(message, driverIds, "m");
                         WebSocketMapUtil.sendNewOrderMessage(message, null, "p");
 
                     } catch (IOException e) {

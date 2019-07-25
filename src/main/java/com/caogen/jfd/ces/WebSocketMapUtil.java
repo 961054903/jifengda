@@ -54,18 +54,20 @@ public class WebSocketMapUtil {
     public static void sendNewOrderMessage(Map<String,Object> message, String[] driver,String flag) throws IOException {
         System.out.println("-------------" + driver);
         //循环找出司机
-        for (int i = 0; i <driver.length; i++) {
-            String id = driver[i];
+
             if("m".equals(flag)){
-                if(effectiveSet.contains(id)){
-                    //取出司机对象， 发送订单消息
-                    WebSocketServer obj = get(id);
-                    System.out.println("WebSocketServer Object:" + obj);
-                    if (obj != null) {
-                        try {
-                            obj.sendMessage(message.toString());
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                for (int i = 0; i <driver.length; i++) {
+                    String id = driver[i];
+                    if (effectiveSet.contains(id)) {
+                        //取出司机对象， 发送订单消息
+                        WebSocketServer obj = get(id);
+                        System.out.println("WebSocketServer Object:" + obj);
+                        if (obj != null) {
+                            try {
+                                obj.sendMessage(message.toString());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
@@ -83,7 +85,7 @@ public class WebSocketMapUtil {
                     }
                 }
 
-            }
+
 
 
         }
@@ -111,15 +113,18 @@ public class WebSocketMapUtil {
                         it.remove();
                         subOnlineCount();           //在线数减1
                     }
-                    if(!backstageSet.contains(next.getKey())) {
+                    Map.Entry<String, WebSocketServer> next1 = it.next();
+                    if(!backstageSet.contains(next1.getKey())) {
                         it.remove();
                         subOnlineCount();           //在线数减1
                     }
                 }
                 // 清空有效Set
                 effectiveSet.clear();
+                //清空有效的backstageSet
+                backstageSet.clear();
             }
-        }, 1000,20000 );
+        }, 60000,60000 );
     }
 
 

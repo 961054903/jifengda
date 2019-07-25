@@ -172,5 +172,14 @@ FROM order_info
     </select>
 
 
+    <select id="get11" parameterType="String"
+            resultType="Peservation">
+        SELECT*
+        FROM order_info
+        where
+        code = #{code}
+    </select>
+
+
 
 </mapper>
