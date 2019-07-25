@@ -1,5 +1,8 @@
 package com.caogen.jfd.entity.driver;
 
+import com.caogen.jfd.common.Constants;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.time.LocalTime;
 
@@ -8,6 +11,7 @@ public class price implements Serializable {
     private static final long serialVersionUID = -3975707111792384047L;
     private Integer id; //id
     private Double is_work;//是否营业
+    @DateTimeFormat(pattern = Constants.FORMAT_DATETIME)
     private LocalTime work_start;//营业时间
     private LocalTime work_end;//下班时间
     private  String city;//城市

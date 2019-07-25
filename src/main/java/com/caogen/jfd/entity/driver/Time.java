@@ -1,5 +1,8 @@
 package com.caogen.jfd.entity.driver;
 
+import com.caogen.jfd.common.Constants;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -10,7 +13,9 @@ public class Time implements Serializable {
     private static final long serialVersionUID = -3933707114992384047L;
     private Integer id; //id
     private String phone;//手机号
+    @DateTimeFormat(pattern = Constants.FORMAT_TIME)
     private LocalDateTime time;//时间
+    @DateTimeFormat(pattern = Constants.FORMAT_TIME)
     private  Double one_day;//一天时间
     private String tim;//时间
 

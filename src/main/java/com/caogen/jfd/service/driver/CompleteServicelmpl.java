@@ -5,13 +5,16 @@ import com.caogen.jfd.dao.driver.CompleteDao;
 import com.caogen.jfd.dao.driver.PersonalDao;
 import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.util.FormatUtils;
+import com.sun.org.apache.bcel.internal.generic.IADD;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -75,7 +78,7 @@ public class CompleteServicelmpl implements CompleteService {
         Complete complete = new Complete();
         complete.setDriver_id(driver_id);
         List<Complete> completes = completeDao.find3(complete);
-        for (int i = 0; i < completes.size(); i++) {
+        for (int i = 0; i < completes.size(); ) {
             LocalDateTime SS = completes.get(i).getFinish_date();
             Long newss = SS.toInstant(ZoneOffset.of("+8")).toEpochMilli();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -83,17 +86,17 @@ public class CompleteServicelmpl implements CompleteService {
             Date date = sdf.parse(start);
             //结束
             Date date1 = sdf.parse(end);
-            if (newss >=date.getTime() && newss <= date1.getTime()) {
-            } else {
+            if (newss >= date.getTime() && newss <= date1.getTime()) {
+                i++; } else {
                 completes.remove(i);
             }
-
         }
-        for (Complete item : completes) {
-            item.setCreateDate(FormatUtils.dateToStr(item.getCreate_date()));
-            item.setFinishdate(FormatUtils.dateToStr(item.getFinish_date()));
-            item.setCreate_date(null);
-            item.setFinish_date(null);
+            for (Complete item : completes) {
+                item.setCreateDate(FormatUtils.dateToStr(item.getCreate_date()));
+                item.setFinishdate(FormatUtils.dateToStr(item.getFinish_date()));
+                item.setCreate_date(null);
+                item.setFinish_date(null);
+
         }
         return completes;
     }

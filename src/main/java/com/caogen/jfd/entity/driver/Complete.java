@@ -1,5 +1,8 @@
 package com.caogen.jfd.entity.driver;
 
+import com.caogen.jfd.common.Constants;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,10 +14,12 @@ public class Complete implements Serializable {
     private Integer user_id;//用户id
     private Integer model_id;//车辆型号id
     private String code;//订单号
+    @DateTimeFormat(pattern = Constants.FORMAT_DATETIME)
     private LocalDateTime create_date;//创建时间
     private Integer status;//订单状态 0：待付款；1：待接单；2：已接单；3：已取货；4：已完成；5：已取消；6：已退款
     private Peservation.Type type; //'订单类型：单点订单、多点订单',
     private Peservation.Mode mode;//订单模式：普通订单、预约订单
+    @DateTimeFormat(pattern = Constants.FORMAT_DATETIME)
     private LocalDateTime appoint_date;//预约时间
     private String label;//订单标签：改派订单、投诉订单、抢单订单、平台分配
     private String origin;//发货地址
@@ -31,6 +36,7 @@ public class Complete implements Serializable {
     private Integer driver_id;//司机id
     private Double kilometer;//公里
     private Double bonus;//提成
+    @DateTimeFormat(pattern = Constants.FORMAT_DATETIME)
     private LocalDateTime finish_date;//结束时间
     private Boolean is_evaluate;//是否评价
     private Integer evaluate_grade;//评价分数

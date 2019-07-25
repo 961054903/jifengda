@@ -1,5 +1,4 @@
 package com.caogen.jfd.service.driver;
-
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.dao.driver.OnlineDao;
 import com.caogen.jfd.dao.driver.PersonalDao;
@@ -15,7 +14,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static com.caogen.jfd.entity.driver.Online.Operation.online;
-
 
 @Service
 public class OnlineSeriverlmpl implements OnlineSeriver {

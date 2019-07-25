@@ -26,11 +26,11 @@
         DATE_FORMAT(create_date,'%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
     </select>
 
-    <sql id="ccc">create_date,code,origin,destination,kilometer,bonus,finish_date,driver_id,status,type,mode,label,name</sql>
-    <select id="find3" parameterType="Complete"
+    <sql id="UUU">create_date,code,origin,destination,kilometer,bonus,finish_date,driver_id,status,type,mode,label,name</sql>
+    <select id="find3" parameterType="java.util.List"
             resultType="Complete">
         SELECT
-        <include refid="ccc" />
+        <include refid="UUU" />
         FROM order_history
         where
         driver_id=#{driver_id}

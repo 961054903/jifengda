@@ -1,5 +1,8 @@
 package com.caogen.jfd.entity.driver;
 
+import com.caogen.jfd.common.Constants;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -9,6 +12,7 @@ public class Reward implements Serializable {
     private static final long serialVersionUID = -3975707111992384047L;
     private Integer id; //id
     private String activityname;//奖励内容
+    @DateTimeFormat(pattern = Constants.FORMAT_DATETIME)
     private LocalDateTime  create_date; //创建时间
     private Double money;//奖励金额
     private Integer driver_id;

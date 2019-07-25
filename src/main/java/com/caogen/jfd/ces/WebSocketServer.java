@@ -52,14 +52,13 @@ public class WebSocketServer {
             WebSocketMapUtil.heartbeat(driverId,flag);
             return;
         }
-        // 处理其他消息
-        try {
-            sendMessage(message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        // 处理其他消息
+//        try {
+//            sendMessage("");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
-
     /**
      *
      * @param session
@@ -75,6 +74,4 @@ public class WebSocketServer {
     public void sendMessage(String message) throws IOException {
         this.session.getBasicRemote().sendText(message);
     }
-
-
 }

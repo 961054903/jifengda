@@ -1,5 +1,8 @@
 package com.caogen.jfd.entity.driver;
 
+import com.caogen.jfd.common.Constants;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -10,6 +13,7 @@ public class Systemm implements Serializable {
     private Integer id; //id
     private String title;//标题
     private String content;//内容
+    @DateTimeFormat(pattern = Constants.FORMAT_DATETIME)
     private LocalDateTime create_date;//创建时间
     private String CreateDate;
 

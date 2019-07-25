@@ -1,5 +1,8 @@
 package com.caogen.jfd.entity.driver;
 
+import com.caogen.jfd.common.Constants;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -7,6 +10,7 @@ public class DriverSite implements Serializable {
     private static final long serialVersionUID = -1975707114992664047L;
     private Integer id; //id
     private Integer driver_id;//司机id
+    @DateTimeFormat(pattern = Constants.FORMAT_DATETIME)
     private LocalDateTime create_date;//创建时间
     private Double longitude;//经度
     private Double latitude;//维度

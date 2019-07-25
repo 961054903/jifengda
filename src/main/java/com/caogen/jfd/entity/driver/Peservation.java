@@ -1,5 +1,8 @@
 package com.caogen.jfd.entity.driver;
 
+import com.caogen.jfd.common.Constants;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -10,10 +13,12 @@ public class Peservation implements Serializable {
     private Integer user_id;//用户id
     private Integer model_id;//车辆型号id
     private String code;//订单号
+    @DateTimeFormat(pattern = Constants.FORMAT_DATETIME)
     private LocalDateTime create_date;//创建时间
     private Integer status;//订单状态 0：待付款；1：待接单；2：已接单；3：已取货；4：已完成；5：已取消；6：已退款
     private Type type; //'订单类型：单点订单、多点订单',
     private Mode mode;//订单模式：普通订单、预约订单
+    @DateTimeFormat(pattern = Constants.FORMAT_DATETIME)
     private LocalDateTime appoint_date;//预约时间
     private String label;//订单标签：1:改派订单、2:投诉订单、3:抢单订单、4:平台分配
     private String origin;//发货地址

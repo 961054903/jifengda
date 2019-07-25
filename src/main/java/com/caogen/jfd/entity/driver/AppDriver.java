@@ -1,4 +1,7 @@
 package com.caogen.jfd.entity.driver;
+import com.caogen.jfd.common.Constants;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -10,6 +13,7 @@ public class AppDriver implements Serializable {
     private String password;   //密码
     private Status status;  // 状态
     private String salt;//盐
+    @DateTimeFormat(pattern = Constants.FORMAT_DATETIME)
     private LocalDateTime create_date;   //创建时间
     private String des_key;//3DES算法所需密钥
     private String des_iv; // 3DES算法所需向量

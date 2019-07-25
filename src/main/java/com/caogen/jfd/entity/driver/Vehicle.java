@@ -1,5 +1,8 @@
 package com.caogen.jfd.entity.driver;
 
+import com.caogen.jfd.common.Constants;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -9,6 +12,7 @@ public class Vehicle extends Model implements Serializable {
     private Integer model_id;//车型id
     private Type type;//类型：自有、挂靠
     private  String number;//车牌号
+    @DateTimeFormat(pattern = Constants.FORMAT_DATETIME)
     private LocalDateTime create_date;//开始时间
     private String photo_url; //车辆照片URL
     private String license_url;//行驶证照片URL

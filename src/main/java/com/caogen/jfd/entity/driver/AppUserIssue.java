@@ -1,5 +1,8 @@
 package com.caogen.jfd.entity.driver;
 
+import com.caogen.jfd.common.Constants;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -15,6 +18,7 @@ public class AppUserIssue implements Serializable {
 	private String title;
 	private String content;
 	private String photo_url;
+	@DateTimeFormat(pattern = Constants.FORMAT_DATETIME)
 	private LocalDateTime create_date;
 	private String name;
 	private String phone;
