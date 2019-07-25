@@ -34,6 +34,9 @@
         FROM order_history
         where
         driver_id=#{driver_id}
+        ORDER BY
+        create_date
+        DESC
     </select>
 
     <select id="find4" parameterType="Complete"

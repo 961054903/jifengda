@@ -127,7 +127,6 @@ public class WebSocketMapUtil {
         }, 60000,60000 );
     }
 
-
     public static synchronized int getOnlineCount() {
         return onlineCount;
     }

@@ -109,13 +109,16 @@ public class PeservationServicelmpl implements PeservationService {
         Double latitude2 = appUserSite.getLatitude();
         Double longitude2 = appUserSite.getLongitude();
         LocalDateTime create_date = peservations.getCreate_date();
+        String gap = peservations.getGap();
 
         message.put("name", name);
         message.put("code", code);
         message.put("status", status);
         message.put("origin", origin);
+        message.put("gap",gap);
         message.put("destination", destination);
         message.put("create_date", create_date);
+
         message.put("isShow","y");
 
         //司机

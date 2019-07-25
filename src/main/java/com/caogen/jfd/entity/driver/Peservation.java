@@ -19,6 +19,7 @@ public class Peservation implements Serializable {
     private String origin;//发货地址
     private String destination;//收货地址
     private String name;//货物名称
+    private String gap;
     private Double night_service_cost;//夜间服务费
     private Double traffic_jam_cost;//高峰期加价
     private Boolean is_support; //是否保价
@@ -118,6 +119,14 @@ public class Peservation implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getGap() {
+        return gap;
+    }
+
+    public void setGap(String gap) {
+        this.gap = gap;
     }
 
     public LocalDateTime getCreate_date() {

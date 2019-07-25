@@ -84,7 +84,6 @@ public class CompleteServicelmpl implements CompleteService {
             //结束
             Date date1 = sdf.parse(end);
             if (newss >=date.getTime() && newss <= date1.getTime()) {
-
             } else {
                 completes.remove(i);
             }
