@@ -5,16 +5,12 @@ import com.caogen.jfd.dao.driver.CompleteDao;
 import com.caogen.jfd.dao.driver.PersonalDao;
 import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.util.FormatUtils;
-import com.sun.org.apache.bcel.internal.generic.IADD;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -87,7 +83,7 @@ public class CompleteServicelmpl implements CompleteService {
             //结束
             Date date1 = sdf.parse(end);
             if (newss >= date.getTime() && newss <= date1.getTime()) {
-                i++; } else {
+                i++;} else {
                 completes.remove(i);
             }
         }
@@ -96,28 +92,8 @@ public class CompleteServicelmpl implements CompleteService {
                 item.setFinishdate(FormatUtils.dateToStr(item.getFinish_date()));
                 item.setCreate_date(null);
                 item.setFinish_date(null);
-
         }
         return completes;
     }
 
-
-
-
-
-//    @Override
-//    public Complete getchampion() {
-//        AppDriver appDriver = new AppDriver();
-//        Complete complete = new Complete();
-//        Personal personal = new Personal();
-//        List<Complete> completes = completeDao.find4();
-//        Complete complete1 = completes.get(0);
-//        Integer driver_id = complete1.getCc();
-//        appDriver.setId(driver_id);
-//        AppDriver app = appDriverDao.get(appDriver);
-//        String  phone =  app.getDriverphone();
-//        personal.setPhone(phone);
-//        personalDao.get6(personal);
-//        return personal;
-//    }
 }

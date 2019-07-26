@@ -38,6 +38,42 @@ public class Peservation implements Serializable {
     private Double bonus;//提成
     private String phone;
     private String Createdate;
+    private String photo_url;
+    private String driver_name;
+    private String number;
+    private String model;
+
+    public String getPhoto_url() {
+        return photo_url;
+    }
+
+    public void setPhoto_url(String photo_url) {
+        this.photo_url = photo_url;
+    }
+
+    public String getDriver_name() {
+        return driver_name;
+    }
+
+    public void setDriver_name(String driver_name) {
+        this.driver_name = driver_name;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
 
     public String getCreatedate() {
         return Createdate;

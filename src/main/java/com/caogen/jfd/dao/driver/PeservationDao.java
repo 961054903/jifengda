@@ -30,4 +30,6 @@ public interface PeservationDao extends BaseDao<Peservation> {
     void update1(Peservation peservation);
 
     Peservation get11(String code);
+
+    Peservation get333(String code);
 }

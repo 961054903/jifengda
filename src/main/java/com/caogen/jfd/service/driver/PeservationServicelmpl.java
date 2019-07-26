@@ -1,9 +1,12 @@
 package com.caogen.jfd.service.driver;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.caogen.jfd.ces.WebSocketMapUtil;
 import com.caogen.jfd.common.Constants;
 
 import com.caogen.jfd.dao.driver.*;
+import com.caogen.jfd.dome.JPush;
 import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.entity.AppUserSite;
 
@@ -76,11 +79,8 @@ public class PeservationServicelmpl implements PeservationService {
 
     @Override
     public  Peservation getma(String code) {
-        Peservation peservation = new Peservation();
-        peservation.setCode(code);
-        Peservation peservation1 = peservationDao.get(peservation);
-        String s = FormatUtils.dateToStr(peservation1.getCreate_date());
-        peservation1.setCreatedate(s);
+        Peservation peservation1 = peservationDao.get333(code);
+
         return  peservation1;
     }
 
@@ -120,6 +120,8 @@ public class PeservationServicelmpl implements PeservationService {
         message.put("destination", destination);
         message.put("create_date", create_date);
         message.put("isShow","y");
+
+
 
         //司机
         List<Personal> personalDao1 = personalDao.find3(personal);
@@ -190,7 +192,7 @@ public class PeservationServicelmpl implements PeservationService {
                     }
                 }
             }
-        }, 10000);
+        }, 60000);
     }
 
 
@@ -331,7 +333,12 @@ public class PeservationServicelmpl implements PeservationService {
             peservationDao.update1(task);
             gettake(id,code);
         }
+
+        Map<String,String>aa = new HashMap<>();
+        aa.put("msg","订单状态发生改变");
+        JPush.jpushAll(aa);
     }
+
 
 }
 

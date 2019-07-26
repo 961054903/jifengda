@@ -1,8 +1,7 @@
 package com.caogen.jfd.ces;
 
-import javax.jms.Session;
-import javax.websocket.OnOpen;
-import javax.websocket.server.PathParam;
+import com.alibaba.fastjson.JSON;
+
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -50,7 +49,6 @@ public class WebSocketMapUtil {
         }
 
     }
-
     public static void sendNewOrderMessage(Map<String,Object> message, String[] driver,String flag) throws IOException {
         System.out.println("-------------" + driver);
         //循环找出司机
@@ -64,7 +62,7 @@ public class WebSocketMapUtil {
                         System.out.println("WebSocketServer Object:" + obj);
                         if (obj != null) {
                             try {
-                                obj.sendMessage(message.toString());
+                                obj.sendMessage(JSON.toJSONString(message)  );
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -84,14 +82,8 @@ public class WebSocketMapUtil {
                         }
                     }
                 }
-
-
-
-
-        }
+           }
     }
-
-
     /**
      * 定时清除无效的连接(项目启动时调用)
      * 当有新连接加入或收到连接心跳,会往有效列表里存入ID

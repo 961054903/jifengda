@@ -49,6 +49,19 @@
     </select>
 
 
+    <select id="get333" parameterType="java.util.Map"
+            resultType="Peservation">
+        SELECT
+        d.driver_id,d.code,d.create_date,d.origin,d.destination,d.kilometer,d.bonus,
+        c.name driver_name,c.phone,a.model,b.number,c.photo_url
+        FROM
+        vehicle_model a,
+        vehicle b,
+        app_driver_info c,
+        order_info d
+        WHERE d.driver_id = c.user_id AND d.model_id = a.id AND c.vehicle_id = b.id AND d.model_id = b.id AND d.code = #{code}
+    </select>
+
 
     <select id="findput" parameterType="String"
             resultType="Peservation">

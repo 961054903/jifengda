@@ -1,12 +1,14 @@
 package com.caogen.jfd.service.driver;
 
 import com.caogen.jfd.dao.driver.TaskDao;
+import com.caogen.jfd.dome.JPush;
 import com.caogen.jfd.entity.driver.Task;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import java.util.HashMap;
+import java.util.Map;
 @Service
 public class TaskServicelmpl implements TaskService {
     @Autowired
@@ -14,12 +16,9 @@ public class TaskServicelmpl implements TaskService {
 
     @Override
     public void create(Task entity) {
-
     }
-
     @Override
     public void remove(Task entity) {
-
     }
 
     @Override
@@ -56,6 +55,10 @@ public class TaskServicelmpl implements TaskService {
             tasks.setStatus(6);
             taskDao.update(tasks);
         }
+
+        Map<String,String> aa = new HashMap<>();
+        aa.put("msg","您的订单状态发生改变");
+        JPush.jpushAll(aa);
     }
 
 }

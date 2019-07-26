@@ -10,6 +10,7 @@ public class Online implements Serializable {
     private LocalDateTime create_date;
     private Integer driver_id;
 
+
     public enum  Operation{
         online,offline
     }
