@@ -36,6 +36,15 @@ public class Peservation implements Serializable {
     private String driver_name;
     private String number;
     private String model;
+    private String gap;
+
+    public String getGap() {
+        return gap;
+    }
+
+    public void setGap(String gap) {
+        this.gap = gap;
+    }
 
     public String getCreatedate() {
         return Createdate;

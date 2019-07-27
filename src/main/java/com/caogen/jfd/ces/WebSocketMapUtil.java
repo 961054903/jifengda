@@ -43,11 +43,8 @@ public class WebSocketMapUtil {
         }else if("p".equals(flag)){
             //加到pc端集合里
             backstageSet.add(key);
-
         }
-
     }
-
     public static void sendNewOrderMessage(Map<String,Object> message, String[] driver,String flag) throws IOException {
         System.out.println("-------------" + driver);
         //循环找出司机
@@ -81,13 +78,8 @@ public class WebSocketMapUtil {
                     }
                 }
 
-
-
-
         }
     }
-
-
     /**
      * 定时清除无效的连接(项目启动时调用)
      * 当有新连接加入或收到连接心跳,会往有效列表里存入ID

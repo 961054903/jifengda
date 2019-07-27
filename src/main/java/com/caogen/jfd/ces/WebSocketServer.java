@@ -5,10 +5,7 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-
 import static com.caogen.jfd.ces.WebSocketMapUtil.subOnlineCount;
-
-
 @ServerEndpoint(value = "/Web/{driverId}/{flag}",encoders = EncoderConvert.class)
 public class WebSocketServer {
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
@@ -17,6 +14,7 @@ public class WebSocketServer {
     private String driverId;
     //
     private String flag;
+
 
     /**
      * 连接建立成功调用的方法*/
@@ -55,14 +53,13 @@ public class WebSocketServer {
 //            e.printStackTrace();
 //        }
     }
-
     /**
-     *
      * @param session
      * @param error
      */
     @OnError
     public void onError(Session session, Throwable error) {
+
         error.printStackTrace();
     }
     /**
@@ -70,7 +67,6 @@ public class WebSocketServer {
      */
     public void sendMessage(String message) throws IOException {
         this.session.getBasicRemote().sendText(message);
+
     }
-
-
 }

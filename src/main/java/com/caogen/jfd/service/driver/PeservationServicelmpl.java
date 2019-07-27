@@ -57,7 +57,6 @@ public class PeservationServicelmpl implements PeservationService {
         return null;
     }
 
-
     @Override
     public List<Peservation> getmake(Integer driver_id, Peservation.Mode mode) { ;
         Peservation peservation = new Peservation();
@@ -76,19 +75,14 @@ public class PeservationServicelmpl implements PeservationService {
             return  peservation1;
         }
 
-
     @Override
     public void getput() {
-
     }
-
-
 
     @Override
     public void  getput(String code) {
         Personal personal = new Personal();
         Vehicle vehicle = new Vehicle();
-
         //取出新订单
         Peservation peservations = peservationDao.findput(code);
         Map<String, Object> message = new HashMap<>();
@@ -102,11 +96,13 @@ public class PeservationServicelmpl implements PeservationService {
         Double latitude2 = appUserSite.getLatitude();
         Double longitude2 = appUserSite.getLongitude();
         LocalDateTime create_date = peservations.getCreate_date();
+        String gap = peservations.getGap();
 
         message.put("name", name);
         message.put("code", code);
         message.put("status", status);
         message.put("origin", origin);
+        message.put("gap",gap);
         message.put("destination", destination);
         message.put("create_date", create_date);
         message.put("isShow","y");
@@ -174,7 +170,6 @@ public class PeservationServicelmpl implements PeservationService {
                         message.put("isShow","n");
                         WebSocketMapUtil.sendNewOrderMessage(message, driverIds, "m");
                         WebSocketMapUtil.sendNewOrderMessage(message, null, "p");
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
