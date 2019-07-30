@@ -1,6 +1,8 @@
 package com.caogen.jfd.ces;
 
 
+import com.caogen.jfd.common.StaticLogger;
+
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
@@ -23,6 +25,7 @@ public class WebSocketServer {
         this.session = session;
         this.driverId = driverId;
         this.flag = flag;
+        StaticLogger.info("我连接成功了------"+driverId);
         WebSocketMapUtil.put(driverId,flag,this);
     }
 
@@ -41,6 +44,7 @@ public class WebSocketServer {
      * @param message 客户端发送过来的消息*/
     @OnMessage
     public void onMessage(String message) {
+        StaticLogger.info("客户端发来了消息--------"+message);
         // 处理客户端心跳
         if("ping".equals(message)) {
             WebSocketMapUtil.heartbeat(driverId,flag);
@@ -59,7 +63,7 @@ public class WebSocketServer {
      */
     @OnError
     public void onError(Session session, Throwable error) {
-
+        StaticLogger.info("连接错误了-----------"+error.getMessage());
         error.printStackTrace();
     }
     /**
