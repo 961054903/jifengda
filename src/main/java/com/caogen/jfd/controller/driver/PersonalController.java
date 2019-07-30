@@ -367,20 +367,23 @@ public class PersonalController {
         Message message = new Message();
         try {
             AppDriver driver =appDriverService.getByToken(data.getDesc());
-            Complete appDriver = Constants.gson.fromJson((String)data.getData(),Complete.class);
-            List <Complete> peservation = completeService.getmon(driver.getId());
-            Double aa =0.0;
-            for(int i = 0;i<peservation.size();i++){
-                Double ss = peservation.get(i).getBonus();
-                aa += ss;
+            if (driver!=null){
+                //Complete appDriver = Constants.gson.fromJson((String)data.getData(),Complete.class);
+                List <Complete> peservation = completeService.getmon(driver.getId());
+                Double aa =0.0;
+                for(int i = 0;i<peservation.size();i++){
+                    Double ss = peservation.get(i).getBonus();
+                    aa += ss;
+                }
+                int size = peservation.size();
+                Map<String,Object> appDrivers = new HashMap();
+                appDrivers.put("order",size);
+                appDrivers.put("royalty",aa);
+                message.setData(appDrivers);
+                message.setCode(ErrorCode.SUCCEED.getCode());
+                message.setDesc(ErrorCode.SUCCEED.getDesc());
             }
-            int size = peservation.size();
-            Map<String,Object> appDrivers = new HashMap();
-            appDrivers.put("order",size);
-            appDrivers.put("royalty",aa);
-            message.setData(appDrivers);
-            message.setCode(ErrorCode.SUCCEED.getCode());
-            message.setDesc(ErrorCode.SUCCEED.getDesc());
+
         } catch (Exception e) {
             message.setCode(ErrorCode.FAIL.getCode());
             message.setDesc(ErrorCode.FAIL.getDesc());
