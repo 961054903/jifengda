@@ -34,7 +34,7 @@ public class WebSocketServer {
      */
     @OnClose
     public void onClose() {
-        WebSocketMapUtil.remove(driverId,flag);
+        WebSocketMapUtil.remove(driverId);
         subOnlineCount();           //在线数减1
     }
 

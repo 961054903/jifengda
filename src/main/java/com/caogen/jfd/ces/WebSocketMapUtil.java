@@ -12,7 +12,7 @@ public class WebSocketMapUtil {
     // 用于存放有效的连接ID
     private static CopyOnWriteArraySet<String> effectiveSet = new CopyOnWriteArraySet<>();
    //存放后端id
-    private static ArrayList<String> backstageSet = new ArrayList<>();
+    private static CopyOnWriteArraySet<String> backstageSet = new CopyOnWriteArraySet<>();
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
 
@@ -26,8 +26,8 @@ public class WebSocketMapUtil {
         return webSocketMap.get(key);
     }
 
-    public static void remove(String key,String flag){
-        webSocketMap.remove(key,flag);
+    public static void remove(String key ){
+        webSocketMap.remove(key);
         subOnlineCount();
     }
 
@@ -65,13 +65,13 @@ public class WebSocketMapUtil {
                     }
                 }
             }else if("p".equals(flag)){
-                for(int j = 0;j<backstageSet.size();j++){
+                for(String id:backstageSet){
                     //取出后台对象， 发送订单消息
-                    WebSocketServer obj = get(backstageSet.get(j));
+                    WebSocketServer obj = get(id);
                     System.out.println("WebSocketServer Object:" + obj);
                     if (obj != null) {
                         try {
-                            obj.sendMessage(JSON.toJSONString(message)  );
+                            obj.sendMessage(message.toString());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
