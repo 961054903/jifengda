@@ -47,11 +47,11 @@ public class WebSocketServer {
             return;
         }
 //        // 处理其他消息
-//        try {
-//            sendMessage(message);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            sendMessage(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     /**
      * @param session
