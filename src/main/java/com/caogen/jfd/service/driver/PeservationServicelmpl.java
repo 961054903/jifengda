@@ -80,7 +80,7 @@ public class PeservationServicelmpl implements PeservationService {
     }
 
     @Override
-    public void  getput(String code) {
+    public void  getput(String code,String flag) {
         Personal personal = new Personal();
         Vehicle vehicle = new Vehicle();
         //取出新订单
@@ -105,7 +105,11 @@ public class PeservationServicelmpl implements PeservationService {
         message.put("gap",gap);
         message.put("destination", destination);
         message.put("create_date", create_date);
-        message.put("isShow","y");
+        if("cancle".equals(flag) || "refund".equals(flag)){
+            message.put("isShow",flag);
+        }else {
+            message.put("isShow","y");
+        }
 
         //司机
         List<Personal> personalDao1 = personalDao.find3(personal);
@@ -155,27 +159,30 @@ public class PeservationServicelmpl implements PeservationService {
             WebSocketMapUtil.sendNewOrderMessage(message, driverIds, "m");
         } catch (Exception e) {
         }
-        //过十秒后再次发送停止显示订单信息
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                //1.判断该订单是否被抢单
-                //根据订单号来获取司机id判断是否为空
-                Peservation personal1 = peservationDao.get11(code);
-                Integer driver_id = personal1.getDriver_id();
-                if (driver_id == null) {
-                    //未被抢：a.删除司机手机关于此订单的信息 b.推送给管理后台
-                    try {
-                        message.put("isShow","n");
-                        WebSocketMapUtil.sendNewOrderMessage(message, driverIds, "m");
-                        WebSocketMapUtil.sendNewOrderMessage(message, null, "p");
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        if("add".equals(flag)){
+            //过十秒后再次发送停止显示订单信息
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    //1.判断该订单是否被抢单
+                    //根据订单号来获取司机id判断是否为空
+                    Peservation personal1 = peservationDao.get11(code);
+                    Integer driver_id = personal1.getDriver_id();
+                    if (driver_id == null) {
+                        //未被抢：a.删除司机手机关于此订单的信息 b.推送给管理后台
+                        try {
+                            message.put("isShow","n");
+                            WebSocketMapUtil.sendNewOrderMessage(message, driverIds, "m");
+                            WebSocketMapUtil.sendNewOrderMessage(message, null, "p");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
-        }, 10000);
+            }, 10000);
+        }
+
     }
 
 

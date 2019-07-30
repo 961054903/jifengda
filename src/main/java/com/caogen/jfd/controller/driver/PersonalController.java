@@ -450,10 +450,10 @@ public class PersonalController {
      */
     @ResponseBody
     @RequestMapping("push")
-    public Message push(String code) {
+    public Message push(String code,String flag) {//flag:add新增订单 cancle取消订单 refund用户退款
         Message message = new Message();
         try {
-            peservationService.getput(code);
+            peservationService.getput(code,flag);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {

@@ -19,7 +19,7 @@ public interface PeservationService extends BaseService<Peservation> {
 
     void getput();
 
-    void  getput(String code);
+    void  getput(String code,String flag);
 
     boolean getspike(Integer driver_id, String code);
 
