@@ -270,7 +270,6 @@ public class PersonalController {
         Message message = new Message();
         try {
             AppDriver driver =appDriverService.getByToken(data.getDesc());
-             Complete appDriver = Constants.gson.fromJson((String)data.getData(),Complete.class);
             List <Complete> peservation = completeService.getto(driver.getId());
             String cc = detaiService.getime(driver.getId());
             int size = peservation.size();

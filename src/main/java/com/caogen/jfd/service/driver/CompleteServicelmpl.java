@@ -51,10 +51,6 @@ public class CompleteServicelmpl implements CompleteService {
         Complete complete = new Complete();
         complete.setDriver_id(driver_id);
         List<Complete> completes = completeDao.find1(complete);
-        for (Complete item : completes) {
-            item.setCreateDate(FormatUtils.dateToStr(item.getCreate_date()));
-            item.setCreate_date(null);
-        }
         return completes;
     }
 
@@ -74,28 +70,9 @@ public class CompleteServicelmpl implements CompleteService {
     public List<Complete> gethistory(Integer driver_id, String start, String end) throws ParseException {
         Complete complete = new Complete();
         complete.setDriver_id(driver_id);
+        complete.setStart(start);
+        complete.setEnd(end);
         List<Complete> completes = completeDao.find3(complete);
-        for (int i = 0; i < completes.size(); i++) {
-            LocalDateTime SS = completes.get(i).getFinish_date();
-            Long newss = SS.toInstant(ZoneOffset.of("+8")).toEpochMilli();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            //开始
-            Date date = sdf.parse(start);
-            //结束
-            Date date1 = sdf.parse(end);
-            if (newss >=date.getTime() && newss <= date1.getTime()) {
-
-            } else {
-                completes.remove(i);
-            }
-
-        }
-        for (Complete item : completes) {
-            item.setCreateDate(FormatUtils.dateToStr(item.getCreate_date()));
-            item.setFinishdate(FormatUtils.dateToStr(item.getFinish_date()));
-            item.setCreate_date(null);
-            item.setFinish_date(null);
-        }
         return completes;
     }
 

@@ -7,12 +7,13 @@
     <select id="find1" parameterType="Complete"
             resultType="Complete">
         SELECT
-        <include refid="roya" />
+        code,origin,destination,kilometer,bonus,date_format(create_date,'%Y-%m-d %H:%i:%s') as createDate,status,type,mode,label,name
+        ,date_format(finish_date,'%Y-%m-d %H:%i:%s') as finishDate
         FROM order_history
         where
         driver_id =#{driver_id}
         and
-        TO_DAYS(create_date) = TO_DAYS(NOW())
+        TO_DAYS(finish_date) = TO_DAYS(NOW())
     </select>
 
     <select id="find2" parameterType="Complete"
@@ -26,14 +27,16 @@
         DATE_FORMAT(create_date,'%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
     </select>
 
-    <sql id="ccc">create_date,code,origin,destination,kilometer,bonus,finish_date,driver_id,status,type,mode,label,name</sql>
+    <sql id="ccc">
+    date_format(create_date,'%Y-%m-%d %H:%i:%s') as createDate,code,origin,destination,kilometer,bonus,
+    date_format(finish_date,'%Y-%m-%d %H:%i:%s') as finishDate,driver_id,status,type,mode,label,name</sql>
     <select id="find3" parameterType="Complete"
             resultType="Complete">
         SELECT
         <include refid="ccc" />
         FROM order_history
         where
-        driver_id=#{driver_id}
+        driver_id=#{driver_id} and date_format(finish_date,'%Y-%m-%d') between #{start} and #{end}
     </select>
 
     <select id="find4" parameterType="Complete"
