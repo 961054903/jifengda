@@ -32,4 +32,11 @@
 	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/*/api/*" /> 
 		<bean class="com.caogen.jfd.interceptor.AppUserInterceptor" /> </mvc:interceptor> 
 		</mvc:interceptors> -->
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.caogen.jfd.interceptor.CheckTokenInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>  
