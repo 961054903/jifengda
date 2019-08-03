@@ -273,26 +273,26 @@ public class PersonalController {
             List <Complete> peservation = completeService.getto(driver.getId());
             String cc = detaiService.getime(driver.getId());
             int size = peservation.size();
-        Double aa =0.0;
-    for(int i = 0;i<peservation.size();i++){
-        Double ss = peservation.get(i).getBonus();
-        aa += ss;
-    }
-      Map<String,Object> appDrivers = new HashMap();
-       appDrivers.put("order",size);
-       if (cc==null){
-           appDrivers.put("time",0);
+            Double aa =0.0;
+            for(int i = 0;i<peservation.size();i++){
+                Double ss = peservation.get(i).getBonus();
+                aa += ss;
+            }
+              Map<String,Object> appDrivers = new HashMap();
+               appDrivers.put("order",size);
+               if (cc==null){
+                   appDrivers.put("time",0);
 
-       }else {
-           appDrivers.put("time",cc);
-       }
-       appDrivers.put("royalty",aa);
-        message.setData(appDrivers);
-    } catch (Exception e) {
-            message.setErrorCode(ErrorCode.FAIL);
-            StaticLogger.error("user order count error", e);
-    }
-        return message;
+               }else {
+                   appDrivers.put("time",cc);
+               }
+               appDrivers.put("royalty",aa);
+                message.setData(appDrivers);
+            } catch (Exception e) {
+                    message.setErrorCode(ErrorCode.FAIL);
+                    StaticLogger.error("user order count error", e);
+            }
+                return message;
 
 }
 //

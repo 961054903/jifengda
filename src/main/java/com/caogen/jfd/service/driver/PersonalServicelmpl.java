@@ -107,7 +107,10 @@ public class PersonalServicelmpl implements PersonalService {
                 dd++;
             }
         }
-        int b =  cc / dd ;
+        int b = 0;
+        if (dd != 0){
+            b =  cc / dd ;
+        }
         personalDao2.setGrade(b);
         Model modelDao3 = modelDao.get3(model);
         String contacts_gender = personalDao2.getContacts_gender();
