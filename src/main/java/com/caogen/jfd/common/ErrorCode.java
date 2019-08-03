@@ -13,6 +13,7 @@ public enum ErrorCode {
 	CITY_LIST_ERROR("0005", "获取城市列表失败"),
 	INDUSTRY_LIST_ERROR("0006", "获取行业列表失败"),
 	VERSION_ERROR("0007", "获取版本号失败失败"),
+	TOKEN_PAST_DUE("0010", "用户不存在或token已过期"),
 	
 	LOGIN_ERROR("0100", "登录失败"),
 	LOGIN_USER_ERROR("0101", "用户不存在或状态异常"),
