@@ -2,8 +2,10 @@ package com.caogen.jfd.interceptor;
 
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.entity.AppUser;
+import com.caogen.jfd.entity.driver.AppDriver;
 import com.caogen.jfd.exception.DefinedException;
 import com.caogen.jfd.service.AppUserService;
+import com.caogen.jfd.service.driver.AppDriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -16,7 +18,7 @@ import static com.caogen.jfd.common.Constants.REQUEST_TOKEN;
 
 public class CheckTokenInterceptor implements HandlerInterceptor {
 	@Autowired
-	private AppUserService userService;
+	private AppDriverService appDriverService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -25,8 +27,8 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
 		if (StringUtils.isEmpty(token)) {
 			return true;
 		}
-		AppUser user = userService.getByToken(token);
-		if (user == null) {
+		AppDriver driver =appDriverService.getByToken(token);
+		if (driver == null) {
 			throw new DefinedException(ErrorCode.TOKEN_PAST_DUE);
 		}
 		return true;
