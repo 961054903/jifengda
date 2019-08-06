@@ -96,13 +96,13 @@ FROM order_info
         UPDATE
         order_info
         SET
-       driver_id=#{driver_id}
+       driver_id=#{driver_id},status = #{status}
         WHERE
        code =#{code}
     </update>
 
 
-    <sql id="mmm">code,destination</sql>
+    <sql id="mmm">code,origin,destination</sql>
     <select id="getss" parameterType="Peservation"
             resultType="Peservation">
         SELECT id,

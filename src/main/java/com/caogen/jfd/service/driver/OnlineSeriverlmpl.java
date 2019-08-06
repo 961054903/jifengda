@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import static com.caogen.jfd.entity.driver.Online.Operation.offline;
 import static com.caogen.jfd.entity.driver.Online.Operation.online;
 
 
@@ -28,7 +29,9 @@ public class OnlineSeriverlmpl implements OnlineSeriver {
 
     @Override
     public void in(Integer driver_id, Online.Operation operation) {
+
         Online online1 =new Online();
+        online1.setOperation(offline);
         Personal personal = new Personal();
         personal.setUser_id(driver_id);
         online1.setDriver_id(driver_id);

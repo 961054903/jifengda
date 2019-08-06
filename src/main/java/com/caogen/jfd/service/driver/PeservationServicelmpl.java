@@ -195,6 +195,7 @@ public class PeservationServicelmpl implements PeservationService {
         Integer id1 = appDriverDao.get(appDriver).getId();
         peservation.setDriver_id(id1);
         peservation.setCode(code);
+        peservation.setStatus(2);
         Peservation  peservations = peservationDao.getdsp(peservation);
         //判断库存
         if(peservations.getCode()==null){
@@ -225,7 +226,7 @@ public class PeservationServicelmpl implements PeservationService {
         String origin = peservations.getOrigin();
         task1.setDestination(origin);
         task1.setCode(code);
-        task1.setSerial(null);
+        task1.setSerial("00");
         task1.setStatus(0);
         taskDao.insert(task1);//地址表插入数据
         //插入收货地址
