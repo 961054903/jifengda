@@ -473,14 +473,12 @@ public class PersonalController {
      */
     @ResponseBody
     @RequestMapping(value = {"spike","app/spike"})
-    public Message spike(Message data) {
+    public Message spike(String code,Integer driver_id) {
         Message message = new Message();
         try {
-            AppDriver driver =appDriverService.getByToken(data.getDesc());
-            Peservation appDriver = Constants.gson.fromJson((String) data.getData(),Peservation.class);
-            boolean peservations = peservationService.getspike(driver.getId(),appDriver.getCode());
+            boolean peservations = peservationService.getspike(driver_id,code);
             if (peservations){
-                peservationService.getfenjie(appDriver.getCode());//抢单成功记录地址
+                peservationService.getfenjie(code);//抢单成功记录地址
             }
             message.setData(peservations);
             message.setCode(ErrorCode.SUCCEED.getCode());
