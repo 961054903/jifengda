@@ -51,7 +51,8 @@
     <select id="get333" parameterType="java.util.Map"
             resultType="Peservation">
 		SELECT
-			i.`code`,
+			i.`code`, 
+			i.gap,
 			i.create_date,
 			i.origin,
 			i.destination,
