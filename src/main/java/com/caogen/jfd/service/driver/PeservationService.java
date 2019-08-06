@@ -2,6 +2,7 @@ package com.caogen.jfd.service.driver;
 
 
 import com.caogen.jfd.entity.driver.Peservation;
+import com.caogen.jfd.entity.driver.Task;
 import com.caogen.jfd.service.BaseService;
 
 import java.util.List;
@@ -25,9 +26,11 @@ public interface PeservationService extends BaseService<Peservation> {
 
     void getfenjie(String code);
 
-    void gettake(Integer id, String code);
-
    List <Peservation> gettui();
 
     void getsingle(Integer id, String code);
+
+    List<Task> taskInfoList(String code);
+
+    void completeOrder(String code,Integer taskId);
 }

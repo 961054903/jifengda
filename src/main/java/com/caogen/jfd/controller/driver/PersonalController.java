@@ -6,6 +6,7 @@ import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.driver.*;
+import com.sun.org.apache.bcel.internal.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -183,6 +184,7 @@ public class PersonalController {
 
     @Autowired
     private RoyaltyService royaltyService;
+
     @ResponseBody
     @RequestMapping(value = {"details", "app/details"})
     public Message details(String code) {
@@ -479,7 +481,7 @@ public class PersonalController {
             Peservation appDriver = Constants.gson.fromJson((String) data.getData(),Peservation.class);
             boolean peservations = peservationService.getspike(driver.getId(),appDriver.getCode());
             if (peservations){
-                peservationService.getfenjie(appDriver.getCode());
+                peservationService.getfenjie(appDriver.getCode());//抢单成功记录地址
             }
             message.setData(peservations);
             message.setCode(ErrorCode.SUCCEED.getCode());
@@ -535,6 +537,50 @@ public class PersonalController {
             AppDriver driver =appDriverService.getByToken(data.getDesc());
             Peservation appDriver = Constants.gson.fromJson((String) data.getData(),Peservation.class);
             peservationService.getsingle(driver.getId(),appDriver.getCode());
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
+
+
+    /**
+     * 订单对应所有地址信息接口
+     * @param code
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = {"taskInfoList","app/taskInfoList"})
+    public Message taskInfoList(String code) {
+        Message message = new Message();
+        try {
+            List<Task> taskList = peservationService.taskInfoList(code);
+            message.setData(taskList);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
+
+    /**
+     * 订单对应所有地址信息接口
+     * @param code
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = {"completeOrder","app/completeOrder"})
+    public Message completeOrder(String code,Integer taskId) {
+        Message message = new Message();
+        try {
+            peservationService.completeOrder(code,taskId);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {

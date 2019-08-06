@@ -186,7 +186,7 @@ public class PeservationServicelmpl implements PeservationService {
     }
 
 
-
+    //抢单接口
     @Override
     public boolean getspike(Integer driver_id, String code) {
         AppDriver appDriver = new AppDriver();
@@ -211,6 +211,7 @@ public class PeservationServicelmpl implements PeservationService {
     }
 
 
+    //抢单完成后，记录地址
     @Autowired
     private TaskDao taskDao;
     @Override
@@ -219,6 +220,15 @@ public class PeservationServicelmpl implements PeservationService {
         peservation.setCode(code);
         Peservation  peservations = peservationDao.getss(peservation);
         String destination = peservations.getDestination();
+        //插入发货地址
+        Task task1 = new Task();
+        String origin = peservations.getOrigin();
+        task1.setDestination(origin);
+        task1.setCode(code);
+        task1.setSerial(null);
+        task1.setStatus(0);
+        taskDao.insert(task1);//地址表插入数据
+        //插入收货地址
         AppUserSite[] appUserSite = Constants.gson.fromJson(destination,AppUserSite[].class);
         for (int i =0;i<appUserSite.length;i++){
             Task task = new Task();
@@ -228,17 +238,16 @@ public class PeservationServicelmpl implements PeservationService {
             String a = Integer.toString(i);
             task.setSerial(a);
             task.setStatus(0);
-            taskDao.insert(task);
+            taskDao.insert(task);//地址表插入数据
         }
 
         }
 
-    @Override
-    public void gettake(Integer id, String code) {
+        //订单完成，插入历史表
+    public void gettake(String code) {
         Peservation peservation = new Peservation();
         Complete complete = new Complete();
         peservation.setCode(code);
-        peservation.setDriver_id(id);
         Peservation  peservations = peservationDao.get6(peservation);
         String code1 = peservations.getCode();
         String phone1 = peservations.getPhone();
@@ -283,7 +292,7 @@ public class PeservationServicelmpl implements PeservationService {
         complete.setCode(code1);
         complete.setPhone(phone1);
         complete.setCreate_date(create_date);
-        complete.setStatus(status);
+        complete.setStatus(4);//已完成
         complete.setMode(mode);
         complete.setOrigin(origin);
         complete.setDestination(destination);
@@ -322,11 +331,50 @@ public class PeservationServicelmpl implements PeservationService {
         }else if (task.getStatus()== 5) {
             task.setStatus(6);
             peservationDao.update1(task);
-            gettake(id,code);
+            gettake(code);
         }
         Map<String,String>aa = new HashMap<>();
         aa.put("msg","订单状态发生改变");
         JPush.jpushAll(aa);
+    }
+
+    @Override
+    public List<Task> taskInfoList(String code) {
+        return peservationDao.taskInfoList(code);
+    }
+
+    @Override
+    public void completeOrder(String code, Integer taskId) {
+
+        //更新此地址信息
+        Task task = new Task();
+        task.setId(taskId);
+        taskDao.update(task);
+
+        //订单信息
+        Peservation peservation =new Peservation();
+        peservation.setCode(code);
+
+        //判断此地址是否为第一个，即发货地址
+        Integer minId = taskDao.checkMin(task);
+        if(minId.equals(taskId)){
+            //更新订单状态
+            peservationDao.update1(peservation);
+        }
+
+        //判断此地址是否为最后一个，即订单完成
+        Integer maxId = taskDao.checkMax(task);
+        if (taskId.equals(maxId)){//相同，说明是最后一个地址
+            //删除orderInfo，添加至orderHistory
+            gettake(code);
+            //根据订单查询人的极光id
+            String registrationID = taskDao.getRegistrationID(code);
+            //极光推送
+            Map<String,String>aa = new HashMap<>();
+            aa.put("msg","订单状态发生改变");
+            aa.put("id",registrationID);
+            JPush.jpushAll(aa);
+        }
     }
 
 }

@@ -17,12 +17,11 @@
         UPDATE
         order_task
         SET
-        status =#{status}
+        status =3
         WHERE
-        serial =#{serial}
-        and
-        code =#{code}
+        id = #{id}
     </update>
+
 
 
     <insert id="insert" parameterType="Task">
@@ -33,4 +32,19 @@
         #{code},#{serial},#{status},#{destination}
         )
     </insert>
+
+    <select id="checkMax" parameterType="Task" resultType="java.lang.Integer">
+        SELECT MAX(id) FROM order_task WHERE CODE = #{code}
+    </select>
+
+    <select id="checkMin" parameterType="Task" resultType="java.lang.Integer">
+        SELECT MIN(id) FROM order_task WHERE CODE = #{code}
+    </select>
+
+    <select id="getRegistrationID" parameterType="java.lang.String" resultType="java.lang.String">
+        select a.registration_id
+           from app_user a,order_history b
+        where a.id = b.user_id and b.code = #{code}
+    </select>
+
 </mapper>

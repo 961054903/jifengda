@@ -4,6 +4,7 @@ package com.caogen.jfd.dao.driver;
 import com.caogen.jfd.dao.user.BaseDao;
 import com.caogen.jfd.entity.driver.Personal;
 import com.caogen.jfd.entity.driver.Peservation;
+import com.caogen.jfd.entity.driver.Task;
 
 import java.util.List;
 
@@ -32,4 +33,6 @@ public interface PeservationDao extends BaseDao<Peservation> {
     Peservation get11(String code);
 
     Peservation get333(String code);
+
+    List<Task> taskInfoList(String code);
 }

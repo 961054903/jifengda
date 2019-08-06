@@ -174,7 +174,7 @@ FROM order_info
         UPDATE
         order_info
         SET
-        status =#{status}
+        status = status+1
         WHERE
         code =#{code}
     </update>
@@ -200,6 +200,8 @@ FROM order_info
     </select>
 
 
-
+    <select id="taskInfoList" parameterType="String" resultType="Task">
+        select * from order_task where code = #{code}
+    </select>
 
 </mapper>
