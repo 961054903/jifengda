@@ -6,6 +6,7 @@ import com.caogen.jfd.entity.driver.Task;
 import com.caogen.jfd.service.BaseService;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PeservationService extends BaseService<Peservation> {
    List<Peservation> getmake(Integer driver_id, Peservation.Mode mode);
@@ -33,4 +34,6 @@ public interface PeservationService extends BaseService<Peservation> {
     List<Task> taskInfoList(String code);
 
     void completeOrder(String code,Integer taskId);
+
+    List<Map> currentOrder(Integer driverId);
 }

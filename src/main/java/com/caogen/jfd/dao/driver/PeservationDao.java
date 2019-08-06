@@ -7,6 +7,7 @@ import com.caogen.jfd.entity.driver.Peservation;
 import com.caogen.jfd.entity.driver.Task;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PeservationDao extends BaseDao<Peservation> {
 
@@ -35,4 +36,6 @@ public interface PeservationDao extends BaseDao<Peservation> {
     Peservation get333(String code);
 
     List<Task> taskInfoList(String code);
+
+    List<Map> currentOrder(Integer driverId);
 }

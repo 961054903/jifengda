@@ -6,7 +6,6 @@ import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.driver.*;
-import com.sun.org.apache.bcel.internal.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -432,7 +431,7 @@ public class PersonalController {
      * @return
      */
     @ResponseBody
-        @RequestMapping("champion")
+    @RequestMapping("champion")
     public Message champion() {
         Message message = new Message();
         try {
@@ -590,6 +589,28 @@ public class PersonalController {
         }
         return message;
     }
+
+    /**
+     * 订单冠军
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = {"currentOrder","app/currentOrder"})
+    public Message currentOrder(Integer driverId) {
+        Message message = new Message();
+        try {
+            List<Map> cc = peservationService.currentOrder(driverId);
+            message.setData(cc);
+            message.setCode(ErrorCode.SUCCEED.getCode());
+            message.setDesc(ErrorCode.SUCCEED.getDesc());
+        } catch (Exception e) {
+            message.setCode(ErrorCode.FAIL.getCode());
+            message.setDesc(ErrorCode.FAIL.getDesc());
+            StaticLogger.logger().error(message.getDesc(), e);
+        }
+        return message;
+    }
+
 
 
 //    /**

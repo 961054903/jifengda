@@ -377,6 +377,11 @@ public class PeservationServicelmpl implements PeservationService {
         }
     }
 
+    @Override
+    public List<Map> currentOrder(Integer driverId) {
+        return peservationDao.currentOrder(driverId);
+    }
+
 }
 
 
