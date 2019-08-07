@@ -24,7 +24,7 @@
         where
         driver_id =#{driver_id}
         and
-        DATE_FORMAT(create_date,'%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+        DATE_FORMAT(finish_date,'%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
     </select>
 
     <sql id="ccc">
