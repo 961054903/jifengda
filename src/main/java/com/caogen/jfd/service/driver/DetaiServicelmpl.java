@@ -47,7 +47,6 @@ public class DetaiServicelmpl implements DetaiService {
         detail.setDriver_id(driver_id);
         List<Detail> zz = detaiDao.find(detail);
         if (zz.size()>0) {
-
             long aa = 0;
             if (zz.get(zz.size() - 1).getOperation().equals(online)) {
                 Detail detai2 = new Detail();
@@ -63,12 +62,10 @@ public class DetaiServicelmpl implements DetaiService {
                 Long a = newSecond2 - newSecond1;
                 aa += a;
             }
-
             long hours = aa / 1000 / 60;
             String s = Long.toString(hours);
             return s;
         }
-
      return null;
     }
 }

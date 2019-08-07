@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -272,10 +273,12 @@ public class PersonalController {
             List <Complete> peservation = completeService.getto(driver.getId());
             String cc = detaiService.getime(driver.getId());
             int size = peservation.size();
-            Double aa =0.0;
+            BigDecimal aa = new BigDecimal("0.00");
+            //Double aa =0.0;
             for(int i = 0;i<peservation.size();i++){
-                Double ss = peservation.get(i).getBonus();
-                aa += ss;
+                double d = peservation.get(i).getBonus();
+                BigDecimal ss = new BigDecimal(Double.toString(d));
+                aa = aa.add(ss);
             }
               Map<String,Object> appDrivers = new HashMap();
                appDrivers.put("order",size);
