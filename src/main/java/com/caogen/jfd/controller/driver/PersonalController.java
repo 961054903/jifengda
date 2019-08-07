@@ -6,6 +6,7 @@ import com.caogen.jfd.common.StaticLogger;
 import com.caogen.jfd.entity.driver.*;
 import com.caogen.jfd.model.Message;
 import com.caogen.jfd.service.driver.*;
+import com.caogen.jfd.util.HttpClientUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -480,6 +481,12 @@ public class PersonalController {
             boolean peservations = peservationService.getspike(driver_id,code);
             if (peservations){
                 peservationService.getfenjie(code);//抢单成功记录地址
+                //给websocket发消息删除
+                // 发送HTTP请求
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("flag", "spike");
+                map.put("code", code);
+                HttpClientUtils.doPost(Constants.NOTIFY_URL, map);
             }
             message.setData(peservations);
             message.setCode(ErrorCode.SUCCEED.getCode());

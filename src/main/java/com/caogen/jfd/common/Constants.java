@@ -67,6 +67,8 @@ public class Constants {
 	public static final String WXPAY_NOTIFY_URL = "http://47.95.122.231:8080/JFDService/wxpay/notify";
 	// 支付宝支付回调地址
 	public static final String ALI_NOTIFY_URL = "http://47.95.122.231:8080/JFDService/alipay/notify";
+	// 通知后台及司机端
+	public static final String NOTIFY_URL = "http://47.95.122.231:8080/JFDBackstage/order/push";
 
 	// JSON日期格式化
 	public static final String FORMAT_DATETIME = "yyyy-MM-dd HH:mm:ss";
