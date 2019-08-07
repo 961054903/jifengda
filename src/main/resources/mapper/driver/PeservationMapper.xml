@@ -51,14 +51,14 @@
     <select id="get333" parameterType="java.util.Map"
             resultType="Peservation">
 		SELECT
-			i.`code`, 
+			i.`code`, i.status,i.type,i.mode,i.appoint_date,i.reasons,i.label,i.name,night_cost,jam_cost,empty_cost,is_support,support_money,support_cost,
+			order_money,ticket_money,actually_paid,payment,detail,
 			i.gap,
 			i.create_date,
 			i.origin,
 			i.destination,
 			i.bonus,
 			i.kilometer,
-			ui.`name`,
 			ui.phone,
 			ui.photo_url
 		FROM
