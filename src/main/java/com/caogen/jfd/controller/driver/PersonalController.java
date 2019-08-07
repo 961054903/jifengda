@@ -190,9 +190,7 @@ public class PersonalController {
         Message message = new Message();
         try {
             Peservation peservation = peservationService.getma(code);
-            Map<String, Object> appDrivers = new HashMap();
-            appDrivers.put("order", peservation);
-            message.setData(appDrivers);
+            message.setData(peservation);
             message.setCode(ErrorCode.SUCCEED.getCode());
             message.setDesc(ErrorCode.SUCCEED.getDesc());
         } catch (Exception e) {
