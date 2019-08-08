@@ -56,16 +56,16 @@
         limit 3
 	</select>
 
-    <sql id="id">user_id,driver_id,model_id,code,create_date,status,type,mode,appoint_date,label,origin,destination,name,night_service_cost,traffic_jam_cost,is_support,support_money,
-support_cost,order_money,ticket_money,actually_paid,kilometer,bonus,finish_date,is_evaluate
+    <sql id="id">user_id,driver_id,model_id,code,create_date,status,type,mode,appoint_date,label,origin,destination,name,night_cost,jam_cost,is_support,support_money,
+support_cost,order_money,ticket_money,actually_paid,kilometer,bonus,finish_date,city
 </sql>
     <insert id="insert" parameterType="Complete">
         INSERT INTO order_history (
         <include refid="id"/>
         )
         VALUES (
-        #{user_id},#{driver_id},#{model_id},#{code},#{create_date},#{status},#{type},#{mode},#{appoint_date},#{label},#{origin},#{destination},#{name},#{night_service_cost},
-        #{traffic_jam_cost},#{is_support},#{support_money},#{support_cost},#{order_money},#{ticket_money},#{actually_paid},#{kilometer},#{bonus},#{finish_date},#{is_evaluate}
+        #{user_id},#{driver_id},#{model_id},#{code},#{create_date},#{status},#{type},#{mode},#{appoint_date},#{label},#{origin},#{destination},#{name},#{night_cost},
+        #{jam_cost},#{is_support},#{support_money},#{support_cost},#{order_money},#{ticket_money},#{actually_paid},#{kilometer},#{bonus},#{finish_date},#{city}
         )
     </insert>
 

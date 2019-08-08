@@ -20,8 +20,8 @@ public class Complete implements Serializable {
     private String origin;//发货地址
     private String destination;//收货地址
     private String name;//货物名称
-    private Double night_service_cost;//夜间服务费
-    private Double traffic_jam_cost;//高峰期加价
+    private Double night_cost;//夜间服务费
+    private Double jam_cost;//高峰期加价
     private Boolean is_support; //是否保价
     private Double support_money;//保价金额
     private Double support_cost;//保价费用
@@ -45,6 +45,15 @@ public class Complete implements Serializable {
     private String createDate;
     private String Finishdate;
     private Double order;
+    private String city;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     @Override
     public String toString() {
@@ -62,8 +71,8 @@ public class Complete implements Serializable {
                 ", origin='" + origin + '\'' +
                 ", destination='" + destination + '\'' +
                 ", name='" + name + '\'' +
-                ", night_service_cost=" + night_service_cost +
-                ", traffic_jam_cost=" + traffic_jam_cost +
+                ", night_cost=" + night_cost +
+                ", jam_cost=" + jam_cost +
                 ", is_support=" + is_support +
                 ", support_money=" + support_money +
                 ", support_cost=" + support_cost +
@@ -198,20 +207,20 @@ public class Complete implements Serializable {
         this.name = name;
     }
 
-    public Double getNight_service_cost() {
-        return night_service_cost;
+    public Double getNight_cost() {
+        return night_cost;
     }
 
-    public void setNight_service_cost(Double night_service_cost) {
-        this.night_service_cost = night_service_cost;
+    public void setNight_cost(Double night_cost) {
+        this.night_cost = night_cost;
     }
 
-    public Double getTraffic_jam_cost() {
-        return traffic_jam_cost;
+    public Double getJam_cost() {
+        return jam_cost;
     }
 
-    public void setTraffic_jam_cost(Double traffic_jam_cost) {
-        this.traffic_jam_cost = traffic_jam_cost;
+    public void setJam_cost(Double jam_cost) {
+        this.jam_cost = jam_cost;
     }
 
     public Boolean getIs_support() {

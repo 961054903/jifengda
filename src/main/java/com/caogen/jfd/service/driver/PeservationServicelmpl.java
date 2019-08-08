@@ -266,14 +266,15 @@ public class PeservationServicelmpl implements PeservationService {
         LocalDateTime appoint_date = peservations.getAppoint_date();
         String label = peservations.getLabel();
         String name = peservations.getName();
-        Double night_service_cost = peservations.getNight_service_cost();
-        Double traffic_jam_cost = peservations.getTraffic_jam_cost();
+        Double night_cost = peservations.getNight_cost();
+        Double jam_cost = peservations.getJam_cost();
         Boolean is_support = peservations.getIs_support();
         Double support_money = peservations.getSupport_money();
         Double support_cost = peservations.getSupport_cost();
         Double order_money = peservations.getOrder_money();
         Double ticket_money = peservations.getTicket_money();
         Double actually_paid = peservations.getActually_paid();
+        String city = peservations.getCity();
 
         complete.setActually_paid(actually_paid);
         complete.setTicket_money(ticket_money);
@@ -281,8 +282,8 @@ public class PeservationServicelmpl implements PeservationService {
         complete.setSupport_cost(support_cost);
         complete.setSupport_money(support_money);
         complete.setIs_support(is_support);
-        complete.setTraffic_jam_cost(traffic_jam_cost);
-        complete.setNight_service_cost(night_service_cost);
+        complete.setJam_cost(jam_cost);
+        complete.setNight_cost(night_cost);
         complete.setName(name);
         complete.setLabel(label);
         complete.setAppoint_date(appoint_date);
@@ -300,6 +301,7 @@ public class PeservationServicelmpl implements PeservationService {
         complete.setKilometer(kilometre);
         complete.setBonus(bonus);
         complete.setFinish_date(LocalDateTime.now());
+        complete.setCity(city);
         completeDao.insert(complete);
         peservationDao.delete(peservation);
     }
@@ -356,6 +358,7 @@ public class PeservationServicelmpl implements PeservationService {
         Peservation peservation =new Peservation();
         peservation.setCode(code);
 
+        task.setCode(code);
         //判断此地址是否为第一个，即发货地址
         Integer minId = taskDao.checkMin(task);
         if(minId.equals(taskId)){

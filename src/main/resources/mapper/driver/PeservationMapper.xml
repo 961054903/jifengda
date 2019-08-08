@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caogen.jfd.dao.driver.PeservationDao">
     <sql id="peservation">driver_id,create_date,mode,label,origin,destination,kilometer,code,status,type,name</sql>
-    <sql id="Oder">code,origin,destination,kilometer,create_date,mode,bonus,status,user_id,driver_id,model_id,type,appoint_date,label,name,night_service_cost,traffic_jam_cost,
-        is_support,support_money,support_cost,order_money,ticket_money,actually_paid</sql>
+    <sql id="Oder">code,origin,destination,kilometer,create_date,mode,bonus,status,user_id,driver_id,model_id,type,appoint_date,label,name,night_cost,jam_cost,
+        is_support,support_money,support_cost,order_money,ticket_money,actually_paid,city</sql>
     <select id="find" parameterType="Peservation"
             resultType="Peservation">
         SELECT id,
@@ -136,8 +136,8 @@ FROM order_info
             <if test="appoint_date != null">AND appoint_date = #{appoint_date}</if>
             <if test="label != null">AND label = #{label}</if>
             <if test="name != null">AND name = #{name}</if>
-            <if test="night_service_cost != null">AND night_service_cost = #{night_service_cost}</if>
-            <if test="traffic_jam_cost != null">AND traffic_jam_cost = #{traffic_jam_cost}</if>
+            <if test="night_cost != null">AND night_cost = #{night_cost}</if>
+            <if test="jam_cost != null">AND jam_cost = #{jam_cost}</if>
             <if test="is_support != null">AND is_support = #{is_support}</if>
             <if test="support_money != null">AND support_money = #{support_money}</if>
             <if test="support_cost != null">AND support_cost = #{support_cost}</if>
