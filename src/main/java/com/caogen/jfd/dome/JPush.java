@@ -16,6 +16,7 @@ import cn.jpush.api.push.model.notification.Notification;
 import java.util.Map;
 
 public class JPush {
+
     // 设置好账号的app_key和masterSecret是必须的
 
 //    用户端:
@@ -24,8 +25,11 @@ public class JPush {
 //    司机端:
 //    AppKey:809af7dfa25a0d0bb74c8e61
 //    Master Secret:cbab1113022f86c1acb179aa
-    private static String APP_KEY = "2f7bd160b5c947f95012ba8e";
-    private static String MASTER_SECRET = "d83374c1a5ab9fba6bc1deec";
+    //private static String APP_KEY = "2f7bd160b5c947f95012ba8e";
+    //private static String MASTER_SECRET = "d83374c1a5ab9fba6bc1deec";
+
+    private static String APP_KEY = "8b5ddabea93b9becb8e12dd2";
+    private static String MASTER_SECRET = "85ddffcf80676ae95c95a3f0";
 
     //极光推送>>Android
     //Map<String, String> parm是我自己传过来的参数,同学们可以自定义参数
