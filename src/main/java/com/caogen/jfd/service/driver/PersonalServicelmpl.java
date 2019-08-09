@@ -112,7 +112,7 @@ public class PersonalServicelmpl implements PersonalService {
             b =  cc / dd ;
         }
         personalDao2.setGrade(b);
-        Model modelDao3 = modelDao.get3(model);
+        Model modelDao3 = modelDao.get3(personal);
         String contacts_gender = personalDao2.getContacts_gender();
         String contacts_name = personalDao2.getContacts_name();
         String contacts_phone = personalDao2.getContacts_phone();

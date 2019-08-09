@@ -12,5 +12,5 @@ public interface ModelDao extends BaseDao<Model>  {
      * @param
      * @return
      */
-   Model  get3(Model id);
+   Model  get3(Personal personal);
 }

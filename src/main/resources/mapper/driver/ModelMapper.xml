@@ -35,19 +35,11 @@
     <sql id="vehicle">model</sql>
     <select id="get3" parameterType="Personal"
             resultType="Model">
-        SELECT
-        bb.model
-        FROM
-        app_driver_info aa
-        left
-        JOIN
-        vehicle_model  bb
-        on
-        bb.id =aa.user_id
-        <where>
-            <if test="id != null">bb.id = #{id}</if>
-            <if test="model != null">AND bb. model = #{model}</if>
-        </where>
+        SELECT c.model
+        FROM app_driver_info a
+        LEFT JOIN vehicle b ON a.vehicle_id = b.id
+        LEFT JOIN vehicle_model c ON b.model_id = c.id
+        WHERE a.user_id = #{user_id}
     </select>
 
 </mapper>
