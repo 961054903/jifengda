@@ -1,0 +1,19 @@
+.cotainer{
+  padding: .2rem;
+  font-size: .13rem;
+  color: #000;
+  line-height: .21rem;
+}
+.title{
+  text-align: center;
+  font-weight: 700;
+}
+h3{
+  font-size: .13rem;
+}
+p,h3{
+  margin: .2rem 0;
+}
+p span{
+  text-indent: 2em;
+}
