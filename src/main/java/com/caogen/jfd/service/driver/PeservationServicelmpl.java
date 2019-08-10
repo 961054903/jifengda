@@ -377,7 +377,11 @@ public class PeservationServicelmpl implements PeservationService {
             Map<String,String>aa = new HashMap<>();
             aa.put("msg","订单状态发生改变");
             aa.put("id",registrationID);
-            JPush.jpushAll(aa);
+            try{
+                JPush.jpushAll(aa);
+            }catch (Exception e){
+
+            }
         }
     }
 
