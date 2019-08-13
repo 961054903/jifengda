@@ -124,7 +124,7 @@
         longitude =#{longitude},
         latitude =#{latitude}
         WHERE
-        phone =#{phone}
+        user_id =#{user_id}
     </update>
 
     <sql id="ll">user_id</sql>
