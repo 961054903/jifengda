@@ -50,6 +50,7 @@ public class CompleteServicelmpl implements CompleteService {
     public List<Complete> getto(Integer driver_id) {
         Complete complete = new Complete();
         complete.setDriver_id(driver_id);
+        complete.setStatus(4);
         List<Complete> completes = completeDao.find1(complete);
         return completes;
     }
@@ -72,6 +73,7 @@ public class CompleteServicelmpl implements CompleteService {
         complete.setDriver_id(driver_id);
         complete.setStart(start);
         complete.setEnd(end);
+        complete.setStatus(4);
         List<Complete> completes = completeDao.find3(complete);
         return completes;
     }
