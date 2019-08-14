@@ -289,7 +289,7 @@ public class PersonalController {
                }else {
                    appDrivers.put("time",cc);
                }
-               appDrivers.put("royalty",aa);
+               appDrivers.put("royalty",aa.setScale(2, BigDecimal.ROUND_UP));
                 message.setData(appDrivers);
             } catch (Exception e) {
                     message.setErrorCode(ErrorCode.FAIL);

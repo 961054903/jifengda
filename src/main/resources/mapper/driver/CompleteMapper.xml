@@ -26,6 +26,7 @@
         driver_id =#{driver_id}
         and
         DATE_FORMAT(finish_date,'%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+        and status = #{status}
     </select>
 
     <sql id="ccc">

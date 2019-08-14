@@ -59,6 +59,7 @@ public class CompleteServicelmpl implements CompleteService {
     public List<Complete> getmon(Integer driver_id) {
         Complete complete = new Complete();
         complete.setDriver_id(driver_id);
+        complete.setStatus(4);
         List<Complete> completes = completeDao.find2(complete);
         for (Complete item : completes) {
             item.setCreateDate(FormatUtils.dateToStr(item.getCreate_date()));
