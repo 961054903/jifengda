@@ -14,6 +14,7 @@
         driver_id =#{driver_id}
         and
         TO_DAYS(finish_date) = TO_DAYS(NOW())
+        and status = 4
     </select>
 
     <select id="find2" parameterType="Complete"
