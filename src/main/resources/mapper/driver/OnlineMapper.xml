@@ -5,7 +5,7 @@
 <mapper namespace="com.caogen.jfd.dao.driver.OnlineDao">
     <sql id="aa">operation,create_date,driver_id</sql>
     <insert id="insert" parameterType="Online">
-        INSERT INTO log_driver_online (
+        INSERT INTO app_driver_online (
         <include refid="aa"/>
         )
         VALUES (

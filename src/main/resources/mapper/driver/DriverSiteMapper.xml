@@ -5,7 +5,7 @@
     <sql id="name">longitude,latitude,create_date,driver_id
 	</sql>
     <insert id="insert" parameterType="DriverSite">
-        INSERT INTO log_driver_site (
+        INSERT INTO app_driver_site (
         <include refid="name" />
         )
         VALUES (

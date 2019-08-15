@@ -9,7 +9,7 @@
         SELECT
         <include refid="time" />
         FROM
-        log_driver_online
+        app_driver_online
         where
         driver_id =#{driver_id}
         and
