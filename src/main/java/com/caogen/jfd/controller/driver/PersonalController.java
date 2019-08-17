@@ -372,15 +372,17 @@ public class PersonalController {
             if (driver!=null){
                 //Complete appDriver = Constants.gson.fromJson((String)data.getData(),Complete.class);
                 List <Complete> peservation = completeService.getmon(driver.getId());
-                Double aa =0.0;
+                BigDecimal aa = new BigDecimal("0.00");
                 for(int i = 0;i<peservation.size();i++){
-                    Double ss = peservation.get(i).getBonus();
-                    aa += ss;
+
+                    double d = peservation.get(i).getBonus();
+                    BigDecimal ss = new BigDecimal(Double.toString(d));
+                    aa = aa.add(ss);
                 }
                 int size = peservation.size();
                 Map<String,Object> appDrivers = new HashMap();
                 appDrivers.put("order",size);
-                appDrivers.put("royalty",aa);
+                appDrivers.put("royalty",aa.setScale(2, BigDecimal.ROUND_UP));
                 message.setData(appDrivers);
                 message.setCode(ErrorCode.SUCCEED.getCode());
                 message.setDesc(ErrorCode.SUCCEED.getDesc());
@@ -407,14 +409,15 @@ public class PersonalController {
             AppDriver driver =appDriverService.getByToken(data.getDesc());
             Complete appDriver = Constants.gson.fromJson((String)data.getData(),Complete.class);
            List <Complete> completes = completeService.gethistory(driver.getId(),appDriver.getStart(),appDriver.getEnd());
-            Double aa =0.0;
+            BigDecimal aa = new BigDecimal("0.00");
             for(int i = 0;i<completes.size();i++){
-                Double ss = completes.get(i).getBonus();
-                aa += ss;
+                double d = completes.get(i).getBonus();
+                BigDecimal ss = new BigDecimal(Double.toString(d));
+                aa = aa.add(ss);
             }
             int size = completes.size();
             Map<String,Object>qq =new HashMap();
-             qq.put("royalty",aa);
+             qq.put("royalty",aa.setScale(2, BigDecimal.ROUND_UP));
              qq.put("order",size);
              qq.put("information",completes);
              message.setData(qq);
