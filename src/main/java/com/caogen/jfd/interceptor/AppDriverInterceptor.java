@@ -12,9 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.caogen.jfd.common.ErrorCode;
 import com.caogen.jfd.common.StaticLogger;
-import com.caogen.jfd.entity.driver.AppDriver;
+import com.caogen.jfd.entity.AppDriver;
 import com.caogen.jfd.exception.DefinedException;
-import com.caogen.jfd.service.driver.AppDriverService;
+import com.caogen.jfd.service.AppDriverService;
 import com.caogen.jfd.util.SecretUtils;
 
 /**

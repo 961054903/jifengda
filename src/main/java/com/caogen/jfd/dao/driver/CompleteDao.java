@@ -1,10 +1,8 @@
 package com.caogen.jfd.dao.driver;
 
-import com.caogen.jfd.dao.user.BaseDao;
-import com.caogen.jfd.entity.driver.Complete;
-
-
 import java.util.List;
+
+import com.caogen.jfd.entity.Complete;
 
 public interface CompleteDao extends BaseDao<Complete> {
     /**

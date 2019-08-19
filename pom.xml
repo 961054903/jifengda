@@ -6,7 +6,7 @@
 	<artifactId>JFDService_Driver</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>JFDService Maven Webapp</name>
+	<name>JFDService_Driver Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<version.spring>4.3.23.RELEASE</version.spring>
@@ -197,7 +197,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>JFDService</finalName>
+		<finalName>JFDService_Driver</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

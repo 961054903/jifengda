@@ -1,10 +1,9 @@
 package com.caogen.jfd.dao.driver;
 
-import com.caogen.jfd.dao.user.BaseDao;
-import com.caogen.jfd.entity.driver.Personal;
-import com.caogen.jfd.entity.driver.Peservation;
-
 import java.util.List;
+
+import com.caogen.jfd.entity.Personal;
+import com.caogen.jfd.entity.Peservation;
 
 public interface PersonalDao extends BaseDao<Personal> {
 

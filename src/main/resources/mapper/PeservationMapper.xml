@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caogen.jfd.dao.driver.PeservationDao">
+    <sql id="peservation">driver_id,create_date,mode,label,origin,destination,kilometer,code,status,type,name</sql>
+    <sql id="Oder">code,origin,destination,kilometer,create_date,mode,bonus,status,user_id,driver_id,model_id,type,appoint_date,label,name,night_cost,jam_cost,
+        is_support,support_money,support_cost,order_money,ticket_money,actually_paid,city,payment,detail</sql>
+    <select id="find" parameterType="Peservation"
+            resultType="Peservation">
+        SELECT id,
+        <include refid="peservation" />
+        FROM  order_info
+        <where>
+            <if test="driver_id != null">driver_id = #{driver_id}</if>
+            <if test="mode != null">AND mode = #{mode}</if>
+            <if test="create_date != null">AND create_date = #{create_date}</if>
+            <if test="origin != null">AND origin = #{origin}</if>
+            <if test="destination != null">AND destination = #{destination}</if>
+            <if test="kilometer != null">AND kilometer = #{kilometer}</if>
+            <if test="code != null">AND code = #{code}</if>
+            <if test="status != null">AND status = #{status}</if>
+            <if test="type != null">AND type = #{type}</if>
+            <if test="name != null">AND name = #{name}</if>
+        </where>
+    </select>
+
+    <sql id="Order">code,origin,destination,kilometer,create_date,mode,bonus,user_id,driver_id,status,type,name,label</sql>
+    <select id="get" parameterType="Peservation"
+            resultType="Peservation">
+        SELECT
+        <include refid="Order" />
+        FROM order_info
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="code != null">AND code = #{code}</if>
+            <if test="origin != null">AND origin = #{origin}</if>
+            <if test="destination != null">AND destination = #{destination}</if>
+            <if test="kilometer != null">AND kilometer = #{kilometer}</if>
+            <if test="create_date != null">AND create_date = #{create_date}</if>
+            <if test="mode != null">AND mode = #{mode}</if>
+            <if test="bonus != null">AND bonus = #{bonus}</if>
+            <if test="driver_id != null">AND driver_id = #{driver_id}</if>
+            <if test="status != null">AND status = #{status}</if>
+            <if test="type != null">AND type = #{type}</if>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="label != null">AND label = #{label}</if>
+        </where>
+    </select>
+
+    <select id="get333" parameterType="java.util.Map"
+            resultType="Peservation">
+		SELECT
+			i.`code`, i.status,i.type,i.mode,i.appoint_date,i.reasons,i.label,i.name,night_cost,jam_cost,empty_cost,is_support,support_money,support_cost,
+			order_money,ticket_money,actually_paid,payment,detail,
+			i.gap,
+			i.create_date,
+			i.origin,
+			i.destination,
+			i.bonus,
+			i.kilometer,
+			ui.phone,
+			ui.photo_url
+		FROM
+			order_info i
+		JOIN app_user_info ui ON i.user_id = ui.user_id
+		WHERE
+			i.`code` = #{code}   
+	</select>
+
+
+
+    <select id="findput" parameterType="String"
+            resultType="Peservation">
+        SELECT *
+        FROM order_info
+        where
+        code =#{code}
+    </select>
+
+
+<sql id="moccc">code,driver_id</sql>
+<select id="getdsp"
+        resultType="Peservation">
+SELECT
+<include refid="moccc" />
+FROM order_info
+    <where>
+
+    <if test="code != null"> code = #{code}</if>
+    </where>
+</select>
+
+
+    <update id="update" parameterType="Peservation">
+        UPDATE
+        order_info
+        SET
+       driver_id=#{driver_id},status = #{status}
+        WHERE
+       code =#{code}
+    </update>
+
+
+    <sql id="mmm">code,origin,destination</sql>
+    <select id="getss" parameterType="Peservation"
+            resultType="Peservation">
+        SELECT id,
+        <include refid="mmm" />
+        FROM order_info
+        <where>
+            <if test="code != null">  code = #{code}</if>
+        </where>
+    </select>
+
+
+    <select id="get6" parameterType="Peservation"
+            resultType="Peservation">
+        SELECT
+        <include refid="Oder" />
+        FROM order_info
+        <where>
+            <if test="id != null">id = #{id}</if>
+            <if test="code != null">AND code = #{code}</if>
+            <if test="origin != null">AND origin = #{origin}</if>
+            <if test="destination != null">AND destination = #{destination}</if>
+            <if test="kilometer != null">AND kilometer = #{kilometer}</if>
+            <if test="create_date != null">AND create_date = #{create_date}</if>
+            <if test="mode != null">AND mode = #{mode}</if>
+            <if test="bonus != null">AND bonus = #{bonus}</if>
+            <if test="driver_id != null">AND driver_id = #{driver_id}</if>
+            <if test="status != null">AND status = #{status}</if>
+            <if test="user_id != null">AND user_id = #{user_id}</if>
+            <if test="model_id != null">AND model_id = #{model_id}</if>
+            <if test="type != null">AND type = #{type}</if>
+            <if test="appoint_date != null">AND appoint_date = #{appoint_date}</if>
+            <if test="label != null">AND label = #{label}</if>
+            <if test="name != null">AND name = #{name}</if>
+            <if test="night_cost != null">AND night_cost = #{night_cost}</if>
+            <if test="jam_cost != null">AND jam_cost = #{jam_cost}</if>
+            <if test="is_support != null">AND is_support = #{is_support}</if>
+            <if test="support_money != null">AND support_money = #{support_money}</if>
+            <if test="support_cost != null">AND support_cost = #{support_cost}</if>
+            <if test="order_money != null">AND order_money = #{order_money}</if>
+            <if test="ticket_money != null">AND ticket_money = #{ticket_money}</if>
+            <if test="actually_paid != null">AND actually_paid = #{actually_paid}</if>
+
+        </where>
+    </select>
+
+    <delete id="delete" parameterType="Peservation">
+       DELETE
+       FROM
+        order_info
+        WHERE
+        code =#{code}
+
+    </delete>
+
+
+    <sql id="nth">driver_id,origin,destination,kilometer,mode</sql>
+    <select id="find8"
+            resultType="Peservation">
+        SELECT
+        <include refid="nth" />
+        FROM order_info
+
+       where
+            driver_id is null
+
+    </select>
+
+
+    <update id="update1" parameterType="Peservation">
+        UPDATE
+        order_info
+        SET
+        status = status+1
+        WHERE
+        code =#{code}
+    </update>
+
+
+
+    <select id="get8" parameterType="Peservation"
+            resultType="Peservation">
+        SELECT
+        <include refid="Oder" />
+        FROM order_info
+       where
+        driver_id = #{driver_id}
+    </select>
+
+
+    <select id="get11" parameterType="String"
+            resultType="Peservation">
+        SELECT*
+        FROM order_info
+        where
+        code = #{code}
+    </select>
+
+
+    <select id="taskInfoList" parameterType="String" resultType="Task">
+        select * from order_task where code = #{code}
+    </select>
+
+    <select id="currentOrder" parameterType="java.lang.Integer" resultType="java.util.Map">
+        select * from order_info where driver_id = #{driverId} and status in (2,3)
+    </select>
+</mapper>
