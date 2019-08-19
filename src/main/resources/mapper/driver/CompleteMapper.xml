@@ -60,7 +60,7 @@
 	</select>
 
     <sql id="id">user_id,driver_id,model_id,code,create_date,status,type,mode,appoint_date,label,origin,destination,name,night_cost,jam_cost,is_support,support_money,
-support_cost,order_money,ticket_money,actually_paid,kilometer,bonus,finish_date,city
+support_cost,order_money,ticket_money,actually_paid,kilometer,bonus,finish_date,city,payment,detail
 </sql>
     <insert id="insert" parameterType="Complete">
         INSERT INTO order_history (
@@ -68,7 +68,8 @@ support_cost,order_money,ticket_money,actually_paid,kilometer,bonus,finish_date,
         )
         VALUES (
         #{user_id},#{driver_id},#{model_id},#{code},#{create_date},#{status},#{type},#{mode},#{appoint_date},#{label},#{origin},#{destination},#{name},#{night_cost},
-        #{jam_cost},#{is_support},#{support_money},#{support_cost},#{order_money},#{ticket_money},#{actually_paid},#{kilometer},#{bonus},#{finish_date},#{city}
+        #{jam_cost},#{is_support},#{support_money},#{support_cost},#{order_money},#{ticket_money},#{actually_paid},#{kilometer},#{bonus},#{finish_date},#{city},
+        #{payment},#{detail}
         )
     </insert>
 

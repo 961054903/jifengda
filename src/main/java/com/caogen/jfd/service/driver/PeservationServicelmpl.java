@@ -275,6 +275,9 @@ public class PeservationServicelmpl implements PeservationService {
         Double ticket_money = peservations.getTicket_money();
         Double actually_paid = peservations.getActually_paid();
         String city = peservations.getCity();
+        Peservation.Payment payment = peservations.getPayment();//支付方式
+        String detail = peservations.getDetail();
+
 
         complete.setActually_paid(actually_paid);
         complete.setTicket_money(ticket_money);
@@ -302,6 +305,9 @@ public class PeservationServicelmpl implements PeservationService {
         complete.setBonus(bonus);
         complete.setFinish_date(LocalDateTime.now());
         complete.setCity(city);
+        complete.setPayment(payment);
+        complete.setDetail(detail);
+
         completeDao.insert(complete);
         peservationDao.delete(peservation);
     }

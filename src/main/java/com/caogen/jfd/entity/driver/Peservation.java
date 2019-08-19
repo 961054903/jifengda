@@ -38,6 +38,24 @@ public class Peservation implements Serializable {
     private String model;
     private String gap;
     private String city;
+    private String detail;
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+    private Payment payment;
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 
     public String getCity() {
         return city;
@@ -69,6 +87,10 @@ public class Peservation implements Serializable {
 
     public enum Mode {
         common, appoint
+    }
+
+    public enum Payment{
+        wxpay,alipay,balance
     }
 
     public enum Label {

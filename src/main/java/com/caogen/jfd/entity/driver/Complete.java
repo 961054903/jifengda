@@ -46,6 +46,24 @@ public class Complete implements Serializable {
     private String Finishdate;
     private Double order;
     private String city;
+    private Peservation.Payment payment;
+    private String detail;
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public Peservation.Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Peservation.Payment payment) {
+        this.payment = payment;
+    }
 
     public String getCity() {
         return city;
