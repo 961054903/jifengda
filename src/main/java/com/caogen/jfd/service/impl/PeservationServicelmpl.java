@@ -391,7 +391,7 @@ public class PeservationServicelmpl implements PeservationService {
 
         //判断此地址是否为最后一个，即订单完成
         Integer maxId = taskDao.checkMax(task);
-        if (taskId.equals(maxId)){//相同，说明是最后一个地址
+        if (maxId.equals(0)){//相同，说明是最后一个地址
             //删除orderInfo，添加至orderHistory
             gettake(code);
             //根据订单查询人的极光id
